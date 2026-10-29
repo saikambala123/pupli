@@ -1,0 +1,53 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.3 test:ui
+> node test/career-profile-editor.spec.mjs && node test/ui-regressions.spec.mjs && node test/portal-signout.spec.mjs
+
+PASS diploma field has no implicit answer
+PASS Yes reaches profile update
+PASS correct profile endpoint
+PASS saved callback retains diploma answer
+PASS No can replace Yes
+PASS declaration can be cleared
+6/6 profile editor checks passed
+  ok   no dashboard component parses a response body outside a guard
+  ok   the shared client helper never rejects
+  ok   optimistic writes roll back when the request fails
+  ok   created rows replace a matching row instead of duplicating it
+  ok   POST /api/profiles seeds every profile section, not just contact details
+  ok   a part-filled profile row survives a save
+  ok   activity buckets use the local calendar, not UTC
+  ok   localDateKey brackets the day correctly either side of midnight
+  ok   the greeting and today count are computed client-side
+  ok   no dashboard grid track can be widened by its content
+  ok   the dashboard content column and the Overview columns can shrink
+  ok   a connected extension is not asked to pair again
+  ok   a stale database connection is checked and replaced, not reused
+  ok   dashboard pages send a signed-out visitor to sign in instead of throwing
+  ok   a page that fails to load shows a way forward, not a dead end
+  ok   saved passwords are never shown on the Saved answers page
+  ok   the resume file input resets so the same file can be picked twice
+  ok   the free-text start date is not bound to an <input type="date">
+  ok   clipboard success is only claimed when the write resolved
+  ok   a database outage is reported as 503 with a cause, not an opaque 500
+  ok   every legal link in the footer has a page behind it
+  ok   the profile schema keeps sexual orientation and transgender
+  ok   the profile editor asks both in the EEO section
+  ok     sexualOrientation: the rule reads the profile and knows every option
+  ok     transgender: the rule reads the profile and knows every option
+
+25 checks passed
+
+clicking the sign-out icon
+  ok   asks "Are you sure you want to log out?"
+  ok     offers Cancel and Log out
+  ok     and has not signed out yet
+  ok     Cancel has the focus, so a reflex Enter keeps you in
+  ok   Cancel closes it and you stay signed in
+  ok   Escape closes it too
+  ok   so does a click outside it
+  ok   Log out signs you out
+  ok     and goes to the home page
+
+9/9 checks passed
+

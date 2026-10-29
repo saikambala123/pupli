@@ -1,0 +1,18 @@
+Signup response 200
+Signup reached dashboard
+dashboard {"title":"Overview · Appli-Fill","width":1440,"scrollWidth":1440,"heading":"Good morning, Appli.","error":false}
+dashboard-mobile {"title":"Overview · Appli-Fill","width":390,"scrollWidth":390,"heading":"Good morning, Appli.","error":false}
+dashboard-profile {"title":"Profile · Appli-Fill","width":1440,"scrollWidth":1440,"heading":"Default profile","error":false}
+dashboard-applications {"title":"Applications · Appli-Fill","width":1440,"scrollWidth":1440,"heading":"Applications","error":false}
+dashboard-responses {"title":"Saved answers · Appli-Fill","width":1440,"scrollWidth":1440,"heading":"Saved answers","error":false}
+dashboard-settings {"title":"Settings · Appli-Fill","width":1440,"scrollWidth":1440,"heading":"Autofill behaviour","error":false}
+dashboard-premium {"title":"Premium · Appli-Fill","width":1440,"scrollWidth":1440,"heading":"Premium is on","error":false}
+Profile edit/save/reload passed
+Generate pairing 200
+Redeem pairing 200
+Extension bootstrap 200
+Existing session compatibility passed
+Logout confirmation and cookie cleanup passed
+Mobile menu passed
+Icon and web manifest served successfully
+pageErrors []

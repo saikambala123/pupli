@@ -1,0 +1,112 @@
+
+Personal information, with the page focused
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: the applicant's own address picked from Google's suggestions
+  ok     the apartment it dropped in Address Line 2
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information, filled from the popup (the page has no focus)
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: the applicant's own address picked from Google's suggestions
+  ok     the apartment it dropped in Address Line 2
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information: Address Line 1 marked as a combobox (newer Maps builds)
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: the applicant's own address picked from Google's suggestions
+  ok     the apartment it dropped in Address Line 2
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information: Google's suggestions arrive 1.2 s after typing
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: the applicant's own address picked from Google's suggestions
+  ok     the apartment it dropped in Address Line 2
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information: no suggestion is the applicant's address
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: no suggestion is the applicant's, so the street stays as typed
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information: no suggestion, and the box marked as a combobox
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: no suggestion is the applicant's, so the street stays as typed
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+  ok     never retyped with the city and state added
+
+Questions, with the page focused
+  ok   At least 18: Yes
+  ok   Authorized to work: Yes
+  ok   Sponsorship: No
+  ok   How did you hear: LinkedIn, picked from its list
+  ok   Worked for Acme Corporation before: No
+  ok   Available Start Date: today (10/27/2026)
+  ok   Desired salary: 120000, counted Annually
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Questions, from the popup
+  ok   At least 18: Yes
+  ok   Authorized to work: Yes
+  ok   Sponsorship: No
+  ok   How did you hear: LinkedIn, picked from its list
+  ok   Worked for Acme Corporation before: No
+  ok   Available Start Date: today (10/27/2026)
+  ok   Desired salary: 120000, counted Annually
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Voluntary self-identification, with the page focused
+  ok   Gender: Male
+  ok   Ethnicity: Not Hispanic or Latino
+  ok   Race (open only once Ethnicity is answered): Asian
+  ok   Protected Veteran Status: not a protected veteran
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Voluntary self-identification, from the popup
+  ok   Gender: Male
+  ok   Ethnicity: Not Hispanic or Latino
+  ok   Race (open only once Ethnicity is answered): Asian
+  ok   Protected Veteran Status: not a protected veteran
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+89/89 checks passed
+

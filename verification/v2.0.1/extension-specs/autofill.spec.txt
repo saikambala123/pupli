@@ -1,0 +1,85 @@
+
+Appli-Fill autofill — 2396ms, 66 filled, 6 left for the user
+
+  ok   only one dropdown open at a time
+  ok   no menu left open at the end
+  ok   no dropdown opened more than once
+  ok   no field written more than once
+  ok   no synthetic click on <body>
+  ok   SAP-style widget kept its value
+  ok   first name
+  ok   email
+  ok   street address has no city/state/zip tail
+  ok   country combobox
+  ok   state select
+  ok   work row 1 employer
+  ok   work row 1 title
+  ok   work row 2 employer is the second job
+  ok   work row 2 title is the second job
+  ok   row 1 start month
+  ok   row 1 start year
+  ok   row 1 end date left blank (current job)
+  ok   row 2 start year
+  ok   row 2 end year
+  ok   row 2 end month
+  ok   row 2 employer country filled from its own menu
+  ok   unsatisfiable menu did not leak into the next field
+  ok   iCIMS row 1 employer
+  ok   iCIMS row 1 title
+  ok   iCIMS row 2 employer is job 2
+  ok   iCIMS year box holds a year, not '2025-04'
+  ok   iCIMS start month is April
+  ok   iCIMS row 2 end year
+  ok   veteran radio picked the applicant's own answer
+  ok   gender select
+  ok   ethnicity select
+  ok   disability dropdown took the 'No' branch, never the 'Yes' one
+  ok   saved answer: notice period
+  ok   saved answer: relocation
+  ok   saved answer: how did you hear
+  ok   sponsorship answered No
+  ok   work authorization answered Yes
+  ok   years-of-experience question got its own answer
+  ok   start-date question got its own answer
+  ok   compensation question got its own answer
+  ok   the neighbouring question's answer did not leak into 'full legal name'
+  ok   unknown designee email left empty
+  ok   unknown location-requirement question left empty
+  ok   iCIMS address
+  ok   iCIMS city
+  ok   the '— Make a Selection —' country picker is answered
+  ok   the country picker was answered without opening its menu
+  ok   the widget's visible text followed the value
+  ok   State/Province is filled after Country unlocks it
+  ok   a widget with no ARIA is still answered through its hidden select
+  ok   the dependent 'Please specify' takes its saved answer
+  ok   a select inside a collapsed step is not filled
+  ok   Greenhouse: work eligibility answered
+  ok   Greenhouse: sponsorship answered
+  ok   Greenhouse: country of residence answered
+  ok   Greenhouse: gender answered
+  ok   Greenhouse: gh-eligible written exactly once
+  ok   Greenhouse: gh-eligible menu opened at most once
+  ok   Greenhouse: gh-sponsorship written exactly once
+  ok   Greenhouse: gh-sponsorship menu opened at most once
+  ok   Greenhouse: gh-residence written exactly once
+  ok   Greenhouse: gh-residence menu opened at most once
+  ok   Greenhouse: gh-gender written exactly once
+  ok   Greenhouse: gh-gender menu opened at most once
+  ok   Greenhouse: an unknowable question is left blank
+  ok   Greenhouse: answered questions are not flagged as needing the user
+  ok   Greenhouse: the unanswerable question is the one flagged
+  ok   Ant-style dropdown answered through its hidden input
+  ok   Ant-style dropdown written once
+  ok   Ant-style dropdown opened once
+  ok   Downshift-style combobox keeps working
+  ok   Downshift-style combobox written once
+  ok   Downshift-style combobox opened once
+  ok   resume input left alone
+  ok   re-running changes no already-filled value
+  ok   re-running writes nothing
+  ok   re-running only revisits dropdowns that are still blank
+  ok   re-running leaves the Greenhouse answers untouched
+
+79/79 checks passed
+

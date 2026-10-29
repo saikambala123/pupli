@@ -1,0 +1,66 @@
+
+From the profile and saved answers — no model needed
+  ok   work authorization → Yes
+  ok   Workday's sponsorship wording → No (from the profile)
+  ok   at least 18 → Yes
+  ok   previously employed by Leidos → Yes (Leidos is on the work history)
+  ok   federal government, military or civilian → Yes (U.S. Army on the history)
+  ok   active clearance, profile None → No
+  ok   able to obtain a clearance, U.S. citizen → Yes
+  ok   relatives at Leidos → No (the answer saved for GDIT's identical question)
+  ok   currently employed → Yes (a current job on the history)
+  ok   highest education → Master's Degree
+  ok   years of cloud engineering → 2-5 years (the Cloud Engineer role, 2021 to now)
+  ok   salary expectations → the desired salary
+  ok   an answer read off the history is shown as a draft to review
+  ok   without Premium the model is never called
+  ok   the questions only the applicant or the model can answer are highlighted
+  ok   the popup is told why they were not drafted
+
+The rest in one request, while the form fills
+  ok   one request for the whole page
+  ok   it carries only what the profile and saved answers could not answer
+  ok   a felony question is never put to the model
+  ok   each menu is sent with its own options
+  ok   every yes/no menu is sent with Yes and No
+  ok   the checkbox list is sent as a multi-select
+  ok   travel → Yes (drafted)
+  ok   non-compete without a profile or saved answer stays unanswered
+  ok   work arrangement → Hybrid (drafted)
+  ok   essential functions → Yes (drafted)
+  ok   on-site radio → Yes
+  ok   cloud platforms → Amazon Web Services
+  ok   why this role → the drafted paragraph
+  ok   felony stays blank and highlighted
+  ok   the drafted answers are marked as drafts
+  ok   six answers drafted, two declarations left for the applicant
+  ok   known profile answers finish before the AI request
+  ok   the whole page fills in 4167ms with a 1.5s model — well under the old per-question wait
+
+The applicant's own answers come first
+  ok   an exact saved answer beats the model
+  ok   an exact saved answer beats the history
+  ok   and the model is not asked about either
+  ok   an answer that names the other employer is not carried across
+  ok   a different question is not matched just because a name was removed
+  ok   a history without Leidos → the stored No for Leidos
+
+When the answer service is unavailable or older
+  ok   an older service is asked one question at a time
+  ok   …each with its own menu's options
+  ok   …and the answers still land
+  ok   a refused request is not retried question by question
+  ok   the reason is reported
+  ok   the profile's answers are all still there
+  ok   the rest are highlighted
+  ok   switched off → never called
+  ok   a sync without the setting reads as on
+
+Choosing between profiles never holds up the fill
+  ok   a slow scoring call is not waited on (6929ms)
+  ok   …the active profile is used meanwhile
+  ok   the next step of the same application does not score again
+  ok   a prompt score picks the better-matching profile
+
+53/53 checks passed
+

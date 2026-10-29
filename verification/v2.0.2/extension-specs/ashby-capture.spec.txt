@@ -1,0 +1,17 @@
+  ok   a ticked checkbox is captured at all
+  ok   the ethnicity group is saved under its printed question
+  ok   no uuid fragment reaches the question text
+  ok   the group's other choices are kept beside the answer
+  ok   the ethnicity answer is typed as a checkbox
+  ok   the gender group is saved under its printed question
+  ok   'I prefer to self-describe' is never stored as a question
+  ok   the radio group is saved under its printed question
+  ok   the radio answer is typed as a radio
+  ok   the dropdown is saved under its printed question
+  ok   the dropdown answer is typed as a select
+  ok   the dropdown's placeholder row is not kept as a choice
+  ok   an untouched AI draft is not offered as an unsaved answer
+  ok   an answer the applicant types is offered
+
+14/14 checks passed
+

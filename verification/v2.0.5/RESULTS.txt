@@ -1,0 +1,40 @@
+Appli-Fill 2.0.5 verification
+
+PASS: 28/28 packaged Oracle phone/education/date checks.
+PASS: 22/22 packaged Ashby submission-state checks.
+PASS: 18/18 packaged cross-portal study-matching checks.
+PASS: 20/20 existing Ashby Yes/No checks.
+PASS: 37/37 real React commit/validation regressions.
+PASS: 22/22 portal contact regressions.
+PASS: 12/12 segmented-control regressions.
+PASS: 79/79 general autofill regressions.
+PASS: all 12 portal-matrix spec programs.
+PASS: 92/92 profile/schema/helper checks.
+PASS: 60/60 career registration regressions.
+PASS: self-identification checks (all passing).
+PASS: npm run lint (no errors or warnings).
+PASS: npx tsc --noEmit.
+PASS: npm run build.
+PASS: npm run ext:build.
+PASS: Chrome/Firefox archive integrity, versions, and source parity.
+
+Final packaged verification command:
+APPLI_FILL_EXT=dist/chrome CHROMIUM_PATH=/tmp/chromium npm run test:oracle-ashby
+
+The new Oracle fixture verifies distinct majors and completion dates for two
+education records, start/end months and years for two jobs, phone number/model
+commitment, and manual-edit preservation. It checks whole-date acquisition and
+prevents copying an education date into an unrelated certification.
+The Ashby fixture uses real React 18 components with pointer/mouse/click/blur
+state handlers and validates the submitted answers, with both normal page focus
+and simulated popup focus. Native No answers are preserved as No. No validation
+constraints are removed and no hidden checkbox is forced to an affirmative value.
+Study tests cover abbreviations, exact preference, close related subjects,
+unrelated-subject refusal, and native/custom dropdowns across five portal types.
+
+Scope: offline Chromium fixtures and isolated model/schema checks. No live
+Oracle/Ashby application, production database, or live Gemini request was used.
+The production build used a random, build-only JWT_SECRET that is not saved in
+the project. Firefox packaging was checked; Firefox itself was not launched.
+This release used the focused checks above, rather than rerunning the entire
+historical extension suite. Earlier release logs remain in separate folders.

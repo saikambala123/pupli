@@ -1,0 +1,41 @@
+
+the question stored is the question, not an option
+  ok   a shared name and a sibling <label for>: stored under the question
+  ok   a shared name and a sibling <label for>: the chosen option is the answer
+  ok   a shared name and a sibling <label for>: captured once, not once per option
+  ok   a shared name and a sibling <label for>: every option is stored beside it
+  ok   no name attribute at all: stored under the question
+  ok   no name attribute at all: the chosen option is the answer
+  ok   no name attribute at all: captured once, not once per option
+  ok   no name attribute at all: every option is stored beside it
+  ok   a unique name per option: stored under the question
+  ok   a unique name per option: the chosen option is the answer
+  ok   a unique name per option: captured once, not once per option
+  ok   a unique name per option: every option is stored beside it
+  ok   an ARIA radiogroup of divs: stored under the question
+  ok   an ARIA radiogroup of divs: the chosen option is the answer
+  ok   an ARIA radiogroup of divs: captured once, not once per option
+  ok   an ARIA radiogroup of divs: every option is stored beside it
+
+only answers the applicant gave reach the unsaved list
+  ok   a fill does not bank the fields the portal pre-filled
+  ok   visiting a field without changing it banks nothing
+  ok   an answer the applicant types is banked
+  ok   editing a value that was already there banks the edit
+
+identity fields stay in the profile, never in Saved Answers
+  ok   correcting an autofilled name is not banked as an answer
+
+a question is read from its own field, not the one next to it
+  ok   the neighbour's saved answer did not land in Address
+  ok   the neighbour's saved answer did not land in City
+  ok   it did land in the question it belongs to
+
+an answer given on one application comes back on the next
+  ok   both answers were captured on the first application
+  ok   the radio answer is replayed onto the next application
+  ok   the dropdown answer is replayed onto the next application
+  ok   replaying does not put the replayed answers straight back in the unsaved list
+
+28/28 checks passed
+

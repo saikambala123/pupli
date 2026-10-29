@@ -1,0 +1,48 @@
+
+Voluntary Disclosures and Self Identify on one page (generated ids)
+  ok   race/ethnicity
+  ok   gender
+  ok   veteran status
+  ok   Name is the applicant's name
+  ok   Employee ID is left blank
+  ok   Date is today, MM/DD/YYYY
+  ok   the "No" disability box is ticked, and only it
+  ok   nothing Appli-Fill filled is pending
+
+  …and a change made by hand is
+  ok   the applicant's choice is held
+  ok     and nothing else
+
+the Self Identify step alone (generated ids, no heading naming the form)
+  ok   Name is the applicant's name
+  ok   Employee ID is left blank
+  ok   Date is today, MM/DD/YYYY
+  ok   the "No" disability box is ticked
+  ok   a "Date" above the form is not given today's date
+  ok   nothing Appli-Fill filled is pending
+
+a current tenant's Self Identify step (selfIdentifiedDisabilityData ids, role=checkbox)
+  ok   Name is the applicant's name
+  ok   Employee ID is left blank
+  ok   Date is today, MM/DD/YYYY
+  ok   the "No" disability box is ticked, and only it
+  ok   nothing Appli-Fill filled is pending
+
+ethnicity drawn as a list of boxes (Voluntary Disclosures)
+  ok   only the applicant's ethnicity is ticked
+  ok   nothing Appli-Fill filled is pending
+
+however the profile words the disability answer
+  ok   "No" → [false,true,false] (native boxes)
+  ok   "No" → [false,true,false] (role=checkbox)
+  ok   "Yes, I have a disability" → [true,false,false] (native boxes)
+  ok   "Yes, I have a disability" → [true,false,false] (role=checkbox)
+  ok   "Yes" → [true,false,false] (native boxes)
+  ok   "Yes" → [true,false,false] (role=checkbox)
+  ok   "I don't wish to answer" → [false,false,true] (native boxes)
+  ok   "I don't wish to answer" → [false,false,true] (role=checkbox)
+  ok   "" → [false,false,false] (native boxes)
+  ok   "" → [false,false,false] (role=checkbox)
+
+33/33 checks passed
+

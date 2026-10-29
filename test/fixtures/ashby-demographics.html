@@ -1,0 +1,133 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Superhuman — Application</title>
+<style>
+  body{font-family:system-ui;padding:24px;max-width:760px}
+  ._fieldEntry{margin-bottom:26px}
+  ._label{display:block;font-weight:600;margin-bottom:8px}
+  ._option{display:block;margin:3px 0}
+  input[type=text],textarea{width:100%;padding:8px;border:1px solid #ccd;border-radius:6px}
+  ._comboInput{width:100%;padding:8px;border:1px solid #ccd;border-radius:6px}
+</style></head><body>
+<h1>SUPERHUMAN</h1>
+<form id="application-form" class="ashby-application-form">
+
+  <!-- Profile-owned: must never reach the pending list -->
+  <div class="_fieldEntry">
+    <label class="_label" for="_systemfield_name">Name</label>
+    <input id="_systemfield_name" name="_systemfield_name" type="text">
+  </div>
+
+  <!--
+    Case 1 — the screenshot's checkbox group.
+
+    Ashby gives every option its own uuid-derived `name`, there is no <fieldset>,
+    no role=group and no aria-labelledby. The question is a sibling <label> that
+    points at nothing. humanize() turns the name into
+    "edb 0c17 447a b4c5 8a5afa5ba1a9 gh quest labeled checkbox 2", which is what
+    the popup showed as the question.
+  -->
+  <div class="_fieldEntry">
+    <label class="_label">How would you describe your racial/ethnic background? (mark all that apply)</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_i_dont_wish_to_answer"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="I don't wish to answer"> I don't wish to answer</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_i_prefer_to_self_describe"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="I prefer to self-describe"> I prefer to self-describe</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_white"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="White or European"> White or European</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_southeast_asian"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="Southeast Asian"> Southeast Asian</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_south_asian"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="South Asian"> South Asian</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_hawaiian"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="Native Hawaiian or Pacific Islander"> Native Hawaiian or Pacific Islander</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_mena"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="Middle Eastern or North African"> Middle Eastern or North African</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_indigenous"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="Indigenous, American Indian or Alaska Native"> Indigenous, American Indian or Alaska Native</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_hispanic"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="Hispanic, Latinx or of Spanish Origin"> Hispanic, Latinx or of Spanish Origin</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_east_asian"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="East Asian"> East Asian</label>
+    <label class="_option"><input type="checkbox"
+      id="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2_black"
+      name="4409827-edb-0c17-447a-b4c5-8a5afa5ba1a9_gh_quest_labeled_checkbox_2"
+      value="Black or of African descent"> Black or of African descent</label>
+  </div>
+
+  <!--
+    Case 2 — the "i prefer to self describe" report.
+
+    Each option carries its OWN name here, so the group cannot be resolved through
+    `name` and humanize(id) reads back as the option text with the hyphen lost.
+    "i prefer to self describe" then failed the exact-match options test and was
+    stored as a question.
+  -->
+  <div class="_fieldEntry">
+    <label class="_label">How would you describe your gender identity? (mark all that apply)</label>
+    <label class="_option"><input type="checkbox"
+      id="q_gender_identity_man" name="q_gender_identity_man" value="Man"> Man</label>
+    <label class="_option"><input type="checkbox"
+      id="q_gender_identity_woman" name="q_gender_identity_woman" value="Woman"> Woman</label>
+    <label class="_option"><input type="checkbox"
+      id="q_gender_identity_non_binary" name="q_gender_identity_non_binary" value="Non-binary"> Non-binary</label>
+    <label class="_option"><input type="checkbox"
+      id="q_gender_identity_i_prefer_to_self_describe"
+      name="q_gender_identity_i_prefer_to_self_describe"
+      value="I prefer to self-describe"> I prefer to self-describe</label>
+  </div>
+
+  <!-- Case 3 — a radio group with the same uuid-name shape -->
+  <div class="_fieldEntry">
+    <label class="_label">Do you identify as transgender?</label>
+    <label class="_option"><input type="radio"
+      name="7781200-aa41-4c9d-9f31-0be2e1ab77c2_gh_quest_labeled_radio_5" value="Yes"> Yes</label>
+    <label class="_option"><input type="radio"
+      name="7781200-aa41-4c9d-9f31-0be2e1ab77c2_gh_quest_labeled_radio_5" value="No"> No</label>
+    <label class="_option"><input type="radio"
+      name="7781200-aa41-4c9d-9f31-0be2e1ab77c2_gh_quest_labeled_radio_5" value="I prefer to self-describe"> I prefer to self-describe</label>
+    <label class="_option"><input type="radio"
+      name="7781200-aa41-4c9d-9f31-0be2e1ab77c2_gh_quest_labeled_radio_5" value="I don't wish to answer"> I don't wish to answer</label>
+  </div>
+
+  <!-- Case 4 — a native select whose label is only a sibling -->
+  <div class="_fieldEntry">
+    <label class="_label">Which location are you applying to?</label>
+    <select id="9930014-bb52-4d1a-8e77-1cc3f2bc88d3_gh_quest_select_7"
+            name="9930014-bb52-4d1a-8e77-1cc3f2bc88d3_gh_quest_select_7">
+      <option value="">Start typing…</option>
+      <option>San Francisco, California, United States</option>
+      <option>Jacksonville, Florida, United States</option>
+      <option>New York, New York, United States</option>
+      <option>Remote, United States</option>
+    </select>
+  </div>
+
+  <!-- Case 5 — free text an AI draft lands in -->
+  <div class="_fieldEntry">
+    <label class="_label" for="q_why_superhuman">Why are you interested in this role?</label>
+    <textarea id="q_why_superhuman" name="q_why_superhuman" rows="3"></textarea>
+  </div>
+
+  <button type="submit">Submit application</button>
+</form>
+</body></html>

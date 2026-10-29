@@ -1,0 +1,149 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Senior DevOps Engineer - Northwind</title>
+<meta property="og:site_name" content="Northwind">
+<style>body{font-family:system-ui;max-width:760px;margin:0 auto;padding:24px}
+label{display:block;font-size:13px;margin:14px 0 4px}
+input[type=text],input[type=email],input[type=tel],textarea{width:100%;padding:8px;font-size:14px}
+.select__control{border:1px solid #ccc;padding:6px;cursor:pointer;min-height:36px}
+.select__menu{border:1px solid #ccc;max-height:200px;overflow:auto}
+.select__option{padding:6px;cursor:pointer}
+.hidden{display:none}</style></head>
+<body>
+<!-- Decoy: the job-board search box that sits above the form on real boards. -->
+<form id="board-search" role="search"><label for="q">Search jobs</label><input type="text" id="q" name="q"></form>
+
+<h1 class="app-title">Senior DevOps Engineer</h1>
+<span class="company-name">at Northwind</span>
+
+<form id="application_form" action="/applications" method="post">
+  <label for="first_name">First Name <span aria-hidden="true">*</span></label>
+  <input type="text" id="first_name" name="job_application[first_name]" autocomplete="given-name">
+
+  <label for="last_name">Last Name *</label>
+  <input type="text" id="last_name" name="job_application[last_name]" autocomplete="family-name">
+
+  <label for="email">Email *</label>
+  <input type="email" id="email" name="job_application[email]">
+
+  <label for="phone">Phone</label>
+  <input type="tel" id="phone" name="job_application[phone]">
+
+  <label for="job_application_location">Location (City) </label>
+  <input type="text" id="job_application_location" name="job_application[location]" autocomplete="address-level2">
+
+  <label for="resume">Resume/CV</label>
+  <input type="file" id="resume" name="job_application[resume]">
+
+  <label for="urls_LinkedIn">LinkedIn Profile</label>
+  <input type="text" id="urls_LinkedIn" name="job_application[urls][LinkedIn]">
+
+  <label for="urls_Website">Website</label>
+  <input type="text" id="urls_Website" name="job_application[urls][Website]">
+
+  <!-- react-select: value lives in a hidden input, display text in a div -->
+  <div class="field" data-q="sponsorship">
+    <label id="lbl-sponsorship">Will you now or in the future require sponsorship for employment visa status?<span>*</span></label>
+    <div class="select" data-id="gh-sponsorship"></div>
+    <input type="hidden" name="gh-sponsorship" value="">
+  </div>
+
+  <div class="field" data-q="authorized">
+    <label id="lbl-authorized">Are you legally authorized to work in the United States?*</label>
+    <div class="select" data-id="gh-authorized"></div>
+    <input type="hidden" name="gh-authorized" value="">
+  </div>
+
+  <div class="field" data-q="hear">
+    <label id="lbl-hear">How did you hear about this job?</label>
+    <div class="select" data-id="gh-hear"></div>
+    <input type="hidden" name="gh-hear" value="">
+  </div>
+
+  <label for="q-years">How many years of DevOps experience do you have?*</label>
+  <input type="text" id="q-years" name="q-years">
+
+  <label for="q-why">Why do you want to work here?</label>
+  <textarea id="q-why" name="q-why" rows="4"></textarea>
+
+  <label for="q-start">What is your earliest start date?</label>
+  <input type="text" id="q-start" name="q-start">
+
+  <h3>U.S. Standard Demographic Questions</h3>
+  <div class="field" data-q="gender">
+    <label id="lbl-gender">Gender</label>
+    <div class="select" data-id="gh-gender"></div>
+    <input type="hidden" name="gh-gender" value="">
+  </div>
+  <div class="field" data-q="hispanic">
+    <label id="lbl-hispanic">Are you Hispanic or Latino?</label>
+    <div class="select" data-id="gh-hispanic"></div>
+    <input type="hidden" name="gh-hispanic" value="">
+  </div>
+  <div class="field" data-q="veteran">
+    <label id="lbl-veteran">Veteran Status</label>
+    <div class="select" data-id="gh-veteran"></div>
+    <input type="hidden" name="gh-veteran" value="">
+  </div>
+  <div class="field" data-q="disability">
+    <label id="lbl-disability">Disability Status</label>
+    <div class="select" data-id="gh-disability"></div>
+    <input type="hidden" name="gh-disability" value="">
+  </div>
+
+  <input type="submit" id="submit_app" value="Submit Application">
+</form>
+
+<script>
+/* A faithful-enough react-select: the control is a div, the chosen label is
+   painted into a child node, and the value a submit would send lives in the
+   hidden input beside it. */
+function reactSelect(host, options, labelId) {
+  const hiddenInput = host.parentElement.querySelector('input[type=hidden]');
+  const control = document.createElement("div");
+  control.className = "select__control";
+  control.setAttribute("role", "combobox");
+  control.setAttribute("aria-expanded", "false");
+  control.setAttribute("aria-haspopup", "listbox");
+  control.setAttribute("aria-labelledby", labelId);
+  control.tabIndex = 0;
+  const value = document.createElement("div");
+  value.className = "select__placeholder";
+  value.textContent = "Select...";
+  control.appendChild(value);
+  const menu = document.createElement("div");
+  menu.className = "select__menu hidden";
+  menu.setAttribute("role", "listbox");
+  options.forEach((text) => {
+    const o = document.createElement("div");
+    o.className = "select__option";
+    o.setAttribute("role", "option");
+    o.textContent = text;
+    o.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      value.textContent = text;
+      value.className = "select__single-value";
+      hiddenInput.value = text;
+      hiddenInput.dispatchEvent(new Event("change", { bubbles: true }));
+      menu.classList.add("hidden");
+      control.setAttribute("aria-expanded", "false");
+    });
+    menu.appendChild(o);
+  });
+  control.addEventListener("click", () => {
+    const open = !menu.classList.contains("hidden");
+    menu.classList.toggle("hidden", open);
+    control.setAttribute("aria-expanded", String(!open));
+  });
+  host.appendChild(control);
+  host.appendChild(menu);
+}
+const YESNO = ["Yes", "No"];
+reactSelect(document.querySelector('[data-id=gh-sponsorship]'), YESNO, "lbl-sponsorship");
+reactSelect(document.querySelector('[data-id=gh-authorized]'), YESNO, "lbl-authorized");
+reactSelect(document.querySelector('[data-id=gh-hear]'), ["LinkedIn", "Indeed", "Referral", "Company website", "Other"], "lbl-hear");
+reactSelect(document.querySelector('[data-id=gh-gender]'), ["Man", "Woman", "Non-binary", "I don't wish to answer"], "lbl-gender");
+reactSelect(document.querySelector('[data-id=gh-hispanic]'), ["Yes", "No", "I don't wish to answer"], "lbl-hispanic");
+reactSelect(document.querySelector('[data-id=gh-veteran]'), ["I identify as one or more of the classifications of a protected veteran", "I am not a protected veteran", "I don't wish to answer"], "lbl-veteran");
+reactSelect(document.querySelector('[data-id=gh-disability]'), ["Yes, I have a disability, or have had one in the past", "No, I do not have a disability and have not had one in the past", "I do not want to answer"], "lbl-disability");
+</script>
+</body></html>

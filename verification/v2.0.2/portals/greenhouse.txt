@@ -1,0 +1,24 @@
+
+Greenhouse — detected "greenhouse", 17 filled, 0 left
+
+  ok   detected as Greenhouse
+  ok   first name
+  ok   last name
+  ok   email
+  ok   phone
+  ok   location (city)
+  ok   LinkedIn url
+  ok   Website url
+  ok   sponsorship react-select submits No
+  ok   work authorization react-select submits Yes
+  ok   how did you hear submits LinkedIn
+  ok   years of experience answered
+  ok   why-work-here from saved answers
+  ok   gender from profile
+  ok   hispanic/latino from profile
+  ok   veteran status from profile
+  ok   disability status from profile
+  ok   the board search box was left alone
+
+18/18 checks passed — Greenhouse
+

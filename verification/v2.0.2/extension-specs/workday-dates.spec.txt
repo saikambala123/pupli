@@ -1,0 +1,44 @@
+
+both halves of every date are written
+  ok   row 1 start month
+  ok   row 1 start year
+  ok   row 1 end month
+  ok   row 1 end year
+
+the second row is the second job, and To is not a copy of From
+  ok   row 2 start month
+  ok   row 2 start year
+  ok   row 2 end month
+  ok   row 2 end year
+  ok   From and To are different dates
+
+the year is not trimmed to two digits
+  ok   w1f-y holds four digits
+  ok   w1to-y holds four digits
+  ok   w2f-y holds four digits
+  ok   w2to-y holds four digits
+
+the page raises no date error of its own
+  ok   no 'Invalid Date' anywhere on the form
+
+an edit to each row is held separately
+  ok   both edits were held
+  ok   under two different questions
+  ok   each question names its row
+  ok   the answers stayed with their own row
+
+editing a date segment is held rather than dropped
+  ok   the month edit reached the list
+  ok   a two-letter label still produced a usable question
+
+a widget that fills its buffer from keystrokes
+  ok   the boxes show the dates
+  ok   and the widget's own buffer holds them too
+  ok   so Save and Continue raises no required-field error
+
+the application-documents upload
+  ok   no document is attached by the fill
+  ok   and the upload is not flagged as needing an answer
+
+25/25 checks passed
+

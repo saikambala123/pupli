@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Cybersecurity Specialist — REGENT</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; }
+  .page { display: flex; gap: 32px; padding: 24px; }
+  .job-meta { width: 260px; }
+  .job-meta h3 { font-size: 12px; text-transform: uppercase; color: #667; margin: 16px 0 4px; }
+  .job-meta p { margin: 0; }
+  main { flex: 1; max-width: 640px; }
+  .field { margin-bottom: 20px; }
+  .field label, .q { display: block; font-weight: 600; margin-bottom: 6px; }
+  input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccd; border-radius: 6px; }
+  .seg { display: inline-flex; border: 1px solid #ccd; border-radius: 6px; overflow: hidden; }
+  .seg button { padding: 10px 28px; border: 0; border-right: 1px solid #ccd; background: #fff; cursor: pointer; font: inherit; }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: #1a56db; color: #fff; }
+</style>
+</head>
+<body>
+<header><img alt="REGENT" /></header>
+
+<div class="page">
+  <!-- The posting's own details. Not part of the application, but it sits in a
+       shared ancestor with the form, which is how "Employment Type / Full time"
+       reached the Name and Email boxes. -->
+  <div class="job-meta">
+    <h3>Location</h3>
+    <p>North Kingstown, Rhode Island, USA</p>
+    <h3>Employment Type</h3>
+    <p>Full time</p>
+    <h3>Department</h3>
+    <p>People &amp; Places</p>
+    <p>Information Technology</p>
+  </div>
+
+  <main>
+    <h2>REGENT Job Application</h2>
+
+    <div class="field">
+      <label>Name*</label>
+      <input id="f-name" type="text" />
+    </div>
+
+    <div class="field">
+      <label>Email*</label>
+      <input id="f-email" type="text" />
+    </div>
+
+    <div class="field">
+      <label>Why are you interested in this role?*</label>
+      <textarea id="f-why" rows="4"></textarea>
+    </div>
+
+    <div class="field">
+      <p class="q">Are you legally authorized to work in the United States?*</p>
+      <div class="seg" data-q="auth">
+        <button type="button" id="auth-yes" aria-pressed="false">Yes</button>
+        <button type="button" id="auth-no" aria-pressed="false">No</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <p class="q">Will you need visa sponsorship now or in the future to be eligible for employment in the United States?*</p>
+      <div class="seg" data-q="sponsor">
+        <button type="button" id="spon-yes" aria-pressed="false">Yes</button>
+        <button type="button" id="spon-no" aria-pressed="false">No</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <p class="q">REGENT is located in North Kingstown, Rhode Island. Are you either located within a 50 mile radius or available to work on-site with relocation support?*</p>
+      <div class="seg" data-q="reloc">
+        <button type="button" id="reloc-yes" aria-pressed="false">Yes</button>
+        <button type="button" id="reloc-no" aria-pressed="false">No</button>
+      </div>
+    </div>
+
+    <button type="submit" id="submit-app">Submit Application</button>
+  </main>
+</div>
+
+<script>
+  // Segmented control behaviour: one choice per group, reflected in aria-pressed.
+  document.querySelectorAll(".seg").forEach((group) => {
+    group.querySelectorAll("button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        group.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", "false"));
+        btn.setAttribute("aria-pressed", "true");
+      });
+    });
+  });
+</script>
+</body>
+</html>

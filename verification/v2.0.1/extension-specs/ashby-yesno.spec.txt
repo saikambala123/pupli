@@ -1,0 +1,31 @@
+
+what is collected
+  ok   each Yes / No row is one question
+  ok     collected as a choice, not as buttons
+  ok     the mirror checkbox is never a field of its own
+  ok   work authorization is read as such
+  ok   sponsorship is read as such
+  ok   "previously employed by Chainalysis" is read as such
+  ok   "considered for other opportunities" is read as such
+
+fill
+  ok   Are you legally authorized… = Yes
+  ok   Will you require sponsorship… = No
+  ok   Previously employed by Chainalysis… = No
+  ok   Considered for other opportunities = Yes
+  ok     shown as a draft to check
+  ok   a question the profile cannot answer is left alone
+  ok     and outlined for the applicant
+  ok   answered questions are not outlined
+  ok   the rest of the form still fills
+  ok   nothing Appli-Fill pressed is offered as the applicant's answer
+  ok   filled count includes the Yes / No rows
+
+submit
+  ok   the form submits with every Yes / No answered
+
+what the applicant changes by hand is still theirs
+  ok   changing Yes to No is held as their answer
+
+20/20 checks passed
+

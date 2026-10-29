@@ -1,0 +1,47 @@
+
+the school as the profile has it
+  ok   School or University is picked from Workday's list
+  ok     searched by the profile's own words
+  ok     Save and Continue accepts it
+  ok     no search text is left in the box
+  ok     never a look-alike (Northwestern Polytechnic, Northwestern College)
+  ok     not a draft: it is the profile's school
+  ok     the results list is closed afterwards
+  ok   Field of Study already answered is left as it is
+  ok   GPA from the profile
+  ok   LinkedIn from the profile, though saved under "Other"
+  ok   Twitter from the profile
+  ok   Facebook, which the profile does not have, is left empty and not outlined
+  ok   nothing Appli-Fill filled is offered as the applicant's answer
+  ok   done in 3186ms
+
+a campus or a place after the name
+  ok   the school is found without the place
+
+"The" in front
+  ok   University of North Carolina at Charlotte, not Chapel Hill
+
+text already sitting in the search box (a résumé parse, or an earlier fill)
+  ok   the school is still searched and picked
+
+a school the tenant's list does not carry
+  ok   "Other" is picked, so the step can be saved
+  ok     shown as a draft to check
+
+a name the list holds more than one school for
+  ok   nothing is guessed
+  ok     and not "Other" either
+  ok     the box is outlined for the applicant
+  ok     and left without stray search text
+
+matching one school's name to another
+  ok   "MIT" is Massachusetts Institute of Technology
+  ok   Northwestern Polytechnic University is not Northwestern University
+  ok   University of Illinois at Chicago is not a match for University of Illinois
+  ok   a campus after the name is the same school
+  ok   "at" and word order do not matter
+  ok   "Univ." is University
+  ok   "&" is "and"
+
+30/30 checks passed
+

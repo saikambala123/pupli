@@ -1,0 +1,112 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Platform Engineer @ Brellium</title>
+<style>
+body{font-family:system-ui;padding:24px;max-width:720px}
+.ashby-application-form-field-entry{margin-bottom:22px}
+label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+.desc{font-size:12px;color:#556;margin:0 0 6px}
+.wrap{position:relative}
+input{width:100%;padding:8px;border:1px solid #ccd;border-radius:6px;box-sizing:border-box;font:inherit}
+.chev{position:absolute;right:10px;top:8px;pointer-events:none}
+[role=listbox]{position:absolute;background:#fff;border:1px solid #ccd;border-radius:6px;max-height:220px;overflow:auto;z-index:9;margin:0;padding:4px 0;list-style:none}
+[role=option]{padding:6px 10px;cursor:pointer}
+[role=option][aria-selected=true]{background:#222;color:#fff}
+.yesno button{padding:6px 14px;border:1px solid #ccd;background:#fff}
+.yesno button[aria-pressed=true]{background:#222;color:#fff}
+</style></head><body>
+<!--
+  Ashby's application form, as jobs.ashbyhq.com/brellium draws it: the
+  Location question is an <input role="combobox"> with a description under
+  the label. Suggestions come back from the server a moment after typing and
+  are drawn in a listbox at the end of <body>. Only a picked suggestion
+  counts: leaving the box with typed text clears it, as Ashby does.
+
+  `window.__LOCATION_MODE` picks the list the server answers from:
+    "countries" — countries only (typing "uni" offers United States, United
+                  Kingdom, United Arab Emirates, Tanzania, US Virgin Islands);
+    "places"    — cities, states and countries, Google-style.
+-->
+<form class="ashby-application-form-container">
+  <div class="ashby-application-form-field-entry">
+    <label for="_systemfield_name">Name<span>*</span></label>
+    <input id="_systemfield_name" name="_systemfield_name" type="text">
+  </div>
+  <div class="ashby-application-form-field-entry">
+    <label for="_systemfield_email">Email<span>*</span></label>
+    <input id="_systemfield_email" name="_systemfield_email" type="email">
+  </div>
+  <div class="ashby-application-form-field-entry">
+    <label for="_systemfield_location">Location<span>*</span></label>
+    <p class="desc">We follow a hybrid work model, with team members working four days a week from our Flatiron office. A current NYC location or willingness to relocate is required, unless otherwise specified.</p>
+    <div class="wrap">
+      <input id="_systemfield_location" name="_systemfield_location" role="combobox" aria-autocomplete="list"
+             aria-expanded="false" autocomplete="off" placeholder="Start typing...">
+      <span class="chev">&#8964;</span>
+    </div>
+  </div>
+</form>
+<script>
+const COUNTRIES = ["Afghanistan","Australia","Canada","India","Mexico","Tanzania","United Arab Emirates","United Kingdom","United States","United States Minor Outlying Islands","US Virgin Islands"];
+const PLACES = [
+  "Jacksonville, Florida, United States", "Jacksonville, North Carolina, United States", "Jacksonville Beach, Florida, United States",
+  "Jacksonville, Texas, United States", "New York, New York, United States", "Florida, United States", "United States",
+  "United Kingdom", "Stanley, North Carolina, United States", "Stanley, Idaho, United States", "Hyderabad, Telangana, India",
+];
+const input = document.getElementById("_systemfield_location");
+window.__picked = null;
+let list = null;
+let timer = null;
+function closeList() { if (list) { list.remove(); list = null; } input.setAttribute("aria-expanded", "false"); }
+function search(q) {
+  const mode = window.__LOCATION_MODE || "countries";
+  const source = mode === "places" ? PLACES : COUNTRIES;
+  const needle = q.trim().toLowerCase().replace(/\s+/g, " ");
+  if (!needle) return [];
+  // Matched from the start of any word, as Ashby does ("states" finds "United States").
+  return source.filter((name) => {
+    const words = name.toLowerCase().replace(/[(),]/g, " ").split(/\s+/).filter(Boolean);
+    const flat = name.toLowerCase().replace(/\s+/g, " ");
+    return flat.startsWith(needle) || words.some((_, i) => words.slice(i).join(" ").startsWith(needle.replace(/,/g, "")));
+  }).slice(0, 8);
+}
+function show(results) {
+  closeList();
+  if (!results.length) return;
+  list = document.createElement("ul");
+  list.setAttribute("role", "listbox");
+  results.forEach((name, i) => {
+    const li = document.createElement("li");
+    li.setAttribute("role", "option");
+    li.setAttribute("aria-selected", String(i === 0));
+    li.textContent = name;
+    li.addEventListener("mousedown", (e) => e.preventDefault());
+    li.addEventListener("click", () => {
+      input.value = name;
+      window.__picked = name;
+      closeList();
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    list.appendChild(li);
+  });
+  const r = input.getBoundingClientRect();
+  list.style.top = (r.bottom + window.scrollY + 2) + "px";
+  list.style.left = (r.left + window.scrollX) + "px";
+  list.style.width = r.width + "px";
+  document.body.appendChild(list);
+  input.setAttribute("aria-expanded", "true");
+}
+input.addEventListener("input", () => {
+  window.__picked = null;
+  clearTimeout(timer);
+  const q = input.value;
+  // The answer comes back from the server a moment later.
+  timer = setTimeout(() => show(search(q)), 250);
+});
+input.addEventListener("blur", () => {
+  setTimeout(() => {
+    // Typed text that was never picked is not an answer.
+    if (!window.__picked) input.value = "";
+    closeList();
+  }, 150);
+});
+</script>
+</body></html>

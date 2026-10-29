@@ -1,0 +1,30 @@
+
+A salary question whose choices are amounts
+  ok   the form is filled (First Name)
+  ok   a list of salary ranges is not answered with the first range
+  ok   nor a row of salary-range radios
+
+Yes / No radios whose question is the first radio's <label for>
+  ok   the first radio reads as its choice ("Yes"), not as the question
+  ok   authorized to work: Yes
+  ok   driver's license: Yes
+
+A "Title" under Licenses and Certifications, and a Prefix list, for a profile with no title of its own
+  ok   the certification's Title is not given an honorific
+  ok   the Prefix is not guessed from the applicant's gender
+
+Check boxes: background check, drug test, a preferred name, declining to give one's race
+  ok   the background-check box is left for the applicant to tick
+  ok   so is the drug-test box
+  ok   and "I have a preferred or chosen name"
+  ok   and "I choose not to disclose my race"
+
+A form drawn inside the page's own shadow root, with two Work Experience rows
+  ok   the job titles are read as job titles, one per row
+  ok   no job title box is given an honorific
+  ok   the second job's box never takes the first job's company
+  ok   the page's own app element is never outlined or flashed
+  ok   no page errors
+
+17/17 checks passed
+

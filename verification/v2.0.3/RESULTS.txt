@@ -1,0 +1,59 @@
+Appli-Fill 2.0.3 verification
+
+PASS: 60/60 career registration checks against source scripts.
+PASS: 60/60 career registration checks against dist/chrome scripts.
+PASS: 86/86 profile schema, normalization and helper checks.
+PASS: 6/6 real ProfileEditor interaction/save-payload checks.
+PASS: 10/10 account-password checks on the final code.
+PASS: final self-identification rule checks (all passing).
+PASS: 20/20 answer accuracy and latency checks on the final code.
+PASS: 33/33 Ashby survey compatibility checks.
+PASS: 51/51 final eligibility-wording checks.
+PASS: API regression suite (12 checks).
+PASS: UI regression suite, including the profile editor and sign-out interaction.
+PASS: all 12 portal-matrix spec programs.
+PASS: npm run lint (no warnings or errors).
+PASS: npx tsc --noEmit.
+PASS: npm run build.
+PASS: npm run ext:build.
+PASS: Chrome/Firefox package versions, source parity and ZIP integrity.
+PASS: extension JavaScript syntax checks.
+
+Regression sweep details
+The 58 extension spec programs were exercised. The initial sweep passed the first
+57 and reached a legacy assertion in the last spec that expected an unknown field
+saying "If none, enter N/A" to remain blank. That assertion conflicts with the
+requested 2.0.3 behavior. It was updated to expect N/A, and the final spec passed
+51/51. No application code was changed for that assertion update. The original
+sweep transcript and the final eligibility transcript are both included.
+The subsequent API, UI and 12-portal suites all exited with status 0.
+Additional focused checks and the packaged Chrome career regression were run on
+the final implementation after compatibility adjustments.
+
+Commands
+CHROMIUM_PATH=/tmp/chromium npm test
+CHROMIUM_PATH=/tmp/chromium node test/eligibility-wording.spec.mjs
+npm run test:api
+CHROMIUM_PATH=/tmp/chromium npm run test:ui
+CHROMIUM_PATH=/tmp/chromium npm run test:portals
+CHROMIUM_PATH=/tmp/chromium node test/career-registration.spec.mjs
+APPLI_FILL_EXT=dist/chrome CHROMIUM_PATH=/tmp/chromium node test/career-registration.spec.mjs
+node test/career-profile.spec.mjs
+CHROMIUM_PATH=/tmp/chromium node test/account-password.spec.mjs
+node test/self-id.spec.mjs
+CHROMIUM_PATH=/tmp/chromium node test/answer-accuracy-latency.spec.mjs
+CHROMIUM_PATH=/tmp/chromium node test/ashby-survey.spec.mjs
+npm run lint
+npx tsc --noEmit
+npm run build
+npm run ext:build
+
+Scope
+Chromium tests run offline fixtures using the actual extension scripts and portal
+model/change handlers. The editor test renders the real React component with an
+isolated API transport. Persistence checks use the real Mongoose schema with
+BSON serialization. API regressions cover data/query construction. No live
+McDonald's application was submitted and no production MongoDB/Gemini credentials
+were used. The production build used a randomly generated, build-only JWT_SECRET;
+that value was not saved in the deliverable. Firefox package contents were
+verified; Firefox itself was not launched.

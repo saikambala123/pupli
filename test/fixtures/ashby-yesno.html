@@ -1,0 +1,135 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Senior DevOps Engineer @ Chainalysis | Ashby</title>
+<style>
+body{font-family:system-ui;padding:20px;max-width:760px}
+.ashby-application-form-field-entry{margin-bottom:18px;position:relative}
+.ashby-application-form-question-title{display:block;font-weight:600;margin-bottom:6px}
+._yesno_hkyf8_143{display:flex;gap:0;position:relative}
+._yesno_hkyf8_143 button{padding:8px 22px;border:1px solid #ccd;background:#fff;cursor:pointer}
+._yesno_hkyf8_143 button._active_1v5e2_12{background:#3a1b8c;color:#fff}
+input[type=text],input[type=email]{width:100%;padding:7px;border:1px solid #ccd;border-radius:4px}
+._radio_row{display:block;margin:4px 0}
+</style></head>
+<body>
+<!--
+  Ashby's application form as jobs.ashbyhq.com/chainalysis-careers draws it.
+  A Yes / No question is two <button>s in a `_yesno_` row, plus a checkbox the
+  size of nothing that carries the question's id (the label points at it) and
+  mirrors the pressed button. The pressed button gets an `_active_` class on
+  the next render, not in the click handler. The form refuses to submit until
+  every required Yes / No has a pressed button, as Ashby does.
+-->
+<div class="ashby-application-form-container">
+<h1>Senior DevOps Engineer</h1>
+<form class="_form_1xnbm_1 ashby-application-form" id="app" novalidate>
+  <div class="_fieldEntry_hkyf8_29 ashby-application-form-field-entry">
+    <label class="_heading_101oc_53 ashby-application-form-question-title" for="_systemfield_name">Name<span>*</span></label>
+    <input type="text" id="_systemfield_name" name="_systemfield_name" required>
+  </div>
+  <div class="_fieldEntry_hkyf8_29 ashby-application-form-field-entry">
+    <label class="_heading_101oc_53 ashby-application-form-question-title" for="_systemfield_email">Email<span>*</span></label>
+    <input type="email" id="_systemfield_email" name="_systemfield_email" required>
+  </div>
+
+  <div class="_fieldEntry_hkyf8_29 ashby-application-form-field-entry" data-q="auth">
+    <label class="_heading_101oc_53 _required_101oc_92 ashby-application-form-question-title" for="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f01">Are you legally authorized to work for any employer in the United States without restrictions?</label>
+    <div class="_container_1v5e2_29 _yesno_hkyf8_143">
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button">Yes</button>
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button">No</button>
+      <input type="checkbox" name="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f01" id="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f01" tabindex="-1" required
+             style="position:absolute;width:0;height:0;opacity:0;margin:0;padding:0">
+    </div>
+  </div>
+
+  <div class="_fieldEntry_hkyf8_29 ashby-application-form-field-entry" data-q="sponsor">
+    <label class="_heading_101oc_53 _required_101oc_92 ashby-application-form-question-title" for="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f02">Will you now or in the future require sponsorship to maintain that work authorization?</label>
+    <div class="_container_1v5e2_29 _yesno_hkyf8_143">
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button">Yes</button>
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button">No</button>
+      <input type="checkbox" name="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f02" id="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f02" tabindex="-1" required
+             style="position:absolute;width:0;height:0;opacity:0;margin:0;padding:0">
+    </div>
+  </div>
+
+  <div class="_fieldEntry_hkyf8_29 ashby-application-form-field-entry" data-q="tz">
+    <label class="_heading_101oc_53 _required_101oc_92 ashby-application-form-question-title">What is your current time zone?</label>
+    <div class="_container_101oc_1">
+      <label class="_radio_row"><input type="radio" name="tz-9a3c" value="PST"> PST</label>
+      <label class="_radio_row"><input type="radio" name="tz-9a3c" value="MST"> MST</label>
+      <label class="_radio_row"><input type="radio" name="tz-9a3c" value="CST"> CST</label>
+      <label class="_radio_row"><input type="radio" name="tz-9a3c" value="EST"> EST</label>
+      <label class="_radio_row"><input type="radio" name="tz-9a3c" value="BST"> BST</label>
+      <label class="_radio_row"><input type="radio" name="tz-9a3c" value="CET"> CET</label>
+    </div>
+  </div>
+
+  <!-- The mirror first, the buttons after it (a later Ashby build). -->
+  <div class="_fieldEntry_hkyf8_29 ashby-application-form-field-entry" data-q="prior">
+    <label class="_heading_101oc_53 _required_101oc_92 ashby-application-form-question-title" for="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f03">Have you been previously employed by Chainalysis as an Intern, Full Time Employee, or Contractor? If yes, please select "Yes".</label>
+    <div class="_container_1v5e2_29 _yesno_hkyf8_143">
+      <input type="checkbox" name="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f03" id="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f03" tabindex="-1" required
+             style="position:absolute;width:1px;height:1px;opacity:0;margin:0;padding:0">
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button">Yes</button>
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button">No</button>
+    </div>
+  </div>
+
+  <div class="_fieldEntry_hkyf8_29 ashby-application-form-field-entry" data-q="other">
+    <label class="_heading_101oc_53 ashby-application-form-question-title" for="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f04">Would you like to be considered for other opportunities at Chainalysis?</label>
+    <div class="_container_1v5e2_29 _yesno_hkyf8_143">
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button" aria-pressed="false">Yes</button>
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button" aria-pressed="false">No</button>
+      <input type="checkbox" name="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f04" id="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f04" tabindex="-1"
+             style="position:absolute;width:0;height:0;opacity:0;margin:0;padding:0">
+    </div>
+  </div>
+
+  <div class="_fieldEntry_hkyf8_29 ashby-application-form-field-entry" data-q="noncompete">
+    <label class="_heading_101oc_53 _required_101oc_92 ashby-application-form-question-title" for="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f05">Are you currently bound by a non-compete agreement?</label>
+    <div class="_container_1v5e2_29 _yesno_hkyf8_143">
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button">Yes</button>
+      <button class="_container_pjyt6_1 _option_1v5e2_35" type="button">No</button>
+      <input type="checkbox" name="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f05" id="9a3c1f0e-5c1b-4d7e-8f0a-1b2c3d4e5f05" tabindex="-1" required
+             style="position:absolute;width:0;height:0;opacity:0;margin:0;padding:0">
+    </div>
+  </div>
+
+  <button type="submit" class="ashby-application-form-submit-button">Submit Application</button>
+</form>
+</div>
+
+<script>
+/* Ashby's Yes / No: the click is recorded in React state, the button is painted
+   `_active_` on the next render, and the mirror checkbox follows (ticked for Yes). */
+window.__answers = {};
+document.querySelectorAll("._yesno_hkyf8_143").forEach((row) => {
+  const entry = row.closest("[data-q]");
+  const q = entry.dataset.q;
+  const buttons = Array.from(row.querySelectorAll("button"));
+  const mirror = row.querySelector("input[type=checkbox]");
+  buttons.forEach((b) => b.addEventListener("click", () => {
+    const answer = b.textContent.trim();
+    window.__answers[q] = answer;
+    setTimeout(() => {
+      buttons.forEach((x) => {
+        x.classList.toggle("_active_1v5e2_12", x === b);
+        if (x.hasAttribute("aria-pressed")) x.setAttribute("aria-pressed", String(x === b));
+      });
+      mirror.checked = answer === "Yes";
+    }, 60);
+  }));
+});
+window.__submitErrors = null;
+document.getElementById("app").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const missing = [];
+  document.querySelectorAll("[data-q]").forEach((entry) => {
+    const row = entry.querySelector("._yesno_hkyf8_143");
+    if (!row) return;
+    const required = row.querySelector("input[required]");
+    if (required && !window.__answers[entry.dataset.q]) missing.push(entry.dataset.q);
+  });
+  window.__submitErrors = missing;
+});
+</script>
+</body></html>

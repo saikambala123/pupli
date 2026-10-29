@@ -1,0 +1,15 @@
+  ok   a form-less application is scanned at all
+  ok   first name is filled from the profile
+  ok   last name is filled from the profile
+  ok   email is filled from the profile
+  ok   phone is filled from the profile
+  ok   the site's search box is left alone
+  ok   the search box is not counted as a field needing the user
+  ok   the application beside a newsletter box is filled
+  ok   the newsletter box is not filled with the applicant's email
+  ok   the login box is not filled
+  ok   a genuine application form is still filled
+  ok   the scan stays inside the application form
+
+12/12 checks passed
+

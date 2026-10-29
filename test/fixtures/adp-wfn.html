@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Career Center | Acme Corporation</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#f4f5f7;color:#222}
+.mdf-header{background:#d0271d;color:#fff;padding:10px 20px}
+main{max-width:760px;margin:0 auto;padding:20px}
+.step{background:#fff;border-radius:8px;padding:18px 22px;margin-bottom:18px}
+.mdf-validated-field{margin-bottom:14px}
+.mdf-label label,.qLabel,.vsid-title{display:block;font-size:13px;margin-bottom:4px;color:#333}
+.mdf-required-indicator{color:#c0392b;margin-left:2px}
+.vdl-textbox{font:inherit;padding:8px 10px;border:1px solid #8a8a8a;border-radius:4px;width:100%;box-sizing:border-box}
+.vdl-textbox.is-invalid{border-color:#c0392b}
+.vdl-validation-error{color:#c0392b;font-size:12px}
+.phone-group{display:flex;gap:8px}.phone-group select{width:40%;font:inherit;padding:8px}
+.vdl-checkbox{margin:8px 0;display:flex;gap:8px;align-items:flex-start}
+.MDFSelectBox{position:relative}
+.MDFSelectBox__control{display:flex;align-items:center;border:1px solid #8a8a8a;border-radius:4px;padding:2px 8px;min-height:34px;background:#fff;cursor:pointer}
+.MDFSelectBox--is-disabled .MDFSelectBox__control{background:#eee;cursor:default}
+.MDFSelectBox__value-container{flex:1;display:grid;align-items:center}
+.MDFSelectBox__placeholder,.MDFSelectBox__single-value,.MDFSelectBox__input-container{grid-area:1/1/2/3}
+.MDFSelectBox__placeholder{color:#888}
+.MDFSelectBox__input{border:0;outline:0;font:inherit;width:100%;background:transparent}
+.MDFSelectBox__menu{position:absolute;left:0;right:0;z-index:30;background:#fff;border:1px solid #bbb;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.MDFSelectBox__menu-list{max-height:220px;overflow:auto}
+.MDFSelectBox__option{padding:7px 10px;cursor:pointer}
+.MDFSelectBox__option--is-focused{background:#eef3fb}
+.MDFSelectBox__menu-notice--no-options{padding:7px 10px;color:#888}
+.qMainDiv,.additional-question,.vsid-component-padding-bottom{margin-bottom:16px}
+.pac-container{position:absolute;z-index:1000;background:#fff;border:1px solid #bbb;box-shadow:0 4px 12px rgba(0,0,0,.2);font-size:13px}
+.pac-item{padding:6px 10px;cursor:pointer;border-top:1px solid #eee}
+.pac-item:hover,.pac-item-selected{background:#ebf2fe}
+.pac-item-query{font-weight:600;margin-right:4px}
+footer{display:flex;justify-content:flex-end}
+#ja_sv_cw_next_footer_btn{font:inherit;padding:8px 18px;background:#d0271d;color:#fff;border:0;border-radius:4px}
+</style></head>
+<body>
+<!--
+  ADP Workforce Now's Career Center application (workforcenow.adp.com/mascsr/
+  default/mdf/recruitment/recruitment.html?cid=…), drawn from the markup other
+  fillers read (Jobright's Workforce Now module):
+
+  - Personal information: `.mdf-validated-field` rows, `.mdf-label label[for]`
+    (+ `.mdf-required-indicator`) over an `input.vdl-textbox`. Country and State
+    are react-select lists (`.MDFSelectBox__control`, `input[role=combobox]`,
+    `.MDFSelectBox__single-value`, options in `.MDFSelectBox__menu-list`).
+    Mobile Number is `label#validated_label_mobile…` over a `[role=group]`
+    with `select[name=phoneCountry]` (ISO codes) and `input[data-testid=
+    phone-input]`. Address Line 1 is a Google Places box (`.pac-target-input`,
+    suggestions in `.pac-container .pac-item` at the end of the page; picking
+    one fills City, State and Postal Code).
+  - Questions: `.quesitions-container` (sic) → `div.qMainDiv` with
+    `.question-label-container label.qLabel[for]` and an `sdf-radio-group`
+    (`sdf-radio-button[label][value]`), a react-select or a box;
+    `div.additional-question` for the desired salary.
+  - Voluntary self-identification: `.vsid-padding-container`, react-select
+    lists under `label.vsid-title` (Gender, Ethnicity `#vsidEthinicity`, Race
+    `#vsidRace` — open only once Ethnicity is "Not Hispanic or Latino"), the
+    veteran question as an `sdf-radio-group` under an `h4`.
+
+  window.__wfn = {
+    step: "personal" | "questions" | "vsid",
+    pacAria: bool,         Address Line 1 says it is a combobox (newer Maps builds)
+    noPlace: bool,         no suggestion is the applicant's address
+    latency: ms            suggestions arrive this long after typing (default 300)
+  }
+  window.__model   what the form keeps; window.__log   what was picked
+  #ja_sv_cw_next_footer_btn   the page's own check → window.__errors
+-->
+<div id="app">
+<header class="mdf-header">Acme Corporation · Career Center</header>
+<main class="recruitment-application">
+  <h1>Senior Site Reliability Engineer</h1>
+  <div class="step personal-step-container" data-step="personal">
+    <h2>Personal Information</h2>
+    <div id="personal-fields"></div>
+  </div>
+  <div class="step" data-step="questions">
+    <h2>Questions</h2>
+    <div class="quesitions-container">
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_1">Are you at least 18 years of age?<span class="mdf-required-indicator">*</span></label></div>
+        <sdf-radio-group id="question_1" data-model="q1" required>
+          <sdf-radio-button label="Yes" value="Y"></sdf-radio-button>
+          <sdf-radio-button label="No" value="N"></sdf-radio-button>
+        </sdf-radio-group>
+      </div>
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_2">Are you legally authorized to work in the United States?<span class="mdf-required-indicator">*</span></label></div>
+        <sdf-radio-group id="question_2" data-model="q2" required>
+          <sdf-radio-button label="Yes" value="Y"></sdf-radio-button>
+          <sdf-radio-button label="No" value="N"></sdf-radio-button>
+        </sdf-radio-group>
+      </div>
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_3">Will you now or in the future require sponsorship for employment visa status?<span class="mdf-required-indicator">*</span></label></div>
+        <sdf-radio-group id="question_3" data-model="q3" required>
+          <sdf-radio-button label="Yes" value="Y"></sdf-radio-button>
+          <sdf-radio-button label="No" value="N"></sdf-radio-button>
+        </sdf-radio-group>
+      </div>
+      <div class="qMainDiv" id="q4-row">
+        <div class="question-label-container"><label class="qLabel" for="question_4">How did you hear about us?<span class="mdf-required-indicator">*</span></label></div>
+      </div>
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_5">Have you ever worked for Acme Corporation before?<span class="mdf-required-indicator">*</span></label></div>
+        <sdf-radio-group id="question_5" data-model="q5" required>
+          <sdf-radio-button label="Yes" value="Y"></sdf-radio-button>
+          <sdf-radio-button label="No" value="N"></sdf-radio-button>
+        </sdf-radio-group>
+      </div>
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_6">Available Start Date<span class="mdf-required-indicator">*</span></label></div>
+        <input id="question_6" class="vdl-textbox" type="text" placeholder="MM/DD/YYYY" data-model="q6" required>
+      </div>
+      <div class="additional-question">
+        <span class="qLabel question-label-container">What is your desired salary?</span>
+        <sdf-radio-group id="salaryFrequency" data-model="salaryFrequency">
+          <sdf-radio-button label="Annually" value="A"></sdf-radio-button>
+          <sdf-radio-button label="Hourly" value="H"></sdf-radio-button>
+        </sdf-radio-group>
+        <input type="text" id="desiredSalary" class="vdl-textbox" aria-label="Desired Salary" data-model="desiredSalary">
+        <sdf-select-simple id="salaryCurrency" aria-label="Select Currency Type" data-model="salaryCurrency">
+          <sdf-select-item value="USD">United States Dollar ( USD )</sdf-select-item>
+          <sdf-select-item value="CAD">Canadian Dollar ( CAD )</sdf-select-item>
+          <sdf-select-item value="EUR">Euro ( EUR )</sdf-select-item>
+        </sdf-select-simple>
+      </div>
+    </div>
+  </div>
+  <div class="step personal-step-container vsid-padding-container" data-step="vsid">
+    <h2>Voluntary Self-Identification</h2>
+    <div class="vsid-component-padding-bottom"><label class="vsid-title" id="gender_vsid_label">Gender</label><div class="vsid-item" id="vsid-gender"></div></div>
+    <div class="vsid-component-padding-bottom"><label class="vsid-title" id="ethnicity_vsid_label">Ethnicity</label><div class="vsid-item" id="vsid-ethnicity"></div></div>
+    <div class="vsid-component-padding-bottom"><label class="vsid-title" id="race_vsid_label">Race</label><div class="vsid-item" id="vsid-race"></div></div>
+    <div class="vsid-component-padding-bottom padding-top">
+      <h4>Protected Veteran Status</h4>
+      <sdf-radio-group id="vsidVeteran" data-model="veteran">
+        <sdf-radio-button label="I identify as one or more of the classifications of protected veteran" value="P"></sdf-radio-button>
+        <sdf-radio-button label="I am not a protected veteran" value="N"></sdf-radio-button>
+        <sdf-radio-button label="I don't wish to answer" value="D"></sdf-radio-button>
+      </sdf-radio-group>
+    </div>
+  </div>
+  <footer><button type="button" id="ja_sv_cw_next_footer_btn">Next</button></footer>
+</main>
+</div>
+<!--SDF-KIT-->
+<script>
+(function () {
+  const cfg = window.__wfn || {};
+  const step = cfg.step || "personal";
+  document.querySelectorAll("[data-step]").forEach((s) => { if (s.dataset.step !== step) s.remove(); });
+  window.__model = {};
+  window.__log = window.__log || [];
+  window.__errors = null;
+  const model = window.__model;
+  const log = (s) => window.__log.push(s);
+
+  const STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida",
+    "Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan",
+    "Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina",
+    "North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah",
+    "Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+  const COUNTRIES = ["Canada","India","Mexico","United Kingdom","United States","United States Minor Outlying Islands"];
+
+  /* ---------- react-select, as Workforce Now's MDF draws it ---------- */
+  let instance = 0;
+  function mdfSelect({ inputId, name, options, label = null, ariaLabel = null, disabled = false, onPick = null }) {
+    const n = ++instance;
+    const ids = { listbox: `react-select-instance-${n}-listbox`, placeholder: `react-select-instance-${n}-placeholder` };
+    const box = document.createElement("div");
+    box.className = "MDFSelectBox";
+    box.innerHTML = `
+      <div class="MDFSelectBox__control">
+        <div class="MDFSelectBox__value-container">
+          <div class="MDFSelectBox__placeholder" id="${ids.placeholder}">Select...</div>
+          <div class="MDFSelectBox__single-value" hidden></div>
+          <div class="MDFSelectBox__input-container"><input class="MDFSelectBox__input" id="${inputId}" type="text" role="combobox"
+            aria-autocomplete="list" aria-expanded="false" aria-haspopup="true" autocomplete="off" aria-describedby="${ids.placeholder}" value=""></div>
+        </div>
+        <div class="MDFSelectBox__indicators"><span class="MDFSelectBox__indicator-separator"></span><div class="MDFSelectBox__indicator MDFSelectBox__dropdown-indicator" aria-hidden="true">&#9662;</div></div>
+      </div>`;
+    const input = box.querySelector("input");
+    if (label) input.setAttribute("aria-labelledby", label);
+    if (ariaLabel) input.setAttribute("aria-label", ariaLabel);
+    const control = box.querySelector(".MDFSelectBox__control");
+    const single = box.querySelector(".MDFSelectBox__single-value");
+    const placeholder = box.querySelector(".MDFSelectBox__placeholder");
+    let open = false, focused = -1, value = "", menu = null;
+    const setDisabled = (on) => {
+      disabled = on;
+      input.disabled = on;
+      box.classList.toggle("MDFSelectBox--is-disabled", on);
+      if (on) input.setAttribute("aria-disabled", "true"); else input.removeAttribute("aria-disabled");
+    };
+    setDisabled(disabled);
+    const shown = () => {
+      const needle = input.value.trim().toLowerCase();
+      return options.filter((o) => !needle || o.toLowerCase().includes(needle));
+    };
+    const paint = () => {
+      single.hidden = !value;
+      single.textContent = value;
+      placeholder.hidden = Boolean(value) || Boolean(input.value);
+    };
+    const render = () => {
+      if (!menu) return;
+      const list = menu.querySelector(".MDFSelectBox__menu-list");
+      list.innerHTML = "";
+      const rows = shown();
+      if (!rows.length) list.innerHTML = `<div class="MDFSelectBox__menu-notice MDFSelectBox__menu-notice--no-options">No options</div>`;
+      rows.forEach((text, i) => {
+        const opt = document.createElement("div");
+        opt.className = "MDFSelectBox__option" + (i === focused ? " MDFSelectBox__option--is-focused" : "");
+        opt.id = `react-select-instance-${n}-option-${i}`;
+        opt.setAttribute("role", "option");
+        opt.setAttribute("aria-selected", String(text === value));
+        opt.textContent = text;
+        opt.addEventListener("mousemove", () => { focused = i; });
+        opt.addEventListener("click", () => pick(text));
+        list.appendChild(opt);
+      });
+    };
+    const show = () => {
+      if (open || disabled) return;
+      open = true; focused = 0;
+      menu = document.createElement("div");
+      menu.className = "MDFSelectBox__menu";
+      menu.innerHTML = `<div class="MDFSelectBox__menu-list" role="listbox" id="${ids.listbox}"></div>`;
+      menu.addEventListener("mousedown", (e) => e.preventDefault());
+      box.appendChild(menu);
+      input.setAttribute("aria-expanded", "true");
+      input.setAttribute("aria-controls", ids.listbox);
+      render();
+    };
+    const hide = () => {
+      if (!open) return;
+      open = false;
+      menu?.remove(); menu = null;
+      input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-controls");
+      input.removeAttribute("aria-activedescendant");
+    };
+    const pick = (text) => {
+      value = text;
+      input.value = "";
+      paint();
+      hide();
+      model[name] = text;
+      log(`picked ${name}: ${text}`);
+      onPick?.(text);
+    };
+    control.addEventListener("mousedown", (e) => {
+      if (disabled) return;
+      if (e.target !== input) e.preventDefault();
+      input.focus();
+      open ? (e.target === input ? null : hide()) : show();
+    });
+    input.addEventListener("input", () => { paint(); focused = 0; open ? render() : show(); });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") { e.preventDefault(); if (!open) show(); else { focused = Math.min(shown().length - 1, focused + 1); render(); } }
+      else if (e.key === "ArrowUp") { e.preventDefault(); focused = Math.max(0, focused - 1); render(); }
+      else if (e.key === "Enter" && open) { e.preventDefault(); const t = shown()[focused]; if (t) pick(t); }
+      else if (e.key === "Escape") hide();
+    });
+    input.addEventListener("blur", () => { hide(); input.value = ""; paint(); });
+    paint();
+    box.__setDisabled = setDisabled;
+    box.__value = () => value;
+    return box;
+  }
+
+  /* ---------- personal information ---------- */
+  const fields = document.getElementById("personal-fields");
+  const textRow = (id, label, { required = false, extra = "" } = {}) => {
+    const row = document.createElement("div");
+    row.className = "mdf-validated-field";
+    row.innerHTML = `<div class="mdf-label"><label for="${id}" id="validated_label_${id}">${label}${required ? '<span class="mdf-required-indicator">*</span>' : ""}</label></div>
+      <input id="${id}" class="vdl-textbox" type="text" data-model="${id}" ${required ? "required aria-required=\"true\"" : ""} ${extra}>
+      <div class="vdl-validation-error" role="alert"></div>`;
+    fields.appendChild(row);
+    return row.querySelector("input");
+  };
+  const listRow = (id, label, options, { required = false } = {}) => {
+    const row = document.createElement("div");
+    row.className = "mdf-validated-field";
+    row.innerHTML = `<div class="mdf-label"><label for="${id}" id="validated_label_${id}">${label}${required ? '<span class="mdf-required-indicator">*</span>' : ""}</label></div>`;
+    const box = mdfSelect({ inputId: id, name: id, options, label: `validated_label_${id}` });
+    row.appendChild(box);
+    row.insertAdjacentHTML("beforeend", `<div class="vdl-validation-error" role="alert"></div>`);
+    row.dataset.required = String(required);
+    fields.appendChild(row);
+    return box;
+  };
+  if (step === "personal") {
+    textRow("firstName", "First Name", { required: true });
+    textRow("middleName", "Middle Name");
+    textRow("lastName", "Last Name", { required: true });
+    fields.insertAdjacentHTML("beforeend", `<div id="usePreferredName" class="vdl-checkbox"><input type="checkbox" id="usePreferredName-input" name="usePreferredName"><label for="usePreferredName-input">I have a preferred or chosen name</label></div>`);
+    textRow("email", "Email", { required: true });
+    fields.insertAdjacentHTML("beforeend", `
+      <div class="mdf-validated-field">
+        <div class="mdf-label"><label id="validated_label_mobile_phone" for="mobilePhone">Mobile Number<span class="mdf-required-indicator">*</span></label></div>
+        <div role="group" aria-labelledby="validated_label_mobile_phone" class="phone-group">
+          <select name="phoneCountry" id="phoneCountry" aria-label="Country Code">
+            <option value="CA">Canada (+1)</option><option value="IN">India (+91)</option><option value="MX">Mexico (+52)</option>
+            <option value="GB">United Kingdom (+44)</option><option value="US" selected>United States (+1)</option>
+          </select>
+          <input data-testid="phone-input" type="tel" id="mobilePhone" class="vdl-textbox" data-model="mobilePhone" aria-required="true" autocomplete="off">
+        </div>
+        <div class="vdl-validation-error" role="alert"></div>
+      </div>
+      <div id="consentCheckBox" class="personal-info-consent vdl-checkbox"><input type="checkbox" id="consentCheckBox-input" name="consentCheckBox"><label for="consentCheckBox-input">(Optional) I would like to receive text messages to this number about my job application.</label></div>`);
+    listRow("country", "Country", COUNTRIES, { required: true });
+    const line1 = textRow("addressLine1", "Address Line 1", { required: true, extra: 'placeholder="Enter a location"' });
+    textRow("addressLine2", "Address Line 2");
+    textRow("city", "City", { required: true });
+    const stateBox = listRow("state", "State", STATES, { required: true });
+    textRow("postalCode", "Postal Code", { required: true });
+
+    /* Google Places on Address Line 1. */
+    line1.classList.add("pac-target-input");
+    line1.setAttribute("autocomplete", "off");
+    if (cfg.pacAria) { line1.setAttribute("role", "combobox"); line1.setAttribute("aria-autocomplete", "list"); line1.setAttribute("aria-expanded", "false"); }
+    const PLACES = cfg.noPlace ? [] : [
+      { street: "8451 Gate Parkway West", city: "Jacksonville", state: "Florida", zip: "32216", line: ["8451 Gate Parkway West", "Jacksonville, FL, USA"] },
+      { street: "8451 Gate Parkway West", city: "Jacksonville Beach", state: "Florida", zip: "32250", line: ["8451 Gate Parkway West", "Jacksonville Beach, FL, USA"] },
+      { street: "8451 Gate Drive", city: "Orlando", state: "Florida", zip: "32801", line: ["8451 Gate Drive", "Orlando, FL, USA"] },
+    ];
+    let pac = null, timer = null;
+    const closePac = () => { pac?.remove(); pac = null; if (cfg.pacAria) line1.setAttribute("aria-expanded", "false"); };
+    const choosePlace = (place) => {
+      closePac();
+      // The page's own place_changed handler: the street, the city, the state and the code.
+      const set = (el, v) => { el.value = v; model[el.dataset.model] = v; };
+      set(line1, place.street);
+      set(document.getElementById("city"), place.city);
+      set(document.getElementById("postalCode"), place.zip);
+      stateBox.__pickByPlace?.(place.state);
+      log(`picked addressLine1: ${place.street}, ${place.city}`);
+    };
+    stateBox.__pickByPlace = (text) => {
+      const single = stateBox.querySelector(".MDFSelectBox__single-value");
+      single.hidden = false; single.textContent = text;
+      stateBox.querySelector(".MDFSelectBox__placeholder").hidden = true;
+      model.state = text;
+    };
+    line1.addEventListener("input", () => {
+      clearTimeout(timer);
+      const typed = line1.value.trim().toLowerCase();
+      timer = setTimeout(() => {
+        closePac();
+        if (typed.length < 3) return;
+        const words = typed.replace(/,/g, " ").split(/\s+/).filter(Boolean);
+        const rows = PLACES.filter((p) => words[0] && p.street.toLowerCase().startsWith(words[0]));
+        if (!rows.length) return;
+        pac = document.createElement("div");
+        pac.className = "pac-container pac-logo";
+        const r = line1.getBoundingClientRect();
+        pac.style.cssText = `left:${r.left + scrollX}px;top:${r.bottom + scrollY}px;width:${r.width}px`;
+        rows.forEach((p) => {
+          const item = document.createElement("div");
+          item.className = "pac-item";
+          item.innerHTML = `<span class="pac-icon pac-icon-marker"></span><span class="pac-item-query"><span class="pac-matched">${p.line[0]}</span></span><span>${p.line[1]}</span>`;
+          // Google's list chooses on mousedown.
+          item.addEventListener("mousedown", (e) => { e.preventDefault(); choosePlace(p); });
+          pac.appendChild(item);
+        });
+        document.body.appendChild(pac);
+        if (cfg.pacAria) line1.setAttribute("aria-expanded", "true");
+      }, Number(cfg.latency ?? 300));
+    });
+    line1.addEventListener("keydown", (e) => { if (e.key === "Escape") closePac(); });
+    line1.addEventListener("blur", () => setTimeout(closePac, 150));
+  }
+
+  /* ---------- questions ---------- */
+  if (step === "questions") {
+    const row = document.getElementById("q4-row");
+    row.appendChild(mdfSelect({ inputId: "question_4", name: "q4", options: ["Company Website", "Indeed", "LinkedIn", "Glassdoor", "Employee Referral", "Other"] }));
+  }
+
+  /* ---------- voluntary self-identification ---------- */
+  if (step === "vsid") {
+    document.getElementById("vsid-gender").appendChild(mdfSelect({ inputId: "vsidGender", name: "gender", ariaLabel: "Gender",
+      options: ["Male", "Female", "I do not wish to self-identify"] }));
+    let race = null;
+    document.getElementById("vsid-ethnicity").appendChild(mdfSelect({ inputId: "vsidEthinicity", name: "ethnicity", ariaLabel: "Ethnicity",
+      options: ["Hispanic or Latino", "Not Hispanic or Latino", "I do not wish to self-identify"],
+      onPick: (v) => race.__setDisabled(v !== "Not Hispanic or Latino") }));
+    race = mdfSelect({ inputId: "vsidRace", name: "race", ariaLabel: "Race", disabled: true,
+      options: ["American Indian or Alaska Native (Not Hispanic or Latino)", "Asian (Not Hispanic or Latino)",
+        "Black or African American (Not Hispanic or Latino)", "Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)",
+        "White (Not Hispanic or Latino)", "Two or More Races (Not Hispanic or Latino)"] });
+    document.getElementById("vsid-race").appendChild(race);
+  }
+
+  /* ---------- what the form keeps ---------- */
+  document.addEventListener("input", (e) => {
+    const el = e.target;
+    if (el.matches?.("input.vdl-textbox[data-model]")) model[el.dataset.model] = el.value;
+  });
+  document.addEventListener("change", (e) => {
+    const el = e.target;
+    if (el.matches?.("select[name=phoneCountry]")) model.phoneCountry = el.value;
+    if (el.matches?.("input[type=checkbox]")) model[el.name] = el.checked;
+  });
+  document.addEventListener("sdfChange", (e) => {
+    const host = e.target;
+    if (host?.dataset?.model) model[host.dataset.model] = e.detail;
+  });
+
+  /* ---------- Next ---------- */
+  document.getElementById("ja_sv_cw_next_footer_btn").addEventListener("click", () => {
+    const errors = [];
+    const need = (name, ok, why = "required") => { if (!ok) errors.push(`${name}: ${why}`); };
+    const filled = (name) => String(model[name] ?? "").trim() !== "";
+    if (step === "personal") {
+      ["firstName", "lastName", "email", "mobilePhone", "addressLine1", "city", "postalCode", "country", "state"].forEach((n) => need(n, filled(n)));
+      if (filled("email")) need("email", /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(model.email), "invalid");
+      if (filled("mobilePhone")) need("mobilePhone", String(model.mobilePhone).replace(/\D+/g, "").length === 10, `invalid ${model.mobilePhone}`);
+      if (filled("postalCode")) need("postalCode", /^\d{5}(-\d{4})?$/.test(String(model.postalCode).trim()), `invalid ${model.postalCode}`);
+      ["firstName", "lastName", "email", "mobilePhone", "addressLine1", "city", "postalCode"].forEach((n) => {
+        const el = document.getElementById(n);
+        if (el && el.value !== String(model[n] ?? "")) errors.push(`${n}: shows "${el.value}" but keeps "${model[n] ?? ""}"`);
+      });
+    }
+    if (step === "questions") {
+      ["q1", "q2", "q3", "q4", "q5", "q6"].forEach((n) => need(n, filled(n)));
+      if (filled("q6")) need("q6", /^\d{2}\/\d{2}\/\d{4}$/.test(String(model.q6).trim()), `invalid date ${model.q6}`);
+    }
+    if (step === "vsid") {
+      ["gender", "ethnicity", "veteran"].forEach((n) => need(n, filled(n)));
+      if (model.ethnicity === "Not Hispanic or Latino") need("race", filled("race"));
+    }
+    window.__errors = errors;
+  });
+})();
+</script>
+</body></html>

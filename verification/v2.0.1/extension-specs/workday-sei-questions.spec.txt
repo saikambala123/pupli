@@ -1,0 +1,99 @@
+
+question labels drawn as formLabel labels, "Immediately"
+  ok   Employment Type Desired is the employment-type question
+  ok   Shift Preference is not taken for an employment question
+  ok   every Available Start Date box is the availability question
+  ok   the other-opportunities question is recognised
+  ok   the base-salary question is the desired-salary question
+  ok   the bonus question is not the salary question
+  ok   Employment Type Desired = Full-Time (the current job's type)
+  ok   Available Start Date = today, in all three boxes
+  ok     and Workday reports no Invalid Date
+  ok   considered for other opportunities = Yes
+  ok     shown as a draft to check
+  ok   base salary expectation from the profile
+  ok   the bonus box is left alone
+  ok   Shift Preference is left for the applicant, outlined
+  ok   nothing Appli-Fill filled is offered back as the applicant's
+
+question labels drawn as <legend>, "Immediately"
+  ok   Employment Type Desired is the employment-type question
+  ok   Shift Preference is not taken for an employment question
+  ok   every Available Start Date box is the availability question
+  ok   the other-opportunities question is recognised
+  ok   the base-salary question is the desired-salary question
+  ok   the bonus question is not the salary question
+  ok   Employment Type Desired = Full-Time (the current job's type)
+  ok   Available Start Date = today, in all three boxes
+  ok     and Workday reports no Invalid Date
+  ok   considered for other opportunities = Yes
+  ok     shown as a draft to check
+  ok   base salary expectation from the profile
+  ok   the bonus box is left alone
+  ok   Shift Preference is left for the applicant, outlined
+  ok   nothing Appli-Fill filled is offered back as the applicant's
+
+other ways of saying when
+  ok   ASAP is today
+  ok   "2 weeks" is two weeks from today
+  ok   "Two weeks' notice" too
+  ok   a date is that date
+  ok   a date already past is today
+  ok   nothing in the profile: today
+  ok   words no calendar can hold: today
+
+the questions inside one group, a number in another box (reported on 1.23.0)
+  ok   salary from the profile: the salary and bonus boxes are not part of the date
+  ok     Available Start Date = today, never 01/01/2000 or empty
+  ok     the bonus box holds the saved "20000"
+  ok     the salary box holds the profile's salary
+  ok   salary already answered (as when the page is filled again): the salary and bonus boxes are not part of the date
+  ok     Available Start Date = today, never 01/01/2000 or empty
+  ok     the bonus box holds the saved "20000"
+  ok     the salary box holds what it had
+  ok   an amount, a percentage or a word is never read as a date
+  ok     while real dates still are
+
+a start date saved off an earlier application
+  ok   "Immediately" in the profile: the profile's date (or today's), never the saved 01/01/2000
+  ok   nothing in the profile: the profile's date (or today's), never the saved 01/01/2000
+  ok   a date in the profile: the profile's date (or today's), never the saved 01/01/2000
+
+a date already in the boxes
+  ok   01/01/2000 left by an earlier fill is replaced with today's date
+  ok   a start date still ahead is left as it is
+
+the same question asked in words, in a plain box
+  ok   a saved date is never replayed: today's date instead
+  ok   a saved answer in words is still used
+
+Workday's boxes that take nothing typed (reported again on 1.24.0)
+  ok   "Immediately": today, picked from Workday's calendar
+  ok     and the calendar is closed again
+  ok   01/01/2000 left by 1.24.0 is replaced with today, from the calendar
+  ok     and the calendar is closed again
+  ok   a date in the profile: its month turned to and its day picked
+  ok     and the calendar is closed again
+  ok   01/01/2000 in boxes that take Backspace: cleared, then today picked from this month's calendar
+  ok   with no calendar either, the arrow keys are never pressed: never 01/01/2000
+  ok     the date is outlined for the applicant, not reported as filled
+
+a widget that reads keystrokes itself (no calendar)
+  ok   today's date, typed a keystroke at a time
+
+a widget that only takes the arrow keys
+  ok   today's date, from its calendar
+
+a widget that will not show the date
+  ok   the boxes are never emptied (an emptied date reads as nothing filled)
+  ok     and outlined for the applicant, not reported as filled
+  ok     the rest of the page still fills
+
+how the boxes are written (no calendar)
+  ok   each box is planned with the whole date, so whichever box is reached first writes it
+  ok     (a date written into all three boxes in one go is lost by this widget)
+  ok   a whole date handed to one box still fills MM, DD and YYYY: each box is read back and tried again
+  ok     and it is read back to be sure
+
+72/72 checks passed
+

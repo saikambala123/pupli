@@ -1,0 +1,154 @@
+/* Appli-Fill on-page UI. Namespaced and !important-guarded because host pages
+   have aggressive resets and we're injecting into someone else's stylesheet. */
+
+.applifill-pill {
+  position: fixed !important;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2147483647;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 340px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #ffffff !important;
+  border: 1px solid #DEE5E8;
+  box-shadow: 0 18px 44px -16px rgba(16, 24, 40, .35);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  color: #101828 !important;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity .22s ease, transform .22s cubic-bezier(.2, .8, .2, 1);
+}
+
+.applifill-pill--visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.applifill-pill__dot {
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  margin-top: 5px;
+  border-radius: 999px;
+  background: #C94D0B;
+}
+
+.applifill-pill[data-tone="busy"] .applifill-pill__dot { animation: applifill-blink 1.2s ease-in-out infinite; }
+.applifill-pill[data-tone="done"] .applifill-pill__dot { background: #00858A; }
+.applifill-pill[data-tone="partial"] .applifill-pill__dot { background: #FFB020; }
+.applifill-pill[data-tone="warn"] .applifill-pill__dot { background: #E5484D; }
+
+@keyframes applifill-blink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+
+.applifill-pill__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+.applifill-pill__title {
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+}
+
+.applifill-pill__body {
+  font-size: 12.5px !important;
+  line-height: 1.4 !important;
+  color: #475467 !important;
+}
+
+.applifill-pill__close {
+  all: unset;
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 17px;
+  line-height: 1;
+  color: #6F7E8A;
+  align-self: flex-start;
+}
+.applifill-pill__close:hover { color: #101828; }
+
+/* While a fill is running, the host page's own smooth-scrolling turns every
+   field we visit into an animated jump. Autofill is not a scroll tour — pin
+   the behaviour to instant so the page stays still. */
+html.applifill-running,
+html.applifill-running body {
+  scroll-behavior: auto !important;
+}
+
+/* Field feedback. Applies to custom dropdown buttons and comboboxes too, not
+   just native controls — those are most of a Workday or Oracle form. */
+.applifill-filled {
+  animation: applifill-flash 1.2s ease-out;
+}
+
+@keyframes applifill-flash {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 194, 168, .5); background-color: rgba(0, 194, 168, .10); }
+  100% { box-shadow: 0 0 0 6px rgba(0, 194, 168, 0); background-color: transparent; }
+}
+
+.applifill-needs-you {
+  outline: 2px dashed #FFB020 !important;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .applifill-pill, .applifill-filled {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Answers Appli-Fill chose rather than read from the profile — AI drafts and
+   voluntary-disclosure fallbacks. The user is expected to read these before
+   submitting, so they stay visibly different from filled facts. */
+.applifill-drafted {
+  outline: 2px solid rgba(201,77,11, .45) !important;
+  outline-offset: 2px;
+  background-color: rgba(201,77,11, .04) !important;
+}
+
+.applifill-pill__stop {
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 8px;
+  padding: 6px 9px;
+  background: #e5484d;
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.applifill-pill__stop:disabled { opacity: .65; cursor: wait; }
+.applifill-pill__stop[hidden] { display: none; }
+
+/* ------------------------------------------------------------------ */
+/*  Unsaved answers                                                    */
+/*                                                                     */
+/*  The floating bar that used to live here was removed: it covered the */
+/*  bottom of the application while the applicant was still typing in   */
+/*  it. Only the field markers remain — the list itself, with Save and  */
+/*  Discard, is in the extension popup beside the saved answers.        */
+/* ------------------------------------------------------------------ */
+
+.applifill-unsaved {
+  outline: 2px dashed #FFB020 !important;
+  outline-offset: 1px;
+}
+
+.applifill-saved {
+  outline: 2px solid #00858A !important;
+  outline-offset: 1px;
+  transition: outline-color .6s ease;
+}
+
+/* The same mascot and palette, with host-page styles explicitly isolated. */
+.applifill-pill { background:#0C1720!important; color:#F2F7F9!important; border:1px solid #324D5A; border-radius:16px; box-shadow:0 12px 40px #07111C44; }
+.applifill-pill__logo { width:36px!important; height:36px!important; min-width:36px!important; object-fit:contain!important; border:0!important; background:transparent!important; margin:0!important; padding:0!important; }
+.applifill-pill__dot { width:6px;height:6px;margin-top:6px;background:#FF863D; }
+.applifill-pill__body { color:#AFC4CF!important; }
+.applifill-pill__close { color:#AFC4CF; }
+.applifill-pill__close:hover { color:#fff; }

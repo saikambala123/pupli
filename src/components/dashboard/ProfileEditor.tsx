@@ -1,0 +1,842 @@
+"use client";
+import { apiPatch, apiDelete } from "@/lib/client-api";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  User, Link2, Briefcase, GraduationCap, Wrench, FileText, ShieldCheck,
+  Banknote, Users, Plus, Trash2, Loader2, Check, Upload, Sparkles, X,
+} from "lucide-react";
+
+/** Parsing reads the file in memory; attaching stores it inside the profile. */
+const PARSE_MAX_BYTES = 10 * 1024 * 1024;
+const ATTACH_MAX_BYTES = 4 * 1024 * 1024;
+
+/* ------------------------------------------------------------------ */
+/*  Small building blocks                                              */
+/* ------------------------------------------------------------------ */
+
+function Field({
+  label, value, onChange, placeholder, type = "text", hint, className = "",
+}: {
+  label: string; value?: string; onChange: (v: string) => void;
+  placeholder?: string; type?: string; hint?: string; className?: string;
+}) {
+  return (
+    <div className={className}>
+      <label className="label">{label}</label>
+      <input
+        className="input"
+        type={type}
+        value={value ?? ""}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      {hint && <p className="mt-1 font-mono text-[10.5px] text-ink-faint">{hint}</p>}
+    </div>
+  );
+}
+
+function Select({
+  label, value, onChange, options, className = "",
+}: {
+  label: string; value?: string; onChange: (v: string) => void;
+  options: string[]; className?: string;
+}) {
+  // A <select> renders blank when its value isn't one of its options, which
+  // silently hid perfectly good parsed values (a resume saying "B.Tech" used
+  // to show an empty Degree field). Keep any unlisted value visible instead.
+  const current = value ?? "";
+  const all = current && !options.includes(current) ? [...options, current] : options;
+
+  return (
+    <div className={className}>
+      <label className="label">{label}</label>
+      <select className="input" value={current} onChange={(e) => onChange(e.target.value)}>
+        <option value="">Select…</option>
+        {all.map((o) => (
+          <option key={o} value={o}>{o}</option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+function TextArea({
+  label, value, onChange, placeholder, rows = 4,
+}: {
+  label: string; value?: string; onChange: (v: string) => void; placeholder?: string; rows?: number;
+}) {
+  return (
+    <div>
+      <label className="label">{label}</label>
+      <textarea
+        className="input resize-y"
+        rows={rows}
+        value={value ?? ""}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </div>
+  );
+}
+
+function TagInput({ label, tags, onChange, placeholder }: {
+  label: string; tags: string[]; onChange: (t: string[]) => void; placeholder?: string;
+}) {
+  const [draft, setDraft] = useState("");
+  const add = () => {
+    const v = draft.trim();
+    if (v && !tags.includes(v)) onChange([...tags, v]);
+    setDraft("");
+  };
+  return (
+    <div>
+      <label className="label">{label}</label>
+      <div className="flex flex-wrap gap-1.5 rounded-xl border border-line bg-white p-2">
+        {tags.map((t) => (
+          <span key={t} className="inline-flex items-center gap-1.5 rounded-lg bg-brand-50 px-2.5 py-1 text-[13px] text-brand-700">
+            {t}
+            <button onClick={() => onChange(tags.filter((x) => x !== t))} aria-label={`Remove ${t}`}>
+              <Trash2 className="h-3 w-3" />
+            </button>
+          </span>
+        ))}
+        <input
+          className="min-w-[140px] flex-1 bg-transparent px-1.5 py-1 text-[14px] outline-none placeholder:text-ink-faint"
+          value={draft}
+          placeholder={placeholder ?? "Type and press Enter"}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === ",") { e.preventDefault(); add(); }
+            if (e.key === "Backspace" && !draft && tags.length) onChange(tags.slice(0, -1));
+          }}
+          onBlur={add}
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+
+const SECTIONS = [
+  { id: "personal", label: "Personal", icon: User },
+  { id: "links", label: "Links", icon: Link2 },
+  { id: "experience", label: "Work history", icon: Briefcase },
+  { id: "education", label: "Education", icon: GraduationCap },
+  { id: "skills", label: "Skills", icon: Wrench },
+  { id: "documents", label: "Documents", icon: FileText },
+  { id: "eligibility", label: "Work eligibility", icon: ShieldCheck },
+  { id: "compensation", label: "Compensation", icon: Banknote },
+  { id: "eeo", label: "EEO", icon: Users },
+] as const;
+
+const YESNO = ["Yes", "No"];
+
+export default function ProfileEditor({
+  initial,
+  premium = false,
+  pendingResume = null,
+  onResumeConsumed,
+  onSaved,
+}: {
+  initial: any;
+  premium?: boolean;
+  pendingResume?: { file: File; nonce: number } | null;
+  onResumeConsumed?: () => void;
+  onSaved?: (profile: any) => void;
+}) {
+  const [p, setP] = useState<any>(initial);
+  const [section, setSection] = useState<string>("personal");
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [error, setError] = useState("");
+  const [parsing, setParsing] = useState(false);
+  const [parsed, setParsed] = useState<any>(null);
+
+  // A resume picked from the toolbar above: show the Documents tab so the user
+  // sees what's happening, then read it without a second file prompt.
+  const lastResumeNonce = useRef<number | null>(null);
+  useEffect(() => {
+    if (!pendingResume || lastResumeNonce.current === pendingResume.nonce) return;
+    lastResumeNonce.current = pendingResume.nonce;
+    setSection("documents");
+    readResume(pendingResume.file, { alsoAttach: true });
+    onResumeConsumed?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingResume]);
+
+  const setPath = (path: string, value: any) =>
+    setP((prev: any) => {
+      const [head, tail] = path.split(".");
+      if (tail) return { ...prev, [head]: { ...(prev[head] ?? {}), [tail]: value } };
+      return { ...prev, [head]: value };
+    });
+
+  const completeness = useMemo(() => {
+    const checks = [
+      p.personal?.firstName, p.personal?.lastName, p.personal?.email, p.personal?.phone,
+      p.personal?.city, p.personal?.country, p.education?.length, p.experience?.length,
+      p.skills?.length, p.websites?.length, p.documents?.some((d: any) => d.kind === "resume"),
+      p.workAuth?.authorizedToWork, p.eeo?.gender || p.eeo?.declineToSelfIdentify, p.summary,
+    ];
+    return Math.round((checks.filter(Boolean).length / checks.length) * 100);
+  }, [p]);
+
+  const save = () => saveProfile(p);
+
+  async function saveProfile(profile: any) {
+    setSaving(true);
+    setError("");
+    try {
+      // Send only the editable sections. Posting the whole document back sent
+      // megabytes of base64 resume over the wire and let the server overwrite
+      // its own file data with the browser's slimmed-down copy.
+      const payload = {
+        label: profile.label, targetRole: profile.targetRole, color: profile.color,
+        summary: profile.summary, personal: profile.personal, workAuth: profile.workAuth,
+        compensation: profile.compensation, eeo: profile.eeo,
+        skills: profile.skills, certifications: profile.certifications,
+        websites: profile.websites, experience: profile.experience, education: profile.education,
+      };
+
+      const res = await apiPatch(`/api/profiles/${profile._id}`, payload);
+      if (!res.ok) throw new Error(res.error || "Couldn't save your changes.");
+      // The response omits `documents` by design, so preserve local state.
+      const merged = { ...res.data, documents: profile.documents ?? [] };
+      setP(merged);
+      onSaved?.(merged);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2200);
+      return true;
+    } catch (e: any) {
+      setError(e.message);
+      return false;
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  /**
+   * Sends the resume to the server, which extracts the text, runs it through
+   * the AI provider, and returns structured sections. Nothing is written until
+   * the user accepts the result.
+   */
+  async function readResume(file: File, { alsoAttach = false } = {}) {
+    setParsing(true);
+    setError("");
+    try {
+      if (file.size > PARSE_MAX_BYTES) {
+        throw new Error("That resume is over 10 MB. Please export/compress it to a smaller file and try again.");
+      }
+      // Parse first; attachment storage is intentionally done after successful
+      // parsing so a slow MongoDB write cannot make the AI step appear stuck.
+      const fd = new FormData();
+      fd.append("file", file);
+      const controller = new AbortController();
+      // Must outlast the server's own budget, otherwise the browser cancels a
+      // parse that was about to succeed and the user sees a false timeout.
+      const timeout = window.setTimeout(() => controller.abort(), 120_000);
+      let res: Response;
+      try {
+        res = await fetch("/api/ai/parse-resume", { method: "POST", body: fd, signal: controller.signal });
+      } catch (err: any) {
+        if (err?.name === "AbortError") throw new Error("Resume parsing took too long. Please retry once. Large or scanned resumes can take longer to process.");
+        throw err;
+      } finally {
+        window.clearTimeout(timeout);
+      }
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(json.error || `Resume parsing failed (${res.status}). Please try again.`);
+      if (!json?.data) throw new Error("Resume parsing returned no profile data. Please try again.");
+      setParsed(json.data);
+      if (alsoAttach) {
+        const attached = await uploadResume(file);
+        if (!attached) throw new Error("The resume was parsed successfully, but the file attachment could not be saved. Retry the attachment without re-parsing.");
+      }
+    } catch (e: any) {
+      setError(e.message);
+    } finally {
+      setParsing(false);
+    }
+  }
+
+  /** Merges parsed sections in, keeping anything the user already filled in. */
+  async function acceptParsed(sections: Record<string, boolean>) {
+    const prev = p;
+    const next = { ...prev, personal: { ...(prev.personal ?? {}) } };
+    if (sections.personal && parsed.personal) {
+      next.personal = { ...prev.personal };
+      for (const [k, v] of Object.entries(parsed.personal)) {
+        if (v && !next.personal[k]) next.personal[k] = v;
+      }
+    }
+    if (sections.experience && parsed.experience?.length) next.experience = parsed.experience;
+    if (sections.education && parsed.education?.length) next.education = parsed.education;
+    if (sections.skills && parsed.skills?.length) {
+      next.skills = Array.from(new Set([...(prev.skills ?? []), ...parsed.skills]));
+    }
+    if (sections.websites && parsed.websites?.length) {
+      const have = new Set((prev.websites ?? []).map((w: any) => w.url));
+      next.websites = [...(prev.websites ?? []), ...parsed.websites.filter((w: any) => w.url && !have.has(w.url))];
+    }
+    if (sections.summary && parsed.summary) next.summary = parsed.summary;
+    if (sections.skills && parsed.targetRole && !prev.targetRole) next.targetRole = parsed.targetRole;
+    if (sections.workAuth && parsed.workAuth) {
+      next.workAuth = { ...(prev.workAuth ?? {}) };
+      for (const [k, v] of Object.entries(parsed.workAuth)) if (v && !next.workAuth[k]) next.workAuth[k] = v;
+    }
+    if (sections.compensation && parsed.compensation) {
+      next.compensation = { ...(prev.compensation ?? {}) };
+      for (const [k, v] of Object.entries(parsed.compensation)) if (v && !next.compensation[k]) next.compensation[k] = v;
+    }
+    if (sections.eeo && parsed.eeo) {
+      next.eeo = { ...(prev.eeo ?? {}) };
+      for (const [k, v] of Object.entries(parsed.eeo)) if (v && !next.eeo[k]) next.eeo[k] = v;
+    }
+
+    // Persist only after the complete merged object exists. The old implementation
+    // performed a network side-effect inside a React state updater, which could
+    // race under concurrent rendering and save the previous draft.
+    setP(next);
+    const ok = await saveProfile(next);
+    if (ok) setParsed(null);
+  }
+
+  /** Documents live outside the PATCH payload, so they need their own call. */
+  async function deleteDocument(documentId: string) {
+    const before = p.documents ?? [];
+    setP((prev: any) => ({ ...prev, documents: (prev.documents ?? []).filter((d: any) => d._id !== documentId) }));
+    // Was fire-and-forget: a failed delete still removed the resume from the
+    // list, so the user believed it was gone until the next page load.
+    const res = await apiDelete("/api/resume/upload", { profileId: p._id, documentId });
+    if (!res.ok) {
+      setP((prev: any) => ({ ...prev, documents: before }));
+      setError(res.error);
+    }
+  }
+
+  async function uploadResume(file: File, kind = "resume") {
+    try {
+      // Storage is the tighter limit: the file is kept as base64 inside the
+      // profile document, and MongoDB caps a document at 16 MB.
+      if (file.size > ATTACH_MAX_BYTES) {
+        setError("That file is over 4 MB, which is too large to attach. The parse still worked — attach a smaller copy if you need the file stored.");
+        return false;
+      }
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("profileId", p._id);
+      fd.append("kind", kind);
+      const res = await fetch("/api/resume/upload", { method: "POST", body: fd });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) { setError(json.error || "The resume could not be saved."); return false; }
+      setP((prev: any) => ({
+        ...prev,
+        documents: [...(prev.documents ?? []), { ...json.data, _id: json.data.id }],
+      }));
+      return true;
+    } catch (e: any) {
+      setError(e?.message || "The resume upload failed.");
+      return false;
+    }
+  }
+
+  const addRow = (key: string, blank: any) =>
+    setP((prev: any) => ({ ...prev, [key]: [...(prev[key] ?? []), blank] }));
+  const updateRow = (key: string, i: number, patch: any) =>
+    setP((prev: any) => ({
+      ...prev,
+      [key]: prev[key].map((r: any, idx: number) => (idx === i ? { ...r, ...patch } : r)),
+    }));
+  const removeRow = (key: string, i: number) =>
+    setP((prev: any) => ({ ...prev, [key]: prev[key].filter((_: any, idx: number) => idx !== i) }));
+
+  /**
+   * "I currently work here" belongs to one role.
+   *
+   * Nothing stopped it being ticked on several, and a resume import sets it on
+   * every role whose dates read "Present" or "Till Date" — which overlapping
+   * and contract roles routinely do. An application form then received the
+   * claim against each of them, and Workday, which drops the end date of any
+   * role marked current, blanked the applicant's whole employment history.
+   *
+   * Ticking one row clears the rest, so what the profile stores is what the
+   * form will say. Untick freely: this only clears others when a row is ticked.
+   */
+  const setCurrentRole = (i: number, checked: boolean) =>
+    setP((prev: any) => ({
+      ...prev,
+      experience: (prev.experience ?? []).map((row: any, idx: number) =>
+        idx === i
+          ? { ...row, current: checked, ...(checked ? { endDate: "" } : {}) }
+          : (checked ? { ...row, current: false } : row)
+      ),
+    }));
+
+  return (
+    <div className="space-y-6">
+      <header className="sticky top-0 z-20 -mx-5 border-b border-line bg-canvas px-5 pb-3 pt-5 sm:-mx-8 sm:px-8">
+        <p className="eyebrow">Profile</p>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+          <h1 className="font-display text-[30px] font-extrabold tracking-[-.02em]">
+            {p.label || "Your profile"}
+          </h1>
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:block">
+              <p className="text-right font-mono text-[11px] text-ink-faint">{completeness}% complete</p>
+              <div className="mt-1 h-1.5 w-28 overflow-hidden rounded-full bg-line">
+                <div className="h-full rounded-full bg-brand-500" style={{ width: `${completeness}%` }} />
+              </div>
+            </div>
+            <button onClick={save} className="btn-primary" disabled={saving}>
+              {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : saved ? <Check className="h-4 w-4" /> : null}
+              {saved ? "Saved" : "Save changes"}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <p className="-mt-2 max-w-[62ch] text-[15px] text-ink-soft">
+        Everything here is what the extension types into application forms. A blank
+        field is a field you will fill in by hand on every application.
+      </p>
+
+      {error && (
+        <p role="alert" className="rounded-xl border border-danger-500/25 bg-danger-500/5 px-4 py-3 text-[13px] text-danger-600">
+          {error}
+        </p>
+      )}
+
+      <div className="grid gap-6 lg:grid-cols-[190px_minmax(0,1fr)]">
+        {/* Section rail */}
+        <nav className="flex gap-1.5 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible scroll-thin">
+          {SECTIONS.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => setSection(s.id)}
+              className={`flex shrink-0 items-center gap-2.5 rounded-xl px-3 py-2.5 text-[13.5px] font-medium transition ${
+                section === s.id ? "bg-brand-500 text-white shadow-sm" : "text-ink-soft hover:bg-white"
+              }`}
+            >
+              <s.icon className="h-4 w-4" />
+              {s.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="card p-5 sm:p-6">
+          {/* ---------------- Personal ---------------- */}
+          {section === "personal" && (
+            <div className="space-y-5">
+              <div className="grid gap-4 sm:grid-cols-3">
+                <Field label="First name" value={p.personal?.firstName} onChange={(v) => setPath("personal.firstName", v)} placeholder="Aarav" />
+                <Field label="Middle name" value={p.personal?.middleName} onChange={(v) => setPath("personal.middleName", v)} />
+                <Field label="Last name" value={p.personal?.lastName} onChange={(v) => setPath("personal.lastName", v)} placeholder="Mehta" />
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label="Preferred name" value={p.personal?.preferredName} onChange={(v) => setPath("personal.preferredName", v)} hint="Used when a form asks for a preferred or nickname" />
+                <Field label="Pronouns" value={p.personal?.pronouns} onChange={(v) => setPath("personal.pronouns", v)} placeholder="he/him" />
+              </div>
+              <div className="grid gap-4 sm:grid-cols-3">
+                <Field label="Email" type="email" value={p.personal?.email} onChange={(v) => setPath("personal.email", v)} />
+                <Select label="Phone type" value={p.personal?.phoneType} onChange={(v) => setPath("personal.phoneType", v)}
+                  options={["Mobile", "Home", "Personal", "Work"]} />
+                <div className="grid grid-cols-[90px_minmax(0,1fr)] gap-2">
+                  <Field label="Code" value={p.personal?.phoneCountryCode} onChange={(v) => setPath("personal.phoneCountryCode", v)} placeholder="+1" />
+                  <Field label="Phone" value={p.personal?.phone} onChange={(v) => setPath("personal.phone", v)} placeholder="415 555 0142" />
+                </div>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {/* Falls back to a text input when the stored value isn't a valid
+                    yyyy-MM-dd, so an imported or parsed value is still visible
+                    and editable rather than silently blank. */}
+                <Field
+                  label="Date of birth"
+                  type={!p.personal?.dateOfBirth || /^\d{4}-\d{2}-\d{2}$/.test(p.personal.dateOfBirth) ? "date" : "text"}
+                  value={p.personal?.dateOfBirth}
+                  onChange={(v) => setPath("personal.dateOfBirth", v)}
+                />
+                <Field label="Nationality / citizenship" value={p.personal?.nationality} onChange={(v) => setPath("personal.nationality", v)} />
+              </div>
+              <Field label="Street address" value={p.personal?.address} onChange={(v) => setPath("personal.address", v)} />
+              <Field label="Address line 2" value={p.personal?.addressLine2} onChange={(v) => setPath("personal.addressLine2", v)} />
+              <div className="grid gap-4 sm:grid-cols-4">
+                <Field label="City" value={p.personal?.city} onChange={(v) => setPath("personal.city", v)} />
+                <Field label="State / region" value={p.personal?.state} onChange={(v) => setPath("personal.state", v)} />
+                <Field label="Postal code" value={p.personal?.zip} onChange={(v) => setPath("personal.zip", v)} />
+                <Field label="Country" value={p.personal?.country} onChange={(v) => setPath("personal.country", v)} />
+              </div>
+              <Field label="County / district" value={p.personal?.county} onChange={(v) => setPath("personal.county", v)} hint="Used when an application asks for your county. Enter the county for your address." />
+              <TagInput label="Languages" tags={p.personal?.languages ?? []} onChange={(t) => setPath("personal.languages", t)} placeholder="English, Hindi…" />
+              <TextArea
+                label="Short summary"
+                value={p.summary}
+                onChange={(v) => setPath("summary", v)}
+                placeholder="Two or three sentences on what you do. Premium uses this when drafting answers."
+              />
+            </div>
+          )}
+
+          {/* ---------------- Links ---------------- */}
+          {section === "links" && (
+            <div className="space-y-4">
+              {(p.websites ?? []).map((w: any, i: number) => (
+                <div key={i} className="grid gap-3 sm:grid-cols-[180px_minmax(0,1fr)_auto]">
+                  <Select label="Type" value={w.label} onChange={(v) => updateRow("websites", i, { label: v })}
+                    options={["LinkedIn", "GitHub", "Portfolio", "Personal website", "Twitter/X", "Dribbble", "Behance", "Other"]} />
+                  <Field label="URL" value={w.url} onChange={(v) => updateRow("websites", i, { url: v })} placeholder="https://" />
+                  <button onClick={() => removeRow("websites", i)} className="btn-danger btn-sm mt-[26px] h-[42px]" aria-label="Remove link">
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              ))}
+              <button onClick={() => addRow("websites", { label: "LinkedIn", url: "" })} className="btn-ghost btn-sm">
+                <Plus className="h-3.5 w-3.5" /> Add link
+              </button>
+            </div>
+          )}
+
+          {/* ---------------- Experience ---------------- */}
+          {section === "experience" && (
+            <div className="space-y-5">
+              {(p.experience ?? []).map((x: any, i: number) => (
+                <div key={i} className="rounded-xl border border-line p-4">
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="chip">Role {i + 1}</span>
+                    <button onClick={() => removeRow("experience", i)} className="text-danger-500 hover:opacity-70" aria-label="Remove role">
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Field label="Job title" value={x.title} onChange={(v) => updateRow("experience", i, { title: v })} />
+                    <Field label="Company" value={x.company} onChange={(v) => updateRow("experience", i, { company: v })} />
+                    <Select label="Employment type" value={x.employmentType} onChange={(v) => updateRow("experience", i, { employmentType: v })}
+                      options={["Full-time", "Part-time", "Internship", "Contract", "Freelance", "Co-op"]} />
+                    <Field label="Location" value={x.location} onChange={(v) => updateRow("experience", i, { location: v })} />
+                    <Select label="Work location type" value={x.locationType} onChange={(v) => updateRow("experience", i, { locationType: v })}
+                      options={["On-site", "Remote", "Hybrid"]} />
+                    <Field label="Start" type="month" value={x.startDate} onChange={(v) => updateRow("experience", i, { startDate: v })} />
+                    <div>
+                      <Field label="End" type="month" value={x.endDate} onChange={(v) => updateRow("experience", i, { endDate: v })} />
+                      <label className="mt-2 flex items-center gap-2 text-[13px] text-ink-soft">
+                        <input type="checkbox" checked={!!x.current} onChange={(e) => setCurrentRole(i, e.target.checked)} />
+                        I currently work here
+                      </label>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <TextArea label="What you did" value={x.description} onChange={(v) => updateRow("experience", i, { description: v })} rows={3} />
+                  </div>
+                </div>
+              ))}
+              <button onClick={() => addRow("experience", { title: "", company: "", current: false })} className="btn-ghost btn-sm">
+                <Plus className="h-3.5 w-3.5" /> Add role
+              </button>
+            </div>
+          )}
+
+          {/* ---------------- Education ---------------- */}
+          {section === "education" && (
+            <div className="space-y-5">
+              {(p.education ?? []).map((e: any, i: number) => (
+                <div key={i} className="rounded-xl border border-line p-4">
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="chip">School {i + 1}</span>
+                    <button onClick={() => removeRow("education", i)} className="text-danger-500 hover:opacity-70" aria-label="Remove school">
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Field label="School" value={e.school} onChange={(v) => updateRow("education", i, { school: v })} />
+                    <Select label="Degree" value={e.degree} onChange={(v) => updateRow("education", i, { degree: v })}
+                      options={["High School Diploma", "Associate's Degree", "Bachelor's Degree", "Master's Degree", "MBA", "Doctorate (PhD)", "Bootcamp", "Other"]} />
+                    <Field label="Field of study" value={e.fieldOfStudy} onChange={(v) => updateRow("education", i, { fieldOfStudy: v })} />
+                    <Field label="GPA" value={e.gpa} onChange={(v) => updateRow("education", i, { gpa: v })} placeholder="3.8" />
+                    <Field label="School location" value={e.location} onChange={(v) => updateRow("education", i, { location: v })} />
+                    <Field label="Start" type="month" value={e.startDate} onChange={(v) => updateRow("education", i, { startDate: v })} />
+                    <Field label="End (or expected)" type="month" value={e.endDate} onChange={(v) => updateRow("education", i, { endDate: v })} />
+                  </div>
+                </div>
+              ))}
+              <button onClick={() => addRow("education", { school: "", degree: "" })} className="btn-ghost btn-sm">
+                <Plus className="h-3.5 w-3.5" /> Add school
+              </button>
+            </div>
+          )}
+
+          {/* ---------------- Skills ---------------- */}
+          {section === "skills" && (
+            <div className="space-y-5">
+              <TagInput label="Skills" tags={p.skills ?? []} onChange={(t) => setPath("skills", t)} placeholder="React, TypeScript, Postgres…" />
+              <TagInput label="Certifications" tags={p.certifications ?? []} onChange={(t) => setPath("certifications", t)} placeholder="AWS Solutions Architect…" />
+              <Field label="Target role" value={p.targetRole} onChange={(v) => setPath("targetRole", v)} placeholder="Senior Frontend Engineer" hint="Premium scores each posting against this" />
+            </div>
+          )}
+
+          {/* ---------------- Documents ---------------- */}
+          {section === "documents" && (
+            <div className="space-y-5">
+              <label className="flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-line bg-canvas px-6 py-10 text-center transition hover:border-brand-300 hover:bg-brand-50">
+                <Upload className="h-6 w-6 text-brand-500" />
+                <span className="mt-3 text-[15px] font-semibold">Upload your resume</span>
+                <span className="mt-1 text-[13px] text-ink-soft">PDF, DOC, DOCX, TXT, PNG, JPG or WEBP · up to 3 MB</span>
+                <span className="mt-1 text-[12px] text-ink-faint">Attached automatically to applications that ask for a file</span>
+                <input
+                  type="file"
+                  className="hidden"
+                  accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.webp"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    // Clear the input first. Without this the browser fires no
+                    // change event when the same file is picked twice, so
+                    // re-uploading after a delete or a failed upload did nothing
+                    // at all — no spinner, no error.
+                    e.target.value = "";
+                    if (f) uploadResume(f);
+                  }}
+                />
+              </label>
+
+              {/* Read the resume and fill in the rest of the profile from it. */}
+              <div className="rounded-2xl border border-brand-200 bg-brand-50/60 p-5">
+                <div className="flex items-start gap-3">
+                  <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-brand-500 text-white">
+                    <Sparkles className="h-4 w-4" />
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-[15px] font-bold">Fill this profile from your resume</h3>
+                    <p className="mt-1 text-[13.5px] leading-relaxed text-ink-soft">
+                      Reads your work history, education, skills and links, then shows you what it found
+                      before anything is saved.
+                    </p>
+                    <label className="btn-primary btn-sm mt-3 cursor-pointer">
+                      {parsing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
+                      {parsing ? "Reading your resume…" : "Read my resume"}
+                      <input
+                        type="file"
+                        className="hidden"
+                        accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.webp"
+                        disabled={parsing}
+                        onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ""; if (f) readResume(f); }}
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              {(p.documents ?? []).length > 0 && (
+                <ul className="divide-y divide-line rounded-xl border border-line">
+                  {p.documents.map((d: any, i: number) => (
+                    <li key={d._id ?? i} className="flex items-center gap-3 px-4 py-3">
+                      <FileText className="h-4 w-4 shrink-0 text-brand-500" />
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-[14px] font-medium">{d.name}</p>
+                        <p className="font-mono text-[11px] text-ink-faint">
+                          {d.kind} · {Math.round((d.size ?? 0) / 1024)} KB
+                        </p>
+                      </div>
+                      {d.isDefault && <span className="chip border-teal-500/30 bg-teal-500/10 text-teal-600">default</span>}
+                      <button onClick={() => deleteDocument(d._id)} className="text-danger-500 hover:opacity-70" aria-label="Remove document">
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
+          {/* ---------------- Work eligibility ---------------- */}
+          {section === "eligibility" && (
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Select label="Authorized to work in the country you're applying to?" value={p.workAuth?.authorizedToWork} onChange={(v) => setPath("workAuth.authorizedToWork", v)} options={YESNO} />
+              <Select label="Will you need visa sponsorship?" value={p.workAuth?.requireSponsorship} onChange={(v) => setPath("workAuth.requireSponsorship", v)} options={YESNO} />
+              <Select label="Work authorization type" value={p.workAuth?.workAuthType} onChange={(v) => setPath("workAuth.workAuthType", v)}
+                options={["US Citizen", "Permanent Resident (Green Card)", "H-1B", "F-1 OPT", "F-1 CPT", "TN", "L-1", "EAD", "Other"]} />
+              <Select label="Willing to relocate?" value={p.workAuth?.willingToRelocate} onChange={(v) => setPath("workAuth.willingToRelocate", v)} options={YESNO} />
+              <Select label="Remote preference" value={p.workAuth?.remotePreference} onChange={(v) => setPath("workAuth.remotePreference", v)} options={["Remote", "Hybrid", "On-site", "No preference"]} />
+              {/* Not type="date". The resume parser is explicitly allowed to return
+                  free text here ("Immediately", "March 2026"), and a date input
+                  silently renders anything that isn't yyyy-MM-dd as EMPTY — so the
+                  field looked unset while the extension still typed the stored
+                  value into real application forms. */}
+              <Field label="Available start date" value={p.workAuth?.availableStartDate} onChange={(v) => setPath("workAuth.availableStartDate", v)} placeholder="2026-09-01, or “Immediately”" />
+              <Field label="Notice period" value={p.workAuth?.noticePeriod} onChange={(v) => setPath("workAuth.noticePeriod", v)} placeholder="Two weeks" />
+              <Select label="Are you over 18?" value={p.workAuth?.over18} onChange={(v) => setPath("workAuth.over18", v)} options={YESNO} />
+              <Select label="Previously employed at this company?" value={p.workAuth?.previouslyEmployedHere} onChange={(v) => setPath("workAuth.previouslyEmployedHere", v)} options={YESNO} />
+              <Select label="Do you have any relatives employed by this company?" value={p.workAuth?.relativesEmployedHere} onChange={(v) => setPath("workAuth.relativesEmployedHere", v)} options={YESNO} />
+              <Field label="Referred by" value={p.workAuth?.referredBy} onChange={(v) => setPath("workAuth.referredBy", v)} />
+              <Field label="Referrer's first name" value={p.workAuth?.referrerFirstName} onChange={(v) => setPath("workAuth.referrerFirstName", v)} />
+              <Field label="Referrer's last name" value={p.workAuth?.referrerLastName} onChange={(v) => setPath("workAuth.referrerLastName", v)} />
+              <Field label="Referrer's employee ID (if known)" value={p.workAuth?.referrerEmployeeId} onChange={(v) => setPath("workAuth.referrerEmployeeId", v)} />
+              <Select label="How did you hear about us?" value={p.workAuth?.howDidYouHear} onChange={(v) => setPath("workAuth.howDidYouHear", v)}
+                options={["Company website", "LinkedIn", "Indeed", "Referral", "Job board", "Recruiter", "Other"]} />
+              <Select label="Do you have a minimum education level of high school diploma or GED?" value={p.workAuth?.highSchoolDiplomaOrGED} onChange={(v) => setPath("workAuth.highSchoolDiplomaOrGED", v)} options={YESNO} />
+              <Field label="Other names or aliases" value={p.personal?.aliases} onChange={(v) => setPath("personal.aliases", v)} />
+              <Field label="Preferred application language" value={p.personal?.preferredLanguage} onChange={(v) => setPath("personal.preferredLanguage", v)} placeholder="English" />
+              <Select label="Make my career profile visible to" value={p.workAuth?.profileVisibility} onChange={(v) => setPath("workAuth.profileVisibility", v)} options={["Any company recruiter worldwide", "Any company recruiter in my country/region of residence", "Only recruiters managing jobs I apply to"]} />
+              <Select label="Receive new job posting notifications?" value={p.workAuth?.jobNotifications} onChange={(v) => setPath("workAuth.jobNotifications", v)} options={YESNO} />
+              <Select label="Security clearance" value={p.workAuth?.securityClearance} onChange={(v) => setPath("workAuth.securityClearance", v)} options={["None", "Confidential", "Secret", "Top Secret", "TS/SCI"]} />
+              <Select label="Do you consent to receive text messages about job applications?" value={p.workAuth?.textMessageConsent} onChange={(v) => setPath("workAuth.textMessageConsent", v)} options={YESNO} />
+              <Select label="Have you signed a non-compete, non-solicitation, or other restrictive employment agreement?" value={p.workAuth?.signedNonCompete} onChange={(v) => setPath("workAuth.signedNonCompete", v)} options={YESNO} />
+              <Select label="Have you ever been terminated or dismissed from employment?" value={p.workAuth?.employmentTermination} onChange={(v) => setPath("workAuth.employmentTermination", v)} options={YESNO} />
+              <Select label="Have you ever been terminated or disciplined for harassment or workplace violence?" value={p.workAuth?.workplaceMisconduct} onChange={(v) => setPath("workAuth.workplaceMisconduct", v)} options={YESNO} />
+            </div>
+          )}
+
+          {/* ---------------- Compensation ---------------- */}
+          {section === "compensation" && (
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Desired salary" value={p.compensation?.desiredSalary} onChange={(v) => setPath("compensation.desiredSalary", v)} placeholder="185000" />
+              <Field label="Current salary" value={p.compensation?.currentSalary} onChange={(v) => setPath("compensation.currentSalary", v)} hint="Leave blank where it's illegal to ask" />
+              <Select label="Currency" value={p.compensation?.salaryCurrency} onChange={(v) => setPath("compensation.salaryCurrency", v)} options={["USD", "EUR", "GBP", "INR", "CAD", "AUD"]} />
+              <Select label="Period" value={p.compensation?.salaryPeriod} onChange={(v) => setPath("compensation.salaryPeriod", v)} options={["year", "month", "hour"]} />
+            </div>
+          )}
+
+          {/* ---------------- EEO ---------------- */}
+          {section === "eeo" && (
+            <div className="space-y-5">
+              <p className="rounded-xl border border-line bg-canvas px-4 py-3 text-[13px] leading-relaxed text-ink-soft">
+                These questions are voluntary on every application. Answer them once here, or tick decline
+                and Appli-Fill will select the decline option wherever it appears.
+              </p>
+              <label className="flex items-center gap-2.5 text-[14px]">
+                <input
+                  type="checkbox"
+                  checked={!!p.eeo?.declineToSelfIdentify}
+                  onChange={(e) => setPath("eeo.declineToSelfIdentify", e.target.checked)}
+                />
+                Decline to self-identify on all applications
+              </label>
+
+              {!p.eeo?.declineToSelfIdentify && (
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Select label="Gender" value={p.eeo?.gender} onChange={(v) => setPath("eeo.gender", v)} options={["Male", "Female", "Non-binary", "Prefer not to say"]} />
+                  <Select label="Hispanic or Latino?" value={p.eeo?.hispanicLatino} onChange={(v) => setPath("eeo.hispanicLatino", v)} options={["Yes", "No", "Prefer not to say"]} />
+                  <Select label="Race / ethnicity" value={p.eeo?.race} onChange={(v) => setPath("eeo.race", v)}
+                    options={["American Indian or Alaska Native", "Asian", "Black or African American", "Hispanic or Latino", "Native Hawaiian or Other Pacific Islander", "White", "Two or More Races", "Prefer not to say"]} />
+                  <Select label="Veteran status" value={p.eeo?.veteranStatus} onChange={(v) => setPath("eeo.veteranStatus", v)}
+                    options={["I am not a protected veteran", "I identify as one or more of the classifications of a protected veteran", "I don't wish to answer"]} />
+                  <Select label="Disability status" value={p.eeo?.disabilityStatus} onChange={(v) => setPath("eeo.disabilityStatus", v)}
+                    options={["Yes, I have a disability", "No, I don't have a disability", "I don't wish to answer"]} />
+                  <Select label="Gender identity" value={p.eeo?.genderIdentity} onChange={(v) => setPath("eeo.genderIdentity", v)} options={["Man", "Woman", "Non-binary", "Prefer not to say"]} />
+                  <Field label="Ethnicity (when asked separately from race)" value={p.eeo?.ethnicity} onChange={(v) => setPath("eeo.ethnicity", v)} />
+                  <Select label="Sexual orientation" value={p.eeo?.sexualOrientation} onChange={(v) => setPath("eeo.sexualOrientation", v)}
+                    options={["Heterosexual", "Gay", "Lesbian", "Bisexual", "Pansexual", "Asexual", "Queer", "Prefer to self-describe", "Prefer not to say"]} />
+                  <Select label="Do you identify as transgender?" value={p.eeo?.transgender} onChange={(v) => setPath("eeo.transgender", v)}
+                    options={["Yes", "No", "Prefer not to say"]} />
+                  <Field label="Signature name" value={p.eeo?.disabilitySignatureName} onChange={(v) => setPath("eeo.disabilitySignatureName", v)} hint="Some disability forms ask you to type your name" />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {parsed && <ParsedReview parsed={parsed} onCancel={() => setParsed(null)} onAccept={acceptParsed} />}
+    </div>
+  );
+}
+
+/** Shows what was read out of the resume so the user accepts it section by section. */
+function ParsedReview({
+  parsed, onAccept, onCancel,
+}: { parsed: any; onAccept: (s: Record<string, boolean>) => void; onCancel: () => void }) {
+  const meta = parsed._meta ?? {};
+  const warnings: string[] = Array.isArray(meta.warnings) ? meta.warnings : [];
+  const degraded = meta.aiUsed === false || meta.source === "local" || meta.source === "ai-partial";
+
+  const period = (e: any) =>
+    [e.startDate, e.current ? "present" : e.endDate].filter(Boolean).join("–");
+
+  const available = [
+    ["personal", "Contact details", [parsed.personal?.firstName, parsed.personal?.email, parsed.personal?.phone, parsed.personal?.city].filter(Boolean).join(" · ")],
+    ["experience", `Work history (${parsed.experience?.length ?? 0})`, (parsed.experience ?? []).slice(0, 3).map((e: any) => `${e.title || "—"} at ${e.company || "—"}${period(e) ? ` (${period(e)})` : ""}`).join(" · ")],
+    ["education", `Education (${parsed.education?.length ?? 0})`, (parsed.education ?? []).map((e: any) => [e.degree, e.fieldOfStudy, e.school].filter(Boolean).join(" · ")).join("  |  ")],
+    ["skills", `Skills (${parsed.skills?.length ?? 0})`, (parsed.skills ?? []).slice(0, 8).join(", ")],
+    ["websites", `Links (${parsed.websites?.length ?? 0})`, (parsed.websites ?? []).map((w: any) => w.label).join(", ")],
+    ["workAuth", "Work eligibility", [parsed.workAuth?.authorizedToWork, parsed.workAuth?.requireSponsorship, parsed.workAuth?.visaStatus].filter(Boolean).join(" · ")],
+    ["compensation", "Compensation", [parsed.compensation?.desiredSalary, parsed.compensation?.currentSalary].filter(Boolean).join(" · ")],
+    ["eeo", "EEO", [parsed.eeo?.gender, parsed.eeo?.race, parsed.eeo?.veteranStatus, parsed.eeo?.disabilityStatus].filter(Boolean).join(" · ")],
+    ["summary", "Summary", parsed.summary?.slice(0, 90)],
+  ].filter(([, , preview]) => preview) as [string, string, string][];
+
+  const [checked, setChecked] = useState<Record<string, boolean>>(
+    Object.fromEntries(available.map(([key]) => [key, true]))
+  );
+
+  return (
+    <div className="fixed inset-0 z-50 grid place-items-center p-4">
+      <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" onClick={onCancel} />
+      <div className="relative flex max-h-[85vh] w-full max-w-[520px] animate-pop flex-col rounded-2xl bg-white shadow-lift">
+        <div className="flex items-start justify-between gap-4 border-b border-line p-6 pb-4">
+          <div>
+            <h2 className="font-display text-[20px] font-extrabold">Here&apos;s what we read</h2>
+            <p className="mt-1 text-[13.5px] text-ink-soft">
+              Untick anything you&apos;d rather keep as it is. Existing values are never overwritten.
+            </p>
+          </div>
+          <button onClick={onCancel} className="text-ink-faint hover:text-ink" aria-label="Close">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        <div className="scroll-thin flex-1 space-y-2 overflow-y-auto p-6 pt-4">
+          {(degraded || warnings.length > 0) && (
+            <div className="mb-3 rounded-xl border border-amber-200 bg-amber-50 p-3.5">
+              <p className="text-[13px] font-semibold text-amber-900">
+                {degraded ? "Some of this needs a check" : "A few things to check"}
+              </p>
+              <ul className="mt-1 list-disc space-y-0.5 pl-4 text-[12.5px] text-amber-900/85">
+                {degraded && meta.aiUsed === false && (
+                  <li>AI parsing didn&apos;t run, so this came from plain text extraction.</li>
+                )}
+                {warnings.slice(0, 4).map((w, i) => (
+                  <li key={i}>{w}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {available.length === 0 && (
+            <p className="py-6 text-center text-[14px] text-ink-soft">
+              Nothing usable came back. If your resume is a scan, export a text-based PDF and try again.
+            </p>
+          )}
+          {available.map(([key, title, preview]) => (
+            <label
+              key={key}
+              className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition ${
+                checked[key] ? "border-brand-200 bg-brand-50/50" : "border-line bg-white"
+              }`}
+            >
+              <input
+                type="checkbox"
+                className="mt-0.5 accent-brand-500"
+                checked={!!checked[key]}
+                onChange={(e) => setChecked((c) => ({ ...c, [key]: e.target.checked }))}
+              />
+              <span className="min-w-0">
+                <span className="block text-[14px] font-semibold">{title}</span>
+                <span className="mt-0.5 block truncate text-[12.5px] text-ink-soft">{preview}</span>
+              </span>
+            </label>
+          ))}
+        </div>
+
+        <div className="flex gap-2 border-t border-line p-6 pt-4">
+          <button onClick={onCancel} className="btn-ghost flex-1">Discard</button>
+          <button
+            onClick={() => onAccept(checked)}
+            className="btn-primary flex-1"
+            disabled={!available.some(([k]) => checked[k])}
+          >
+            <Check className="h-4 w-4" />
+            Apply to profile
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,191 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Virtualitics - DevOps Engineer</title>
+<style>
+body{font-family:system-ui;padding:20px;max-width:760px}
+ul{list-style:none;padding:0}
+.application-question{margin-bottom:14px}
+.application-label{font-weight:600;font-size:13px;margin-bottom:4px}
+input[type=text],input[type=email]{width:100%;padding:7px;border:1px solid #ccd;border-radius:4px}
+.dropdown-container{border:1px solid #ccd;background:#fff}
+.dropdown-container[hidden]{display:none}
+.dropdown-location{padding:6px 10px;cursor:pointer}
+.dropdown-location:hover,.dropdown-location.active{background:#222;color:#fff}
+.resume-upload-success{color:green}
+</style></head>
+<body>
+<div class="main-header-logo"><img alt="Virtualitics"></div>
+<div class="posting-headline" data-qa="posting-name"><h2>DevOps Engineer</h2></div>
+
+<!-- Lever's application page, as served: `data-qa` on containers as well as on
+     the inputs, a résumé upload that reports "Success!", and a location box
+     that only accepts a place picked from its own suggestion list. -->
+<form class="application-form" id="application-form" method="POST" action="/apply" data-qa="application-form">
+  <div class="section page-centered application-form" data-qa="section-application">
+    <h4>Submit your application</h4>
+    <ul>
+      <li class="application-question resume" data-qa="resume-question">
+        <label>
+          <div class="application-label">Resume/CV<span class="required">✱</span></div>
+          <div class="application-field" data-qa="resume-field">
+            <a class="postings-btn template-btn-utility visible-resume-upload" data-qa="btn-upload-resume">
+              <span class="default-label">ATTACH RESUME/CV</span>
+              <input class="application-file-input" type="file" id="resume-upload-input" name="resume" data-qa="input-resume" style="display:none">
+            </a>
+            <span class="filename" data-qa="resume-filename">PRADEEP_DEVOPS_CV.pdf</span>
+            <span class="resume-upload-success" data-qa="resume-success">Success!</span>
+          </div>
+        </label>
+      </li>
+      <li class="application-question" data-qa="name-question">
+        <label>
+          <div class="application-label">Full name<span class="required">✱</span></div>
+          <div class="application-field" data-qa="name-field"><input type="text" name="name" required data-qa="name-input" autocomplete="name"></div>
+        </label>
+      </li>
+      <li class="application-question" data-qa="email-question">
+        <label>
+          <div class="application-label">Email<span class="required">✱</span></div>
+          <div class="application-field" data-qa="email-field"><input type="email" name="email" required data-qa="email-input"></div>
+        </label>
+      </li>
+      <li class="application-question" data-qa="phone-question">
+        <label>
+          <div class="application-label">Phone<span class="required">✱</span></div>
+          <div class="application-field" data-qa="phone-field"><input type="text" name="phone" id="phone-input" data-qa="phone-input"></div>
+        </label>
+      </li>
+      <li class="application-question" data-qa="location-question">
+        <label>
+          <div class="application-label">Current location<span class="required">✱</span></div>
+          <div class="application-field" data-qa="location-field">
+            <input type="text" name="location" id="location-input" class="location-input" required autocomplete="off" data-qa="location-input">
+            <input type="hidden" name="selectedLocation" id="selected-location">
+            <div class="dropdown-container location-dropdown" id="location-dropdown" data-qa="location-dropdown" hidden>
+              <div class="dropdown-results" data-qa="location-results"></div>
+              <div class="dropdown-no-results" hidden>No location found. Try entering a different location</div>
+              <div class="dropdown-loading-results" hidden>Loading</div>
+            </div>
+          </div>
+        </label>
+      </li>
+      <li class="application-question" data-qa="org-question">
+        <label>
+          <div class="application-label">Current company</div>
+          <div class="application-field" data-qa="org-field"><input type="text" name="org" data-qa="org-input"></div>
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div class="section page-centered" data-qa="additional-cards">
+    <h4>Additional questions</h4>
+    <ul>
+      <li class="application-question custom-question" data-qa="auth-question">
+        <div class="application-label">Are you legally authorized to work in the United States?<span class="required">✱</span></div>
+        <div class="application-field" data-qa="auth-field">
+          <ul data-qa="multiple-choice">
+            <li><label><input type="radio" name="cards[auth][field0]" value="Yes"><span class="application-answer-alternative">Yes</span></label></li>
+            <li><label><input type="radio" name="cards[auth][field0]" value="No"><span class="application-answer-alternative">No</span></label></li>
+          </ul>
+        </div>
+      </li>
+      <li class="application-question custom-question" data-qa="why-question">
+        <label>
+          <div class="application-label">What interests you about Virtualitics?</div>
+          <div class="application-field" data-qa="why-field"><textarea name="cards[why][field0]" data-qa="why-input"></textarea></div>
+        </label>
+      </li>
+    </ul>
+  </div>
+  <button type="submit" class="template-btn-submit" data-qa="btn-submit">Submit application</button>
+</form>
+
+<script>
+/* Lever's location search: typing asks the server for places, the answer is a
+   list of `.dropdown-location` rows, and only picking one fills the hidden
+   `selectedLocation` the form actually submits.
+
+   As the live page behaves: the search runs a moment after typing stops and
+   the server takes most of a second to answer ("Loading" in the meantime); the
+   list is only shown while the box has focus, and closes when it loses it.
+   Options (set before this script runs): window.__lever = { latency, debounce,
+   blurCloses, focusOnly, clearsUnpicked }. */
+const LEVER = Object.assign({ latency: 900, debounce: 250, blurCloses: true, focusOnly: true }, window.__lever || {});
+/* Lever's lookup is guarded by hCaptcha. `tokenAfter` (ms from load): searches
+   asked for before the check has produced its token are dropped without a
+   word. `challenge`: the check wants a human, and no search runs until
+   window.__solveChallenge() is called. */
+const LOADED = performance.now();
+window.__challengePending = Boolean(LEVER.challenge);
+window.__solveChallenge = () => { window.__challengePending = false; };
+const tokenReady = () =>
+  (!LEVER.tokenAfter || performance.now() - LOADED >= LEVER.tokenAfter) && !window.__challengePending;
+const PLACES = [
+  "City of Jacksonville, FL, USA", "Jacksonville Beach, FL, USA", "Jacksonville, NC, USA",
+  "Jacksonville, TX, USA", "Jacksonville, AR, USA", "Stanley, NC, USA", "Charlotte, NC, USA",
+  "Hyderabad, Telangana, India", "Chicago, IL, USA", "Austin, TX, USA",
+  "Springfield, IL, USA", "Springfield, MO, USA", "Springfield, MA, USA",
+];
+const input = document.getElementById("location-input");
+const box = document.getElementById("location-dropdown");
+const results = box.querySelector(".dropdown-results");
+const noResults = box.querySelector(".dropdown-no-results");
+const loading = box.querySelector(".dropdown-loading-results");
+const hidden = document.getElementById("selected-location");
+let timer = null;
+let seq = 0;
+window.__searches = [];
+input.addEventListener("input", () => {
+  hidden.value = "";
+  clearTimeout(timer);
+  const mine = ++seq;
+  timer = setTimeout(async () => {
+    const q = input.value.trim().toLowerCase();
+    window.__searches.push(q);
+    if (q.length < 3) { box.hidden = true; return; }
+    if (LEVER.focusOnly && document.activeElement !== input) return;
+    if (!tokenReady()) return;                                  // no token yet: nothing happens
+    results.innerHTML = "";
+    loading.hidden = false;
+    box.hidden = false;
+    await new Promise((r) => setTimeout(r, LEVER.latency));   // the server
+    if (mine !== seq) return;                                  // a newer search is running
+    loading.hidden = true;
+    if (LEVER.focusOnly && document.activeElement !== input) { box.hidden = true; return; }
+    const words = q.split(/[\s,]+/).filter((w) => w.length > 2 && !["united", "states", "usa", "florida", "carolina", "north"].includes(w));
+    const hits = PLACES.filter((p) => words.every((w) => p.toLowerCase().includes(w)));
+    hits.forEach((text, i) => {
+      const row = document.createElement("div");
+      row.className = "dropdown-location";
+      row.textContent = text;
+      row.dataset.id = String(i);
+      row.addEventListener("mousedown", (e) => e.preventDefault());
+      row.addEventListener("click", () => {
+        input.value = text;
+        hidden.value = JSON.stringify({ name: text, id: i });
+        box.hidden = true;
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+      results.appendChild(row);
+    });
+    noResults.hidden = hits.length > 0;
+    box.hidden = false;
+  }, LEVER.debounce);
+});
+input.addEventListener("blur", () => {
+  setTimeout(() => {
+    if (document.activeElement === input) return;
+    if (LEVER.blurCloses) box.hidden = true;
+    // Some boards keep nothing that was not picked from the list.
+    if (LEVER.clearsUnpicked && !hidden.value) input.value = "";
+  }, 200);
+});
+/* Submitting: Lever refuses a location that was typed but never picked. */
+window.__submitErrors = null;
+document.getElementById("application-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const errors = [];
+  if (!hidden.value) errors.push("Please select a location from the dropdown");
+  window.__submitErrors = errors;
+});
+</script>
+</body></html>

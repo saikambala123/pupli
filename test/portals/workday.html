@@ -1,0 +1,92 @@
+<!doctype html><html><head><meta charset="utf-8"><title>My Information — Workday</title>
+<style>body{font-family:system-ui;padding:20px;max-width:760px}
+.f{margin-bottom:12px}label{display:block;font-weight:600;margin-bottom:4px;font-size:13px}
+input,select{width:100%;padding:7px;border:1px solid #ccd;border-radius:5px}
+.sec{border:1px solid #dde;border-radius:8px;padding:12px;margin-bottom:14px}
+button.wd{padding:7px 10px;font:inherit;cursor:pointer;text-align:left;width:100%;background:#fff;border:1px solid #ccd;border-radius:5px}
+.menu{border:1px solid #ccd;background:#fff;position:absolute;z-index:99}
+.menu[hidden]{display:none}.menu div{padding:6px 10px;cursor:pointer}
+</style></head><body>
+<div data-automation-id="applyFlowPage">
+  <h2>My Information</h2>
+  <div class="f"><label for="wd-first">First Name</label><input id="wd-first" data-automation-id="legalNameSection_firstName" type="text"></div>
+  <div class="f"><label for="wd-last">Last Name</label><input id="wd-last" data-automation-id="legalNameSection_lastName" type="text"></div>
+
+  <h3>Address</h3>
+  <div class="f"><label id="wd-cty-l">Country</label>
+    <button id="wd-cty" class="wd" type="button" data-automation-id="countryDropdown" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wd-cty-l">Select One</button>
+    <div class="menu" id="wd-cty-menu" role="listbox" hidden>
+      <div role="option">India</div><div role="option">United Kingdom</div><div role="option">United States of America</div>
+    </div></div>
+  <div class="f"><label for="wd-a1">Address Line 1</label><input id="wd-a1" data-automation-id="addressSection_addressLine1" type="text"></div>
+  <div class="f"><label for="wd-a2">Address Line 2</label><input id="wd-a2" data-automation-id="addressSection_addressLine2" type="text"></div>
+  <div class="f"><label for="wd-city">City</label><input id="wd-city" data-automation-id="addressSection_city" type="text"></div>
+  <div class="f"><label id="wd-st-l">State</label>
+    <button id="wd-st" class="wd" type="button" data-automation-id="addressSection_countryRegion" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wd-st-l">Select One</button>
+    <div class="menu" id="wd-st-menu" role="listbox" hidden>
+      <div role="option">California</div><div role="option">New York</div><div role="option">North Carolina</div>
+    </div></div>
+  <div class="f"><label for="wd-zip">Postal Code</label><input id="wd-zip" data-automation-id="addressSection_postalCode" type="text"></div>
+
+  <h3>Phone</h3>
+  <div class="f"><label id="wd-pdt-l">Phone Device Type</label>
+    <button id="wd-pdt" class="wd" type="button" data-automation-id="phone-device-type" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wd-pdt-l">Select One</button>
+    <div class="menu" id="wd-pdt-menu" role="listbox" hidden>
+      <div role="option">Mobile</div><div role="option">Home</div><div role="option">Work</div>
+    </div></div>
+  <div class="f"><label id="wd-cc-l">Country Phone Code</label>
+    <button id="wd-cc" class="wd" type="button" data-automation-id="country-phone-code" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wd-cc-l">Select One</button>
+    <div class="menu" id="wd-cc-menu" role="listbox" hidden>
+      <div role="option">India (+91)</div><div role="option">United States of America (+1)</div>
+    </div></div>
+  <div class="f"><label for="wd-ph">Phone Number</label><input id="wd-ph" data-automation-id="phone-number" type="text"></div>
+  <div class="f"><label for="wd-ext">Phone Extension</label><input id="wd-ext" data-automation-id="phone-extension" type="text"></div>
+
+  <h3>How Did You Hear About Us?</h3>
+  <div class="f"><label id="wd-src-l">How Did You Hear About Us?</label>
+    <button id="wd-src" class="wd" type="button" data-automation-id="source" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wd-src-l">Select One</button>
+    <div class="menu" id="wd-src-menu" role="listbox" hidden>
+      <div role="option">Job Boards</div><div role="option">Social Media</div><div role="option">Referral</div><div role="option">University</div>
+    </div></div>
+
+  <h3>Application Questions</h3>
+  <div class="f"><label id="wd-auth-l">Are you legally authorized to work in the country in which this position is located?</label>
+    <button id="wd-auth" class="wd" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wd-auth-l">Select One</button>
+    <div class="menu" id="wd-auth-menu" role="listbox" hidden><div role="option">Yes</div><div role="option">No</div></div></div>
+  <div class="f"><label id="wd-spon-l">Will you now or in the future require sponsorship to work in the country in which this position is located?</label>
+    <button id="wd-spon" class="wd" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wd-spon-l">Select One</button>
+    <div class="menu" id="wd-spon-menu" role="listbox" hidden><div role="option">Yes</div><div role="option">No</div></div></div>
+
+  <button type="button" data-automation-id="bottom-navigation-next-button">Save and Continue</button>
+</div>
+<script>
+/* Workday dropdown: a button that opens a listbox rendered at the end of body.
+   The chosen value is painted back onto the button. */
+document.querySelectorAll("button.wd").forEach((btn) => {
+  const menu = document.getElementById(btn.id + "-menu");
+  document.body.appendChild(menu);
+  btn.addEventListener("click", () => {
+    const open = btn.getAttribute("aria-expanded") === "true";
+    document.querySelectorAll(".menu").forEach((m) => { m.hidden = true; });
+    document.querySelectorAll("button.wd").forEach((b) => b.setAttribute("aria-expanded", "false"));
+    if (!open) {
+      const r = btn.getBoundingClientRect();
+      menu.style.top = (r.bottom + window.scrollY) + "px";
+      menu.style.left = (r.left + window.scrollX) + "px";
+      menu.style.width = r.width + "px";
+      menu.hidden = false;
+      btn.setAttribute("aria-expanded", "true");
+    }
+  });
+  menu.querySelectorAll("[role=option]").forEach((opt) => {
+    opt.addEventListener("click", () => {
+      btn.textContent = opt.textContent;
+      btn.setAttribute("aria-valuetext", opt.textContent);
+      menu.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+      btn.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+  });
+});
+</script>
+</body></html>

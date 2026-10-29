@@ -1,0 +1,53 @@
+<!doctype html><html><head><meta charset="utf-8"><title>My Information — Workday</title>
+<style>body{font-family:system-ui;padding:20px;max-width:640px}
+.f{margin-bottom:14px}label{display:block;font-weight:600;margin-bottom:4px}
+input,select{width:100%;padding:8px;border:1px solid #ccd;border-radius:5px}
+input[aria-invalid=true]{border-color:#c00}.err{color:#c00;font-size:12px}</style></head><body>
+<div data-automation-id="applyFlowPage">
+  <h3>Address</h3>
+  <div class="f"><label for="a1">Address Line 1 *</label><input id="a1" type="text"><div class="err" id="e-a1"></div></div>
+  <div class="f"><label for="a2">Address Line 2</label><input id="a2" type="text"></div>
+  <div class="f"><label for="ct">City *</label><input id="ct" type="text"></div>
+  <div class="f"><label for="st">State *</label>
+    <select id="st"><option value="">Select One</option><option>Illinois</option><option>North Carolina</option></select></div>
+  <div class="f"><label for="pc">Postal Code *</label><input id="pc" type="text"><div class="err" id="e-pc"></div></div>
+  <input type="file" id="resume"><button type="button" id="save">Save and Continue</button>
+</div>
+<script>
+/* Workday rebuilds this section once the country resolves, resetting its model
+   while the boxes keep their text, then marks the required ones invalid. */
+const model = Object.create(null);
+const root = document.querySelector("[data-automation-id='applyFlowPage']");
+root.addEventListener("input", (e) => { if (e.target.matches("input,select")) model[e.target.id] = e.target.value; }, true);
+root.addEventListener("change", (e) => { if (e.target.matches("select")) model[e.target.id] = e.target.value; }, true);
+
+let armed = false;
+root.addEventListener("input", () => {
+  if (armed) return;
+  armed = true;
+  setTimeout(() => {
+    ["a1", "pc"].forEach((id) => {
+      delete model[id];                                  // the model forgets
+      const el = document.getElementById(id);
+      el.setAttribute("aria-invalid", "true");           // ...and says so
+      document.getElementById("e-" + id).textContent =
+        "Error: The field is required and must have a value.";
+    });
+    window.__rerendered = true;
+  }, 450);
+}, true);
+
+/* Once a value genuinely arrives again, the flag clears. */
+root.addEventListener("input", (e) => {
+  const el = e.target;
+  if (el.getAttribute("aria-invalid") === "true" && el.value) {
+    el.removeAttribute("aria-invalid");
+    document.getElementById("e-" + el.id).textContent = "";
+  }
+}, true);
+
+document.getElementById("save").addEventListener("click", () => {
+  window.__missing = ["a1", "ct", "st", "pc"].filter((id) => !model[id]);
+});
+window.__model = model;
+</script></body></html>

@@ -1,0 +1,12 @@
+  ok   an answer typed before any fill is recorded
+  ok   the question is stored as written, without the machine name
+  ok   the profile answered the notice period
+  ok   an unmatched free-text answer is recorded
+  ok   correcting a profile-filled answer is recorded
+  ok   changing a choice the profile answered is recorded
+  ok   a re-edit is queued as the newer answer
+  ok   the applicant's name is not stored as a saved answer
+  ok   no answer is queued twice in a row
+
+9/9 checks passed
+

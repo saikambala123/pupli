@@ -1,0 +1,99 @@
+
+what is collected
+  ok   every pill question is one field
+  ok     answered as a choice
+  ok     under its question, not "Yes"
+  ok   read-only list "region2" is collected (state)
+  ok   read-only list "region1" is collected (county)
+  ok   read-only list "addlAddressAttribute3" is collected (taxDistrict)
+  ok   read-only list "veteran" is collected (veteranStatus)
+  ok   ZIP Code is the zip rule
+  ok   "What compensation are you seeking?" is the salary question
+  ok   "I am Hispanic or Latino." is the Hispanic question
+  ok   "Select the races you identify with." is the race question
+  ok   the prefilled read-only email is left alone
+
+fill: the address suggestion is picked
+  ok   First/Last name
+  ok   Middle Name left empty
+  ok   Phone uses national digits beside the country-code picker
+  ok   Address Line 1 is Oracle's own suggestion
+  ok     and the apartment it dropped is in Line 2
+  ok     and the suggestion list is closed
+  ok   ZIP Code
+  ok   City
+  ok   State
+  ok   County
+  ok   Tax District — the only one offered for the address
+  ok   the address is searched once, never retyped over the pick
+  ok   Title is Mr., from the gender in the profile
+  ok   non-compete: the saved answer
+  ok   worked for YUM! Brands: No (not in the history)
+  ok   legally authorized: Yes
+  ok   sponsorship: No
+  ok   at least 18: Yes
+  ok   employed or contracted by Yum! in six months: No
+  ok   relatives at Yum!: the answer given for GDIT
+  ok   compensation
+  ok   Gender
+  ok   not Hispanic: the box stays clear
+  ok   race: Asian, and only Asian
+  ok   Veteran Status
+  ok   nothing left outlined (Title and Middle Name are optional)
+  ok   reported: nothing left unanswered
+  ok   nothing Appli-Fill filled is offered as a pending answer
+  ok   done in 4776ms
+
+changing a pill by hand
+  ok   is held under its question
+  ok     and nothing else is
+
+fill: no address suggestions; the ZIP Code fills City, State and County
+  ok   Address Line 1 keeps the typed street
+  ok   ZIP Code picked from its list
+  ok   City, State, County as the page set them
+  ok     and City is not searched again over it
+  ok   nothing outlined
+
+fill: every list answered by Appli-Fill, on a slow server
+  ok   ZIP Code picked
+  ok   City picked — JACKSONVILLE, not JACKSONVILLE BEACH
+  ok     and not thrown away when the box lost focus
+  ok   State
+  ok   County — the one the list offers for the ZIP Code
+  ok   Tax District
+  ok   done in 7263ms
+
+fill: suggestions offered, none of them the applicant's address
+  ok   no other address is picked
+  ok     the list is closed
+  ok     and the rest still fills
+
+fill: a Hispanic applicant, and a Tax District with two choices
+  ok   the Hispanic box is ticked
+  ok   race: White
+  ok   County from the ZIP Code's list
+  ok   Tax District with two choices is left for the applicant
+
+fill: nothing saved — the pills go to the answer service with their choices
+  ok   each open Yes/No question is asked once
+  ok     with its choices
+  ok     and never Title, eligibility or the diversity questions
+  ok   known answers are clicked; unknown non-compete stays unanswered
+
+other shapes of the same controls
+  ok   options drawn as <li role=option> are one question
+  ok     labelled by the question even with a link in it
+  ok   buttons each in a <span> are one question
+  ok     labelled by the paragraph above them
+  ok   a floating menu's options are not a question
+  ok   a read-only box that opens a list is fillable
+  ok   a read-only date box that opens a calendar is not
+  ok   a plain read-only box is not
+  ok   veteran status drawn as long pills is answered
+  ok   the street is read apart from its apartment
+  ok     and matches the same street spelled out
+  ok     but not another street, number, ZIP Code or city
+
+78/78 checks passed
+

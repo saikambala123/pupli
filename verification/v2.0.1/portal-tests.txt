@@ -1,0 +1,272 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.1 test:portals
+> node test/portals/greenhouse.spec.mjs && node test/portals/lever.spec.mjs && node test/portals/ashby.spec.mjs && node test/portals/workable.spec.mjs && node test/portals/smartrecruiters.spec.mjs && node test/portals/workday.spec.mjs && node test/portals/icims.spec.mjs && node test/portals/taleo.spec.mjs && node test/portals/successfactors.spec.mjs && node test/portals/oraclehcm.spec.mjs && node test/portals/generic.spec.mjs && node test/portals/ai.spec.mjs
+
+
+Greenhouse — detected "greenhouse", 17 filled, 0 left
+
+  ok   detected as Greenhouse
+  ok   first name
+  ok   last name
+  ok   email
+  ok   phone
+  ok   location (city)
+  ok   LinkedIn url
+  ok   Website url
+  ok   sponsorship react-select submits No
+  ok   work authorization react-select submits Yes
+  ok   how did you hear submits LinkedIn
+  ok   years of experience answered
+  ok   why-work-here from saved answers
+  ok   gender from profile
+  ok   hispanic/latino from profile
+  ok   veteran status from profile
+  ok   disability status from profile
+  ok   the board search box was left alone
+
+18/18 checks passed — Greenhouse
+
+
+Lever — detected "lever", 13 filled, 0 left
+
+  ok   detected as Lever
+  ok   full name
+  ok   email
+  ok   phone
+  ok   current company
+  ok   LinkedIn
+  ok   GitHub
+  ok   Portfolio
+  ok   work authorization radio = Yes
+  ok   sponsorship radio = No
+  ok   relocate radio = Yes
+  ok   salary expectations
+  ok   why-work-here from saved answers
+  ok   how did you hear select
+
+14/14 checks passed — Lever
+
+
+Ashby — detected "ashby", 10 filled, 0 left
+
+  ok   detected as Ashby
+  ok   name
+  ok   email
+  ok   phone
+  ok   LinkedIn despite a uuid field name
+  ok   location
+  ok   work authorization radio = Yes
+  ok   sponsorship radio = No
+  ok   how did you hear = LinkedIn
+  ok   notice period from saved answers
+  ok   gender from profile
+
+11/11 checks passed — Ashby
+
+
+Workable — detected "workable", 13 filled, 2 left
+
+  ok   detected as Workable
+  ok   first name
+  ok   last name
+  ok   email
+  ok   phone
+  ok   location
+  ok   summary
+  ok   LinkedIn
+  ok   GitHub
+  ok   Portfolio
+  ok   education level
+  ok   years of experience
+  ok   work authorization = Yes
+  ok   sponsorship = No
+  ok   skills checkbox group left for the applicant
+
+15/15 checks passed — Workable
+
+
+SmartRecruiters — detected "smartrecruiters", 10 filled, 1 left
+
+  ok   detected as SmartRecruiters
+  ok   first name
+  ok   last name
+  ok   email
+  ok   phone
+  ok   location
+  ok   country
+  ok   current company
+  ok   current job title
+  ok   work authorization
+  ok   sponsorship
+  ok   a rephrased open question is left blank, not guessed
+
+12/12 checks passed — SmartRecruiters
+
+
+Workday — detected "workday", 14 filled, 0 left
+
+  ok   detected as Workday
+  ok   first name
+  ok   last name
+  ok   country dropdown resolves to the US entry
+  ok   address line 1 is the street only
+  ok   address line 2 is the apartment
+  ok   city
+  ok   state dropdown
+  ok   postal code
+  ok   phone device type
+  ok   country phone code picks the US entry
+  ok   phone number is the number, not the code
+  ok   phone extension left blank
+  ok   how did you hear resolves LinkedIn to Social Media
+  ok   work authorization = Yes
+  ok   sponsorship = No
+
+16/16 checks passed — Workday
+
+
+iCIMS — detected "icims", 25 filled, 0 left
+
+  ok   detected as iCIMS
+  ok   first name
+  ok   last name
+  ok   email
+  ok   mobile phone
+  ok   street address is line 1 only
+  ok   address line 2 is the apartment
+  ok   city
+  ok   state
+  ok   postal code
+  ok   experience row 1 employer
+  ok   experience row 1 title
+  ok   experience row 2 employer is the second job
+  ok   experience row 2 title is the second job
+  ok   experience row 1 start date
+  ok   experience row 2 end date
+  ok   school
+  ok   degree
+  ok   major
+  ok   work authorization
+  ok   sponsorship
+  ok   relocate
+  ok   desired salary
+  ok   source
+
+24/24 checks passed — iCIMS
+
+
+Taleo — detected "taleo", 17 filled, 0 left
+
+  ok   detected as Taleo
+  ok   first name
+  ok   middle initial fits maxlength=1
+  ok   last name
+  ok   e-mail address
+  ok   primary number
+  ok   address line 1 carries street + apartment
+  ok   city
+  ok   state select
+  ok   zip
+  ok   country select
+  ok   eligible to work = Yes
+  ok   sponsorship = No
+  ok   most recent employer
+  ok   most recent job title
+  ok   highest education = Master's Degree
+  ok   school
+  ok   how did you hear = LinkedIn
+
+18/18 checks passed — Taleo
+
+
+SuccessFactors — detected "sapSuccessFactors", 11 filled, 0 left
+
+  ok   detected as SAP SuccessFactors
+  ok   first name
+  ok   last name
+  ok   e-mail
+  ok   day time number
+  ok   street address
+  ok   city
+  ok   postal code
+  ok   country
+  ok   work authorization
+  ok   sponsorship
+  ok   source
+
+12/12 checks passed — SAP SuccessFactors
+
+
+Oracle HCM — detected "oraclehcm", 19 filled, 0 left
+
+  ok   detected as Oracle HCM
+  ok   first name
+  ok   last name
+  ok   email
+  ok   country phone code
+  ok   contact number is the phone, not the code
+  ok   country/region is the country
+  ok   state is the state
+  ok   address line 1 is the street only
+  ok   address line 2 is the apartment
+  ok   address line 3 left blank
+  ok   address line 4 left blank
+  ok   city
+  ok   postal code
+  ok   county left blank
+  ok   tax district left blank
+  ok   second last name left blank
+  ok   suffix left blank
+  ok   extension left blank
+  ok   employee ID left blank
+  ok   employer
+  ok   job title
+  ok   work authorization
+  ok   sponsorship
+  ok   referral source
+
+25/25 checks passed — Oracle HCM
+
+
+Generic careers page — detected "generic", 10 filled, 1 left
+
+  ok   falls through to the generic adapter
+  ok   application first name
+  ok   application last name
+  ok   application email
+  ok   application phone
+  ok   application city
+  ok   application country
+  ok   application LinkedIn
+  ok   notice period from saved answers
+  ok   salary expectation
+  ok   right to work
+  ok   the site search box was left alone
+  ok   the newsletter email was left alone
+  ok   the newsletter name was left alone
+
+14/14 checks passed — Generic careers page
+
+
+AI pass — 4 questions sent, 4 drafted
+
+questions sent over the wire:
+   • "Why are you interested in joining Orbit?"  [textarea] options=0
+   • "Describe a project you are proud of."  [textarea] options=0
+   • "Which of these have you used in production?"  [select] options=4
+   • "How many days per week would you come to the office?"  [select] options=5
+
+  ok   the page's questions go in one request
+  ok   the open question is sent as the question alone
+  ok   no question carries the pipe-joined label blob
+  ok   no question leaks the machine name
+  ok   the 'why' answer landed
+  ok   the 'proud of' answer landed
+  ok   the menu question was given its options
+  ok   the menu answer landed
+  ok   the numeric menu answer landed
+  ok   identity fields were never sent to the model
+
+10/10 checks passed — AI answers
+

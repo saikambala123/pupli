@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Career Center | Hawkeye Community Credit Union</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#f4f5f7;color:#222}
+.mdf-header{background:#d0271d;color:#fff;padding:10px 20px}
+main{max-width:760px;margin:0 auto;padding:20px}
+.step{background:#fff;border-radius:8px;padding:18px 22px;margin-bottom:18px}
+.qLabel{display:block;font-size:13px;margin-bottom:4px;color:#333}
+.mdf-required-indicator{color:#c0392b;margin-left:2px}
+.vdl-textbox{font:inherit;padding:8px 10px;border:1px solid #8a8a8a;border-radius:4px;width:100%;box-sizing:border-box}
+.MDFSelectBox{position:relative}
+.MDFSelectBox__control{display:flex;align-items:center;border:1px solid #8a8a8a;border-radius:4px;padding:2px 8px;min-height:34px;background:#fff;cursor:pointer}
+.MDFSelectBox__value-container{flex:1;display:grid;align-items:center}
+.MDFSelectBox__placeholder,.MDFSelectBox__single-value,.MDFSelectBox__input-container{grid-area:1/1/2/3}
+.MDFSelectBox__placeholder{color:#888}
+.MDFSelectBox__input{border:0;outline:0;font:inherit;width:100%;background:transparent}
+.MDFSelectBox__menu{position:absolute;left:0;right:0;z-index:30;background:#fff;border:1px solid #bbb;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.MDFSelectBox__menu-list{max-height:220px;overflow:auto}
+.MDFSelectBox__option{padding:7px 10px;cursor:pointer}
+.MDFSelectBox__option--is-focused{background:#eef3fb}
+.qMainDiv,.additional-question{margin-bottom:16px}
+.salary-row{display:flex;gap:10px;align-items:center}
+.salary-row > *{flex:1}
+footer{display:flex;justify-content:flex-end}
+#ja_sv_cw_next_footer_btn{font:inherit;padding:8px 18px;background:#d0271d;color:#fff;border:0;border-radius:4px}
+</style></head>
+<body>
+<!--
+  ADP Workforce Now's Career Center, the Questions step as reported on 1.26.0
+  (a credit union's application near Des Moines): the employer's own questions
+  as SDF radio groups and react-select lists under `label.qLabel[for]`, the
+  conflict-of-interest box, Date Available, the desired salary with Annually /
+  Hourly, the amount and "Select currency type", and the referral question.
+  The markup follows `adp-wfn.html` (see the notes there).
+
+  window.__wfnq = {
+    currency: "sdf"            an `sdf-select-simple` named "Select Currency Type" (the default)
+            | "sdf-placeholder" the same list with nothing on it but its placeholder
+            | "sdf-drawn"      only the text it draws inside itself says "Select currency type"
+            | "mdf"            a react-select whose placeholder says "Select currency type"
+    company: "…"               another employer's application: its name in the title,
+                               the header and every question
+  }
+  window.__model   what the form keeps; window.__log   what was picked
+  #ja_sv_cw_next_footer_btn   the page's own check → window.__errors
+-->
+<div id="app">
+<header class="mdf-header">Hawkeye Community Credit Union · Career Center</header>
+<main class="recruitment-application">
+  <h1>Senior Systems Analyst</h1>
+  <div class="step" data-step="questions">
+    <h2>Questions</h2>
+    <div class="quesitions-container">
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_1">Are you at least 18 years of age?<span class="mdf-required-indicator">*</span></label></div>
+        <sdf-radio-group id="question_1" data-model="q1" required>
+          <sdf-radio-button label="Yes" value="Y"></sdf-radio-button>
+          <sdf-radio-button label="No" value="N"></sdf-radio-button>
+        </sdf-radio-group>
+      </div>
+      <div class="qMainDiv" id="q2-row">
+        <div class="question-label-container"><label class="qLabel" for="question_2" id="question_2_label">Have you previously been employed by Hawkeye Community Credit Union?<span class="mdf-required-indicator">*</span></label></div>
+      </div>
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_3">This position requires relocation to the Des Moines metro area. Are you willing to relocate?<span class="mdf-required-indicator">*</span></label></div>
+        <sdf-radio-group id="question_3" data-model="q3" required>
+          <sdf-radio-button label="Yes" value="Y"></sdf-radio-button>
+          <sdf-radio-button label="No" value="N"></sdf-radio-button>
+        </sdf-radio-group>
+      </div>
+      <div class="qMainDiv" id="q4-row">
+        <div class="question-label-container"><label class="qLabel" for="question_4" id="question_4_label">Do you have any relatives employed by Hawkeye Community Credit Union?<span class="mdf-required-indicator">*</span></label></div>
+      </div>
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_5">Do you have any additional jobs in the financial services, banking, or credit union industry? If yes, for conflict of interest review purposes, please list employer and type of work. If no, enter NA.<span class="mdf-required-indicator">*</span></label></div>
+        <input id="question_5" class="vdl-textbox" type="text" data-model="q5" required>
+      </div>
+      <div class="qMainDiv" id="q6-row">
+        <div class="question-label-container"><label class="qLabel" for="question_6" id="question_6_label">May we contact your current employer?<span class="mdf-required-indicator">*</span></label></div>
+      </div>
+      <div class="qMainDiv" id="q7-row">
+        <div class="question-label-container"><label class="qLabel" for="question_7" id="question_7_label">Do you currently live within 45 miles of the Des Moines metro area and are able to work onsite?<span class="mdf-required-indicator">*</span></label></div>
+      </div>
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_8">Date Available<span class="mdf-required-indicator">*</span></label></div>
+        <input id="question_8" class="vdl-textbox" type="text" placeholder="MM/DD/YYYY" data-model="q8" required>
+      </div>
+      <div class="additional-question">
+        <span class="qLabel question-label-container">What is your desired salary?<span class="mdf-required-indicator">*</span></span>
+        <sdf-radio-group id="salaryFrequency" data-model="salaryFrequency">
+          <sdf-radio-button label="Annually" value="A"></sdf-radio-button>
+          <sdf-radio-button label="Hourly" value="H"></sdf-radio-button>
+        </sdf-radio-group>
+        <div class="salary-row" id="salary-row">
+          <input type="text" id="desiredSalary" class="vdl-textbox" aria-label="Desired Salary" data-model="desiredSalary">
+        </div>
+      </div>
+      <div class="qMainDiv">
+        <div class="question-label-container"><label class="qLabel" for="question_10">Did any of our current employees inform you about this position?<span class="mdf-required-indicator">*</span></label></div>
+        <sdf-radio-group id="question_10" data-model="q10" required>
+          <sdf-radio-button label="Yes" value="Y"></sdf-radio-button>
+          <sdf-radio-button label="No" value="N"></sdf-radio-button>
+        </sdf-radio-group>
+      </div>
+    </div>
+  </div>
+  <footer><button type="button" id="ja_sv_cw_next_footer_btn">Next</button></footer>
+</main>
+</div>
+<!--SDF-KIT-->
+<script>
+(function () {
+  const cfg = window.__wfnq || {};
+  if (cfg.company) {
+    const swap = (s) => s.replace(/Hawkeye Community Credit Union/g, cfg.company);
+    document.title = swap(document.title);
+    document.querySelectorAll(".qLabel, .mdf-header").forEach((n) => { n.innerHTML = swap(n.innerHTML); });
+  }
+  window.__model = {};
+  window.__log = window.__log || [];
+  window.__errors = null;
+  const model = window.__model;
+  const log = (s) => window.__log.push(s);
+
+  /* ---------- react-select, as Workforce Now's MDF draws it (see adp-wfn.html) ---------- */
+  let instance = 0;
+  function mdfSelect({ inputId, name, options, label = null, ariaLabel = null, placeholderText = "Select..." }) {
+    const n = ++instance;
+    const ids = { listbox: `react-select-instance-${n}-listbox`, placeholder: `react-select-instance-${n}-placeholder` };
+    const box = document.createElement("div");
+    box.className = "MDFSelectBox";
+    box.innerHTML = `
+      <div class="MDFSelectBox__control">
+        <div class="MDFSelectBox__value-container">
+          <div class="MDFSelectBox__placeholder" id="${ids.placeholder}">${placeholderText}</div>
+          <div class="MDFSelectBox__single-value" hidden></div>
+          <div class="MDFSelectBox__input-container"><input class="MDFSelectBox__input" id="${inputId}" type="text" role="combobox"
+            aria-autocomplete="list" aria-expanded="false" aria-haspopup="true" autocomplete="off" aria-describedby="${ids.placeholder}" value=""></div>
+        </div>
+        <div class="MDFSelectBox__indicators"><div class="MDFSelectBox__indicator MDFSelectBox__dropdown-indicator" aria-hidden="true">&#9662;</div></div>
+      </div>`;
+    const input = box.querySelector("input");
+    if (label) input.setAttribute("aria-labelledby", label);
+    if (ariaLabel) input.setAttribute("aria-label", ariaLabel);
+    const control = box.querySelector(".MDFSelectBox__control");
+    const single = box.querySelector(".MDFSelectBox__single-value");
+    const placeholder = box.querySelector(".MDFSelectBox__placeholder");
+    let open = false, focused = -1, value = "", menu = null;
+    const shown = () => {
+      const needle = input.value.trim().toLowerCase();
+      return options.filter((o) => !needle || o.toLowerCase().includes(needle));
+    };
+    const paint = () => {
+      single.hidden = !value;
+      single.textContent = value;
+      placeholder.hidden = Boolean(value) || Boolean(input.value);
+    };
+    const render = () => {
+      if (!menu) return;
+      const list = menu.querySelector(".MDFSelectBox__menu-list");
+      list.innerHTML = "";
+      const rows = shown();
+      if (!rows.length) list.innerHTML = `<div class="MDFSelectBox__menu-notice MDFSelectBox__menu-notice--no-options">No options</div>`;
+      rows.forEach((text, i) => {
+        const opt = document.createElement("div");
+        opt.className = "MDFSelectBox__option" + (i === focused ? " MDFSelectBox__option--is-focused" : "");
+        opt.id = `react-select-instance-${n}-option-${i}`;
+        opt.setAttribute("role", "option");
+        opt.setAttribute("aria-selected", String(text === value));
+        opt.textContent = text;
+        opt.addEventListener("mousemove", () => { focused = i; });
+        opt.addEventListener("click", () => pick(text));
+        list.appendChild(opt);
+      });
+    };
+    const show = () => {
+      if (open) return;
+      open = true; focused = 0;
+      menu = document.createElement("div");
+      menu.className = "MDFSelectBox__menu";
+      menu.innerHTML = `<div class="MDFSelectBox__menu-list" role="listbox" id="${ids.listbox}"></div>`;
+      menu.addEventListener("mousedown", (e) => e.preventDefault());
+      box.appendChild(menu);
+      input.setAttribute("aria-expanded", "true");
+      input.setAttribute("aria-controls", ids.listbox);
+      render();
+    };
+    const hide = () => {
+      if (!open) return;
+      open = false;
+      menu?.remove(); menu = null;
+      input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-controls");
+      input.removeAttribute("aria-activedescendant");
+    };
+    const pick = (text) => {
+      value = text;
+      input.value = "";
+      paint();
+      hide();
+      model[name] = text;
+      log(`picked ${name}: ${text}`);
+    };
+    control.addEventListener("mousedown", (e) => {
+      if (e.target !== input) e.preventDefault();
+      input.focus();
+      open ? (e.target === input ? null : hide()) : show();
+    });
+    input.addEventListener("input", () => { paint(); focused = 0; open ? render() : show(); });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") { e.preventDefault(); if (!open) show(); else { focused = Math.min(shown().length - 1, focused + 1); render(); } }
+      else if (e.key === "ArrowUp") { e.preventDefault(); focused = Math.max(0, focused - 1); render(); }
+      else if (e.key === "Enter" && open) { e.preventDefault(); const t = shown()[focused]; if (t) pick(t); }
+      else if (e.key === "Escape") hide();
+    });
+    input.addEventListener("blur", () => { hide(); input.value = ""; paint(); });
+    paint();
+    return box;
+  }
+
+  const YES_NO = ["Yes", "No"];
+  for (const n of [2, 4, 6, 7]) {
+    document.getElementById(`q${n}-row`).appendChild(mdfSelect({ inputId: `question_${n}`, name: `q${n}`, options: YES_NO, label: `question_${n}_label` }));
+  }
+
+  /* ---------- the salary's currency, in the shape this run asks for ---------- */
+  const CURRENCIES = [["USD", "United States Dollar ( USD )"], ["CAD", "Canadian Dollar ( CAD )"], ["EUR", "Euro ( EUR )"], ["INR", "Indian Rupee ( INR )"]];
+  const row = document.getElementById("salary-row");
+  const kind = cfg.currency || "sdf";
+  if (kind === "mdf") {
+    row.appendChild(mdfSelect({ inputId: "salaryCurrency", name: "salaryCurrency", options: CURRENCIES.map(([, l]) => l), placeholderText: "Select currency type" }));
+  } else {
+    const sel = document.createElement("sdf-select-simple");
+    sel.id = "salaryCurrency";
+    sel.dataset.model = "salaryCurrency";
+    if (kind === "sdf") sel.setAttribute("aria-label", "Select Currency Type");
+    sel.setAttribute("placeholder", "Select currency type");
+    sel.innerHTML = CURRENCIES.map(([v, l]) => `<sdf-select-item value="${v}">${l}</sdf-select-item>`).join("");
+    row.appendChild(sel);
+    // Only the words it draws inside itself say what it is.
+    if (kind === "sdf-drawn") sel.removeAttribute("placeholder");
+  }
+
+  /* ---------- what the form keeps ---------- */
+  document.addEventListener("input", (e) => {
+    const el = e.target;
+    if (el.matches?.("input.vdl-textbox[data-model]")) model[el.dataset.model] = el.value;
+  });
+  document.addEventListener("sdfChange", (e) => {
+    const host = e.target;
+    if (host?.dataset?.model) model[host.dataset.model] = e.detail;
+  });
+
+  /* ---------- Next ---------- */
+  document.getElementById("ja_sv_cw_next_footer_btn").addEventListener("click", () => {
+    const errors = [];
+    const need = (name, ok, why = "required") => { if (!ok) errors.push(`${name}: ${why}`); };
+    const filled = (name) => String(model[name] ?? "").trim() !== "";
+    ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q10", "desiredSalary", "salaryFrequency", "salaryCurrency"].forEach((n) => need(n, filled(n)));
+    if (filled("q8")) need("q8", /^\d{2}\/\d{2}\/\d{4}$/.test(String(model.q8).trim()), `invalid date ${model.q8}`);
+    window.__errors = errors;
+  });
+})();
+</script>
+</body></html>

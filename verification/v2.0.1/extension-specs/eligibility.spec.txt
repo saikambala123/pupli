@@ -1,0 +1,24 @@
+  ok   legally authorized to work → Yes
+  ok   will you require sponsorship → No
+  ok   able to work WITHOUT sponsorship → Yes
+  ok   do you require sponsorship → No
+  ok   at least 18 → Yes
+  ok   previously employed here → No
+  ok   gender is left blank for the applicant to fill
+  ok   hispanic or latino is left blank for the applicant to fill
+  ok   race is left blank for the applicant to fill
+  ok   veteran status is left blank for the applicant to fill
+  ok   disability status is left blank for the applicant to fill
+  ok   editing an autofilled dropdown queues the new answer
+  ok   the fill's own answers are not offered as the applicant's
+  ok   will you require sponsorship → Yes
+  ok   able to work WITHOUT sponsorship → No
+  ok   q1 is left blank when the profile has no answer
+  ok   q2 is left blank when the profile has no answer
+  ok   q3 is left blank when the profile has no answer
+  ok   q4 is left blank when the profile has no answer
+  ok   q5 is left blank when the profile has no answer
+  ok   q6 is left blank when the profile has no answer
+
+21/21 checks passed
+

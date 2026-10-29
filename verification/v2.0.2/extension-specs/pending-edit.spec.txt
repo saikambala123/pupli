@@ -1,0 +1,45 @@
+
+editing an unsaved answer
+  ok   the edit is accepted
+  ok   the held answer now reads No
+  ok   its choices are kept
+  ok   still one entry, not two
+  ok   nothing was uploaded by an edit alone
+
+rewording the question of an unsaved answer
+  ok   the question can be reworded
+  ok   a question too short to match anything is refused
+
+editing an answer that is already queued uploads the correction
+  ok   saving uploaded it
+  ok   the queued edit is accepted
+  ok   and uploaded straight away
+  ok   the dashboard copy is the corrected one
+  ok   nothing is left waiting
+
+editing something that is no longer pending
+  ok   is refused with a reason
+
+an answer typed into the popup
+  ok   is held
+  ok   a one-word question is refused
+  ok   an empty answer is refused
+  ok   and reaches the dashboard on Save
+
+a dismissal does not swallow a later, deliberate edit
+  ok   discarded
+  ok   the same capture replayed without a new edit stays dismissed
+  ok   a fresh edit made after the dismissal is held
+
+answers read off a question's wrapper
+  ok   a wrapper's list number is never held
+  ok   a real answer of 0 still is
+  ok   updating clears the ones an older build held
+  ok     and keeps everything else
+
+putting Appli-Fill's answer back withdraws the detour
+  ok   withdrawn from the list
+  ok   but not remembered as rejected
+
+all passing
+

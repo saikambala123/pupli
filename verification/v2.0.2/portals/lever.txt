@@ -1,0 +1,20 @@
+
+Lever — detected "lever", 13 filled, 0 left
+
+  ok   detected as Lever
+  ok   full name
+  ok   email
+  ok   phone
+  ok   current company
+  ok   LinkedIn
+  ok   GitHub
+  ok   Portfolio
+  ok   work authorization radio = Yes
+  ok   sponsorship radio = No
+  ok   relocate radio = Yes
+  ok   salary expectations
+  ok   why-work-here from saved answers
+  ok   how did you hear select
+
+14/14 checks passed — Lever
+

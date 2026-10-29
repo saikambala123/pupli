@@ -1,0 +1,7 @@
+PASS diploma field has no implicit answer
+PASS Yes reaches profile update
+PASS correct profile endpoint
+PASS saved callback retains diploma answer
+PASS No can replace Yes
+PASS declaration can be cleared
+6/6 profile editor checks passed

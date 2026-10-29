@@ -1,0 +1,33 @@
+
+opening the popup, connected, for the first time
+  ok   "Connect your account" is never shown to a connected browser
+  ok     nothing is shown until the right view is known
+  ok     then the paired view
+  ok     with no fade on the way in
+
+opening it again
+  ok   the paired view is drawn at once, without waiting for the worker
+  ok     and every frame after it is the same view — no flash, no swap
+  ok     already showing the plan, the profile and the saved answers
+
+opening the popup, not connected
+  ok   the paired view is never shown
+  ok     "Connect your account" once the worker has answered
+
+opening Fill settings
+  ok   the popup is no wider with the settings open
+  ok     and its contents do not move sideways
+  ok     the popup itself never scrolls, the settings scroll inside it
+  ok     closed again, it is as it was
+
+connecting for the first time
+  ok   "Welcome to Appli-Fill Autofill" is shown
+  ok     over the whole popup
+  ok     animated
+  ok     still there two seconds in
+  ok   gone after three seconds, leaving the popup as usual
+  ok   connecting again later shows the popup straight away, without the welcome
+  ok   an ordinary open never shows it
+
+20/20 checks passed
+

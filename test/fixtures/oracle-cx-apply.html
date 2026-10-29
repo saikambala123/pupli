@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Site Reliability Engineer I - Yum! Brands Careers</title>
+<meta property="og:site_name" content="Yum! Brands">
+<style>
+body{font-family:system-ui;margin:0;background:#f7f7f5}
+.app-header{height:48px;background:#1d1d1b;color:#fff;display:flex;align-items:center;padding:0 16px}
+main{max-width:780px;margin:0 auto;padding:20px}
+.apply-flow-block{background:#fff;border:1px solid #e3e3e0;border-radius:10px;padding:18px 20px;margin-bottom:18px}
+.apply-flow-block__title{font-size:18px;margin:0 0 12px}
+.input-row{margin-bottom:16px;position:relative}
+.input-row__label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.input-row__control{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid #c9c9c4;border-radius:6px;font:inherit;background:#fff}
+.input-row__control[readonly]{cursor:pointer}
+.input-row--invalid .input-row__control{border-color:#c0392b}
+.input-row__error{color:#c0392b;font-size:12px;margin-top:4px}
+.input-row__error[hidden]{display:none}
+.cx-select-pills-container{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.cx-select-pill{border:1px solid #9a9a95;border-radius:999px;background:#fff;padding:7px 16px;font:inherit;cursor:pointer}
+.cx-select-pill--selected{background:#1d1d1b;color:#fff;border-color:#1d1d1b}
+.cx-list{position:absolute;z-index:50;list-style:none;margin:0;padding:4px 0;background:#fff;border:1px solid #c9c9c4;border-radius:6px;max-height:260px;overflow:auto;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.cx-list li{padding:7px 10px;cursor:pointer}
+.cx-list li:hover{background:#eee}
+.cx-suggestions{position:absolute;z-index:50;background:#fff;border:1px solid #c9c9c4;border-radius:6px;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.cx-suggestion{padding:8px 10px;cursor:pointer;display:block}
+.cx-suggestion .street{display:block;font-weight:600}
+.cx-suggestion .locality{display:block;font-size:12px;color:#555}
+.oj-select-choice{display:flex;justify-content:space-between;align-items:center;border:1px solid #c9c9c4;border-radius:6px;padding:9px 10px;background:#fff;cursor:pointer}
+.cx-checkbox{display:flex;gap:8px;align-items:center;margin:5px 0}
+fieldset{border:0;margin:0;padding:0}
+legend{font-size:13px;font-weight:600;margin-bottom:6px;padding:0}
+.apply-flow-pagination{display:flex;justify-content:space-between}
+</style></head>
+<body>
+<!--
+  Oracle Recruiting Cloud "Candidate Experience" (hcmUI/CandidateExperience/…/
+  apply/section/1), modelled on the Yum! Brands application:
+
+  - Title and every Yes/No question are "pills" — Oracle draws a list of ten
+    or fewer values as a row of buttons. Three of the shapes seen in the wild
+    are used here: a listbox of option buttons each in its own <li>, plain
+    buttons each in their own wrapper, and radio buttons beside a hidden input.
+  - Address Line 1 offers address suggestions as it is typed. Picking one fills
+    ZIP Code, City, State and County.
+  - ZIP Code and City are type-to-search lists of values: nothing is offered
+    until something is typed, the list comes from the server a moment later,
+    and text that was never picked from it is thrown away when the box loses
+    focus ("Select a value from the list").
+  - State, County, Tax District and Veteran Status are read-only boxes that
+    open a list; Gender is the older <div role="combobox"> drop-down.
+  - Diversity: "I am Hispanic or Latino." is a single checkbox and "Select the
+    races you identify with." is a list of checkboxes.
+
+  Modes (set before the page script runs): window.__cx = { suggestions: bool,
+  autopopulate: bool, latency: ms }.
+-->
+<div class="app-header">Yum! Brands Careers</div>
+<main role="main" class="apply-flow">
+  <h1 class="apply-flow-header__title">Site Reliability Engineer I</h1>
+
+  <section class="apply-flow-block" data-block="contact">
+    <h2 class="apply-flow-block__title">Contact Information</h2>
+
+    <div class="input-row">
+      <label class="input-row__label" id="title-label">Title</label>
+      <ul class="cx-select-pills-container" role="listbox" aria-labelledby="title-label" data-pills="listbox" data-q="title">
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">Doctor</span></button></li>
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">Miss</span></button></li>
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">Mr.</span></button></li>
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">Mrs.</span></button></li>
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">Ms.</span></button></li>
+      </ul>
+    </div>
+
+    <div class="input-row"><label class="input-row__label" for="firstName">First Name *</label>
+      <input class="input-row__control" id="firstName" type="text" aria-required="true"></div>
+    <div class="input-row"><label class="input-row__label" for="middleNames">Middle Name</label>
+      <input class="input-row__control" id="middleNames" type="text"></div>
+    <div class="input-row"><label class="input-row__label" for="lastName">Last Name *</label>
+      <input class="input-row__control" id="lastName" type="text" aria-required="true"></div>
+    <div class="input-row"><label class="input-row__label" for="email">Email Address *</label>
+      <input class="input-row__control" id="email" type="email" readonly value="pat.lee@example.com"></div>
+    <div class="input-row"><label class="input-row__label" for="phoneCode">Country Code</label>
+      <input class="input-row__control" id="phoneCode" type="text" role="combobox" readonly aria-haspopup="listbox" aria-expanded="false" value="United States (+1)"></div>
+    <div class="input-row"><label class="input-row__label" for="phoneNumber">Phone Number *</label>
+      <input class="input-row__control" id="phoneNumber" type="tel" aria-required="true"></div>
+  </section>
+
+  <section class="apply-flow-block" data-block="address">
+    <h2 class="apply-flow-block__title">Address</h2>
+    <div class="input-row"><label class="input-row__label" for="country">Country *</label>
+      <input class="input-row__control" id="country" type="text" role="combobox" readonly aria-haspopup="listbox" aria-expanded="false" value="United States"></div>
+    <div class="input-row"><label class="input-row__label" for="addressLine1">Address Line 1 *</label>
+      <input class="input-row__control" id="addressLine1" type="text" autocomplete="off" aria-autocomplete="list" aria-expanded="false" aria-required="true">
+      <div class="input-row__error" hidden>This field is required.</div></div>
+    <div class="input-row"><label class="input-row__label" for="addressLine2">Address Line 2</label>
+      <input class="input-row__control" id="addressLine2" type="text"></div>
+    <div class="input-row"><label class="input-row__label" for="postalCode">ZIP Code *</label>
+      <input class="input-row__control" id="postalCode" type="text" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" autocomplete="off" aria-required="true">
+      <div class="input-row__error" hidden>Select a value from the list.</div></div>
+    <div class="input-row"><label class="input-row__label" for="townOrCity">City *</label>
+      <input class="input-row__control" id="townOrCity" type="text" role="combobox" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" autocomplete="off" aria-required="true">
+      <div class="input-row__error" hidden>Select a value from the list.</div></div>
+    <div class="input-row"><label class="input-row__label" for="region2">State *</label>
+      <input class="input-row__control" id="region2" type="text" role="combobox" readonly aria-haspopup="listbox" aria-expanded="false" placeholder="Select a value" aria-required="true">
+      <div class="input-row__error" hidden>This field is required.</div></div>
+    <div class="input-row"><label class="input-row__label" for="region1">County *</label>
+      <input class="input-row__control" id="region1" type="text" role="combobox" readonly aria-haspopup="listbox" aria-expanded="false" placeholder="Select a value" aria-required="true">
+      <div class="input-row__error" hidden>This field is required.</div></div>
+    <div class="input-row"><label class="input-row__label" for="addlAddressAttribute3">Tax District</label>
+      <input class="input-row__control" id="addlAddressAttribute3" type="text" role="combobox" readonly aria-haspopup="listbox" aria-expanded="false" placeholder="Select a value"></div>
+  </section>
+
+  <section class="apply-flow-block" data-block="questions">
+    <h2 class="apply-flow-block__title">Application Questions</h2>
+
+    <div class="input-row">
+      <label class="input-row__label" id="q1-label">Are you currently bound by a non-compete agreement, non-solicitation agreement or any other restrictive covenant with a current or former employer? *</label>
+      <div class="cx-select-pills-container" data-pills="wrapped" data-q="noncompete">
+        <div class="cx-select-pill-section"><button type="button" class="cx-select-pill" aria-pressed="false"><span class="cx-select-pill-name">Yes</span></button></div>
+        <div class="cx-select-pill-section"><button type="button" class="cx-select-pill" aria-pressed="false"><span class="cx-select-pill-name">No</span></button></div>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <label class="input-row__label" id="q2-label">Have you ever worked for YUM! Brands or any of its subsidiaries (KFC, Taco Bell, Pizza Hut, Habit Burger &amp; Grill)? *</label>
+      <ul class="cx-select-pills-container" role="listbox" aria-labelledby="q2-label" data-pills="listbox" data-q="workedhere">
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">Yes</span></button></li>
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">No</span></button></li>
+      </ul>
+    </div>
+
+    <div class="input-row">
+      <label class="input-row__label" id="q3-label">Are you legally authorized to work in the United States? *</label>
+      <div class="cx-select-pills-container" role="radiogroup" aria-labelledby="q3-label" data-pills="radiogroup" data-q="auth">
+        <button type="button" class="cx-select-pill" role="radio" aria-checked="false">Yes</button>
+        <button type="button" class="cx-select-pill" role="radio" aria-checked="false">No</button>
+        <input type="hidden" name="q3" value="">
+      </div>
+    </div>
+
+    <div class="input-row">
+      <label class="input-row__label" id="q4-label">Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)? *</label>
+      <ul class="cx-select-pills-container" role="listbox" aria-labelledby="q4-label" data-pills="listbox" data-q="sponsor">
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">Yes</span></button></li>
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">No</span></button></li>
+      </ul>
+    </div>
+
+    <div class="input-row">
+      <label class="input-row__label" id="q5-label">Are you at least 18 years of age? *</label>
+      <div class="cx-select-pills-container" data-pills="wrapped" data-q="over18">
+        <div class="cx-select-pill-section"><button type="button" class="cx-select-pill" aria-pressed="false"><span class="cx-select-pill-name">Yes</span></button></div>
+        <div class="cx-select-pill-section"><button type="button" class="cx-select-pill" aria-pressed="false"><span class="cx-select-pill-name">No</span></button></div>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <label class="input-row__label" id="q6-label">Have you been employed or contracted by Yum! in the past six months? *</label>
+      <div class="cx-select-pills-container" data-pills="wrapped" data-q="recent">
+        <div class="cx-select-pill-section"><button type="button" class="cx-select-pill" aria-pressed="false"><span class="cx-select-pill-name">Yes</span></button></div>
+        <div class="cx-select-pill-section"><button type="button" class="cx-select-pill" aria-pressed="false"><span class="cx-select-pill-name">No</span></button></div>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <label class="input-row__label" id="q7-label">Do you have any relatives currently employed by Yum! Brands? *</label>
+      <ul class="cx-select-pills-container" role="listbox" aria-labelledby="q7-label" data-pills="listbox" data-q="relatives">
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">Yes</span></button></li>
+        <li class="cx-select-pill-section" role="none"><button type="button" class="cx-select-pill" role="option" aria-selected="false"><span class="cx-select-pill-name">No</span></button></li>
+      </ul>
+    </div>
+
+    <div class="input-row"><label class="input-row__label" for="q8">What compensation are you seeking? *</label>
+      <textarea class="input-row__control" id="q8" rows="2" aria-required="true"></textarea></div>
+  </section>
+
+  <section class="apply-flow-block" data-block="diversity">
+    <h2 class="apply-flow-block__title">Diversity</h2>
+    <div class="input-row"><label class="input-row__label" id="gender-label">Gender</label>
+      <div class="oj-select-choice" id="gender" role="combobox" tabindex="0" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="gender-label">
+        <span class="oj-select-chosen">Select a value</span><a class="oj-select-arrow" role="presentation">▾</a>
+      </div></div>
+
+    <div class="input-row">
+      <fieldset class="cx-checkbox-group" id="ethnicity-group">
+        <legend>Ethnicity</legend>
+        <div class="cx-checkbox"><input type="checkbox" id="eth-hispanic" class="cx-checkbox__input"><label for="eth-hispanic">I am Hispanic or Latino.</label></div>
+      </fieldset>
+    </div>
+
+    <div class="input-row">
+      <fieldset class="cx-checkbox-group" id="race-group">
+        <legend>Select the races you identify with.</legend>
+        <div class="cx-checkbox"><input type="checkbox" id="race-1" class="cx-checkbox__input"><label for="race-1">American Indian or Alaska Native</label></div>
+        <div class="cx-checkbox"><input type="checkbox" id="race-2" class="cx-checkbox__input"><label for="race-2">Asian</label></div>
+        <div class="cx-checkbox"><input type="checkbox" id="race-3" class="cx-checkbox__input"><label for="race-3">Black or African American</label></div>
+        <div class="cx-checkbox"><input type="checkbox" id="race-4" class="cx-checkbox__input"><label for="race-4">Native Hawaiian or Other Pacific Islander</label></div>
+        <div class="cx-checkbox"><input type="checkbox" id="race-5" class="cx-checkbox__input"><label for="race-5">White</label></div>
+      </fieldset>
+    </div>
+
+    <div class="input-row"><label class="input-row__label" for="veteran">Veteran Status</label>
+      <input class="input-row__control" id="veteran" type="text" role="combobox" readonly aria-haspopup="listbox" aria-expanded="false" placeholder="Select a value"></div>
+  </section>
+
+  <div class="apply-flow-pagination">
+    <button type="button" class="apply-flow-pagination__back">Back</button>
+    <button type="button" class="apply-flow-pagination__next">Next</button>
+  </div>
+</main>
+
+<script>
+(() => {
+  const MODE = Object.assign({ suggestions: true, autopopulate: true, latency: 650 }, window.__cx || {});
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const $ = (id) => document.getElementById(id);
+  window.__log = [];
+
+  /* ---------------- geography (the "server") ---------------- */
+  const ZIPS = {
+    "32205": { city: "JACKSONVILLE", county: "DUVAL", state: "Florida" },
+    "32206": { city: "JACKSONVILLE", county: "DUVAL", state: "Florida" },
+    "32207": { city: "JACKSONVILLE", county: "DUVAL", state: "Florida" },
+    "32250": { city: "JACKSONVILLE BEACH", county: "DUVAL", state: "Florida" },
+    "32073": { city: "ORANGE PARK", county: "CLAY", state: "Florida" },
+    "32003": { city: "FLEMING ISLAND", county: "CLAY", state: "Florida" },
+    "30301": { city: "ATLANTA", county: "FULTON", state: "Georgia" },
+  };
+  const CITIES = ["JACKSON", "JACKSONVILLE", "JACKSONVILLE BEACH", "ORANGE PARK", "FLEMING ISLAND", "ATLANTA", "JACKSON SPRINGS"];
+  const STATES = ["Alabama", "Alaska", "Arizona", "California", "Colorado", "Florida", "Georgia", "Illinois", "New York", "North Carolina", "Texas", "Washington"];
+  const FL_COUNTIES = ["ALACHUA", "BAKER", "CLAY", "DUVAL", "NASSAU", "ST. JOHNS"];
+  const TAX_DISTRICTS = { DUVAL: ["JACKSONVILLE-DUVAL CONSOLIDATED"], CLAY: ["CLAY COUNTY", "ORANGE PARK TOWN"] };
+  const ADDRESSES = [
+    { street: "1200 HARBOR VIEW DR", zip: "32205" },
+    { street: "1200 HARBOR VIEW RD", zip: "32073" },
+    { street: "1200 HARBOR BLVD", zip: "32250" },
+  ];
+
+  /* ---------------- one open list at a time, drawn at the end of <body> ---------------- */
+  let open = null;
+  function closeList() {
+    if (!open) return;
+    open.list.remove();
+    open.owner.setAttribute("aria-expanded", "false");
+    open = null;
+  }
+  function place(list, owner) {
+    const r = owner.getBoundingClientRect();
+    list.style.top = `${r.bottom + scrollY + 2}px`;
+    list.style.left = `${r.left + scrollX}px`;
+    list.style.width = `${r.width}px`;
+  }
+  function showList(owner, items, onPick) {
+    closeList();
+    const list = document.createElement("ul");
+    list.className = "cx-list";
+    list.id = `${owner.id}-listbox`;
+    list.setAttribute("role", "listbox");
+    items.forEach((text, i) => {
+      const li = document.createElement("li");
+      li.setAttribute("role", "option");
+      li.id = `${list.id}-${i}`;
+      li.textContent = text;
+      li.addEventListener("mousedown", (e) => e.preventDefault());
+      li.addEventListener("click", () => { closeList(); onPick(text); });
+      list.appendChild(li);
+    });
+    place(list, owner);
+    document.body.appendChild(list);
+    owner.setAttribute("aria-expanded", "true");
+    owner.setAttribute("aria-controls", list.id);
+    open = { owner, list };
+  }
+  document.addEventListener("mousedown", (e) => {
+    if (!open) return;
+    if (open.owner.contains(e.target) || open.list.contains(e.target)) return;
+    closeList();
+  }, true);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeList(); }, true);
+
+  const rowOf = (el) => el.closest(".input-row");
+  function setError(el, on) {
+    const row = rowOf(el);
+    row.classList.toggle("input-row--invalid", on);
+    const err = row.querySelector(".input-row__error");
+    if (err) err.hidden = !on;
+    el.setAttribute("aria-invalid", on ? "true" : "false");
+  }
+  /** What the page itself holds for a list-of-values box: only a picked value counts. */
+  function commit(el, text) {
+    el.value = text;
+    el.dataset.value = text;
+    setError(el, false);
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  /* ---------------- read-only boxes that open a list ---------------- */
+  function readOnlySelect(el, source, onPick) {
+    const toggle = () => {
+      if (open && open.owner === el) { closeList(); return; }
+      const items = source();
+      if (!items.length) return;
+      showList(el, items, (text) => { commit(el, text); onPick && onPick(text); });
+    };
+    el.addEventListener("click", toggle);
+    el.addEventListener("keydown", (e) => {
+      if (["ArrowDown", "Enter", " "].includes(e.key) && !(open && open.owner === el)) { e.preventDefault(); toggle(); }
+    });
+  }
+  const zipInfo = () => ZIPS[$("postalCode").dataset.value || ""] || null;
+  readOnlySelect($("phoneCode"), () => ["Canada (+1)", "India (+91)", "United Kingdom (+44)", "United States (+1)"]);
+  readOnlySelect($("country"), () => ["Canada", "India", "United Kingdom", "United States"]);
+  readOnlySelect($("region2"), () => STATES, () => { if ($("region1").dataset.value && !zipInfo()) { commit($("region1"), ""); } });
+  readOnlySelect($("region1"), () => {
+    const z = zipInfo();
+    if (z) return [z.county];
+    return ($("region2").dataset.value || $("region2").value) === "Florida" ? FL_COUNTIES : [];
+  });
+  readOnlySelect($("addlAddressAttribute3"), () => TAX_DISTRICTS[$("region1").dataset.value || $("region1").value] || []);
+  readOnlySelect($("veteran"), () => [
+    "I am not a protected veteran",
+    "I identify as one or more of the classifications of protected veteran",
+    "I do not wish to self-identify",
+  ]);
+
+  /* The older drop-down: a <div role="combobox"> that paints its answer into a span. */
+  (() => {
+    const box = $("gender");
+    const chosen = box.querySelector(".oj-select-chosen");
+    const toggle = () => {
+      if (open && open.owner === box) { closeList(); return; }
+      showList(box, ["Female", "Male", "I do not wish to self-identify"], (text) => {
+        chosen.textContent = text;
+        box.dataset.value = text;
+        box.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    };
+    box.addEventListener("click", toggle);
+    box.addEventListener("keydown", (e) => { if (["ArrowDown", "Enter", " "].includes(e.key)) { e.preventDefault(); toggle(); } });
+  })();
+
+  /* ---------------- type-to-search lists of values ---------------- */
+  function autopopulateFrom(zip) {
+    const z = ZIPS[zip];
+    if (!z || !MODE.autopopulate) return;
+    commit($("townOrCity"), z.city);
+    commit($("region2"), z.state);
+    commit($("region1"), z.county);
+  }
+  function typeToSearch(el, search, onPick) {
+    let timer = null;
+    el.addEventListener("input", () => {
+      el.dataset.value = "";
+      clearTimeout(timer);
+      const q = el.value.trim();
+      if (q.length < 2) { if (open && open.owner === el) closeList(); return; }
+      timer = setTimeout(async () => {
+        window.__log.push(`search ${el.id}: ${q}`);
+        await wait(MODE.latency);                       // the round trip
+        if (el.value.trim() !== q) return;               // superseded by more typing
+        const items = search(q);
+        if (!items.length) { if (open && open.owner === el) closeList(); return; }
+        showList(el, items, (text) => { commit(el, text); onPick && onPick(text); });
+      }, 250);
+    });
+    // Oracle keeps only a value picked from the list.
+    el.addEventListener("blur", () => {
+      setTimeout(() => {
+        if (document.activeElement === el) return;
+        if (el.value && el.value !== el.dataset.value) {
+          window.__log.push(`cleared ${el.id}: ${el.value}`);
+          el.value = "";
+          setError(el, true);
+          if (open && open.owner === el) closeList();
+        }
+      }, 150);
+    });
+  }
+  typeToSearch($("postalCode"), (q) => Object.keys(ZIPS).filter((z) => z.startsWith(q.replace(/\D/g, "").slice(0, 5))).slice(0, 8),
+    (zip) => autopopulateFrom(zip));
+  typeToSearch($("townOrCity"), (q) => {
+    const z = zipInfo();
+    const pool = z ? [z.city] : CITIES;
+    return pool.filter((c) => c.includes(q.toUpperCase()));
+  });
+
+  /* ---------------- Address Line 1 suggestions ---------------- */
+  (() => {
+    const input = $("addressLine1");
+    let timer = null;
+    let box = null;
+    const hide = () => { if (box) { box.remove(); box = null; input.setAttribute("aria-expanded", "false"); } };
+    input.addEventListener("input", () => {
+      clearTimeout(timer);
+      const q = input.value.trim();
+      if (!MODE.suggestions || q.length < 4) { hide(); return; }
+      timer = setTimeout(async () => {
+        window.__log.push(`address search: ${q}`);
+        await wait(MODE.latency);
+        if (input.value.trim() !== q) return;
+        const words = q.toUpperCase().replace(/[,.]/g, " ").split(/\s+/).filter(Boolean);
+        const number = words[0];
+        const hits = ADDRESSES.filter((a) => a.street.startsWith(`${number} `) && a.street.includes(words[1] || ""));
+        hide();
+        if (!hits.length) return;
+        box = document.createElement("div");
+        box.className = "cx-suggestions";
+        box.id = "addressLine1-suggestions";
+        box.setAttribute("role", "listbox");
+        hits.forEach((a, i) => {
+          const z = ZIPS[a.zip];
+          const row = document.createElement("div");
+          row.className = "cx-suggestion";
+          row.id = `addressLine1-suggestion-${i}`;
+          row.setAttribute("role", "option");
+          row.innerHTML = `<span class="street"></span><span class="locality"></span>`;
+          row.querySelector(".street").textContent = a.street.replace(/\b\w+/g, (w) => w[0] + w.slice(1).toLowerCase());
+          row.querySelector(".locality").textContent = `${z.city.replace(/\b\w+/g, (w) => w[0] + w.slice(1).toLowerCase())}, FL ${a.zip}`;
+          row.addEventListener("mousedown", (e) => e.preventDefault());
+          row.addEventListener("click", () => {
+            hide();
+            input.value = a.street;
+            setError(input, false);
+            input.dispatchEvent(new Event("change", { bubbles: true }));
+            window.__log.push(`address picked: ${a.street}`);
+            commit($("postalCode"), a.zip);
+            commit($("townOrCity"), z.city);
+            commit($("region2"), z.state);
+            commit($("region1"), z.county);
+          });
+          box.appendChild(row);
+        });
+        place(box, input);
+        document.body.appendChild(box);
+        input.setAttribute("aria-expanded", "true");
+        input.setAttribute("aria-controls", box.id);
+      }, 300);
+    });
+    document.addEventListener("mousedown", (e) => { if (box && e.target !== input && !box.contains(e.target)) hide(); }, true);
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") hide(); }, true);
+  })();
+
+  /* ---------------- pills: one choice per question ---------------- */
+  document.querySelectorAll(".cx-select-pills-container").forEach((group) => {
+    const kind = group.dataset.pills;
+    const buttons = Array.from(group.querySelectorAll("button"));
+    const hidden = group.querySelector("input[type=hidden]");
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => {
+          const on = b === btn;
+          b.classList.toggle("cx-select-pill--selected", on);
+          if (kind === "listbox") b.setAttribute("aria-selected", String(on));
+          if (kind === "wrapped") b.setAttribute("aria-pressed", String(on));
+          if (kind === "radiogroup") b.setAttribute("aria-checked", String(on));
+        });
+        if (hidden) hidden.value = btn.textContent.trim();
+        group.dataset.value = btn.textContent.trim();
+      });
+    });
+  });
+})();
+</script>
+</body></html>

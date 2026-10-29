@@ -1,0 +1,120 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Voluntary Disclosures — Workday</title>
+<style>
+body{font-family:system-ui;padding:20px;max-width:820px}
+[data-automation-id^=formField]{margin-bottom:18px}
+label{font-size:13px}
+button.wd{padding:7px 10px;font:inherit;cursor:pointer;text-align:left;width:100%;background:#fff;border:1px solid #ccd;border-radius:5px}
+ul[role=listbox]{list-style:none;margin:0;padding:4px 0;border:1px solid #ccd;background:#fff;position:absolute;z-index:99}
+ul[role=listbox] li{padding:6px 10px;cursor:pointer}
+fieldset{border:0;padding:0;margin:0}
+.cb{display:flex;gap:8px;align-items:flex-start;margin:4px 0}
+</style></head><body>
+<!--
+  Workday's Voluntary Disclosures step as uchicago.wd5 draws it: gender and
+  veteran status as menus, "Are you Hispanic or Latino?" as its own menu, and
+  ethnicity as a list of checkboxes whose every label carries "(Not
+  Hispanic/Latino) (United States of America)".
+-->
+<ol data-automation-id="progressBar">
+  <li data-automation-id="progressBarCompletedStep"><div>Application Questions</div></li>
+  <li data-automation-id="progressBarActiveStep"><div>Voluntary Disclosures</div></li>
+  <li data-automation-id="progressBarInactiveStep"><div>Review</div></li>
+</ol>
+<div data-automation-id="applyFlowPage">
+  <h2>Voluntary Disclosures</h2>
+  <div data-automation-id="richText">
+    <p>This Organization abides by the requirements of 41 CFR Section 60-300.5(a). This regulation prohibits discrimination against qualified protected veterans, and requires affirmative action by covered contractors to employ and advance in employment qualified protected veterans.</p>
+  </div>
+
+  <div data-automation-id="formField-gender" data-fkit-id="personalInfoUS--gender">
+    <label for="personalInfoUS--gender">Please select your gender</label>
+    <button class="wd" type="button" id="personalInfoUS--gender" name="gender" aria-haspopup="listbox"
+      aria-label="Please select your gender Select One" value="" data-options="Female|Male|I do not wish to answer.">Select One</button>
+  </div>
+
+  <div data-automation-id="formField-ethnicityMulticheckbox" data-fkit-id="personalInfoUS--ethnicityMulticheckbox">
+    <fieldset>
+      <legend><label>Please select the ethnicity which most accurately describes how you identify yourself.</label></legend>
+      <div id="ethnicity-list"></div>
+    </fieldset>
+  </div>
+
+  <div data-automation-id="formField-hispanicOrLatino" data-fkit-id="personalInfoUS--hispanicOrLatino">
+    <label for="personalInfoUS--hispanicOrLatino">Are you Hispanic or Latino?</label>
+    <button class="wd" type="button" id="personalInfoUS--hispanicOrLatino" name="hispanicOrLatino" aria-haspopup="listbox"
+      aria-label="Are you Hispanic or Latino? Select One" value="" data-options="Yes|No|I do not wish to answer.">Select One</button>
+  </div>
+
+  <div data-automation-id="formField-veteranStatus" data-fkit-id="personalInfoUS--veteranStatus">
+    <label for="personalInfoUS--veteranStatus">Are you a protected veteran?</label>
+    <button class="wd" type="button" id="personalInfoUS--veteranStatus" name="veteranStatus" aria-haspopup="listbox"
+      aria-label="Are you a protected veteran? Select One" value=""
+      data-options="I IDENTIFY AS ONE OR MORE OF THE CLASSIFICATIONS OF PROTECTED VETERAN|I AM NOT A PROTECTED VETERAN|I DO NOT WISH TO SELF-IDENTIFY">Select One</button>
+  </div>
+
+  <button type="button" data-automation-id="pageFooterBackButton">Back</button>
+  <button type="button" data-automation-id="bottom-navigation-next-button">Save and Continue</button>
+</div>
+<script>
+const ETHNICITIES = [
+  "American Indian or Alaskan Native (Not Hispanic/Latino) (United States of America)",
+  "Asian (Not Hispanic/Latino) (United States of America)",
+  "Black or African American (Not Hispanic/Latino) (United States of America)",
+  "Native Hawaiian or Other Pacific Islander (Not Hispanic/Latino) (United States of America)",
+  "White (Not Hispanic/Latino) (United States of America)",
+];
+const host = document.getElementById("ethnicity-list");
+ETHNICITIES.forEach((text, i) => {
+  const id = `64cbff5f364f10000ae7a421cf2100${String(i).padStart(2, "0")}`;
+  const row = document.createElement("div");
+  row.className = "cb";
+  row.innerHTML = `<div data-automation-id="checkbox"><input type="checkbox" id="${id}" aria-checked="false"></div><label for="${id}"></label>`;
+  row.querySelector("label").textContent = text;
+  const box = row.querySelector("input");
+  box.addEventListener("change", () => box.setAttribute("aria-checked", String(box.checked)));
+  host.appendChild(row);
+});
+
+/* Workday menus: portalled listbox, the choice painted onto the button. */
+let openMenu = null;
+function closeMenus() { if (openMenu) { openMenu.menu.remove(); openMenu.btn.setAttribute("aria-expanded", "false"); openMenu = null; } }
+function questionOf(btn) {
+  const label = document.querySelector(`label[for="${btn.id}"]`);
+  return (label ? label.textContent : "").replace(/\s+/g, " ").trim();
+}
+document.querySelectorAll("button.wd").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const wasOpen = openMenu && openMenu.btn === btn;
+    closeMenus();
+    if (wasOpen) return;
+    const menu = document.createElement("ul");
+    menu.setAttribute("role", "listbox");
+    btn.dataset.options.split("|").forEach((text) => {
+      const li = document.createElement("li");
+      li.setAttribute("role", "option");
+      li.textContent = text;
+      li.addEventListener("click", () => {
+        btn.textContent = text;
+        btn.value = text;
+        btn.setAttribute("aria-label", `${questionOf(btn)} ${text}`);
+        closeMenus();
+        btn.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+      menu.appendChild(li);
+    });
+    const r = btn.getBoundingClientRect();
+    menu.style.top = (r.bottom + window.scrollY) + "px";
+    menu.style.left = (r.left + window.scrollX) + "px";
+    menu.style.width = r.width + "px";
+    document.body.appendChild(menu);
+    btn.setAttribute("aria-expanded", "true");
+    openMenu = { btn, menu };
+  });
+});
+document.addEventListener("click", (e) => {
+  if (!openMenu) return;
+  if (openMenu.btn.contains(e.target) || openMenu.menu.contains(e.target)) return;
+  closeMenus();
+}, true);
+</script>
+</body></html>

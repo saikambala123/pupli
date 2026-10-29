@@ -1,0 +1,28 @@
+
+boards.greenhouse.io: "Immediately" in the profile
+  ok   a date input gets today's date
+  ok   a MM/DD/YYYY box gets today's date
+  ok   "When can you start?" keeps the applicant's words
+  ok   Month / Day / Year lists get today's month, day and year
+  ok   numbered MM / YYYY lists too
+  ok   the salary and the saved bonus go in their own boxes
+
+boards.greenhouse.io: a date in the profile
+  ok   every date shape gets 03/15/2027
+
+careers-acme.icims.com: "Immediately" in the profile
+  ok   a date input gets today's date
+  ok   a MM/DD/YYYY box gets today's date
+  ok   "When can you start?" keeps the applicant's words
+  ok   Month / Day / Year lists get today's month, day and year
+  ok   numbered MM / YYYY lists too
+  ok   the salary and the saved bonus go in their own boxes
+
+careers-acme.icims.com: a date in the profile
+  ok   every date shape gets 03/15/2027
+
+a start month saved off an earlier application is not replayed
+  ok   the Month list shows this month, not the saved January
+
+15/15 checks passed
+

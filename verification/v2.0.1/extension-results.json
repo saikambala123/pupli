@@ -1,0 +1,292 @@
+[
+  {
+    "test": "test/answer-accuracy-latency.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/career-profile.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/self-id.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/row-index.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/held-answers.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/career-fields.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/ashby-capture.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-fields.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/late-fields.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/scope.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/segmented.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/autofill.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-flow.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/saved-answers.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/workday-experience.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-dates.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-address.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/eligibility.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/current-job.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/capture.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/greenhouse-rows.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/background.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/answer-route.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/canonical-choices.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/capture-types.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/settings.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/pending-edit.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/popup-pending.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-questions.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-capture.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/provenance.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/app-questions-rules.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/lever-location.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/ashby-location.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-selfid.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-app-questions.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/account-password.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-disclosures.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/oracle-cx.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/adp-myjobs.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/adp-wfn.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/oracle-cx-redwood.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/ashby-yesno.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/cross-site-guards.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-education-prompt.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/oracle-cx-live.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/workday-sei-questions.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/ashby-survey.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/workday-source-prompt.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/popup-open.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/lever-location-pick.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/start-date-other.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/eligibility-wording.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "verification": "corrective/final rerun"
+  },
+  {
+    "test": "test/react-commit.spec.mjs",
+    "code": 0,
+    "signal": null
+  },
+  {
+    "test": "test/adp-wfn-questions.spec.mjs",
+    "code": 0,
+    "signal": null
+  }
+]

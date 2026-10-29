@@ -1,0 +1,94 @@
+
+Worked for this employer before — read from the work history
+  ok   named employer on the history → Yes (former)
+  ok   the current employer → Yes (current)
+  ok   "currently employed by" a past employer → the stored No
+  ok   a window the job ended before → the stored No
+  ok   an employer not on the history → the stored No
+  ok   "this company" on a Workday tenant uses the tenant
+  ok   nothing stored and no match → left for the applicant
+  ok   an acronym tenant matches the full name (GDIT)
+  ok   an acronym in the question matches the full name
+  ok   a joined-up tenant matches the spaced name (boozallen)
+  ok   "Apple" is not "Pineapple Labs"
+  ok   "Meta" is "Meta Platforms, Inc."
+  ok   "Solutions" alone identifies nobody
+  ok   the employer a question names
+  ok   a government is not an employer name
+  ok   the prior-employment rule claims "current or former employee of X"
+  ok   …and "this company" / "a former employee"
+  ok   …but not a question about a skill ("ever worked with Kubernetes")
+  ok   …nor one about a kind of company
+  ok   "worked with" names a tool, not an employer
+  ok   "employed with" does name an employer
+  ok   …but never a federal-government question
+
+Federal service
+  ok   the question is claimed
+  ok   Army service, question includes military → Yes
+  ok   Army service, question about civilian employment only → left open
+  ok   a civilian agency → Yes
+  ok   a GS grade in the title → Yes
+  ok   a history with no government employer → No
+  ok   Navy Federal Credit Union is not the Navy
+  ok   no history at all → left open
+  ok   a declared veteran with an empty history → Yes when military counts
+  ok   "not a protected veteran" is not evidence of service
+  ok   a window the service ended before → No
+  ok   federal contracts are a different question
+  ok   the answer is shown as a draft to review
+
+Security clearance
+  ok   a U.S. citizen without one is able to obtain one
+  ok   a visa holder is not
+  ok   no recorded status → left open
+  ok   a held clearance → Yes
+  ok   eligibility is answered even with no clearance field at all
+  ok   an active-clearance question still answers from the level held
+
+Highest level of education
+  ok   the question goes to the level rule, not the history row
+  ok   Master of Science + B.Tech → Master's Degree
+  ok   a PhD in progress does not count as completed
+  ok   …but does for "highest level of education" without "completed"
+  ok   B.S. → Bachelor's Degree
+  ok   MBA → Master's Degree
+  ok   Associate of Applied Science → Associate's Degree
+  ok   no education → left open
+
+Sponsorship, in Workday's words
+  ok   claimed by the sponsorship rule
+  ok   not claimed by the work-authorization rule
+  ok   answered from the profile
+  ok   "without the company sponsoring" is the inverted question
+  ok   …and No for someone who needs sponsorship
+  ok   sponsoring an event is not immigration
+
+Currently employed
+  ok   the row checkbox rule leaves a question about relatives alone
+  ok   …and "Are you currently employed?"
+  ok   …but still claims "I currently work here"
+  ok   "Are you currently employed?" has its own rule
+  ok   with a current job → Yes
+  ok   with only past jobs → No
+  ok   no history → left open
+  ok   the relatives question is claimed by neither
+
+Years of experience
+  ok   a plain years-of-experience question is the whole career, overlaps counted once
+  ok   "cloud engineering" counts the Cloud Engineer role, not the whole career
+  ok   "with Kubernetes" counts the roles that describe it, as a listed skill
+  ok   "management" is not read into "managed the servers"
+  ok   "relevant" needs judgement, not arithmetic
+  ok   a topic no role names is left open
+  ok   13 → More than 10 years
+  ok   10 → 6-10 years
+  ok   1 → Less than 2 years
+  ok   5.5 on whole-year ranges → 2-5 years
+  ok   "7 years" → 6-10 years
+  ok   10+ style options
+  ok   a number with no range to hold it is left unanswered
+  ok   a menu of months is not a menu of years
+  ok   words are not ranges
+
+78/78 checks passed

@@ -1,0 +1,57 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Job Application — control types</title>
+<style>body{font-family:system-ui;padding:24px;max-width:680px}
+.field{margin-bottom:18px}label.q,p.q{display:block;font-weight:600;margin-bottom:6px}
+input[type=text],textarea,select{width:100%;padding:8px;border:1px solid #ccd;border-radius:6px}
+.seg{display:inline-flex;border:1px solid #ccd;border-radius:6px;overflow:hidden}
+.seg button{padding:8px 22px;border:0;border-right:1px solid #ccd;background:#fff;cursor:pointer;font:inherit}
+.seg button[aria-pressed=true]{background:#1a56db;color:#fff}
+.combo{position:relative}
+.combo__control{width:100%;padding:8px;border:1px solid #ccd;border-radius:6px;background:#fff;text-align:left;cursor:pointer}
+.combo__menu{position:absolute;z-index:10;left:0;right:0;background:#fff;border:1px solid #ccd;border-radius:6px;margin-top:2px}
+.combo__menu[hidden]{display:none}
+.combo__menu div{padding:8px;cursor:pointer}
+</style></head><body>
+<h1>Job Application</h1>
+<form id="application_form">
+  <div class="field"><label class="q" for="q-text">What excites you about this role?</label>
+    <textarea id="q-text" rows="2"></textarea></div>
+
+  <div class="field"><label class="q" for="q-select">What is your highest level of education?</label>
+    <select id="q-select"><option value="">Select…</option><option>High School</option><option>Bachelor's Degree</option><option>Master's Degree</option></select></div>
+
+  <div class="field"><p class="q">How did you hear about this opportunity?</p>
+    <label><input type="radio" name="source" value="LinkedIn"> LinkedIn</label>
+    <label><input type="radio" name="source" value="Referral"> Referral</label>
+    <label><input type="radio" name="source" value="Job Board"> Job Board</label></div>
+
+  <div class="field"><p class="q">Which shifts are you available for?</p>
+    <label><input type="checkbox" name="shifts" value="Mornings"> Mornings</label>
+    <label><input type="checkbox" name="shifts" value="Evenings"> Evenings</label>
+    <label><input type="checkbox" name="shifts" value="Weekends"> Weekends</label></div>
+
+  <div class="field"><p class="q">Do you have a valid driver's license?</p>
+    <div class="seg"><button type="button" id="dl-yes" aria-pressed="false">Yes</button>
+    <button type="button" id="dl-no" aria-pressed="false">No</button></div></div>
+
+  <div class="field"><p class="q" id="lbl-country">Which country are you based in?</p>
+    <div class="combo">
+      <button type="button" id="q-combo" role="combobox" aria-haspopup="listbox" aria-expanded="false"
+              aria-labelledby="lbl-country" class="combo__control">Select…</button>
+      <div class="combo__menu" id="q-combo-menu" role="listbox" hidden>
+        <div role="option">United States</div><div role="option">India</div><div role="option">Canada</div>
+      </div>
+    </div></div>
+
+  <div class="field"><label class="q" for="f-resume">Resume</label><input id="f-resume" type="file"></div>
+  <button type="submit">Submit</button>
+</form>
+<script>
+document.querySelectorAll(".seg").forEach((g) => g.querySelectorAll("button").forEach((b) =>
+  b.addEventListener("click", () => { g.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed","false")); b.setAttribute("aria-pressed","true"); })));
+const ctrl = document.getElementById("q-combo"), menu = document.getElementById("q-combo-menu");
+ctrl.addEventListener("click", () => { const open = menu.hidden; menu.hidden = !open; ctrl.setAttribute("aria-expanded", String(open)); });
+menu.querySelectorAll("[role=option]").forEach((o) => o.addEventListener("click", () => {
+  ctrl.textContent = o.textContent; menu.hidden = true; ctrl.setAttribute("aria-expanded","false"); }));
+</script>
+</body></html>

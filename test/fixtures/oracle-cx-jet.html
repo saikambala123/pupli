@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Apply - Software Engineer</title>
+<style>
+body{font-family:system-ui;margin:0;padding:20px;background:#fafafa}
+apply-flow-block{display:block;background:#fff;padding:16px;margin-bottom:16px;max-width:760px}
+.input-row{margin-bottom:14px}
+.input-row__label{display:block;font-size:13px;margin-bottom:4px}
+.oj-text-field-container{display:flex;border:1px solid #999;border-radius:4px;background:#fff}
+.oj-text-field-middle{flex:1}
+.oj-text-field-input{width:100%;box-sizing:border-box;border:0;padding:8px;font:inherit;background:transparent}
+.oj-searchselect-arrow{width:24px}
+oj-select-single{display:block;position:relative}
+/* JET hides its search box until the list is open, and its own box while it is. */
+oj-select-single .oj-searchselect-filter{position:absolute;inset:0;visibility:hidden}
+oj-select-single.zz-open .oj-searchselect-filter{visibility:visible}
+.oj-listbox-drop-layer{position:absolute;z-index:50;background:#fff;border:1px solid #999;box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.oj-listview-element{list-style:none;margin:0;padding:0}
+.oj-listview-item{padding:7px 10px;cursor:pointer}
+.oj-listview-current-item{background:#e3ecf7}
+.oj-listview-status-message{padding:7px 10px;color:#777}
+.input-row__control{width:100%;box-sizing:border-box;padding:8px;border:1px solid #999;border-radius:4px}
+</style></head>
+<body>
+<!--
+  Oracle Recruiting Candidate Experience on a site whose lists are Oracle JET's
+  <oj-select-single> (DTCC's, as OSApplyTrack mapped it, #318). Drawn as the
+  real component draws itself — checked against @oracle/oraclejet 21.0.1:
+
+    <oj-select-single id="X" class="oj-searchselect …">
+      <div class="oj-text-field-container oj-searchselect-main-field"> … <input id="X|input"
+           class="oj-searchselect-input" role="combobox" aria-controls="lovDropdown_X" …> …
+      <oj-input-text id="oj-searchselect-filter-X" class="oj-searchselect-filter"> … <input
+           id="oj-searchselect-filter-X|input" class="oj-inputtext-input oj-component-initnode"> …
+      <input type="text" aria-hidden="true" style="display:none" class="oj-component-initnode">
+
+  A click on the box hides it and hands the caret to the search box; the list
+  is a layer at the end of the page (#lovDropdown_X_layer > #lovDropdown_X >
+  ul[role=grid] > li[role=row] > div[role=gridcell]), fetched from the server
+  (a loading line meanwhile); only a row picked from it is kept, and the
+  drop-down's own `value` is the row's key. Address Line 1 is Oracle's address
+  search (rows only for what is typed); picking an address fills ZIP Code,
+  City, State and County a moment later.
+
+  window.__jet = { latency: ms (default 700), keysOnly: bool }
+  window.__model: what the page keeps.  #next → window.__errors
+-->
+<main>
+  <h1>Software Engineer</h1>
+  <apply-flow-block>
+    <h3>Address</h3>
+    <div data-jet="single-select-1" data-label="Country" data-key="country" data-list="countries" data-value="United States"></div>
+    <div data-jet="single-select-2" data-label="Address Line 1" data-key="addressLine1" data-list="addresses" data-search></div>
+    <div class="input-row"><label class="input-row__label" for="addressLine2"><span class="input-row__label-text">Address Line 2</span></label>
+      <input class="input-row__control" id="addressLine2" name="addressLine2" type="text"></div>
+    <div data-jet="single-select-3" data-label="ZIP Code" data-key="postalCode" data-list="zips"></div>
+    <div data-jet="single-select-4" data-label="City" data-key="city" data-list="cities"></div>
+    <div data-jet="single-select-5" data-label="State" data-key="region2" data-list="states"></div>
+    <div data-jet="single-select-6" data-label="County" data-key="region1" data-list="counties"></div>
+  </apply-flow-block>
+  <apply-flow-block>
+    <h3>Diversity Information</h3>
+    <div data-jet="single-select-7" data-label="Gender" data-key="gender" data-list="genders" data-optional></div>
+    <div data-jet="single-select-8" data-label="Veteran Self-Identification Status" data-key="veteranStatus" data-list="veterans" data-optional></div>
+  </apply-flow-block>
+  <button type="button" id="next">Next</button>
+</main>
+<script>
+(() => {
+  const MODE = Object.assign({ latency: 700, keysOnly: false }, window.__jet || {});
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  window.__model = { country: "United States" };
+  window.__log = [];
+  const ADDRESSES = [
+    { key: "a1", label: "8451 Gate Pkwy W, Jacksonville, FL 32216", zip: "32216", city: "Jacksonville", state: "Florida", county: "Duval" },
+    { key: "a2", label: "8451 Gate Pkwy E, Jacksonville, FL 32216", zip: "32216", city: "Jacksonville", state: "Florida", county: "Duval" },
+    { key: "a3", label: "8451 Gate Pkwy W, Orlando, FL 32801", zip: "32801", city: "Orlando", state: "Florida", county: "Orange" },
+  ];
+  const LISTS = {
+    countries: () => ["Canada", "India", "United States"],
+    addresses: (q) => {
+      const words = q.toUpperCase().replace(/[,.]/g, " ").split(/\s+/).filter(Boolean);
+      if (q.trim().length < 3 || /\b(APT|UNIT|STE|SUITE)\b/.test(q.toUpperCase())) return [];
+      return ADDRESSES.filter((a) => words.every((w) => a.label.toUpperCase().replace(/[,.]/g, " ").split(/\s+/).some((h) => h.startsWith(w) || (w === "FLORIDA" && h === "FL"))));
+    },
+    zips: () => ["32210", "32216", "32256", "32801"],
+    cities: () => ["Jacksonville", "Jacksonville Beach", "Orlando"],
+    states: () => ["Florida", "Georgia", "Texas"],
+    counties: () => ["Clay", "Duval", "Orange"],
+    genders: () => ["Female", "Male", "Non-Binary", "I do not wish to disclose"],
+    veterans: () => ["I am a protected veteran", "I am not a protected veteran", "I do not wish to self-identify"],
+  };
+  const selects = {};
+
+  document.querySelectorAll("[data-jet]").forEach((spot) => {
+    const id = spot.dataset.jet, label = spot.dataset.label, key = spot.dataset.key, search = spot.hasAttribute("data-search");
+    const row = document.createElement("div");
+    row.className = "input-row input-row--has-picker";
+    row.innerHTML = `<label class="input-row__label${spot.hasAttribute("data-optional") ? "" : " input-row__label--required"}" for="${id}"><span class="input-row__label-text">${label}</span></label>
+      <div class="input-row__control-container"><oj-select-single id="${id}" class="oj-searchselect oj-form-control oj-component oj-enabled oj-text-field oj-complete">
+        <div class="oj-text-field-container oj-searchselect-main-field" role="presentation"><div class="oj-text-field-middle">
+          <input id="${id}|input" autocomplete="off" class="oj-searchselect-input oj-text-field-input" aria-autocomplete="list" role="combobox" aria-expanded="false" aria-controls="lovDropdown_${id}" type="text" tabindex="0" aria-label="${label}">
+        </div><span class="oj-text-field-end"><span class="oj-searchselect-arrow oj-searchselect-open-icon" aria-hidden="true"></span></span></div>
+        <oj-input-text id="oj-searchselect-filter-${id}" class="oj-searchselect-filter oj-inputtext oj-form-control oj-component oj-text-field">
+          <div role="presentation" class="oj-text-field-container"><div class="oj-text-field-middle">
+            <input data-oj-internal="" aria-label="${label}" autocomplete="off" type="text" class="oj-inputtext-input oj-text-field-input oj-component-initnode" id="oj-searchselect-filter-${id}|input">
+          </div></div></oj-input-text>
+        <input data-oj-internal="" type="text" aria-hidden="true" aria-label="${label}" style="display:none" class="oj-component-initnode">
+      </oj-select-single></div>`;
+    spot.replaceWith(row);
+    const host = row.querySelector("oj-select-single");
+    const main = host.querySelector(".oj-searchselect-input");
+    const filter = host.querySelector(".oj-searchselect-filter input");
+    let value = spot.dataset.value || null;
+    let layer = null, rows = [], current = -1, seq = 0, timer = null;
+    main.value = value || "";
+    Object.defineProperty(host, "value", { get: () => value, configurable: true });
+
+    const close = () => {
+      if (layer) layer.style.display = "none";
+      host.classList.remove("zz-open");
+      main.style.visibility = "";
+      main.setAttribute("aria-expanded", "false");
+      filter.removeAttribute("role");
+      filter.removeAttribute("aria-controls");
+      filter.removeAttribute("aria-expanded");
+      current = -1;
+    };
+    const draw = (loading) => {
+      if (!layer) {
+        layer = document.createElement("div");
+        layer.id = `lovDropdown_${id}_layer`;
+        layer.className = "oj-listbox-drop-layer";
+        layer.setAttribute("role", "presentation");
+        layer.innerHTML = `<div id="lovDropdown_${id}" class="oj-listbox-drop oj-listbox-searchselect" role="presentation"><oj-list-view class="oj-select-results oj-listview">
+          <ul class="oj-listview-element" role="grid" aria-label="${label}"></ul>
+          <div class="oj-listview-status-message oj-listview-status" role="status" style="display:none">Loading</div></oj-list-view>
+          <div class="oj-searchselect-no-results-container" style="display:none">No matches found.</div></div>`;
+        document.body.appendChild(layer);
+      }
+      const r = main.getBoundingClientRect();
+      layer.style.display = "block";
+      layer.style.top = `${r.bottom + scrollY + 2}px`;
+      layer.style.left = `${r.left + scrollX}px`;
+      layer.style.width = `${r.width}px`;
+      layer.querySelector(".oj-listview-status-message").style.display = loading ? "block" : "none";
+      layer.querySelector(".oj-searchselect-no-results-container").style.display = !loading && !rows.length ? "block" : "none";
+      const ul = layer.querySelector("ul");
+      ul.innerHTML = "";
+      if (loading) return;
+      rows.forEach((item, i) => {
+        const li = document.createElement("li");
+        li.id = `${id}-row-${i}`;
+        li.setAttribute("role", "row");
+        li.className = `oj-listview-item${i === current ? " oj-listview-current-item oj-focus oj-focus-highlight" : ""}`;
+        li.innerHTML = `<div role="gridcell" class="oj-listview-cell-element" aria-selected="false"><oj-highlight-text><span></span></oj-highlight-text></div>`;
+        li.querySelector("span").textContent = item.label;
+        li.addEventListener("click", (e) => { if (MODE.keysOnly && !e.isTrusted) return; choose(item); });
+        ul.appendChild(li);
+      });
+    };
+    const fetchRows = async (text) => {
+      const mine = ++seq;
+      rows = [];
+      draw(true);
+      await wait(MODE.latency);
+      if (mine !== seq) return;
+      const all = LISTS[spot.dataset.list](text).map((x) => typeof x === "string" ? { key: x, label: x } : x);
+      rows = search ? all : all.filter((x) => !text || x.label.toLowerCase().includes(text.toLowerCase()));
+      current = -1;
+      draw(false);
+    };
+    function choose(item) {
+      value = item.key;
+      main.value = item.label;
+      window.__model[key] = item.label;
+      window.__log.push(`picked ${key}: ${item.label}`);
+      close();
+      if (item.zip) {
+        setTimeout(() => {
+          for (const [k, v] of [["postalCode", item.zip], ["city", item.city], ["region2", item.state], ["region1", item.county]]) selects[k](v);
+        }, 300);
+      }
+    }
+    const open = () => {
+      if (host.classList.contains("zz-open")) return;
+      host.classList.add("zz-open");
+      main.style.visibility = "hidden";
+      main.setAttribute("aria-expanded", "true");
+      filter.value = "";
+      filter.setAttribute("role", "combobox");
+      filter.setAttribute("aria-controls", `lovDropdown_${id}`);
+      filter.setAttribute("aria-expanded", "true");
+      fetchRows("");
+      setTimeout(() => filter.focus(), 0);
+    };
+    main.addEventListener("mousedown", open);
+    main.addEventListener("keydown", (e) => { if (e.key === "ArrowDown" || e.key === "Enter") { e.preventDefault(); open(); } });
+    filter.addEventListener("input", () => {
+      window.__log.push(`typed ${key}: ${filter.value}`);
+      clearTimeout(timer);
+      timer = setTimeout(() => fetchRows(filter.value.trim()), 250);
+    });
+    filter.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" && rows.length) { e.preventDefault(); current = Math.min(rows.length - 1, current + 1); draw(false); }
+      else if (e.key === "Enter" && current >= 0 && rows[current]) { e.preventDefault(); choose(rows[current]); }
+      else if (e.key === "Escape") close();
+    });
+    filter.addEventListener("blur", () => setTimeout(() => { if (document.activeElement !== filter) close(); }, 150));
+    selects[key] = (label) => { const item = LISTS[spot.dataset.list]("").map((x) => typeof x === "string" ? { key: x, label: x } : x).find((x) => x.label === label); if (item) { value = item.key; main.value = item.label; window.__model[key] = item.label; } };
+  });
+
+  const line2 = document.getElementById("addressLine2");
+  const keep = () => { if (line2.value.trim()) window.__model.addressLine2 = line2.value.trim(); };
+  line2.addEventListener("blur", keep);
+  line2.addEventListener("change", keep);
+
+  document.getElementById("next").addEventListener("click", () => {
+    window.__errors = ["addressLine1", "postalCode", "city", "region2", "region1"].filter((k) => !window.__model[k]).map((k) => `${k}: required`);
+  });
+})();
+</script>
+</body></html>

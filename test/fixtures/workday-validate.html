@@ -1,0 +1,55 @@
+<!doctype html><html><head><meta charset="utf-8"><title>My Information — Workday</title>
+<style>body{font-family:system-ui;padding:24px;max-width:640px}
+.f{margin-bottom:14px}label{display:block;font-weight:600;margin-bottom:4px}
+input{width:100%;padding:8px;border:1px solid #ccd;border-radius:5px}
+.err{color:#c00;font-size:12px;margin-top:3px}</style></head><body>
+<div data-automation-id="applyFlowPage">
+  <h2>My Information</h2>
+  <div class="f"><label for="fn">First Name</label><input id="fn" data-automation-id="legalNameSection_firstName" type="text" data-required="1"><div class="err" id="e-fn"></div></div>
+  <div class="f"><label for="ln">Last Name</label><input id="ln" data-automation-id="legalNameSection_lastName" type="text" data-required="1"><div class="err" id="e-ln"></div></div>
+  <div class="f"><label for="em2">Email Address</label><input id="em2" data-automation-id="email" type="text" data-required="1"><div class="err" id="e-em2"></div></div>
+  <button type="button" id="next" data-automation-id="bottom-navigation-next-button">Next</button>
+  <div class="err" id="summary"></div>
+</div>
+<script>
+/* Workday keeps its own model and only trusts a field once it has been
+   committed — which its delegated validator observes via focusout, not blur. */
+const model = Object.create(null);
+const touched = Object.create(null);
+const root = document.querySelector("[data-automation-id='applyFlowPage']");
+root.addEventListener("input", (e) => { if (e.target.matches("input")) model[e.target.id] = e.target.value; }, true);
+root.addEventListener("focusout", (e) => { if (e.target.matches("input")) touched[e.target.id] = true; }, true);
+document.getElementById("next").addEventListener("click", () => {
+  const bad = [];
+  root.querySelectorAll("input[data-required]").forEach((el) => {
+    const errBox = document.getElementById("e-" + el.id);
+    if (!model[el.id]) { errBox.textContent = "This field is required."; bad.push(el.id); }
+    else if (!touched[el.id]) { errBox.textContent = "Please confirm this field."; bad.push(el.id); }
+    else errBox.textContent = "";
+  });
+  document.getElementById("summary").textContent = bad.length ? bad.length + " errors" : "";
+  window.__validationErrors = bad;
+});
+window.__model = model; window.__touched = touched;
+
+/* Workday hydrates its React tree after first paint and re-renders the name
+   section from its own (still empty) model, wiping anything written before it
+   finished. This is what leaves first and last name blank at Next. */
+window.__hydrated = false;
+let hydrationArmed = false;
+const hydrate = () => {
+  ["fn", "ln"].forEach((id) => {
+    const el = document.getElementById(id);
+    el.value = "";
+    delete model[id];
+  });
+  window.__hydrated = true;
+};
+/* Armed by the first write so the wipe always lands *after* the fill, however
+   long the harness took to inject its scripts. */
+root.addEventListener("input", () => {
+  if (hydrationArmed) return;
+  hydrationArmed = true;
+  setTimeout(hydrate, 400);
+}, true);
+</script></body></html>

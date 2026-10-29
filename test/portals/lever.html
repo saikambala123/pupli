@@ -1,0 +1,85 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Staff Engineer - Acme</title></head>
+<body>
+<div class="main-header-logo"><img alt="Acme"></div>
+<div class="posting-headline"><h2>Staff Engineer</h2></div>
+
+<form class="application-form" method="POST" action="/apply">
+  <div class="application-question">
+    <label class="application-label"><span class="text">Full name<span class="required">✱</span></span>
+      <input type="text" name="name" required></label>
+  </div>
+  <div class="application-question">
+    <label class="application-label"><span class="text">Email<span class="required">✱</span></span>
+      <input type="email" name="email" required></label>
+  </div>
+  <div class="application-question">
+    <label class="application-label"><span class="text">Phone</span>
+      <input type="tel" name="phone"></label>
+  </div>
+  <div class="application-question">
+    <label class="application-label"><span class="text">Current company</span>
+      <input type="text" name="org"></label>
+  </div>
+  <div class="application-question">
+    <label class="application-label"><span class="text">Resume/CV<span class="required">✱</span></span>
+      <input type="file" name="resume"></label>
+  </div>
+  <div class="application-question">
+    <label class="application-label"><span class="text">LinkedIn URL</span>
+      <input type="text" name="urls[LinkedIn]"></label>
+  </div>
+  <div class="application-question">
+    <label class="application-label"><span class="text">GitHub URL</span>
+      <input type="text" name="urls[GitHub]"></label>
+  </div>
+  <div class="application-question">
+    <label class="application-label"><span class="text">Portfolio URL</span>
+      <input type="text" name="urls[Portfolio]"></label>
+  </div>
+
+  <!-- Lever custom cards: the question is an <div class=application-label>, the
+       options are radios that share a name and carry their own labels. -->
+  <div class="card">
+    <div class="application-question">
+      <div class="application-label"><span class="text">Are you legally authorized to work in the United States?<span class="required">✱</span></span></div>
+      <ul class="application-answer-alternative">
+        <li><label><input type="radio" name="cards[auth][field0]" value="Yes"><span class="application-answer-alternative">Yes</span></label></li>
+        <li><label><input type="radio" name="cards[auth][field0]" value="No"><span class="application-answer-alternative">No</span></label></li>
+      </ul>
+    </div>
+    <div class="application-question">
+      <div class="application-label"><span class="text">Will you now or in the future require visa sponsorship?<span class="required">✱</span></span></div>
+      <ul class="application-answer-alternative">
+        <li><label><input type="radio" name="cards[auth][field1]" value="Yes"><span class="application-answer-alternative">Yes</span></label></li>
+        <li><label><input type="radio" name="cards[auth][field1]" value="No"><span class="application-answer-alternative">No</span></label></li>
+      </ul>
+    </div>
+    <div class="application-question">
+      <div class="application-label"><span class="text">Are you willing to relocate?</span></div>
+      <ul class="application-answer-alternative">
+        <li><label><input type="radio" name="cards[auth][field2]" value="Yes"><span class="application-answer-alternative">Yes</span></label></li>
+        <li><label><input type="radio" name="cards[auth][field2]" value="No"><span class="application-answer-alternative">No</span></label></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="application-question">
+    <label class="application-label"><span class="text">What are your salary expectations?</span>
+      <input type="text" name="cards[comp][field0]"></label>
+  </div>
+  <div class="application-question">
+    <label class="application-label"><span class="text">Why do you want to work here?</span>
+      <textarea name="cards[why][field0]" rows="4"></textarea></label>
+  </div>
+  <div class="application-question">
+    <label class="application-label"><span class="text">How did you hear about this job?</span>
+      <select name="cards[src][field0]">
+        <option value="">Select one</option>
+        <option>LinkedIn</option><option>Indeed</option><option>Referral</option><option>Other</option>
+      </select></label>
+  </div>
+
+  <button type="submit" class="postings-btn">Submit application</button>
+</form>
+</body></html>

@@ -1,0 +1,2898 @@
+APPLI-FILL 2.0.0 — COMPLETED REGRESSION OUTPUT
+
+The execution was resumed after the first portion. Both portions are shown in order.
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.0 test
+> npm run ext:test && npm run test:api && npm run test:ui && npm run test:portals
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.0 ext:test
+> node test/career-profile.spec.mjs && node test/career-fields.spec.mjs && node test/self-id.spec.mjs && node test/row-index.spec.mjs && node test/held-answers.spec.mjs && node test/saved-answers.spec.mjs && node test/ashby-capture.spec.mjs && node test/late-fields.spec.mjs && node test/workday-fields.spec.mjs && node test/autofill.spec.mjs && node test/scope.spec.mjs && node test/segmented.spec.mjs && node test/workday.spec.mjs && node test/workday-flow.spec.mjs && node test/workday-experience.spec.mjs && node test/workday-dates.spec.mjs && node test/current-job.spec.mjs && node test/workday-address.spec.mjs && node test/greenhouse-rows.spec.mjs && node test/eligibility.spec.mjs && node test/capture.spec.mjs && node test/capture-types.spec.mjs && node test/settings.spec.mjs && node test/background.spec.mjs && node test/answer-route.spec.mjs && node test/canonical-choices.spec.mjs && node test/workday-questions.spec.mjs && node test/workday-capture.spec.mjs && node test/pending-edit.spec.mjs && node test/popup-pending.spec.mjs && node test/lever-location.spec.mjs && node test/workday-selfid.spec.mjs && node test/provenance.spec.mjs && node test/app-questions-rules.spec.mjs && node test/workday-app-questions.spec.mjs && node test/ashby-location.spec.mjs && node test/account-password.spec.mjs && node test/workday-disclosures.spec.mjs && node test/oracle-cx.spec.mjs && node test/oracle-cx-redwood.spec.mjs && node test/oracle-cx-live.spec.mjs && node test/adp-myjobs.spec.mjs && node test/adp-wfn.spec.mjs && node test/cross-site-guards.spec.mjs && node test/ashby-yesno.spec.mjs && node test/workday-sei-questions.spec.mjs && node test/workday-education-prompt.spec.mjs && node test/lever-location-pick.spec.mjs && node test/ashby-survey.spec.mjs && node test/workday-source-prompt.spec.mjs && node test/popup-open.spec.mjs && node test/react-commit.spec.mjs && node test/start-date-other.spec.mjs && node test/adp-wfn-questions.spec.mjs && node test/eligibility-wording.spec.mjs
+
+PASS textMessageConsent survives Mongoose/BSON serialization
+PASS textMessageConsent survives profile normalization
+PASS textMessageConsent has no implied answer
+PASS textMessageConsent rejects invalid declarations
+PASS signedNonCompete survives Mongoose/BSON serialization
+PASS signedNonCompete survives profile normalization
+PASS signedNonCompete has no implied answer
+PASS signedNonCompete rejects invalid declarations
+PASS employmentTermination survives Mongoose/BSON serialization
+PASS employmentTermination survives profile normalization
+PASS employmentTermination has no implied answer
+PASS employmentTermination rejects invalid declarations
+PASS workplaceMisconduct survives Mongoose/BSON serialization
+PASS workplaceMisconduct survives profile normalization
+PASS workplaceMisconduct has no implied answer
+PASS workplaceMisconduct rejects invalid declarations
+PASS consent can be cleared
+PASS +16305550142 preserves national digits
+PASS +16305550142 calling code
+PASS +1 630-555-0142 preserves national digits
+PASS +1 630-555-0142 calling code
+PASS +919876543210 preserves national digits
+PASS +919876543210 calling code
+PASS +442079460958 preserves national digits
+PASS +442079460958 calling code
+PASS 6305550142 preserves national digits
+PASS 6305550142 calling code
+PASS +358401234567 preserves national digits
+PASS +358401234567 calling code
+PASS known country picker strips only its code
+PASS unconfigured Workday picker preserves unconstrained phone
+PASS ADP phone with explicit prefix uses national digits
+PASS +1 maxlength and pattern
+PASS +91 maxlength and pattern
+PASS phone matching a punctuation mask
+PASS phone is never truncated to fit
+PASS invalid negative maxlength has no limit
+PASS plain phone keeps international prefix
+PASS number input receives digits
+PASS normalizing Master's Degree is idempotent
+PASS normalizing Masters Degree is idempotent
+PASS normalizing Bachelor's Degree is idempotent
+PASS normalizing Bachelors Degree is idempotent
+PASS No Selection is empty
+PASS None is a valid clearance
+PASS Select is still an empty clearance
+PASS opt-out wording reverses explicit consent
+PASS textMessageConsent requires a profile or saved declaration
+PASS textMessageConsent does not invent an answer
+PASS restrictiveCovenant requires a profile or saved declaration
+PASS restrictiveCovenant does not invent an answer
+PASS employmentTermination requires a profile or saved declaration
+PASS employmentTermination does not invent an answer
+PASS workplaceMisconduct requires a profile or saved declaration
+PASS workplaceMisconduct does not invent an answer
+PASS securityClearance requires a profile or saved declaration
+PASS securityClearance does not invent an answer
+57/57 career profile/helper checks passed
+PASS sapsf.eu detection
+PASS fn
+PASS ln
+PASS em
+PASS dial
+PASS ph
+PASS homeCountry
+PASS homeState
+PASS homeCity
+PASS jobTitle
+PASS employer
+PASS jobStart
+PASS jobEnd
+PASS jobCountry
+PASS jobState
+PASS jobCity
+PASS eduType
+PASS degree
+PASS school
+PASS major
+PASS eduStart
+PASS eduEnd
+PASS score
+PASS passing
+PASS eduCountry
+PASS eduState
+PASS eduCity
+PASS authorized
+PASS sponsorship
+PASS clearance
+PASS education
+PASS agreement
+PASS termination
+PASS misconduct
+PASS SMS explicit consent
+PASS phone constraints
+PASS ph change event reaches portal model
+PASS clearance change event reaches portal model
+PASS education change event reaches portal model
+PASS agreement change event reaches portal model
+PASS school change event reaches portal model
+PASS eduState change event reaches portal model
+PASS no automatic application submission
+PASS manual phone edit preserved
+PASS None clearance survives another run
+PASS US constrained phone has all national digits
+PASS US plain phone keeps country code
+PASS US numeric phone has no formatting
+PASS India constrained phone has all national digits
+PASS India plain phone keeps country code
+PASS India numeric phone has no formatting
+PASS unset SMS
+PASS unset non-compete
+PASS unset termination
+PASS declined SMS
+PASS declined non-compete
+PASS declined termination
+57/57 career field checks passed
+
+CC-305 block
+  ok   Name matches the self-ID rule
+  ok   Name is the applicant's legal name
+  ok   Employee ID matches its own rule
+  ok   Employee ID is left blank
+  ok   Date matches the self-ID date rule
+  ok   Date is today, MM/DD/YYYY
+  ok   Date is ISO for a native date input
+
+the same labels elsewhere are unaffected
+  ok   a bare Name still resolves to fullName
+  ok   a bare Date is still left alone
+  ok   Graduation Date is not today
+  ok   Employment Start Date is not today
+
+identity fields are unreachable by the model
+  ok   First Name is flagged identity
+  ok   Email is flagged identity
+  ok   Please specify your gender. is flagged identity
+  ok   Please specify your veteran status. is flagged identity
+
+EEO canonicalisation
+  ok   classifications option
+  ok   veteran-but-not-protected is its own branch
+  ok   not-a-protected-veteran
+  ok   Asian (Not Hispanic or Latino)
+  ok   American Indian or Alaska Native (Not Hispanic or Latino)
+  ok   White (Not Hispanic or Latino)
+  ok   Black or African American (Not Hispanic or Latino)
+  ok   Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
+  ok   Two or More Races (Not Hispanic or Latino)
+  ok   Hispanic or Latino
+  ok   'I do not want to answer' is a decline
+  ok   'I do not wish to answer' is a decline
+
+veteran dropdown
+  ok   a non-veteran gets the plain 'not' wording
+  ok   a decline gets the decline option
+  ok   a protected veteran gets the classifications option
+  ok   a non-protected veteran can still reach their wording
+  ok   a non-veteran refuses a list offering only the veteran wording
+
+race dropdown
+  ok   Asian does not land on American Indian
+  ok   Asian Indian lands on Asian
+  ok   Two or More Races is not read as Hispanic
+  ok   American Indian is still reachable
+
+gender dropdown
+  ok   Male resolves to Man
+  ok   Female resolves to Woman
+
+Oracle Recruiting contact section
+  ok   Address Line 1 takes the street
+  ok   Address Line 2 does not take the street
+  ok   Address Line 3 does not take the street
+  ok   Address Line 4 does not take the street
+  ok   Address Line 3 is left blank
+  ok   Address Line 4 is left blank
+  ok   Tax District is left blank
+  ok   Tax District is not the address
+  ok   Suffix has its own rule
+  ok   Suffix is empty without a profile value
+  ok   Title has its own rule
+  ok   Second Last Name is not the surname
+  ok   Second Last Name is left blank
+  ok   City still fills
+  ok   ZIP Code still fills
+  ok   Legal First Name still fills
+  ok   Legal Last Name still fills
+
+length caps
+  ok   a value past the field's maxlength is refused
+  ok   a value within the cap is written
+
+race vs Hispanic/Latino routing
+  ok   Workday race dropdown reaches the race rule
+  ok   a plain Race label reaches the race rule
+  ok   Ethnicity reaches the race rule
+  ok   the Hispanic yes/no question is left to its own rule
+  ok   ...even under an Ethnicity heading
+
+work eligibility
+  ok   eligibility rules are profile-only
+  ok   a citizen is authorised without restating it
+  ok   a citizen needs no sponsorship
+  ok   a green card holder is authorised
+  ok   an explicit stored answer still wins
+  ok   nothing recorded stays blank
+  ok   inverted phrasing, citizen
+  ok   inverted phrasing, needs sponsorship
+
+Workday contact block
+  ok   Phone Number -> phone
+  ok     ...and fills "(425) 444-0364"
+  ok   Country Phone Code -> phoneCountryCode
+  ok     ...and fills "+1"
+  ok   Email Address -> email
+  ok     ...and fills "a@b.com"
+  ok   Phone Extension -> phoneExtension
+  ok     ...and fills null
+
+a rule matching the field's own label beats one matching its neighbours
+  ok   First Name among its siblings
+  ok   Last Name among its siblings
+  ok   rules spanning two descriptions still work
+
+all passing
+
+before reconciliation
+   currentTitle         index 0  -> "Azure DevOps Engineer"
+   currentCompany       index 0  -> "Azure DevOps Engineer"
+   experienceLocation   index 0  -> "Azure DevOps Engineer"
+   currentTitle         index 2  -> null
+   currentCompany       index 1  -> "Senior DevOps Engineer"
+   experienceLocation   index 1  -> "Senior DevOps Engineer"
+
+after reconciliation
+   ok   currentTitle         index 0  -> "Azure DevOps Engineer"
+   ok   currentCompany       index 0  -> "Azure DevOps Engineer"
+   ok   experienceLocation   index 0  -> "Azure DevOps Engineer"
+   ok   currentTitle         index 1  -> "Senior DevOps Engineer"
+   ok   currentCompany       index 1  -> "Senior DevOps Engineer"
+   ok   experienceLocation   index 1  -> "Senior DevOps Engineer"
+
+every field in a row shares its row's index
+
+an edit is held, not banked
+  ok   held answer is stored
+  ok   nothing has entered the sync queue
+
+it survives the content script being torn down
+  ok   still readable after a navigation
+  ok   badge shows there is something waiting
+
+a second answer from a later step joins it
+  ok   two answers held across two steps
+
+re-answering one question replaces it rather than duplicating
+  ok   still two held
+  ok   the newer wording won
+
+saving one moves only that one into the sync queue
+  ok   one left held
+  ok   one queued for sync
+  ok   the right one was queued
+  ok   the answer type came with it
+
+saving the rest empties the held list
+  ok   nothing held
+  ok   both queued
+  ok   the dropdown kept its type
+
+discarding removes without queueing
+  ok   discarded answer is gone
+  ok   and was never queued
+
+Clear empties both buckets
+  ok   something is held
+  ok   something is queued
+  ok   it reports clearing both
+  ok   held answers are gone
+  ok   queued answers are gone
+  ok   and nothing comes back on the next read
+  ok   the badge is empty
+
+a dismissed answer cannot come back on the next form
+  ok   it is held
+  ok   discarding empties the list
+  ok   it does not come back
+  ok   nor in different casing or spacing
+
+but a new question is unaffected
+  ok   a different question is still held
+
+saving one later lifts its dismissal
+  ok   dismissed, so not held
+  ok   saving a different one leaves the dismissal alone
+
+Clear also dismisses what it clears
+  ok   a cleared answer stays gone
+
+but the question stays open to a different answer
+  ok   a better answer to a cleared question is captured
+
+dismissals expire rather than lasting forever
+  ok   an expired dismissal no longer blocks capture
+
+an older build's permanent blacklist is discarded on upgrade
+  ok   questions blocked by the old shape are captured again
+
+all passing
+
+
+the question stored is the question, not an option
+  ok   a shared name and a sibling <label for>: stored under the question
+  ok   a shared name and a sibling <label for>: the chosen option is the answer
+  ok   a shared name and a sibling <label for>: captured once, not once per option
+  ok   a shared name and a sibling <label for>: every option is stored beside it
+  ok   no name attribute at all: stored under the question
+  ok   no name attribute at all: the chosen option is the answer
+  ok   no name attribute at all: captured once, not once per option
+  ok   no name attribute at all: every option is stored beside it
+  ok   a unique name per option: stored under the question
+  ok   a unique name per option: the chosen option is the answer
+  ok   a unique name per option: captured once, not once per option
+  ok   a unique name per option: every option is stored beside it
+  ok   an ARIA radiogroup of divs: stored under the question
+  ok   an ARIA radiogroup of divs: the chosen option is the answer
+  ok   an ARIA radiogroup of divs: captured once, not once per option
+  ok   an ARIA radiogroup of divs: every option is stored beside it
+
+only answers the applicant gave reach the unsaved list
+  ok   a fill does not bank the fields the portal pre-filled
+  ok   visiting a field without changing it banks nothing
+  ok   an answer the applicant types is banked
+  ok   editing a value that was already there banks the edit
+
+identity fields stay in the profile, never in Saved Answers
+  ok   correcting an autofilled name is not banked as an answer
+
+a question is read from its own field, not the one next to it
+  ok   the neighbour's saved answer did not land in Address
+  ok   the neighbour's saved answer did not land in City
+  ok   it did land in the question it belongs to
+
+an answer given on one application comes back on the next
+  ok   both answers were captured on the first application
+  ok   the radio answer is replayed onto the next application
+  ok   the dropdown answer is replayed onto the next application
+  ok   replaying does not put the replayed answers straight back in the unsaved list
+
+28/28 checks passed
+
+  ok   a ticked checkbox is captured at all
+  ok   the ethnicity group is saved under its printed question
+  ok   no uuid fragment reaches the question text
+  ok   the group's other choices are kept beside the answer
+  ok   the ethnicity answer is typed as a checkbox
+  ok   the gender group is saved under its printed question
+  ok   'I prefer to self-describe' is never stored as a question
+  ok   the radio group is saved under its printed question
+  ok   the radio answer is typed as a radio
+  ok   the dropdown is saved under its printed question
+  ok   the dropdown answer is typed as a select
+  ok   the dropdown's placeholder row is not kept as a choice
+  ok   an untouched AI draft is not offered as an unsaved answer
+  ok   an answer the applicant types is offered
+
+14/14 checks passed
+
+  ok   a late dropdown answer is held
+  ok   a late radio answer is held
+  ok   a late checkbox answer is held
+  ok   a late text answer is held
+  ok   a custom radio group answer is held
+  ok   a custom checkbox group answer is held
+  ok   each late answer carries its own control type
+  ok   no question is held twice
+  ok   changing a late dropdown holds the newer answer
+
+9/9 checks passed
+
+
+Workday MM / YYYY (the 'Invalid Date: /2019' field)
+  ok   write reports success
+  ok   month segment filled
+  ok   year segment filled
+  ok   works when handed the year segment
+  ok     and the year is right
+  ok   ISO input: month
+  ok   ISO input: year
+
+Workday spinbuttons with no maxlength (the shipped markup)
+  ok   write reports success
+  ok   month segment filled
+  ok   year segment filled
+  ok   works from the year segment too
+  ok     year correct
+
+Workday MM / DD / YYYY
+  ok   month
+  ok   day
+  ok   year
+
+keyboard activity is emitted (Workday marks the field touched)
+  ok   keydown fired on a segment
+  ok   change fired on a segment
+
+a plain text box is untouched by the segment path
+  ok   ordinary input still writes normally
+  ok     value is the whole string
+
+work-experience Location is profile-only
+  ok   experienceLocation is marked profileOnly
+  ok   educationLocation is marked profileOnly
+  ok   no profile location yields the "." placeholder
+  ok   a profile location is still used
+
+required Location with nothing in the profile
+  ok   a required box gets the placeholder
+  ok   an optional box gets the placeholder too
+  ok   a real location always wins
+  ok   a row the profile has no job for is left alone
+  ok   no jobs at all, nothing written
+
+phone extension
+  ok   phone extension is profile-only
+  ok   no extension in the profile means no value
+
+nothing may open the file chooser
+  ok   a file input is refused
+  ok   a label bound to one is refused
+  ok   an ordinary text input is fine
+
+text is typed through the editing pipeline
+  ok   a text box is written
+  ok     via the editing pipeline, not assignment
+  ok     and holds the value
+
+never types into a box that does not hold the caret
+  ok   the location box is written
+  ok     without the editing command
+  ok     and holds the value
+  ok     and the phone box is untouched
+  ok   a <div> is never typed into
+  ok     and nothing reached the focused box
+
+assignment still works when the pipeline refuses
+  ok   falls back cleanly
+  ok     and holds the value
+
+County is not State
+  ok   County matches its own rule
+  ok   County is not given the state
+  ok   State still fills
+
+address lines are cleaned
+  ok   Line 1 is the street alone
+  ok   Line 2 drops the repeated postal tail
+  ok   City still fills
+  ok   Postal Code still fills
+
+all passing
+
+
+Appli-Fill autofill — 2543ms, 66 filled, 6 left for the user
+
+  ok   only one dropdown open at a time
+  ok   no menu left open at the end
+  ok   no dropdown opened more than once
+  ok   no field written more than once
+  ok   no synthetic click on <body>
+  ok   SAP-style widget kept its value
+  ok   first name
+  ok   email
+  ok   street address has no city/state/zip tail
+  ok   country combobox
+  ok   state select
+  ok   work row 1 employer
+  ok   work row 1 title
+  ok   work row 2 employer is the second job
+  ok   work row 2 title is the second job
+  ok   row 1 start month
+  ok   row 1 start year
+  ok   row 1 end date left blank (current job)
+  ok   row 2 start year
+  ok   row 2 end year
+  ok   row 2 end month
+  ok   row 2 employer country filled from its own menu
+  ok   unsatisfiable menu did not leak into the next field
+  ok   iCIMS row 1 employer
+  ok   iCIMS row 1 title
+  ok   iCIMS row 2 employer is job 2
+  ok   iCIMS year box holds a year, not '2025-04'
+  ok   iCIMS start month is April
+  ok   iCIMS row 2 end year
+  ok   veteran radio picked the applicant's own answer
+  ok   gender select
+  ok   ethnicity select
+  ok   disability dropdown took the 'No' branch, never the 'Yes' one
+  ok   saved answer: notice period
+  ok   saved answer: relocation
+  ok   saved answer: how did you hear
+  ok   sponsorship answered No
+  ok   work authorization answered Yes
+  ok   years-of-experience question got its own answer
+  ok   start-date question got its own answer
+  ok   compensation question got its own answer
+  ok   the neighbouring question's answer did not leak into 'full legal name'
+  ok   unknown designee email left empty
+  ok   unknown location-requirement question left empty
+  ok   iCIMS address
+  ok   iCIMS city
+  ok   the '— Make a Selection —' country picker is answered
+  ok   the country picker was answered without opening its menu
+  ok   the widget's visible text followed the value
+  ok   State/Province is filled after Country unlocks it
+  ok   a widget with no ARIA is still answered through its hidden select
+  ok   the dependent 'Please specify' takes its saved answer
+  ok   a select inside a collapsed step is not filled
+  ok   Greenhouse: work eligibility answered
+  ok   Greenhouse: sponsorship answered
+  ok   Greenhouse: country of residence answered
+  ok   Greenhouse: gender answered
+  ok   Greenhouse: gh-eligible written exactly once
+  ok   Greenhouse: gh-eligible menu opened at most once
+  ok   Greenhouse: gh-sponsorship written exactly once
+  ok   Greenhouse: gh-sponsorship menu opened at most once
+  ok   Greenhouse: gh-residence written exactly once
+  ok   Greenhouse: gh-residence menu opened at most once
+  ok   Greenhouse: gh-gender written exactly once
+  ok   Greenhouse: gh-gender menu opened at most once
+  ok   Greenhouse: an unknowable question is left blank
+  ok   Greenhouse: answered questions are not flagged as needing the user
+  ok   Greenhouse: the unanswerable question is the one flagged
+  ok   Ant-style dropdown answered through its hidden input
+  ok   Ant-style dropdown written once
+  ok   Ant-style dropdown opened once
+  ok   Downshift-style combobox keeps working
+  ok   Downshift-style combobox written once
+  ok   Downshift-style combobox opened once
+  ok   resume input left alone
+  ok   re-running changes no already-filled value
+  ok   re-running writes nothing
+  ok   re-running only revisits dropdowns that are still blank
+  ok   re-running leaves the Greenhouse answers untouched
+
+79/79 checks passed
+
+  ok   a form-less application is scanned at all
+  ok   first name is filled from the profile
+  ok   last name is filled from the profile
+  ok   email is filled from the profile
+  ok   phone is filled from the profile
+  ok   the site's search box is left alone
+  ok   the search box is not counted as a field needing the user
+  ok   the application beside a newsletter box is filled
+  ok   the newsletter box is not filled with the applicant's email
+  ok   the login box is not filled
+  ok   a genuine application form is still filled
+  ok   the scan stays inside the application form
+
+12/12 checks passed
+
+  ok   the sidebar heading stays out of the derived label
+  ok   a box labelled "Name" matches the full-name rule
+  ok   Name gets the applicant's name, not the employment type
+  ok   Email gets the applicant's email, not the employment type
+  ok   each segmented group is collected exactly once
+  ok   the group's options can be read
+  ok   work authorisation answers Yes
+  ok   visa sponsorship answers No
+  ok   relocation answers Yes
+  ok   an answered group is not flagged as needing the user
+  ok   the free-text question is the one left for the applicant
+  ok   no submit button is treated as a question
+
+12/12 checks passed
+
+  ok   email is filled
+  ok   phone is filled
+  ok   the phone extension never receives the email address
+  ok   the phone extension is left alone when the profile has none
+  ok   education rows do not run away
+  ok   Add is clicked at most three times
+  ok   how-did-you-hear is answered
+  ok   LinkedIn is selected when LinkedIn is an offered option
+  ok   a text date field gets today in MM/DD/YYYY
+  ok   a native date input gets today in ISO
+  ok   a dropdown carrying only aria-expanded is seen by the fill
+  ok   an "Add" control is still not treated as a dropdown
+  ok   the fill's own dropdown answer is not offered as the applicant's
+  ok   identity fields are still not queued
+  ok   identity fields are not queued as saved answers
+
+15/15 checks passed
+
+  ok   the account step gets the email filled in
+  ok   the run reports it as the account step
+  ok   no password is invented
+  ok   no confirmation password is invented
+  ok   the page really did re-render and clear the fields
+  ok   first name survives the page's re-render
+  ok   last name survives the page's re-render
+  ok   Next reports no validation errors
+  ok   the page's own model has the names
+  ok   a value the applicant typed is not overwritten
+
+10/10 checks passed
+
+  ok   job title is filled
+  ok   company is filled
+  ok   work dates are filled
+  ok   school is filled
+  ok   degree is filled
+  ok   field of study is filled
+  ok   education start year is filled
+  ok   education end year is filled
+  ok   the two education years differ
+  ok   the page's own model has every required value
+  ok   the LinkedIn box is left blank when the profile has no URL
+  ok   a drafted sentence is not written into the LinkedIn box
+  ok   a real URL from the model is accepted
+
+13/13 checks passed
+
+
+both halves of every date are written
+  ok   row 1 start month
+  ok   row 1 start year
+  ok   row 1 end month
+  ok   row 1 end year
+
+the second row is the second job, and To is not a copy of From
+  ok   row 2 start month
+  ok   row 2 start year
+  ok   row 2 end month
+  ok   row 2 end year
+  ok   From and To are different dates
+
+the year is not trimmed to two digits
+  ok   w1f-y holds four digits
+  ok   w1to-y holds four digits
+  ok   w2f-y holds four digits
+  ok   w2to-y holds four digits
+
+the page raises no date error of its own
+  ok   no 'Invalid Date' anywhere on the form
+
+an edit to each row is held separately
+  ok   both edits were held
+  ok   under two different questions
+  ok   each question names its row
+  ok   the answers stayed with their own row
+
+editing a date segment is held rather than dropped
+  ok   the month edit reached the list
+  ok   a two-letter label still produced a usable question
+
+a widget that fills its buffer from keystrokes
+  ok   the boxes show the dates
+  ok   and the widget's own buffer holds them too
+  ok   so Save and Continue raises no required-field error
+
+the application-documents upload
+  ok   no document is attached by the fill
+  ok   and the upload is not flagged as needing an answer
+
+25/25 checks passed
+
+
+job 1 is the current one
+  ok   shared name: only row 1 is ticked
+  ok   role="checkbox" in one group: only row 1 is ticked
+  ok   every row's box is collected as its own field
+  ok   each row still gets its own employer
+
+job 2 is the current one
+  ok   shared name: only row 2 is ticked
+  ok   role="checkbox" in one group: only row 2 is ticked
+  ok   every row's box is collected as its own field
+  ok   each row still gets its own employer
+
+job 3 is the current one
+  ok   shared name: only row 3 is ticked
+  ok   role="checkbox" in one group: only row 3 is ticked
+  ok   every row's box is collected as its own field
+  ok   each row still gets its own employer
+
+no job is marked current
+  ok   nothing is ticked when the profile says no job is current
+
+every role carries the flag — the reported case
+  ok   exactly one row says 'I currently work here'
+  ok   it is the most recent role
+  ok   the same holds for the grouped widgets
+
+a finished role also carrying the flag
+  ok   still only one row is ticked
+  ok   and it is not the finished one
+
+no flag anywhere, newest role has no end date
+  ok   the open role is ticked
+  ok   the closed roles are left alone
+
+an older role missing its end date is missing data, not a job
+  ok   nothing is ticked
+
+21/21 checks passed
+
+  ok   the page really did rebuild its address section
+  ok   address line 1 holds the street once
+  ok   address line 2 is not a copy of line 1
+  ok   city is filled
+  ok   postal code is filled
+  ok   nothing is still required after the re-render
+  ok   the page cleared its own error flags
+
+7/7 checks passed
+
+  ok   the form keeps the one Education block it came with
+  ok   no row is added for a section that can't be answered
+  ok   the fields it can answer are still answered
+  ok   email is filled
+  ok   the run reports what it filled
+  ok   a form of unanswerable pickers doesn't take a minute
+  ok   a picker that couldn't be read is not re-opened by the settle passes
+
+7/7 checks passed
+
+  ok   legally authorized to work → Yes
+  ok   will you require sponsorship → No
+  ok   able to work WITHOUT sponsorship → Yes
+  ok   do you require sponsorship → No
+  ok   at least 18 → Yes
+  ok   previously employed here → No
+  ok   gender is left blank for the applicant to fill
+  ok   hispanic or latino is left blank for the applicant to fill
+  ok   race is left blank for the applicant to fill
+  ok   veteran status is left blank for the applicant to fill
+  ok   disability status is left blank for the applicant to fill
+  ok   editing an autofilled dropdown queues the new answer
+  ok   the fill's own answers are not offered as the applicant's
+  ok   will you require sponsorship → Yes
+  ok   able to work WITHOUT sponsorship → No
+  ok   q1 is left blank when the profile has no answer
+  ok   q2 is left blank when the profile has no answer
+  ok   q3 is left blank when the profile has no answer
+  ok   q4 is left blank when the profile has no answer
+  ok   q5 is left blank when the profile has no answer
+  ok   q6 is left blank when the profile has no answer
+
+21/21 checks passed
+
+  ok   an answer typed before any fill is recorded
+  ok   the question is stored as written, without the machine name
+  ok   the profile answered the notice period
+  ok   an unmatched free-text answer is recorded
+  ok   correcting a profile-filled answer is recorded
+  ok   changing a choice the profile answered is recorded
+  ok   a re-edit is queued as the newer answer
+  ok   the applicant's name is not stored as a saved answer
+  ok   no answer is queued twice in a row
+
+9/9 checks passed
+
+  ok   a typed answer is queued
+  ok   a native dropdown answer is queued
+  ok   a radio answer is queued
+  ok   a checkbox answer is queued
+  ok   a segmented button answer is queued
+  ok   a custom combobox answer is queued
+  ok   a radio is stored under the question, not the option picked
+  ok   a checkbox is stored under the question, not the option picked
+  ok   every queued question appears once
+  ok   running a fill does not queue Appli-Fill's own answers
+  ok   re-answering queues the newer answer
+
+11/11 checks passed
+
+  ok   no document is attached by default
+  ok   and none is attached even with the old setting on
+  ok   empty EEO profile leaves gender blank by default
+  ok   empty EEO profile leaves ethnicity blank by default
+  ok   empty EEO profile leaves disability blank by default
+  ok   gender declines when the setting is on
+  ok   ethnicity declines when the setting is on
+  ok   disability declines when the setting is on
+  ok   an answer already in the form is left alone
+  ok   a stale email already in the form is left alone
+  ok   existing answers are corrected when the setting is on
+  ok   saved answers are used by default
+  ok   saved answers are skipped when the setting is off
+  ok   an exact saved answer beats the profile value
+
+14/14 checks passed
+
+  ok   Sync now succeeds with an empty local queue
+  ok   Sync now still fetches the dashboard's saved answers
+  ok   Sync now reports how many answers it pulled
+  ok   the pulled answers are cached for the content script
+  ok   queued answers are uploaded
+  ok   the local queue is cleared after a successful upload
+  ok   the upload count is reported
+  ok   a pull still happens after the push
+  ok   Clear reports how many answers it discarded
+  ok   Clear empties the local queue
+  ok   Clear uploads nothing
+  ok   Clear leaves answers already saved in the dashboard alone
+  ok   Clear succeeds with nothing queued
+  ok   one question queues exactly once
+  ok   the newest answer is the one queued
+  ok   a different question queues separately
+  ok   removing one answer reports it
+  ok   the removed answer is gone
+  ok   the other answers are untouched
+  ok   punctuation doesn't stop a removal
+  ok   sync uploads every queued answer
+  ok   a dropdown answer is uploaded
+  ok   a radio answer is uploaded
+  ok   a checkbox answer is uploaded
+  ok   the control type travels with the answer
+  ok   the choices travel with the answer
+  ok   the report counts them
+  ok   the queue is emptied once they are up
+  ok   the content script receives the saved answers
+
+29/29 checks passed
+
+  ok   an exact option is returned unchanged
+  ok   case and punctuation differences still name the option
+  ok   an option quoted inside a sentence is recovered
+  ok   a reply naming two options is refused rather than guessed
+  ok   a reply that names nothing on the menu is refused
+  ok   a longer option is not confused with a shorter one it contains
+  ok   regex metacharacters in a question are escaped, not executed
+  ok   the route escapes before building the expression
+  ok   a single-choice reply is snapped before it is returned
+  ok   the route answers a page of questions with one model call
+  ok   questions are bounded and cleaned
+  ok   identity, self-identification and record questions are never put to the model
+  ok   saved passwords never reach the prompt
+  ok   the most relevant saved answers are chosen when there are many
+  ok   the prompt carries today's date, the options and every question id
+  ok   replies are made safe for the question they answer
+  ok   the output budget grows with the page and stays bounded
+
+17 checks passed
+
+states, however they are written
+  ok   NC, nc, N.C. and North Carolina are one state
+  ok   a city in front is read from the applicant's own value
+  ok   the country is not a state
+  ok   the outlying islands are their own entry
+  ok   Virgin Islands and D.C. in their portal spellings
+  ok   Virginia is not West Virginia, Kansas is not Arkansas
+  ok   Indian states by name, with a trailing country code
+  ok   Canadian provinces by code and accented name
+  ok   an id reads back as the name a menu uses
+
+yes and no
+  ok   plain and sentence-form answers
+  ok   None is a no; N/A, unsure and decline are their own answers
+  ok   words that merely begin with 'no' are not answers
+  ok   a Yes/No menu is recognised, with a placeholder or a decline option
+  ok   other menus are not Yes/No menus
+
+native selects
+  ok   MA → Massachusetts, GA → Georgia, VA → Virginia, IA → Iowa
+  ok   West Virginia is not taken for Virginia
+  ok   a full state name selects a menu of postal codes
+  ok   a state is never written into a Yes/No menu
+  ok   a clearance of None answers No
+  ok   a non-answer like Hybrid is never written into a Yes/No menu
+  ok   Yes still selects Yes
+  ok   No selects the sentence-form No option
+  ok   No is not read inside 'None of the above'
+
+radio groups
+  ok   a state is never clicked into a Yes/No radio group
+  ok   No clicks No
+  ok   No clicks the sentence-form No
+
+already-correct detection
+  ok   West Virginia on screen is not mistaken for Virginia
+  ok   North Carolina on screen counts as the profile's NC
+
+28/28 checks passed
+
+
+State comes from the profile, as the state itself
+  ok   Workday's State menu (address--countryRegion) gets the profile state, not the country
+  ok   Country is left as Workday prefilled it
+  ok   City and postal code from the profile
+  ok   profile state "MA" selects Massachusetts
+  ok   profile state "GA" selects Georgia
+  ok   profile state "VA" selects Virginia
+  ok   profile state "IA" selects Iowa
+  ok   profile state "Virginia" selects Virginia
+  ok   profile state "West Virginia" selects West Virginia
+  ok   profile state "N.C." selects North Carolina
+  ok   profile state "Stanley, NC" selects North Carolina
+  ok   profile state "Washington DC" selects District of Columbia
+  ok   a state that is not on the menu is left blank rather than guessed
+  ok   a saved State answer of "TX" selects Texas
+
+Application questions are answered only when the answer is known
+  ok   over 18 → Yes (profile)
+  ok   non-compete agreements → No (the applicant's saved answer)
+  ok   no agreement-type follow-up appears
+  ok   legally authorized → Yes
+  ok   sponsorship → No
+  ok   active clearance, profile says None → No
+  ok   able to obtain a clearance is not answered No for someone without one
+  ok   employed by the Federal Government is not answered as 'worked here before'
+  ok   previously employed by GDIT → No (profile)
+  ok   willing to relocate → Yes
+  ok   'Have you ever FAILED a drug test?' is never answered Yes
+  ok   'travel out of state' does not receive the applicant's state
+  ok   'Please state your desired salary' gets the salary, not the state
+  ok   a saved answer filed under a section heading is never replayed
+  ok   unanswerable questions are highlighted for the applicant
+  ok   an exact saved answer is used for the Federal Government question
+  ok   an exact saved answer fills a profile-only question the profile left empty
+  ok   an exact saved answer fills the clearance-eligibility question
+  ok   an exact saved answer to the travel question is used
+  ok   a near match with the opposite polarity is not replayed
+  ok   a Secret clearance answers the active-clearance question Yes
+  ok   and the able-to-obtain question Yes
+  ok   question 1 is left blank when the profile is silent
+  ok   question 3 is left blank when the profile is silent
+  ok   question 4 is left blank when the profile is silent
+  ok   question 8 is left blank when the profile is silent
+  ok   and highlighted for the applicant
+
+The résumé upload is left alone
+  ok   the Select files button is not collected as a field
+  ok   the file input is not collected either
+  ok   the file chooser is never opened
+  ok   nothing is attached
+  ok   the upload is not outlined as needing an answer
+
+Speed
+  ok   a full page fills in well under three seconds (801ms)
+  ok   and nothing was skipped to get there
+
+48/48 checks passed
+
+
+a fill on its own offers nothing for review
+  ok   nothing is pending after a fill
+
+every manual change reaches the pending list, under its own question
+  ok   the agreements question is held with the latest answer
+  ok   under the question's own wording
+  ok   with the menu's choices stored beside it
+  ok   the Federal Government question is held
+  ok   the clearance-eligibility question is held
+  ok   a question mentioning 'out of state' is held — it is not an address
+  ok   an edit to an autofilled answer is held
+  ok   an edit to a control the page re-renders is held
+  ok   every held answer carries the time it was made
+  ok   no identity or address field was offered
+  ok   a typed answer is held without leaving the box
+
+an answer refused while the page still flagged the field is captured once it clears
+  ok   the corrected answer reaches the pending list
+
+13/13 checks passed
+
+
+editing an unsaved answer
+  ok   the edit is accepted
+  ok   the held answer now reads No
+  ok   its choices are kept
+  ok   still one entry, not two
+  ok   nothing was uploaded by an edit alone
+
+rewording the question of an unsaved answer
+  ok   the question can be reworded
+  ok   a question too short to match anything is refused
+
+editing an answer that is already queued uploads the correction
+  ok   saving uploaded it
+  ok   the queued edit is accepted
+  ok   and uploaded straight away
+  ok   the dashboard copy is the corrected one
+  ok   nothing is left waiting
+
+editing something that is no longer pending
+  ok   is refused with a reason
+
+an answer typed into the popup
+  ok   is held
+  ok   a one-word question is refused
+  ok   an empty answer is refused
+  ok   and reaches the dashboard on Save
+
+a dismissal does not swallow a later, deliberate edit
+  ok   discarded
+  ok   the same capture replayed without a new edit stays dismissed
+  ok   a fresh edit made after the dismissal is held
+
+answers read off a question's wrapper
+  ok   a wrapper's list number is never held
+  ok   a real answer of 0 still is
+  ok   updating clears the ones an older build held
+  ok     and keeps everything else
+
+putting Appli-Fill's answer back withdraws the detour
+  ok   withdrawn from the list
+  ok   but not remembered as rejected
+
+all passing
+
+
+manual edits are on screen as soon as the popup opens
+  ok   the pending list opens by itself when there are edits to review
+  ok   both edits are listed
+  ok   each has an Edit button
+  ok   there is no 'attach my resume' switch
+
+correcting an answer before saving it
+  ok   the editor opens in place
+  ok   a dropdown answer is edited from the question's own choices
+  ok   a live update waits while an answer is being edited
+  ok   the edit is sent with the new answer
+  ok   and the corrected answer is saved in the same step
+  ok   the saved answer leaves the list and the late capture appears
+  ok   the saved-answer count moves
+
+the list stays current while the popup is open
+  ok   an answer captured on the page appears without reopening the popup
+
+typing an answer in by hand
+  ok   the form opens
+  ok   it is added
+  ok   and saved to the dashboard straight away
+  ok   the form closes afterwards
+
+16/16 checks passed
+
+
+only real controls are fields
+  ok   no wrapper is collected
+  ok   the boxes themselves are
+
+fill with the caret left in Phone
+  ok   Phone keeps exactly the number
+  ok   Current location is Lever's own suggestion
+  ok     and the place Lever submits is set
+  ok     and the box is not left outlined
+  ok   Current company is the current employer
+  ok   the work-authorization question is answered
+  ok   nothing Appli-Fill filled is offered as a pending answer
+  ok   no answer of "0" from a wrapper
+
+a click elsewhere on the page is not an edit
+  ok   still nothing pending after clicking around
+
+what the applicant changes by hand is pending
+  ok   changing a filled answer is held
+  ok   typing an answer by hand is held
+  ok   only what was changed is held
+
+putting Appli-Fill's answer back
+  ok   withdraws the answer held for the detour
+
+the right Jacksonville
+  ok   Texas picks Jacksonville, TX — not Florida, not the beach
+  ok     and sets the submitted place
+  ok     after narrowing a search that found nothing
+
+no suggestion is the applicant's place
+  ok   a different state's Springfield is never picked
+  ok     the box keeps the applicant's full answer
+  ok     and is outlined for them to choose
+  ok     and Phone is untouched
+
+a slow location search
+  ok   Lever's own suggestion is still picked
+  ok     and the place Lever submits is set
+  ok     with a single search, not one per retry
+
+the caret stays in the box until a place is picked
+  ok   the suggestion is picked while the list is up
+  ok     and survives leaving the box
+
+27/27 checks passed
+
+
+Voluntary Disclosures and Self Identify on one page (generated ids)
+  ok   race/ethnicity
+  ok   gender
+  ok   veteran status
+  ok   Name is the applicant's name
+  ok   Employee ID is left blank
+  ok   Date is today, MM/DD/YYYY
+  ok   the "No" disability box is ticked, and only it
+  ok   nothing Appli-Fill filled is pending
+
+  …and a change made by hand is
+  ok   the applicant's choice is held
+  ok     and nothing else
+
+the Self Identify step alone (generated ids, no heading naming the form)
+  ok   Name is the applicant's name
+  ok   Employee ID is left blank
+  ok   Date is today, MM/DD/YYYY
+  ok   the "No" disability box is ticked
+  ok   a "Date" above the form is not given today's date
+  ok   nothing Appli-Fill filled is pending
+
+a current tenant's Self Identify step (selfIdentifiedDisabilityData ids, role=checkbox)
+  ok   Name is the applicant's name
+  ok   Employee ID is left blank
+  ok   Date is today, MM/DD/YYYY
+  ok   the "No" disability box is ticked, and only it
+  ok   nothing Appli-Fill filled is pending
+
+ethnicity drawn as a list of boxes (Voluntary Disclosures)
+  ok   only the applicant's ethnicity is ticked
+  ok   nothing Appli-Fill filled is pending
+
+however the profile words the disability answer
+  ok   "No" → [false,true,false] (native boxes)
+  ok   "No" → [false,true,false] (role=checkbox)
+  ok   "Yes, I have a disability" → [true,false,false] (native boxes)
+  ok   "Yes, I have a disability" → [true,false,false] (role=checkbox)
+  ok   "Yes" → [true,false,false] (native boxes)
+  ok   "Yes" → [true,false,false] (role=checkbox)
+  ok   "I don't wish to answer" → [false,false,true] (native boxes)
+  ok   "I don't wish to answer" → [false,false,true] (role=checkbox)
+  ok   "" → [false,false,false] (native boxes)
+  ok   "" → [false,false,false] (role=checkbox)
+
+33/33 checks passed
+
+
+fill, then let the page have its way with the answers
+  ok   the fill landed
+  ok   the page's phone mask ran
+  ok   the page's salary format ran
+  ok   the page's date format ran
+  ok   the page's wipe was restored by the settle pass
+  ok   nothing Appli-Fill filled is pending
+
+looking is not editing
+  ok   clicking into filled boxes and away holds nothing
+
+what the applicant changes is pending
+  ok   a retyped salary is held
+  ok   a different dropdown choice is held
+  ok   a different select choice is held
+  ok   a corrected saved answer is held
+  ok   only the four changed answers are held
+
+changing it back to Appli-Fill's answer
+  ok   withdraws what was held for the detour
+
+13/13 checks passed
+
+
+Worked for this employer before — read from the work history
+  ok   named employer on the history → Yes (former)
+  ok   the current employer → Yes (current)
+  ok   "currently employed by" a past employer → the stored No
+  ok   a window the job ended before → the stored No
+  ok   an employer not on the history → the stored No
+  ok   "this company" on a Workday tenant uses the tenant
+  ok   nothing stored and no match → left for the applicant
+  ok   an acronym tenant matches the full name (GDIT)
+  ok   an acronym in the question matches the full name
+  ok   a joined-up tenant matches the spaced name (boozallen)
+  ok   "Apple" is not "Pineapple Labs"
+  ok   "Meta" is "Meta Platforms, Inc."
+  ok   "Solutions" alone identifies nobody
+  ok   the employer a question names
+  ok   a government is not an employer name
+  ok   the prior-employment rule claims "current or former employee of X"
+  ok   …and "this company" / "a former employee"
+  ok   …but not a question about a skill ("ever worked with Kubernetes")
+  ok   …nor one about a kind of company
+  ok   "worked with" names a tool, not an employer
+  ok   "employed with" does name an employer
+  ok   …but never a federal-government question
+
+Federal service
+  ok   the question is claimed
+  ok   Army service, question includes military → Yes
+  ok   Army service, question about civilian employment only → left open
+  ok   a civilian agency → Yes
+  ok   a GS grade in the title → Yes
+  ok   a history with no government employer → No
+  ok   Navy Federal Credit Union is not the Navy
+  ok   no history at all → left open
+  ok   a declared veteran with an empty history → Yes when military counts
+  ok   "not a protected veteran" is not evidence of service
+  ok   a window the service ended before → No
+  ok   federal contracts are a different question
+  ok   the answer is shown as a draft to review
+
+Security clearance
+  ok   a U.S. citizen without one is able to obtain one
+  ok   a visa holder is not
+  ok   no recorded status → left open
+  ok   a held clearance → Yes
+  ok   eligibility is answered even with no clearance field at all
+  ok   an active-clearance question still answers from the level held
+
+Highest level of education
+  ok   the question goes to the level rule, not the history row
+  ok   Master of Science + B.Tech → Master's Degree
+  ok   a PhD in progress does not count as completed
+  ok   …but does for "highest level of education" without "completed"
+  ok   B.S. → Bachelor's Degree
+  ok   MBA → Master's Degree
+  ok   Associate of Applied Science → Associate's Degree
+  ok   no education → left open
+
+Sponsorship, in Workday's words
+  ok   claimed by the sponsorship rule
+  ok   not claimed by the work-authorization rule
+  ok   answered from the profile
+  ok   "without the company sponsoring" is the inverted question
+  ok   …and No for someone who needs sponsorship
+  ok   sponsoring an event is not immigration
+
+Currently employed
+  ok   the row checkbox rule leaves a question about relatives alone
+  ok   …and "Are you currently employed?"
+  ok   …but still claims "I currently work here"
+  ok   "Are you currently employed?" has its own rule
+  ok   with a current job → Yes
+  ok   with only past jobs → No
+  ok   no history → left open
+  ok   the relatives question is claimed by neither
+
+Years of experience
+  ok   a plain years-of-experience question is the whole career, overlaps counted once
+  ok   "cloud engineering" counts the Cloud Engineer role, not the whole career
+  ok   "with Kubernetes" counts the roles that describe it, as a listed skill
+  ok   "management" is not read into "managed the servers"
+  ok   "relevant" needs judgement, not arithmetic
+  ok   a topic no role names is left open
+  ok   13 → More than 10 years
+  ok   10 → 6-10 years
+  ok   1 → Less than 2 years
+  ok   5.5 on whole-year ranges → 2-5 years
+  ok   "7 years" → 6-10 years
+  ok   10+ style options
+  ok   a number with no range to hold it is left unanswered
+  ok   a menu of months is not a menu of years
+  ok   words are not ranges
+
+78/78 checks passed
+
+From the profile and saved answers — no model needed
+  ok   work authorization → Yes
+  ok   Workday's sponsorship wording → No (from the profile)
+  ok   at least 18 → Yes
+  ok   previously employed by Leidos → Yes (Leidos is on the work history)
+  ok   federal government, military or civilian → Yes (U.S. Army on the history)
+  ok   active clearance, profile None → No
+  ok   able to obtain a clearance, U.S. citizen → Yes
+  ok   relatives at Leidos → No (the answer saved for GDIT's identical question)
+  ok   currently employed → Yes (a current job on the history)
+  ok   highest education → Master's Degree
+  ok   years of cloud engineering → 2-5 years (the Cloud Engineer role, 2021 to now)
+  ok   salary expectations → the desired salary
+  ok   an answer read off the history is shown as a draft to review
+  ok   without Premium the model is never called
+  ok   the questions only the applicant or the model can answer are highlighted
+  ok   the popup is told why they were not drafted
+
+The rest in one request, while the form fills
+  ok   one request for the whole page
+  ok   it carries only what the profile and saved answers could not answer
+  ok   a felony question is never put to the model
+  ok   each menu is sent with its own options
+  ok   every yes/no menu is sent with Yes and No
+  ok   the checkbox list is sent as a multi-select
+  ok   travel → Yes (drafted)
+  ok   non-compete without a profile or saved answer stays unanswered
+  ok   work arrangement → Hybrid (drafted)
+  ok   essential functions → Yes (drafted)
+  ok   on-site radio → Yes
+  ok   cloud platforms → Amazon Web Services
+  ok   why this role → the drafted paragraph
+  ok   felony stays blank and highlighted
+  ok   the drafted answers are marked as drafts
+  ok   six answers drafted, two declarations left for the applicant
+  ok   the request is sent before the profile's answers are written
+  ok   the whole page fills in 2919ms with a 1.5s model — well under the old per-question wait
+
+The applicant's own answers come first
+  ok   an exact saved answer beats the model
+  ok   an exact saved answer beats the history
+  ok   and the model is not asked about either
+  ok   an answer that names the other employer is not carried across
+  ok   a different question is not matched just because a name was removed
+  ok   a history without Leidos → the stored No for Leidos
+
+When the answer service is unavailable or older
+  ok   an older service is asked one question at a time
+  ok   …each with its own menu's options
+  ok   …and the answers still land
+  ok   a refused request is not retried question by question
+  ok   the reason is reported
+  ok   the profile's answers are all still there
+  ok   the rest are highlighted
+  ok   switched off → never called
+  ok   a sync without the setting reads as on
+
+Choosing between profiles never holds up the fill
+  ok   a slow scoring call is not waited on (6909ms)
+  ok   …the active profile is used meanwhile
+  ok   the next step of the same application does not score again
+  ok   a prompt score picks the better-matching profile
+
+53/53 checks passed
+
+
+A list of countries (typing "uni" offers United States, United Kingdom, …)
+  ok   the Location question is recognised despite "office" in its description
+  ok   United States is picked from the list
+  ok   …and stays after leaving the box
+  ok   never a look-alike (US Virgin Islands, Minor Outlying Islands)
+  ok   done in 5624ms
+  ok   not offered as an answer the applicant typed
+  ok   an applicant in India gets India
+
+A list of places (cities, states and countries)
+  ok   the applicant's city in the applicant's state is picked
+  ok   not Jacksonville Beach, nor another state's Jacksonville
+  ok   a state stored as a code still finds the right Stanley
+
+10/10 checks passed
+
+
+The saved password, filled by Appli-Fill, is not offered back as an edit
+  ok   both password boxes get the saved password
+  ok   neither is held as a manual edit
+  ok   the form is not submitted while "I consent" is clear
+  ok   …and the popup is told why
+  ok   clicking around the form afterwards changes nothing
+  ok   with consent already ticked, Create Account is pressed once
+
+A password the applicant types is held once, as "Password"
+  ok   one entry, filed under "Password"
+  ok   the verify box is never held on its own
+
+The popup never shows a password
+  ok   the held password is listed
+  ok   …but its value is masked
+
+10/10 checks passed
+
+
+The page from the report
+  ok   Asian is ticked
+  ok   gender, Hispanic and veteran are still answered
+  ok   nothing is left needing the applicant
+  ok   nothing Appli-Fill ticked is offered as a manual edit
+
+However the profile words it
+  ok   "White" ticks its own box only
+  ok   "Black or African American" ticks its own box only
+  ok   "American Indian or Alaska Native" ticks its own box only
+  ok   "Native Hawaiian or Other Pacific Islander" ticks its own box only
+  ok   "Asian (Not Hispanic or Latino)" ticks its own box only
+  ok   a category the list does not offer ticks nothing
+  ok   Hispanic is answered by its own question, and no box is guessed
+
+11/11 checks passed
+
+
+what is collected
+  ok   every pill question is one field
+  ok     answered as a choice
+  ok     under its question, not "Yes"
+  ok   read-only list "region2" is collected (state)
+  ok   read-only list "region1" is collected (county)
+  ok   read-only list "addlAddressAttribute3" is collected (taxDistrict)
+  ok   read-only list "veteran" is collected (veteranStatus)
+  ok   ZIP Code is the zip rule
+  ok   "What compensation are you seeking?" is the salary question
+  ok   "I am Hispanic or Latino." is the Hispanic question
+  ok   "Select the races you identify with." is the race question
+  ok   the prefilled read-only email is left alone
+
+fill: the address suggestion is picked
+  ok   First/Last name
+  ok   Middle Name left empty
+  ok   Phone uses national digits beside the country-code picker
+  ok   Address Line 1 is Oracle's own suggestion
+  ok     and the apartment it dropped is in Line 2
+  ok     and the suggestion list is closed
+  ok   ZIP Code
+  ok   City
+  ok   State
+  ok   County
+  ok   Tax District — the only one offered for the address
+  ok   the address is searched once, never retyped over the pick
+  ok   Title is Mr., from the gender in the profile
+  ok   non-compete: the saved answer
+  ok   worked for YUM! Brands: No (not in the history)
+  ok   legally authorized: Yes
+  ok   sponsorship: No
+  ok   at least 18: Yes
+  ok   employed or contracted by Yum! in six months: No
+  ok   relatives at Yum!: the answer given for GDIT
+  ok   compensation
+  ok   Gender
+  ok   not Hispanic: the box stays clear
+  ok   race: Asian, and only Asian
+  ok   Veteran Status
+  ok   nothing left outlined (Title and Middle Name are optional)
+  ok   reported: nothing left unanswered
+  ok   nothing Appli-Fill filled is offered as a pending answer
+  ok   done in 4299ms
+
+changing a pill by hand
+  ok   is held under its question
+  ok     and nothing else is
+
+fill: no address suggestions; the ZIP Code fills City, State and County
+  ok   Address Line 1 keeps the typed street
+  ok   ZIP Code picked from its list
+  ok   City, State, County as the page set them
+  ok     and City is not searched again over it
+  ok   nothing outlined
+
+fill: every list answered by Appli-Fill, on a slow server
+  ok   ZIP Code picked
+  ok   City picked — JACKSONVILLE, not JACKSONVILLE BEACH
+  ok     and not thrown away when the box lost focus
+  ok   State
+  ok   County — the one the list offers for the ZIP Code
+  ok   Tax District
+  ok   done in 7039ms
+
+fill: suggestions offered, none of them the applicant's address
+  ok   no other address is picked
+  ok     the list is closed
+  ok     and the rest still fills
+
+fill: a Hispanic applicant, and a Tax District with two choices
+  ok   the Hispanic box is ticked
+  ok   race: White
+  ok   County from the ZIP Code's list
+  ok   Tax District with two choices is left for the applicant
+
+fill: nothing saved — the pills go to the answer service with their choices
+  ok   each open Yes/No question is asked once
+  ok     with its choices
+  ok     and never Title, eligibility or the diversity questions
+  ok   known answers are clicked; unknown non-compete stays unanswered
+
+other shapes of the same controls
+  ok   options drawn as <li role=option> are one question
+  ok     labelled by the question even with a link in it
+  ok   buttons each in a <span> are one question
+  ok     labelled by the paragraph above them
+  ok   a floating menu's options are not a question
+  ok   a read-only box that opens a list is fillable
+  ok   a read-only date box that opens a calendar is not
+  ok   a plain read-only box is not
+  ok   veteran status drawn as long pills is answered
+  ok   the street is read apart from its apartment
+  ok     and matches the same street spelled out
+  ok     but not another street, number, ZIP Code or city
+
+78/78 checks passed
+
+=== Remaining extension, API, UI and portal suites ===
+
+Personal Info, with the page focused
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok     ZIP Code, City, State and County came from the address picked, not typed by Appli-Fill
+  ok   Next reports nothing missing or invalid
+
+Personal Info, filled from the popup (the page has no focus)
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok     ZIP Code, City, State and County came from the address picked, not typed by Appli-Fill
+  ok   Next reports nothing missing or invalid
+
+lists that only the keyboard (or a person's click) moves
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok   Next reports nothing missing or invalid
+
+an address picked, and Oracle fills nothing from it
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok     ZIP Code chosen from its own list first (it brings the City, State and County)
+  ok   Next reports nothing missing or invalid
+
+Oracle's search finds no such address
+  ok   Address Line 1 is outlined for the applicant, not reported as filled
+  ok     ZIP Code, City, State and County are chosen from their own lists all the same
+  ok     so Next asks for Address Line 1 alone
+
+no such address, on a page whose Address Line 1 keeps a typed street
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok   Address Line 1 keeps the street, typed (its apartment in Address Line 2)
+  ok   Next reports nothing missing or invalid
+
+a slow server (2 s for every list)
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok   Next reports nothing missing or invalid
+
+Application Questions and Diversity Information, with the page focused
+  ok   restrictive covenants: explicit profile No
+  ok   former employee: No (the profile's)
+  ok   authorized to work without requiring sponsorship: Yes
+  ok   salary expectations: 120000
+  ok   I am Hispanic or Latino.: left unticked (the profile says No)
+  ok   races: Asian ticked, and only Asian
+  ok   Gender: Male
+  ok   Veteran Self-Identification Status: I am not a protected veteran
+  ok     the protected-veteran categories left unticked, and not outlined
+  ok     the discharge date left blank, and not outlined
+  ok   Sex at Birth and Visually identified Sex at Birth: Male
+  ok   I choose not to disclose my sex: No
+  ok   Visually identified and Regional Ethnicity or Race: Asian
+  ok   I choose not to disclose my ethnicity or race: No
+  ok   nothing left outlined
+  ok   Next reports nothing missing
+  ok   no list left open
+
+Application Questions and Diversity Information, filled from the popup (the page has no focus)
+  ok   restrictive covenants: explicit profile No
+  ok   former employee: No (the profile's)
+  ok   authorized to work without requiring sponsorship: Yes
+  ok   salary expectations: 120000
+  ok   I am Hispanic or Latino.: left unticked (the profile says No)
+  ok   races: Asian ticked, and only Asian
+  ok   Gender: Male
+  ok   Veteran Self-Identification Status: I am not a protected veteran
+  ok     the protected-veteran categories left unticked, and not outlined
+  ok     the discharge date left blank, and not outlined
+  ok   Sex at Birth and Visually identified Sex at Birth: Male
+  ok   I choose not to disclose my sex: No
+  ok   Visually identified and Regional Ethnicity or Race: Asian
+  ok   I choose not to disclose my ethnicity or race: No
+  ok   nothing left outlined
+  ok   Next reports nothing missing
+  ok   no list left open
+
+Application Questions and Diversity Information, lists that only the keyboard moves
+  ok   restrictive covenants: explicit profile No
+  ok   former employee: No (the profile's)
+  ok   authorized to work without requiring sponsorship: Yes
+  ok   salary expectations: 120000
+  ok   I am Hispanic or Latino.: left unticked (the profile says No)
+  ok   races: Asian ticked, and only Asian
+  ok   Gender: Male
+  ok   Veteran Self-Identification Status: I am not a protected veteran
+  ok     the protected-veteran categories left unticked, and not outlined
+  ok     the discharge date left blank, and not outlined
+  ok   Sex at Birth and Visually identified Sex at Birth: Male
+  ok   I choose not to disclose my sex: No
+  ok   Visually identified and Regional Ethnicity or Race: Asian
+  ok   I choose not to disclose my ethnicity or race: No
+  ok   nothing left outlined
+  ok   Next reports nothing missing
+  ok   no list left open
+
+Application Questions and Diversity Information, a slow server (1.8 s for every list)
+  ok   restrictive covenants: explicit profile No
+  ok   former employee: No (the profile's)
+  ok   authorized to work without requiring sponsorship: Yes
+  ok   salary expectations: 120000
+  ok   I am Hispanic or Latino.: left unticked (the profile says No)
+  ok   races: Asian ticked, and only Asian
+  ok   Gender: Male
+  ok   Veteran Self-Identification Status: I am not a protected veteran
+  ok     the protected-veteran categories left unticked, and not outlined
+  ok     the discharge date left blank, and not outlined
+  ok   Sex at Birth and Visually identified Sex at Birth: Male
+  ok   I choose not to disclose my sex: No
+  ok   Visually identified and Regional Ethnicity or Race: Asian
+  ok   I choose not to disclose my ethnicity or race: No
+  ok   nothing left outlined
+  ok   Next reports nothing missing
+  ok   no list left open
+
+an applicant who declines to self-identify
+  ok   Gender: I do not wish to disclose
+  ok   I choose not to disclose my sex / my ethnicity or race: Yes
+  ok     no race ticked
+
+Oracle JET's lists (oj-select-single), with the page focused
+  ok   Address Line 1: the applicant's address picked — the drop-down holds its key
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County filled
+  ok   Gender: Male, and Veteran Status: not a protected veteran
+  ok   no list left open, nothing outlined
+  ok   Next reports nothing missing
+
+Oracle JET's lists (oj-select-single), filled from the popup (the page has no focus)
+  ok   Address Line 1: the applicant's address picked — the drop-down holds its key
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County filled
+  ok   Gender: Male, and Veteran Status: not a protected veteran
+  ok   no list left open, nothing outlined
+  ok   Next reports nothing missing
+
+Oracle JET's lists (oj-select-single), lists that only the keyboard moves
+  ok   Address Line 1: the applicant's address picked — the drop-down holds its key
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County filled
+  ok   Gender: Male, and Veteran Status: not a protected veteran
+  ok   no list left open, nothing outlined
+  ok   Next reports nothing missing
+
+Oracle JET's lists (oj-select-single), a slow server (2 s for every list)
+  ok   Address Line 1: the applicant's address picked — the drop-down holds its key
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County filled
+  ok   Gender: Male, and Veteran Status: not a protected veteran
+  ok   no list left open, nothing outlined
+  ok   Next reports nothing missing
+
+149/149 checks passed
+
+
+Contact Information, with the page focused
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information, filled from the popup (the page has no focus)
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: the form keeps a box only once it is left, and a choice shows 0.4 s after the click
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: the boxes drawn in the components' light DOM
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: each open list drawn at the end of the page
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: list items named only by their `label`
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: each open list drawn at the end of the page, and nothing on the list itself says it is open
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: the profile's state saved as "TX"
+  ok   State/Province: Texas, found through the list's search
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: the profile's state saved as "Texas"
+  ok   State/Province: Texas, found through the list's search
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: a country the list does not offer
+  ok   Country left empty and outlined for the applicant
+  ok     its search box emptied again, and the list closed
+  ok     and the rest of the page filled as usual
+
+Contact Information: the profile's phone saved as "+1 516-205-8456"
+  ok   the national number goes in the box, without the +1 the country list already has
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions (#prescreeningForm), with the page focused
+  ok   At least 18: Yes (the question as the group's aria-label)
+  ok   Authorized to work: Yes (the question as the group's own label)
+  ok   Sponsorship: No (the question in the row above, the choices named only by `label`)
+  ok   How did you hear: LinkedIn, picked from the list
+  ok   Salary expectations: the profile's 120000
+  ok   Ever employed by Acme Corporation: No
+  ok   Earliest start date: today (10/05/2026), as MM/DD/YYYY
+  ok   Background check: ticked, as the profile consents
+  ok   the free-text question nothing in the profile answers is left for the applicant, outlined
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions (#prescreeningForm), from the popup
+  ok   At least 18: Yes (the question as the group's aria-label)
+  ok   Authorized to work: Yes (the question as the group's own label)
+  ok   Sponsorship: No (the question in the row above, the choices named only by `label`)
+  ok   How did you hear: LinkedIn, picked from the list
+  ok   Salary expectations: the profile's 120000
+  ok   Ever employed by Acme Corporation: No
+  ok   Earliest start date: today (10/05/2026), as MM/DD/YYYY
+  ok   Background check: ticked, as the profile consents
+  ok   the free-text question nothing in the profile answers is left for the applicant, outlined
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions: the boxes in the components' light DOM
+  ok   every question the profile answers is answered
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions: the lists drawn at the end of the page
+  ok   every question the profile answers is answered
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions, with a profile that gives no consent to a background check
+  ok   the consent box is not ticked on the applicant's behalf, and is outlined for them
+
+Employment History: two jobs in the profile, one employer block on the page
+  ok   Add Employer pressed once, for the second job
+  ok   first block: the current job, its start, "I currently work here" ticked and no end date
+  ok   second block: the earlier job, its start and end
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Voluntary Self-Identification, with the page focused
+  ok   Gender: Male
+  ok   Hispanic or Latino: No
+  ok   Race: Asian
+  ok   Veteran Status: not a protected veteran
+  ok   Disability (CC-305): the "No, I do not have a disability" choice
+  ok   CC-305 signature: the applicant's name and today's date (10/05/2026)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Voluntary Self-Identification, from the popup
+  ok   Gender: Male
+  ok   Hispanic or Latino: No
+  ok   Race: Asian
+  ok   Veteran Status: not a protected veteran
+  ok   Disability (CC-305): the "No, I do not have a disability" choice
+  ok   CC-305 signature: the applicant's name and today's date (10/05/2026)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Voluntary Self-Identification, from the popup, lists drawn at the end of the page
+  ok   Gender: Male
+  ok   Hispanic or Latino: No
+  ok   Race: Asian
+  ok   Veteran Status: not a protected veteran
+  ok   Disability (CC-305): the "No, I do not have a disability" choice
+  ok   CC-305 signature: the applicant's name and today's date (10/05/2026)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+140/140 checks passed
+
+
+Personal information, with the page focused
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: the applicant's own address picked from Google's suggestions
+  ok     the apartment it dropped in Address Line 2
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information, filled from the popup (the page has no focus)
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: the applicant's own address picked from Google's suggestions
+  ok     the apartment it dropped in Address Line 2
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information: Address Line 1 marked as a combobox (newer Maps builds)
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: the applicant's own address picked from Google's suggestions
+  ok     the apartment it dropped in Address Line 2
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information: Google's suggestions arrive 1.2 s after typing
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: the applicant's own address picked from Google's suggestions
+  ok     the apartment it dropped in Address Line 2
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information: no suggestion is the applicant's address
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: no suggestion is the applicant's, so the street stays as typed
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Personal information: no suggestion, and the box marked as a combobox
+  ok   First Name, Last Name and Email
+  ok   Mobile Number: ten digits in the number box, the country left at United States (+1)
+  ok   Country: United States, picked from its list
+  ok   Address Line 1: no suggestion is the applicant's, so the street stays as typed
+  ok   City, State and Postal Code
+  ok   "I have a preferred or chosen name" left clear (the profile has none) and not outlined
+  ok   the text-message consent is never ticked for the applicant
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+  ok     never retyped with the city and state added
+
+Questions, with the page focused
+  ok   At least 18: Yes
+  ok   Authorized to work: Yes
+  ok   Sponsorship: No
+  ok   How did you hear: LinkedIn, picked from its list
+  ok   Worked for Acme Corporation before: No
+  ok   Available Start Date: today (10/05/2026)
+  ok   Desired salary: 120000, counted Annually
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Questions, from the popup
+  ok   At least 18: Yes
+  ok   Authorized to work: Yes
+  ok   Sponsorship: No
+  ok   How did you hear: LinkedIn, picked from its list
+  ok   Worked for Acme Corporation before: No
+  ok   Available Start Date: today (10/05/2026)
+  ok   Desired salary: 120000, counted Annually
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Voluntary self-identification, with the page focused
+  ok   Gender: Male
+  ok   Ethnicity: Not Hispanic or Latino
+  ok   Race (open only once Ethnicity is answered): Asian
+  ok   Protected Veteran Status: not a protected veteran
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+Voluntary self-identification, from the popup
+  ok   Gender: Male
+  ok   Ethnicity: Not Hispanic or Latino
+  ok   Race (open only once Ethnicity is answered): Asian
+  ok   Protected Veteran Status: not a protected veteran
+  ok   Next reports nothing missing or invalid
+  ok     and no list or suggestion box is left open
+
+89/89 checks passed
+
+
+A salary question whose choices are amounts
+  ok   the form is filled (First Name)
+  ok   a list of salary ranges is not answered with the first range
+  ok   nor a row of salary-range radios
+
+Yes / No radios whose question is the first radio's <label for>
+  ok   the first radio reads as its choice ("Yes"), not as the question
+  ok   authorized to work: Yes
+  ok   driver's license: Yes
+
+A "Title" under Licenses and Certifications, and a Prefix list, for a profile with no title of its own
+  ok   the certification's Title is not given an honorific
+  ok   the Prefix is not guessed from the applicant's gender
+
+Check boxes: background check, drug test, a preferred name, declining to give one's race
+  ok   the background-check box is left for the applicant to tick
+  ok   so is the drug-test box
+  ok   and "I have a preferred or chosen name"
+  ok   and "I choose not to disclose my race"
+
+A form drawn inside the page's own shadow root, with two Work Experience rows
+  ok   the job titles are read as job titles, one per row
+  ok   no job title box is given an honorific
+  ok   the second job's box never takes the first job's company
+  ok   the page's own app element is never outlined or flashed
+  ok   no page errors
+
+17/17 checks passed
+
+
+what is collected
+  ok   each Yes / No row is one question
+  ok     collected as a choice, not as buttons
+  ok     the mirror checkbox is never a field of its own
+  ok   work authorization is read as such
+  ok   sponsorship is read as such
+  ok   "previously employed by Chainalysis" is read as such
+  ok   "considered for other opportunities" is read as such
+
+fill
+  ok   Are you legally authorized… = Yes
+  ok   Will you require sponsorship… = No
+  ok   Previously employed by Chainalysis… = No
+  ok   Considered for other opportunities = Yes
+  ok     shown as a draft to check
+  ok   a question the profile cannot answer is left alone
+  ok     and outlined for the applicant
+  ok   answered questions are not outlined
+  ok   the rest of the form still fills
+  ok   nothing Appli-Fill pressed is offered as the applicant's answer
+  ok   filled count includes the Yes / No rows
+
+submit
+  ok   the form submits with every Yes / No answered
+
+what the applicant changes by hand is still theirs
+  ok   changing Yes to No is held as their answer
+
+20/20 checks passed
+
+
+question labels drawn as formLabel labels, "Immediately"
+  ok   Employment Type Desired is the employment-type question
+  ok   Shift Preference is not taken for an employment question
+  ok   every Available Start Date box is the availability question
+  ok   the other-opportunities question is recognised
+  ok   the base-salary question is the desired-salary question
+  ok   the bonus question is not the salary question
+  ok   Employment Type Desired = Full-Time (the current job's type)
+  ok   Available Start Date = today, in all three boxes
+  ok     and Workday reports no Invalid Date
+  ok   considered for other opportunities = Yes
+  ok     shown as a draft to check
+  ok   base salary expectation from the profile
+  ok   the bonus box is left alone
+  ok   Shift Preference is left for the applicant, outlined
+  ok   nothing Appli-Fill filled is offered back as the applicant's
+
+question labels drawn as <legend>, "Immediately"
+  ok   Employment Type Desired is the employment-type question
+  ok   Shift Preference is not taken for an employment question
+  ok   every Available Start Date box is the availability question
+  ok   the other-opportunities question is recognised
+  ok   the base-salary question is the desired-salary question
+  ok   the bonus question is not the salary question
+  ok   Employment Type Desired = Full-Time (the current job's type)
+  ok   Available Start Date = today, in all three boxes
+  ok     and Workday reports no Invalid Date
+  ok   considered for other opportunities = Yes
+  ok     shown as a draft to check
+  ok   base salary expectation from the profile
+  ok   the bonus box is left alone
+  ok   Shift Preference is left for the applicant, outlined
+  ok   nothing Appli-Fill filled is offered back as the applicant's
+
+other ways of saying when
+  ok   ASAP is today
+  ok   "2 weeks" is two weeks from today
+  ok   "Two weeks' notice" too
+  ok   a date is that date
+  ok   a date already past is today
+  ok   nothing in the profile: today
+  ok   words no calendar can hold: today
+
+the questions inside one group, a number in another box (reported on 1.23.0)
+  ok   salary from the profile: the salary and bonus boxes are not part of the date
+  ok     Available Start Date = today, never 01/01/2000 or empty
+  ok     the bonus box holds the saved "20000"
+  ok     the salary box holds the profile's salary
+  ok   salary already answered (as when the page is filled again): the salary and bonus boxes are not part of the date
+  ok     Available Start Date = today, never 01/01/2000 or empty
+  ok     the bonus box holds the saved "20000"
+  ok     the salary box holds what it had
+  ok   an amount, a percentage or a word is never read as a date
+  ok     while real dates still are
+
+a start date saved off an earlier application
+  ok   "Immediately" in the profile: the profile's date (or today's), never the saved 01/01/2000
+  ok   nothing in the profile: the profile's date (or today's), never the saved 01/01/2000
+  ok   a date in the profile: the profile's date (or today's), never the saved 01/01/2000
+
+a date already in the boxes
+  ok   01/01/2000 left by an earlier fill is replaced with today's date
+  ok   a start date still ahead is left as it is
+
+the same question asked in words, in a plain box
+  ok   a saved date is never replayed: today's date instead
+  ok   a saved answer in words is still used
+
+Workday's boxes that take nothing typed (reported again on 1.24.0)
+  ok   "Immediately": today, picked from Workday's calendar
+  ok     and the calendar is closed again
+  ok   01/01/2000 left by 1.24.0 is replaced with today, from the calendar
+  ok     and the calendar is closed again
+  ok   a date in the profile: its month turned to and its day picked
+  ok     and the calendar is closed again
+  ok   01/01/2000 in boxes that take Backspace: cleared, then today picked from this month's calendar
+  ok   with no calendar either, the arrow keys are never pressed: never 01/01/2000
+  ok     the date is outlined for the applicant, not reported as filled
+
+a widget that reads keystrokes itself (no calendar)
+  ok   today's date, typed a keystroke at a time
+
+a widget that only takes the arrow keys
+  ok   today's date, from its calendar
+
+a widget that will not show the date
+  ok   the boxes are never emptied (an emptied date reads as nothing filled)
+  ok     and outlined for the applicant, not reported as filled
+  ok     the rest of the page still fills
+
+how the boxes are written (no calendar)
+  ok   each box is planned with the whole date, so whichever box is reached first writes it
+  ok     (a date written into all three boxes in one go is lost by this widget)
+  ok   a whole date handed to one box still fills MM, DD and YYYY: each box is read back and tried again
+  ok     and it is read back to be sure
+
+72/72 checks passed
+
+
+the school as the profile has it
+  ok   School or University is picked from Workday's list
+  ok     searched by the profile's own words
+  ok     Save and Continue accepts it
+  ok     no search text is left in the box
+  ok     never a look-alike (Northwestern Polytechnic, Northwestern College)
+  ok     not a draft: it is the profile's school
+  ok     the results list is closed afterwards
+  ok   Field of Study already answered is left as it is
+  ok   GPA from the profile
+  ok   LinkedIn from the profile, though saved under "Other"
+  ok   Twitter from the profile
+  ok   Facebook, which the profile does not have, is left empty and not outlined
+  ok   nothing Appli-Fill filled is offered as the applicant's answer
+  ok   done in 3143ms
+
+a campus or a place after the name
+  ok   the school is found without the place
+
+"The" in front
+  ok   University of North Carolina at Charlotte, not Chapel Hill
+
+text already sitting in the search box (a résumé parse, or an earlier fill)
+  ok   the school is still searched and picked
+
+a school the tenant's list does not carry
+  ok   "Other" is picked, so the step can be saved
+  ok     shown as a draft to check
+
+a name the list holds more than one school for
+  ok   nothing is guessed
+  ok     and not "Other" either
+  ok     the box is outlined for the applicant
+  ok     and left without stray search text
+
+matching one school's name to another
+  ok   "MIT" is Massachusetts Institute of Technology
+  ok   Northwestern Polytechnic University is not Northwestern University
+  ok   University of Illinois at Chicago is not a match for University of Illinois
+  ok   a campus after the name is the same school
+  ok   "at" and word order do not matter
+  ok   "Univ." is University
+  ok   "&" is "and"
+
+30/30 checks passed
+
+
+typed earlier and never picked
+  ok   the box is not taken as answered
+  ok   Lever's own place is picked
+  ok     the application submits
+
+Lever's first lookup is slow (its check runs first)
+  ok   the list is waited for and the place picked
+  ok     the application submits
+  ok     not outlined (5858ms)
+
+the first keystrokes arrive before Lever's check is ready
+  ok   the search is asked for again and the place picked
+
+Lever wants a human to pass its check first
+  ok   the place is not reported as filled
+  ok     it is counted as needing the applicant
+  ok     and the box is outlined
+  ok     (Lever would refuse it as it stands)
+  ok   clicking into the box finishes the pick
+  ok     the outline goes
+  ok     the application submits
+  ok     and Appli-Fill's pick is not offered as the applicant's answer
+
+the applicant types a different place themselves
+  ok   their own text is left for them to pick from
+
+16/16 checks passed
+
+
+reading the survey's answers
+  ok   "No, I don’t have a disability or have a history/record…" is a No
+  ok   "Yes, I have a disability or have a history/ record…" is a Yes
+  ok   "I don’t wish to answer" (typographic apostrophe) is a decline
+  ok   the profile's own wordings keep their meaning
+  ok   Do you live with a disability? is the disability question, under an introduction about accommodations
+  ok   Sexual Orientation is its own question
+  ok   Do you identify as transgender? is its own question
+  ok   Gender Identity is still the gender question
+  ok   Veteran Status is still the veteran question
+  ok   the feedback question about the survey is not an EEO question
+  ok   an introduction about accommodations does not take the disability question away
+  ok     an accommodation request is still not the disability question
+
+a profile with every answer
+  ok   Do you live with a disability? = No
+  ok   Sexual Orientation = Heterosexual, picked from Ashby's list
+  ok   Do you identify as transgender? = No
+  ok   Gender Identity = Man
+  ok   Veteran Status = I am not a protected Veteran
+  ok   the feedback question is left alone
+  ok   no survey question is outlined
+  ok   nothing Appli-Fill answered is offered as the applicant's
+
+Yes to the disability question
+  ok   Do you live with a disability? = Yes
+
+declining to self-identify
+  ok   disability declined
+  ok   sexual orientation declined
+  ok   transgender declined
+  ok   veteran status declined
+  ok   gender declined
+  ok   the feedback question is still left alone
+
+"Prefer not to say" for the two new questions only
+  ok   sexual orientation: I don’t wish to answer
+  ok   transgender: I don’t wish to answer
+
+another survey's wording of the orientations
+  ok   Gay → Gay or Lesbian
+  ok   Heterosexual → Straight/Heterosexual
+  ok   Pansexual → Bisexual and/or pansexual
+
+nothing saved for the survey
+  ok   nothing is guessed
+
+33/33 checks passed
+
+
+LinkedIn in the profile, found by searching
+  ok   LinkedIn is picked, as a pill
+  ok     searched by the profile's own answer
+  ok     Save and Continue accepts it
+  ok     no search text is left in the box
+  ok     the list is closed
+  ok     reported as filled, not outlined
+  ok     not offered back as the applicant's answer
+  ok   the rest of the step still fills (previously employed = No)
+  ok   done in 1004ms
+
+Indeed in the profile
+  ok   Indeed is picked
+
+a list that is browsed, not searched
+  ok   LinkedIn is found inside its category and picked
+  ok     Social Media was opened first (LinkedIn is a social network before a job board)
+
+the company's own careers site
+  ok   "SEI Careers Website" is picked for Company Website
+
+a list of categories only
+  ok   the category LinkedIn belongs to is picked (Social Media)
+
+an answer already there
+  ok   a pill already given is left as it is
+
+nothing in the profile
+  ok   nothing is picked
+  ok     the question is outlined for the applicant
+  ok     and no text is typed into it
+
+18/18 checks passed
+
+
+opening the popup, connected, for the first time
+  ok   "Connect your account" is never shown to a connected browser
+  ok     nothing is shown until the right view is known
+  ok     then the paired view
+  ok     with no fade on the way in
+
+opening it again
+  ok   the paired view is drawn at once, without waiting for the worker
+  ok     and every frame after it is the same view — no flash, no swap
+  ok     already showing the plan, the profile and the saved answers
+
+opening the popup, not connected
+  ok   the paired view is never shown
+  ok     "Connect your account" once the worker has answered
+
+opening Fill settings
+  ok   the popup is no wider with the settings open
+  ok     and its contents do not move sideways
+  ok     the popup itself never scrolls, the settings scroll inside it
+  ok     closed again, it is as it was
+
+connecting for the first time
+  ok   "Welcome to Appli-Fill Autofill" is shown
+  ok     over the whole popup
+  ok     animated
+  ok     still there two seconds in
+  ok   gone after three seconds, leaving the popup as usual
+  ok   connecting again later shows the popup straight away, without the welcome
+  ok   an ordinary open never shows it
+
+20/20 checks passed
+
+
+Workday My Information, with the page focused
+  ok   firstName: "Pradeep" in the box and kept by the page
+  ok   lastName: "Reddy" in the box and kept by the page
+  ok   addressLine1: "4685 Old Oaks Dr" in the box and kept by the page
+  ok   city: "Jacksonville" in the box and kept by the page
+  ok   postalCode: "32256" in the box and kept by the page
+  ok   Save and Continue reports nothing missing
+
+Workday Voluntary Self-Identification of Disability, with the page focused
+  ok   Name is the applicant's name, kept by the page
+  ok   Employee ID is left blank
+  ok   Date is today, 10/05/2026
+  ok   Save and Continue reports nothing missing
+
+the same Self-Identification step, its Date with Workday's calendar, with the page focused
+  ok   Date is today, 10/05/2026, picked from the calendar
+  ok     and the calendar is closed again
+  ok   Save and Continue reports nothing missing
+
+Ashby (Chainalysis), with the page focused
+  ok   Name in the box and kept by the form
+  ok   Email kept by the form
+  ok   the Yes / No answers are the profile's
+  ok     and pressed on screen
+  ok   Submit reports no validation error
+
+Workday My Information, with the popup open (the page has no focus)
+  ok   firstName: "Pradeep" in the box and kept by the page
+  ok   lastName: "Reddy" in the box and kept by the page
+  ok   addressLine1: "4685 Old Oaks Dr" in the box and kept by the page
+  ok   city: "Jacksonville" in the box and kept by the page
+  ok   postalCode: "32256" in the box and kept by the page
+  ok   Save and Continue reports nothing missing
+
+Workday Voluntary Self-Identification of Disability, with the popup open (the page has no focus)
+  ok   Name is the applicant's name, kept by the page
+  ok   Employee ID is left blank
+  ok   Date is today, 10/05/2026
+  ok   Save and Continue reports nothing missing
+
+the same Self-Identification step, its Date with Workday's calendar, with the popup open (the page has no focus)
+  ok   Date is today, 10/05/2026, picked from the calendar
+  ok     and the calendar is closed again
+  ok   Save and Continue reports nothing missing
+
+Ashby (Chainalysis), with the popup open (the page has no focus)
+  ok   Name in the box and kept by the form
+  ok   Email kept by the form
+  ok   the Yes / No answers are the profile's
+  ok     and pressed on screen
+  ok   Submit reports no validation error
+
+the page is told nothing extra when it has the focus
+  ok   each box is left exactly once (no second blur on top of the browser's)
+
+37/37 checks passed
+
+
+boards.greenhouse.io: "Immediately" in the profile
+  ok   a date input gets today's date
+  ok   a MM/DD/YYYY box gets today's date
+  ok   "When can you start?" keeps the applicant's words
+  ok   Month / Day / Year lists get today's month, day and year
+  ok   numbered MM / YYYY lists too
+  ok   the salary and the saved bonus go in their own boxes
+
+boards.greenhouse.io: a date in the profile
+  ok   every date shape gets 03/15/2027
+
+careers-acme.icims.com: "Immediately" in the profile
+  ok   a date input gets today's date
+  ok   a MM/DD/YYYY box gets today's date
+  ok   "When can you start?" keeps the applicant's words
+  ok   Month / Day / Year lists get today's month, day and year
+  ok   numbered MM / YYYY lists too
+  ok   the salary and the saved bonus go in their own boxes
+
+careers-acme.icims.com: a date in the profile
+  ok   every date shape gets 03/15/2027
+
+a start month saved off an earlier application is not replayed
+  ok   the Month list shows this month, not the saved January
+
+15/15 checks passed
+
+
+The Questions step, with the page focused
+  ok   At least 18 years of age: Yes
+  ok   Previously employed by the credit union: No (Previously employed at this company?)
+  ok   Willing to relocate, though the question says the job requires it: Yes
+  ok   Relatives employed by the credit union: No (the new profile answer)
+  ok   Date Available: the profile's date, 10/11/2026
+  ok   Desired salary 95000, counted Annually
+  ok   Currency type: USD, the profile's currency
+  ok   Did any current employees inform you: No (heard on LinkedIn, nobody referred)
+  ok   the conflict-of-interest box is never given the current employer's name
+  ok   what no profile holds is left outlined for the applicant (contact employer, within 45 miles, other jobs)
+  ok   Next reports only those three
+  ok   no list is left open
+  ok   the fill is quick (under 6 seconds)
+
+The Questions step, filled from the popup (the page has no focus)
+  ok   At least 18 years of age: Yes
+  ok   Previously employed by the credit union: No (Previously employed at this company?)
+  ok   Willing to relocate, though the question says the job requires it: Yes
+  ok   Relatives employed by the credit union: No (the new profile answer)
+  ok   Date Available: the profile's date, 10/11/2026
+  ok   Desired salary 95000, counted Annually
+  ok   Currency type: USD, the profile's currency
+  ok   Did any current employees inform you: No (heard on LinkedIn, nobody referred)
+  ok   the conflict-of-interest box is never given the current employer's name
+
+Currency type, however the list names itself
+  ok   a list named only by its placeholder: USD
+  ok     and the amount and the Annually / Hourly choice are untouched by it
+  ok   a list whose only name is the text it draws: USD
+  ok     and the amount and the Annually / Hourly choice are untouched by it
+  ok   a react-select whose placeholder says "Select currency type": USD
+  ok     and the amount and the Annually / Hourly choice are untouched by it
+  ok   a profile saved in Indian Rupees: INR
+  ok   a profile whose Period is per hour: Hourly
+
+Saved answers for the questions no profile holds, given on another company's application
+  ok   May we contact your current employer: No
+  ok   Within 45 miles: Yes
+  ok   the conflict-of-interest box: NA (it used to be closed to the saved answer)
+  ok   Next reports nothing missing or invalid
+
+Answered by hand on one company's application, filled on the next company's
+  ok   the previous-employment answer is held under its question, with the company
+  ok   the relatives answer too
+  ok   an answer on an ADP radio group is held under its question (it was never held)
+  ok   nothing is held under the section heading
+  ok   Previously employed by Principal Financial Group: the No given to the credit union
+  ok   Relatives employed by Principal Financial Group: the No given to the credit union
+  ok   May we contact your current employer: No
+  ok   Did any current employees inform you: No
+  ok   a Yes for relatives at one company is never carried to another
+  ok     nor a Yes to "…this company?" given on the credit union's own application
+  ok   answers written in Saved Answers as "this company" fill the credit union's questions
+
+The work history still decides for a company the applicant worked at
+  ok   Previously employed by Hawkeye Community Credit Union: Yes (it is on the work history)
+
+46/46 checks passed
+
+
+The reporter's profile: over 18, never worked at Acme, willing to relocate, no relatives there, starting in six days
+  ok   Are you at least 18 years of age? → Yes
+  ok   Are you 18 years of age or older? → Yes
+  ok   Are you over the age of 18? → Yes
+  ok   Are you under the age of 18? → No
+  ok   Are you at least 16 years of age? → Yes
+  ok   Are you at least 21 years of age? → left blank
+  ok   Do you have at least 18 years of experience in software? → left blank
+  ok   Have you ever worked for Acme Corporation before? → No
+  ok   Are you a former Acme Corporation employee? → No
+  ok   Have you ever been an employee of Acme Corporation? → No
+  ok   Prior employment with Acme Corporation? → No
+  ok   Are you a current or former employee of Acme Corporation? → No
+  ok   This position requires relocation to Des Moines, IA. Are you willing to relocate? → Yes
+  ok   If offered the position, are you willing to relocate at your own expense? → Yes
+  ok   Are you open to relocation? → Yes
+  ok   Will you require relocation assistance? → left blank
+  ok   Do you have any relatives employed by Acme Corporation? → No
+  ok   Are you related to anyone currently employed by Acme Corporation? → No
+  ok   Is anyone in your immediate family currently employed by Acme Corporation? → No
+  ok   Does Acme Corporation employ any of your relatives? → No
+  ok   Do you have a relative or friend employed with us? → left blank
+  ok   If you have relatives employed by Acme Corporation, please list their names and relationship. If none, enter N/A. → N/A
+  ok   Are you related to any government official? → left blank
+  ok   Do you have relatives who work in banking? → left blank
+  ok   Did any of our current employees inform you about this position? → No
+  ok   Were you referred by a current employee? → No
+  ok   Date Available → 10/11/2026
+  ok   How soon can you start? → 10/11/2026
+  ok   If offered a position, when would you be available to begin work? → 10/11/2026
+  ok   Earliest date you can start → 10/11/2026
+  ok   When can you start? → Within 2 weeks
+  ok   How soon could you start working? → 1 week
+  ok   Can you start within two weeks of an offer? → Yes
+  ok   What is your notice period? → Immediate
+  ok   Do you have any additional jobs in the financial services industry? If yes, please list employer and type of work. If no, enter NA. → left blank
+
+A former employee with no relatives there: the relatives question is not the employment question
+  ok   Have you ever worked for Acme Corporation before? → Yes
+  ok   Are you related to anyone currently employed by Acme Corporation? → still No
+
+A date of birth answers an age the profile's yes / no cannot
+  ok   Are you at least 21 years of age? → Yes (thirty years old)
+
+Starting today, and a notice period instead of a date
+  ok   "Immediately": When can you start? → Immediately
+  ok     and the radio choices → Immediately
+  ok   no start date, 30 days' notice: When can you start? → Within 1 month
+  ok     Can you start within two weeks? → No
+  ok     What is your notice period? → 30 days
+
+Nothing in the profile: nothing is invented
+  ok   Are you at least 18 years of age? → left blank
+  ok   Are you under the age of 18? → left blank
+  ok   Have you ever worked for Acme Corporation before? → left blank
+  ok   This position requires relocation to Des Moines, IA. Are you willing to relocate? → left blank
+  ok   Do you have any relatives employed by Acme Corporation? → left blank
+  ok   If you have relatives employed by Acme Corporation, please list their names and relationship. If none, enter N/A. → left blank
+  ok   When can you start? → left blank
+  ok   What is your notice period? → left blank
+
+51/51 checks passed
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.0 test:api
+> node test/api-regressions.spec.mjs
+
+  ok   a filter with url: undefined reaches Mongo as userId alone (the original bug)
+  ok   with a url present the filter keeps both constraints
+  ok   the fixed route only upserts when a real url is supplied
+  ok   the applications index is partial, not sparse
+  ok   a PATCH body cannot reassign userId
+  ok   a catastrophic pattern is escaped to a literal
+  ok   ordinary search terms still match
+  ok   unknown settings keys are rejected rather than written
+  ok   the settings schema declares every key the extension reads
+  ok   the popup's settings changes are accepted from its bearer token
+  ok   drafted answers default to on for everyone who has not chosen
+  ok   an omitted scope argument falls back to the payload's scope
+
+12 checks passed
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.0 test:ui
+> node test/ui-regressions.spec.mjs && node test/portal-signout.spec.mjs
+
+  ok   no dashboard component parses a response body outside a guard
+  ok   the shared client helper never rejects
+  ok   optimistic writes roll back when the request fails
+  ok   created rows replace a matching row instead of duplicating it
+  ok   POST /api/profiles seeds every profile section, not just contact details
+  ok   a part-filled profile row survives a save
+  ok   activity buckets use the local calendar, not UTC
+  ok   localDateKey brackets the day correctly either side of midnight
+  ok   the greeting and today count are computed client-side
+  ok   no dashboard grid track can be widened by its content
+  ok   the dashboard content column and the Overview columns can shrink
+  ok   a connected extension is not asked to pair again
+  ok   a stale database connection is checked and replaced, not reused
+  ok   dashboard pages send a signed-out visitor to sign in instead of throwing
+  ok   a page that fails to load shows a way forward, not a dead end
+  ok   saved passwords are never shown on the Saved answers page
+  ok   the resume file input resets so the same file can be picked twice
+  ok   the free-text start date is not bound to an <input type="date">
+  ok   clipboard success is only claimed when the write resolved
+  ok   a database outage is reported as 503 with a cause, not an opaque 500
+  ok   every legal link in the footer has a page behind it
+  ok   the profile schema keeps sexual orientation and transgender
+  ok   the profile editor asks both in the EEO section
+  ok     sexualOrientation: the rule reads the profile and knows every option
+  ok     transgender: the rule reads the profile and knows every option
+
+25 checks passed
+
+clicking the sign-out icon
+  ok   asks "Are you sure you want to log out?"
+  ok     offers Cancel and Log out
+  ok     and has not signed out yet
+  ok     Cancel has the focus, so a reflex Enter keeps you in
+  ok   Cancel closes it and you stay signed in
+  ok   Escape closes it too
+  ok   so does a click outside it
+  ok   Log out signs you out
+  ok     and goes to the home page
+
+9/9 checks passed
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.0 test:portals
+> node test/portals/greenhouse.spec.mjs && node test/portals/lever.spec.mjs && node test/portals/ashby.spec.mjs && node test/portals/workable.spec.mjs && node test/portals/smartrecruiters.spec.mjs && node test/portals/workday.spec.mjs && node test/portals/icims.spec.mjs && node test/portals/taleo.spec.mjs && node test/portals/successfactors.spec.mjs && node test/portals/oraclehcm.spec.mjs && node test/portals/generic.spec.mjs && node test/portals/ai.spec.mjs
+
+
+Greenhouse — detected "greenhouse", 17 filled, 0 left
+
+  ok   detected as Greenhouse
+  ok   first name
+  ok   last name
+  ok   email
+  ok   phone
+  ok   location (city)
+  ok   LinkedIn url
+  ok   Website url
+  ok   sponsorship react-select submits No
+  ok   work authorization react-select submits Yes
+  ok   how did you hear submits LinkedIn
+  ok   years of experience answered
+  ok   why-work-here from saved answers
+  ok   gender from profile
+  ok   hispanic/latino from profile
+  ok   veteran status from profile
+  ok   disability status from profile
+  ok   the board search box was left alone
+
+18/18 checks passed — Greenhouse
+
+
+Lever — detected "lever", 13 filled, 0 left
+
+  ok   detected as Lever
+  ok   full name
+  ok   email
+  ok   phone
+  ok   current company
+  ok   LinkedIn
+  ok   GitHub
+  ok   Portfolio
+  ok   work authorization radio = Yes
+  ok   sponsorship radio = No
+  ok   relocate radio = Yes
+  ok   salary expectations
+  ok   why-work-here from saved answers
+  ok   how did you hear select
+
+14/14 checks passed — Lever
+
+
+Ashby — detected "ashby", 10 filled, 0 left
+
+  ok   detected as Ashby
+  ok   name
+  ok   email
+  ok   phone
+  ok   LinkedIn despite a uuid field name
+  ok   location
+  ok   work authorization radio = Yes
+  ok   sponsorship radio = No
+  ok   how did you hear = LinkedIn
+  ok   notice period from saved answers
+  ok   gender from profile
+
+11/11 checks passed — Ashby
+
+
+Workable — detected "workable", 13 filled, 2 left
+
+  ok   detected as Workable
+  ok   first name
+  ok   last name
+  ok   email
+  ok   phone
+  ok   location
+  ok   summary
+  ok   LinkedIn
+  ok   GitHub
+  ok   Portfolio
+  ok   education level
+  ok   years of experience
+  ok   work authorization = Yes
+  ok   sponsorship = No
+  ok   skills checkbox group left for the applicant
+
+15/15 checks passed — Workable
+
+
+SmartRecruiters — detected "smartrecruiters", 10 filled, 1 left
+
+  ok   detected as SmartRecruiters
+  ok   first name
+  ok   last name
+  ok   email
+  ok   phone
+  ok   location
+  ok   country
+  ok   current company
+  ok   current job title
+  ok   work authorization
+  ok   sponsorship
+  ok   a rephrased open question is left blank, not guessed
+
+12/12 checks passed — SmartRecruiters
+
+
+Workday — detected "workday", 14 filled, 0 left
+
+  ok   detected as Workday
+  ok   first name
+  ok   last name
+  ok   country dropdown resolves to the US entry
+  ok   address line 1 is the street only
+  ok   address line 2 is the apartment
+  ok   city
+  ok   state dropdown
+  ok   postal code
+  ok   phone device type
+  ok   country phone code picks the US entry
+  ok   phone number is the number, not the code
+  ok   phone extension left blank
+  ok   how did you hear resolves LinkedIn to Social Media
+  ok   work authorization = Yes
+  ok   sponsorship = No
+
+16/16 checks passed — Workday
+
+
+iCIMS — detected "icims", 25 filled, 0 left
+
+  ok   detected as iCIMS
+  ok   first name
+  ok   last name
+  ok   email
+  ok   mobile phone
+  ok   street address is line 1 only
+  ok   address line 2 is the apartment
+  ok   city
+  ok   state
+  ok   postal code
+  ok   experience row 1 employer
+  ok   experience row 1 title
+  ok   experience row 2 employer is the second job
+  ok   experience row 2 title is the second job
+  ok   experience row 1 start date
+  ok   experience row 2 end date
+  ok   school
+  ok   degree
+  ok   major
+  ok   work authorization
+  ok   sponsorship
+  ok   relocate
+  ok   desired salary
+  ok   source
+
+24/24 checks passed — iCIMS
+
+
+Taleo — detected "taleo", 17 filled, 0 left
+
+  ok   detected as Taleo
+  ok   first name
+  ok   middle initial fits maxlength=1
+  ok   last name
+  ok   e-mail address
+  ok   primary number
+  ok   address line 1 carries street + apartment
+  ok   city
+  ok   state select
+  ok   zip
+  ok   country select
+  ok   eligible to work = Yes
+  ok   sponsorship = No
+  ok   most recent employer
+  ok   most recent job title
+  ok   highest education = Master's Degree
+  ok   school
+  ok   how did you hear = LinkedIn
+
+18/18 checks passed — Taleo
+
+
+SuccessFactors — detected "sapSuccessFactors", 11 filled, 0 left
+
+  ok   detected as SAP SuccessFactors
+  ok   first name
+  ok   last name
+  ok   e-mail
+  ok   day time number
+  ok   street address
+  ok   city
+  ok   postal code
+  ok   country
+  ok   work authorization
+  ok   sponsorship
+  ok   source
+
+12/12 checks passed — SAP SuccessFactors
+
+
+Oracle HCM — detected "oraclehcm", 19 filled, 0 left
+
+  ok   detected as Oracle HCM
+  ok   first name
+  ok   last name
+  ok   email
+  ok   country phone code
+  ok   contact number is the phone, not the code
+  ok   country/region is the country
+  ok   state is the state
+  ok   address line 1 is the street only
+  ok   address line 2 is the apartment
+  ok   address line 3 left blank
+  ok   address line 4 left blank
+  ok   city
+  ok   postal code
+  ok   county left blank
+  ok   tax district left blank
+  ok   second last name left blank
+  ok   suffix left blank
+  ok   extension left blank
+  ok   employee ID left blank
+  ok   employer
+  ok   job title
+  ok   work authorization
+  ok   sponsorship
+  ok   referral source
+
+25/25 checks passed — Oracle HCM
+
+
+Generic careers page — detected "generic", 10 filled, 1 left
+
+  ok   falls through to the generic adapter
+  ok   application first name
+  ok   application last name
+  ok   application email
+  ok   application phone
+  ok   application city
+  ok   application country
+  ok   application LinkedIn
+  ok   notice period from saved answers
+  ok   salary expectation
+  ok   right to work
+  ok   the site search box was left alone
+  ok   the newsletter email was left alone
+  ok   the newsletter name was left alone
+
+14/14 checks passed — Generic careers page
+
+
+AI pass — 4 questions sent, 4 drafted
+
+questions sent over the wire:
+   • "Why are you interested in joining Orbit?"  [textarea] options=0
+   • "Describe a project you are proud of."  [textarea] options=0
+   • "Which of these have you used in production?"  [select] options=4
+   • "How many days per week would you come to the office?"  [select] options=5
+
+  ok   the page's questions go in one request
+  ok   the open question is sent as the question alone
+  ok   no question carries the pipe-joined label blob
+  ok   no question leaks the machine name
+  ok   the 'why' answer landed
+  ok   the 'proud of' answer landed
+  ok   the menu question was given its options
+  ok   the menu answer landed
+  ok   the numeric menu answer landed
+  ok   identity fields were never sent to the model
+
+10/10 checks passed — AI answers
+
+
+=== Popup after final CSS adjustment ===
+
+manual edits are on screen as soon as the popup opens
+  ok   the pending list opens by itself when there are edits to review
+  ok   both edits are listed
+  ok   each has an Edit button
+  ok   there is no 'attach my resume' switch
+
+correcting an answer before saving it
+  ok   the editor opens in place
+  ok   a dropdown answer is edited from the question's own choices
+  ok   a live update waits while an answer is being edited
+  ok   the edit is sent with the new answer
+  ok   and the corrected answer is saved in the same step
+  ok   the saved answer leaves the list and the late capture appears
+  ok   the saved-answer count moves
+
+the list stays current while the popup is open
+  ok   an answer captured on the page appears without reopening the popup
+
+typing an answer in by hand
+  ok   the form opens
+  ok   it is added
+  ok   and saved to the dashboard straight away
+  ok   the form closes afterwards
+
+16/16 checks passed
+

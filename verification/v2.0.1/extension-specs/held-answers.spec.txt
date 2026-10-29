@@ -1,0 +1,67 @@
+
+an edit is held, not banked
+  ok   held answer is stored
+  ok   nothing has entered the sync queue
+
+it survives the content script being torn down
+  ok   still readable after a navigation
+  ok   badge shows there is something waiting
+
+a second answer from a later step joins it
+  ok   two answers held across two steps
+
+re-answering one question replaces it rather than duplicating
+  ok   still two held
+  ok   the newer wording won
+
+saving one moves only that one into the sync queue
+  ok   one left held
+  ok   one queued for sync
+  ok   the right one was queued
+  ok   the answer type came with it
+
+saving the rest empties the held list
+  ok   nothing held
+  ok   both queued
+  ok   the dropdown kept its type
+
+discarding removes without queueing
+  ok   discarded answer is gone
+  ok   and was never queued
+
+Clear empties both buckets
+  ok   something is held
+  ok   something is queued
+  ok   it reports clearing both
+  ok   held answers are gone
+  ok   queued answers are gone
+  ok   and nothing comes back on the next read
+  ok   the badge is empty
+
+a dismissed answer cannot come back on the next form
+  ok   it is held
+  ok   discarding empties the list
+  ok   it does not come back
+  ok   nor in different casing or spacing
+
+but a new question is unaffected
+  ok   a different question is still held
+
+saving one later lifts its dismissal
+  ok   dismissed, so not held
+  ok   saving a different one leaves the dismissal alone
+
+Clear also dismisses what it clears
+  ok   a cleared answer stays gone
+
+but the question stays open to a different answer
+  ok   a better answer to a cleared question is captured
+
+dismissals expire rather than lasting forever
+  ok   an expired dismissal no longer blocks capture
+
+an older build's permanent blacklist is discarded on upgrade
+  ok   questions blocked by the old shape are captured again
+
+all passing
+

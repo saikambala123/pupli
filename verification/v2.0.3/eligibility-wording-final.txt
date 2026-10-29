@@ -1,0 +1,64 @@
+
+The reporter's profile: over 18, never worked at Acme, willing to relocate, no relatives there, starting in six days
+  ok   Are you at least 18 years of age? → Yes
+  ok   Are you 18 years of age or older? → Yes
+  ok   Are you over the age of 18? → Yes
+  ok   Are you under the age of 18? → No
+  ok   Are you at least 16 years of age? → Yes
+  ok   Are you at least 21 years of age? → left blank
+  ok   Do you have at least 18 years of experience in software? → left blank
+  ok   Have you ever worked for Acme Corporation before? → No
+  ok   Are you a former Acme Corporation employee? → No
+  ok   Have you ever been an employee of Acme Corporation? → No
+  ok   Prior employment with Acme Corporation? → No
+  ok   Are you a current or former employee of Acme Corporation? → No
+  ok   This position requires relocation to Des Moines, IA. Are you willing to relocate? → Yes
+  ok   If offered the position, are you willing to relocate at your own expense? → Yes
+  ok   Are you open to relocation? → Yes
+  ok   Will you require relocation assistance? → left blank
+  ok   Do you have any relatives employed by Acme Corporation? → No
+  ok   Are you related to anyone currently employed by Acme Corporation? → No
+  ok   Is anyone in your immediate family currently employed by Acme Corporation? → No
+  ok   Does Acme Corporation employ any of your relatives? → No
+  ok   Do you have a relative or friend employed with us? → left blank
+  ok   If you have relatives employed by Acme Corporation, please list their names and relationship. If none, enter N/A. → N/A
+  ok   Are you related to any government official? → left blank
+  ok   Do you have relatives who work in banking? → left blank
+  ok   Did any of our current employees inform you about this position? → No
+  ok   Were you referred by a current employee? → No
+  ok   Date Available → 11/02/2026
+  ok   How soon can you start? → 11/02/2026
+  ok   If offered a position, when would you be available to begin work? → 11/02/2026
+  ok   Earliest date you can start → 11/02/2026
+  ok   When can you start? → Within 2 weeks
+  ok   How soon could you start working? → 1 week
+  ok   Can you start within two weeks of an offer? → Yes
+  ok   What is your notice period? → Immediate
+  ok   Do you have any additional jobs in the financial services industry? If yes, please list employer and type of work. If no, enter NA. → left blank
+
+A former employee with no relatives there: the relatives question is not the employment question
+  ok   Have you ever worked for Acme Corporation before? → Yes
+  ok   Are you related to anyone currently employed by Acme Corporation? → still No
+
+A date of birth answers an age the profile's yes / no cannot
+  ok   Are you at least 21 years of age? → Yes (thirty years old)
+
+Starting today, and a notice period instead of a date
+  ok   "Immediately": When can you start? → Immediately
+  ok     and the radio choices → Immediately
+  ok   no start date, 30 days' notice: When can you start? → Within 1 month
+  ok     Can you start within two weeks? → No
+  ok     What is your notice period? → 30 days
+
+Nothing in the profile: nothing is invented
+  ok   Are you at least 18 years of age? → left blank
+  ok   Are you under the age of 18? → left blank
+  ok   Have you ever worked for Acme Corporation before? → left blank
+  ok   This position requires relocation to Des Moines, IA. Are you willing to relocate? → left blank
+  ok   Do you have any relatives employed by Acme Corporation? → left blank
+  ok   If you have relatives employed by Acme Corporation, please list their names and relationship. If none, enter N/A. → N/A
+  ok   When can you start? → left blank
+  ok   What is your notice period? → left blank
+
+51/51 checks passed
+

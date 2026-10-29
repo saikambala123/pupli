@@ -1,0 +1,95 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Application — later steps</title>
+<style>
+  body{font-family:system-ui;padding:24px;max-width:720px}
+  .f{margin-bottom:22px}
+  .q{display:block;font-weight:600;margin-bottom:8px}
+  .opt{display:block;margin:3px 0;cursor:pointer}
+  .box{display:inline-block;width:14px;height:14px;border:1px solid #778;margin-right:6px;vertical-align:-2px}
+  .box[aria-checked="true"]{background:#35c}
+  input[type=text],textarea,select{width:100%;padding:8px;border:1px solid #ccd;border-radius:6px}
+</style></head><body>
+<h1>Field Engineer</h1>
+<form id="app">
+  <div class="f"><label class="q" for="step1">What interests you about this role?</label>
+    <textarea id="step1" name="step1" rows="2"></textarea></div>
+  <div id="later"></div>
+</form>
+
+<script>
+/**
+ * Step two renders after the page has booted.
+ *
+ * A multi-step application, an "Add another" section and a late-hydrating
+ * demographics block all arrive this way — long after the one scan the content
+ * script does on load. None of these controls is reachable by tab, so the
+ * focusin watcher never sees them either.
+ */
+window.renderStep2 = () => {
+  document.getElementById("later").innerHTML = `
+    <div class="f">
+      <label class="q" for="late-select">How many years of Kubernetes experience do you have?</label>
+      <select id="late-select" name="late_select">
+        <option value="">Select…</option><option>0-1</option><option>2-4</option><option>5+</option>
+      </select>
+    </div>
+
+    <div class="f">
+      <span class="q">Are you willing to travel to customer sites?</span>
+      <label class="opt"><input type="radio" name="late_travel" value="Yes"> Yes</label>
+      <label class="opt"><input type="radio" name="late_travel" value="No"> No</label>
+    </div>
+
+    <div class="f">
+      <span class="q">Which certifications do you hold?</span>
+      <label class="opt"><input type="checkbox" name="late_certs" value="CKA"> CKA</label>
+      <label class="opt"><input type="checkbox" name="late_certs" value="AWS SA"> AWS SA</label>
+      <label class="opt"><input type="checkbox" name="late_certs" value="Terraform Associate"> Terraform Associate</label>
+    </div>
+
+    <div class="f">
+      <label class="q" for="late-text">What is your expected base salary?</label>
+      <input id="late-text" name="late_text" type="text">
+    </div>
+
+    <!--
+      A custom radio group with no tabindex: it can be clicked but never
+      focused, so a focus-driven watcher never attaches to it.
+    -->
+    <div class="f">
+      <span class="q" id="shift-q">Which shift pattern suits you best?</span>
+      <div role="radiogroup" aria-labelledby="shift-q">
+        <div class="opt" role="radio" aria-checked="false" data-value="Days"><span class="box"></span>Days</div>
+        <div class="opt" role="radio" aria-checked="false" data-value="Nights"><span class="box"></span>Nights</div>
+        <div class="opt" role="radio" aria-checked="false" data-value="Rotating"><span class="box"></span>Rotating</div>
+      </div>
+    </div>
+
+    <!-- A custom checkbox group, same problem. -->
+    <div class="f">
+      <span class="q" id="tools-q">Which tools have you used in production?</span>
+      <div role="group" aria-labelledby="tools-q">
+        <div class="opt" role="checkbox" aria-checked="false" data-value="Datadog"><span class="box"></span>Datadog</div>
+        <div class="opt" role="checkbox" aria-checked="false" data-value="Prometheus"><span class="box"></span>Prometheus</div>
+        <div class="opt" role="checkbox" aria-checked="false" data-value="Grafana"><span class="box"></span>Grafana</div>
+      </div>
+    </div>
+  `;
+
+  document.querySelectorAll('[role="radio"]').forEach((r) => {
+    r.addEventListener("click", () => {
+      r.closest('[role="radiogroup"]').querySelectorAll('[role="radio"]')
+        .forEach((o) => o.setAttribute("aria-checked", String(o === r)));
+      r.querySelector(".box").setAttribute("aria-checked", "true");
+    });
+  });
+  document.querySelectorAll('[role="checkbox"]').forEach((c) => {
+    c.addEventListener("click", () => {
+      const on = c.getAttribute("aria-checked") !== "true";
+      c.setAttribute("aria-checked", String(on));
+      c.querySelector(".box").setAttribute("aria-checked", String(on));
+    });
+  });
+};
+</script>
+</body></html>

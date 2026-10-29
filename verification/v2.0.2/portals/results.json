@@ -1,0 +1,74 @@
+[
+  {
+    "test": "test/portals/greenhouse.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/lever.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/ashby.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/workable.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/smartrecruiters.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/workday.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/icims.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/taleo.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/successfactors.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/oraclehcm.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/generic.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  },
+  {
+    "test": "test/portals/ai.spec.mjs",
+    "code": 0,
+    "signal": null,
+    "complete": true
+  }
+]

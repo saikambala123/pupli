@@ -1,0 +1,58 @@
+PASS sapsf.eu detection
+PASS fn
+PASS ln
+PASS em
+PASS dial
+PASS ph
+PASS homeCountry
+PASS homeState
+PASS homeCity
+PASS jobTitle
+PASS employer
+PASS jobStart
+PASS jobEnd
+PASS jobCountry
+PASS jobState
+PASS jobCity
+PASS eduType
+PASS degree
+PASS school
+PASS major
+PASS eduStart
+PASS eduEnd
+PASS score
+PASS passing
+PASS eduCountry
+PASS eduState
+PASS eduCity
+PASS authorized
+PASS sponsorship
+PASS clearance
+PASS education
+PASS agreement
+PASS termination
+PASS misconduct
+PASS SMS explicit consent
+PASS phone constraints
+PASS ph change event reaches portal model
+PASS clearance change event reaches portal model
+PASS education change event reaches portal model
+PASS agreement change event reaches portal model
+PASS school change event reaches portal model
+PASS eduState change event reaches portal model
+PASS no automatic application submission
+PASS manual phone edit preserved
+PASS None clearance survives another run
+PASS US constrained phone has all national digits
+PASS US plain phone keeps country code
+PASS US numeric phone has no formatting
+PASS India constrained phone has all national digits
+PASS India plain phone keeps country code
+PASS India numeric phone has no formatting
+PASS unset SMS
+PASS unset non-compete
+PASS unset termination
+PASS declined SMS
+PASS declined non-compete
+PASS declined termination
+57/57 career field checks passed

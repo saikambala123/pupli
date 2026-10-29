@@ -1,0 +1,29 @@
+PASS national
+PASS major0
+PASS major1
+PASS acquired0-m
+PASS acquired0-y
+PASS acquired1-m
+PASS acquired1-y
+PASS jobStart0-m
+PASS jobStart0-y
+PASS jobStart1-m
+PASS jobStart1-y
+PASS jobEnd0-m
+PASS jobEnd0-y
+PASS jobEnd1-m
+PASS jobEnd1-y
+PASS national portal model
+PASS major0 portal model
+PASS major1 portal model
+PASS acquired0-m portal model
+PASS acquired0-y portal model
+PASS jobStart0-m portal model
+PASS jobStart1-y portal model
+PASS no automatic submit
+PASS manual phone preserved
+PASS manual year preserved
+PASS manual date is not mixed with a profile month
+PASS whole education acquisition date
+PASS education date never copied into unrelated certification
+28/28 Oracle phone/education/date checks passed

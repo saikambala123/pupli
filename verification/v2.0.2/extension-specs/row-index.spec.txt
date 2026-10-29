@@ -1,0 +1,17 @@
+before reconciliation
+   currentTitle         index 0  -> "Azure DevOps Engineer"
+   currentCompany       index 0  -> "Azure DevOps Engineer"
+   experienceLocation   index 0  -> "Azure DevOps Engineer"
+   currentTitle         index 2  -> null
+   currentCompany       index 1  -> "Senior DevOps Engineer"
+   experienceLocation   index 1  -> "Senior DevOps Engineer"
+
+after reconciliation
+   ok   currentTitle         index 0  -> "Azure DevOps Engineer"
+   ok   currentCompany       index 0  -> "Azure DevOps Engineer"
+   ok   experienceLocation   index 0  -> "Azure DevOps Engineer"
+   ok   currentTitle         index 1  -> "Senior DevOps Engineer"
+   ok   currentCompany       index 1  -> "Senior DevOps Engineer"
+   ok   experienceLocation   index 1  -> "Senior DevOps Engineer"
+
+every field in a row shares its row's index

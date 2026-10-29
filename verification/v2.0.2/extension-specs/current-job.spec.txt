@@ -1,0 +1,40 @@
+
+job 1 is the current one
+  ok   shared name: only row 1 is ticked
+  ok   role="checkbox" in one group: only row 1 is ticked
+  ok   every row's box is collected as its own field
+  ok   each row still gets its own employer
+
+job 2 is the current one
+  ok   shared name: only row 2 is ticked
+  ok   role="checkbox" in one group: only row 2 is ticked
+  ok   every row's box is collected as its own field
+  ok   each row still gets its own employer
+
+job 3 is the current one
+  ok   shared name: only row 3 is ticked
+  ok   role="checkbox" in one group: only row 3 is ticked
+  ok   every row's box is collected as its own field
+  ok   each row still gets its own employer
+
+no job is marked current
+  ok   nothing is ticked when the profile says no job is current
+
+every role carries the flag — the reported case
+  ok   exactly one row says 'I currently work here'
+  ok   it is the most recent role
+  ok   the same holds for the grouped widgets
+
+a finished role also carrying the flag
+  ok   still only one row is ticked
+  ok   and it is not the finished one
+
+no flag anywhere, newest role has no end date
+  ok   the open role is ticked
+  ok   the closed roles are left alone
+
+an older role missing its end date is missing data, not a job
+  ok   nothing is ticked
+
+21/21 checks passed
+

@@ -1,0 +1,22 @@
+
+a fill on its own offers nothing for review
+  ok   nothing is pending after a fill
+
+every manual change reaches the pending list, under its own question
+  ok   the agreements question is held with the latest answer
+  ok   under the question's own wording
+  ok   with the menu's choices stored beside it
+  ok   the Federal Government question is held
+  ok   the clearance-eligibility question is held
+  ok   a question mentioning 'out of state' is held — it is not an address
+  ok   an edit to an autofilled answer is held
+  ok   an edit to a control the page re-renders is held
+  ok   every held answer carries the time it was made
+  ok   no identity or address field was offered
+  ok   a typed answer is held without leaving the box
+
+an answer refused while the page still flagged the field is captured once it clears
+  ok   the corrected answer reaches the pending list
+
+13/13 checks passed
+

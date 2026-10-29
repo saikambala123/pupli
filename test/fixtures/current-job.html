@@ -1,0 +1,76 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Work Experience — current job</title>
+<style>body{font-family:system-ui;padding:20px;max-width:760px}
+.f{margin-bottom:10px}label{display:block;font-weight:600;font-size:13px}
+input[type=text]{padding:6px;border:1px solid #ccd;border-radius:5px;width:320px}
+h4{margin:18px 0 6px}
+[role=checkbox]{display:inline-block;width:15px;height:15px;border:1px solid #666;vertical-align:middle}
+[role=checkbox][aria-checked=true]{background:#333}</style></head><body>
+
+<!--
+  "I currently work here" is asked once per job. Three boxes on a three-row form
+  are three questions with three different answers, not one question with three
+  options — but three different things in the engine used to group them anyway.
+
+  The three sections below are the three ways that grouping happened:
+    A. native checkboxes sharing one `name` across every row
+    B. role="checkbox" widgets inside a single [role="group"] section
+    C. one checkbox per row with nothing tying them together (the control case)
+
+  In A and B only the first box was collected as a field at all, so rows two and
+  three were never answered; and any write to the group set every box in it.
+-->
+
+<h2>Section A — one shared name</h2>
+<div data-automation-id="workExperience-1"><h4>Work Experience 1</h4>
+  <div class="f"><label for="a1t">Job Title</label><input id="a1t" type="text"></div>
+  <div class="f"><label for="a1c">Company</label><input id="a1c" type="text"></div>
+  <div class="f"><label><input id="a1cur" type="checkbox" name="currentlyWorkHere"> I currently work here</label></div>
+</div>
+<div data-automation-id="workExperience-2"><h4>Work Experience 2</h4>
+  <div class="f"><label for="a2t">Job Title</label><input id="a2t" type="text"></div>
+  <div class="f"><label for="a2c">Company</label><input id="a2c" type="text"></div>
+  <div class="f"><label><input id="a2cur" type="checkbox" name="currentlyWorkHere"> I currently work here</label></div>
+</div>
+<div data-automation-id="workExperience-3"><h4>Work Experience 3</h4>
+  <div class="f"><label for="a3t">Job Title</label><input id="a3t" type="text"></div>
+  <div class="f"><label for="a3c">Company</label><input id="a3c" type="text"></div>
+  <div class="f"><label><input id="a3cur" type="checkbox" name="currentlyWorkHere"> I currently work here</label></div>
+</div>
+
+<h2>Section B — one role="group" around every row</h2>
+<div role="group" aria-label="Employment History">
+  <div data-automation-id="employment-1"><h4>Employment 1</h4>
+    <div class="f"><label for="b1t">Job Title</label><input id="b1t" type="text"></div>
+    <div class="f"><label for="b1c">Company</label><input id="b1c" type="text"></div>
+    <div class="f"><span id="b1l">I currently work here</span>
+      <div id="b1cur" role="checkbox" aria-checked="false" tabindex="0" aria-labelledby="b1l"></div></div>
+  </div>
+  <div data-automation-id="employment-2"><h4>Employment 2</h4>
+    <div class="f"><label for="b2t">Job Title</label><input id="b2t" type="text"></div>
+    <div class="f"><label for="b2c">Company</label><input id="b2c" type="text"></div>
+    <div class="f"><span id="b2l">I currently work here</span>
+      <div id="b2cur" role="checkbox" aria-checked="false" tabindex="0" aria-labelledby="b2l"></div></div>
+  </div>
+  <div data-automation-id="employment-3"><h4>Employment 3</h4>
+    <div class="f"><label for="b3t">Job Title</label><input id="b3t" type="text"></div>
+    <div class="f"><label for="b3c">Company</label><input id="b3c" type="text"></div>
+    <div class="f"><span id="b3l">I currently work here</span>
+      <div id="b3cur" role="checkbox" aria-checked="false" tabindex="0" aria-labelledby="b3l"></div></div>
+  </div>
+</div>
+
+<h2>Section C — a genuine multi-answer group must still work</h2>
+<fieldset><legend>Which shifts are you available for?</legend>
+  <label><input id="shift-am" type="checkbox" name="shifts" value="Mornings"> Mornings</label>
+  <label><input id="shift-pm" type="checkbox" name="shifts" value="Evenings"> Evenings</label>
+  <label><input id="shift-we" type="checkbox" name="shifts" value="Weekends"> Weekends</label>
+</fieldset>
+
+<script>
+/* A role="checkbox" widget toggles itself on click, as a real one does. */
+document.querySelectorAll('[role="checkbox"]').forEach((el) => {
+  el.addEventListener("click", () => {
+    el.setAttribute("aria-checked", el.getAttribute("aria-checked") === "true" ? "false" : "true");
+  });
+});
+</script></body></html>

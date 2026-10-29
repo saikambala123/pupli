@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Job Application for Arkana Laboratories</title>
+<style>body{font-family:system-ui;padding:24px;max-width:640px}
+.f{margin-bottom:14px}label{display:block;font-weight:600;font-size:13px;margin-bottom:3px}
+input{width:100%;padding:8px;border:0;border-bottom:1px solid #ccd}
+.sel{width:100%;padding:8px;border:1px solid #ccd;border-radius:4px;background:#fff;text-align:left;color:#888;cursor:pointer}
+h3{margin:22px 0 8px}
+</style></head><body>
+<form id="application_form">
+  <div class="f"><label for="fn">First Name *</label><input id="fn" name="first_name" type="text"></div>
+  <div class="f"><label for="ln">Last Name *</label><input id="ln" name="last_name" type="text"></div>
+  <div class="f"><label for="em">Email *</label><input id="em" name="email" type="text"></div>
+
+  <div id="edu-container">
+    <div class="edu-block" data-edu="1">
+      <h3>Education</h3>
+      <div class="f"><label id="s1l">School</label>
+        <!-- Greenhouse's newer embed renders these as comboboxes whose option
+             list is fetched remotely; nothing usable is ever in the DOM. -->
+        <div class="sel" id="s1" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="s1l" tabindex="0">Select...</div></div>
+      <div class="f"><label id="d1l">Degree</label>
+        <div class="sel" id="d1" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="d1l" tabindex="0">Select...</div></div>
+      <div class="f"><label id="p1l">Discipline</label>
+        <div class="sel" id="p1" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="p1l" tabindex="0">Select...</div></div>
+    </div>
+  </div>
+  <button type="button" id="add-edu">Add another education</button>
+  <input type="file" id="resume">
+  <button type="submit">Submit Application</button>
+</form>
+<script>
+window.__addClicks = 0;
+let n = 1;
+document.getElementById("add-edu").addEventListener("click", () => {
+  window.__addClicks++; n++;
+  const d = document.createElement("div");
+  d.className = "edu-block"; d.setAttribute("data-edu", String(n));
+  d.innerHTML = '<h3>Education</h3>' +
+    ['School','Degree','Discipline'].map((lab, i) =>
+      '<div class="f"><label id="l'+n+i+'">'+lab+'</label>' +
+      '<div class="sel" role="combobox" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="l'+n+i+'" tabindex="0">Select...</div></div>').join("");
+  document.getElementById("edu-container").appendChild(d);
+});
+/* The pickers open an empty list, so nothing can ever be chosen. */
+document.addEventListener("click", (e) => {
+  const c = e.target.closest(".sel");
+  if (c) c.setAttribute("aria-expanded", "true");
+});
+</script></body></html>

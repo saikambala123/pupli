@@ -1,0 +1,51 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Data Engineer - Acme | Workable</title></head>
+<body>
+<h1 data-ui="job-title">Data Engineer</h1>
+<form data-ui="application-form">
+  <fieldset><legend>Personal information</legend>
+    <div><label for="wk-first">First name *</label><input type="text" id="wk-first" name="firstname"></div>
+    <div><label for="wk-last">Last name *</label><input type="text" id="wk-last" name="lastname"></div>
+    <div><label for="wk-email">Email *</label><input type="email" id="wk-email" name="email"></div>
+    <div><label for="wk-phone">Phone *</label><input type="tel" id="wk-phone" name="phone"></div>
+    <div><label for="wk-loc">Location</label><input type="text" id="wk-loc" name="address"></div>
+    <div><label for="wk-cv">Resume *</label><input type="file" id="wk-cv" name="resume"></div>
+    <div><label for="wk-sum">Summary</label><textarea id="wk-sum" name="summary"></textarea></div>
+  </fieldset>
+
+  <fieldset><legend>Profile</legend>
+    <div><label for="wk-li">LinkedIn URL</label><input type="url" id="wk-li" name="linkedin"></div>
+    <div><label for="wk-gh">GitHub URL</label><input type="url" id="wk-gh" name="github"></div>
+    <div><label for="wk-pf">Portfolio URL</label><input type="url" id="wk-pf" name="portfolio"></div>
+  </fieldset>
+
+  <fieldset><legend>Details</legend>
+    <div><label for="wk-edu">Education level</label>
+      <select id="wk-edu" name="education">
+        <option value="">Select…</option><option>High school</option><option>Bachelor's degree</option><option>Master's degree</option><option>Doctorate</option>
+      </select></div>
+    <div><label for="wk-exp">Years of experience</label><input type="text" id="wk-exp" name="experience"></div>
+    <div><label for="wk-start">When can you start?</label><input type="text" id="wk-start" name="startdate"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Are you legally eligible to work in the United States?</legend>
+    <label><input type="radio" name="q_auth" value="Yes"> Yes</label>
+    <label><input type="radio" name="q_auth" value="No"> No</label>
+  </fieldset>
+  <fieldset>
+    <legend>Do you now or in the future require sponsorship to work in the United States?</legend>
+    <label><input type="radio" name="q_spon" value="Yes"> Yes</label>
+    <label><input type="radio" name="q_spon" value="No"> No</label>
+  </fieldset>
+  <fieldset>
+    <legend>Which of these do you have hands-on experience with? Select all that apply.</legend>
+    <label><input type="checkbox" name="q_skills" value="Kubernetes"> Kubernetes</label>
+    <label><input type="checkbox" name="q_skills" value="Terraform"> Terraform</label>
+    <label><input type="checkbox" name="q_skills" value="Puppet"> Puppet</label>
+    <label><input type="checkbox" name="q_skills" value="Chef"> Chef</label>
+  </fieldset>
+
+  <button type="submit" data-ui="submit-application">Submit application</button>
+</form>
+</body></html>

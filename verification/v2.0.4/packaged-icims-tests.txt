@@ -1,0 +1,107 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.4 test:icims
+> node test/icims-screenshots.spec.mjs && node test/icims-frames.spec.mjs && node test/portals/icims.spec.mjs
+
+PASS login
+PASS fn
+PASS ln
+PASS preferred
+PASS email
+PASS phoneType
+PASS phone
+PASS sms
+PASS addressType
+PASS street
+PASS line2
+PASS city
+PASS zip
+PASS country
+PASS state
+PASS source
+PASS detail
+PASS currency
+PASS salary
+PASS referral
+PASS refFirst
+PASS refLast
+PASS refID
+PASS highest
+PASS prior
+PASS signature
+PASS not submitted
+PASS street portal model
+PASS zip portal model
+PASS detail portal model
+PASS sms portal model
+PASS signature portal model
+PASS manual street preserved
+PASS iform-last
+PASS iform-first
+PASS iform-middle
+PASS iform-street
+PASS iform-line2
+PASS iform-city
+PASS iform-zip
+PASS signature checkbox
+PASS iForm not submitted
+PASS Cellular phone synonym
+PASS referrer referral
+PASS referrer first
+PASS referrer last
+PASS referrer employee
+47/47 iCIMS screenshot checks passed
+PASS cross-origin frame exists
+PASS nested srcdoc frame exists
+PASS page postMessage cannot trigger a fill
+PASS toolbar operation succeeds
+PASS cross-origin city
+PASS cross-origin ZIP
+PASS cross-origin street
+PASS nested iForm first name
+PASS nested iForm surname
+PASS nested iForm middle
+PASS unrelated third-party form untouched
+PASS aggregate filled count includes both frames
+PASS one fill run per application frame
+PASS one fill run per nested frame
+PASS manual edit in child frame preserved
+PASS stop returns success
+PASS stop reaches child frame
+PASS stop reaches nested frame
+PASS concurrent click is rejected
+PASS stop during frame discovery cancels operation
+PASS stop prevents a queued application frame starting
+PASS stop prevents a queued nested frame starting
+PASS a new explicit click works after stop
+23/23 iCIMS frame checks passed
+
+iCIMS — detected "icims", 25 filled, 0 left
+
+  ok   detected as iCIMS
+  ok   first name
+  ok   last name
+  ok   email
+  ok   mobile phone
+  ok   street address is line 1 only
+  ok   address line 2 is the apartment
+  ok   city
+  ok   state
+  ok   postal code
+  ok   experience row 1 employer
+  ok   experience row 1 title
+  ok   experience row 2 employer is the second job
+  ok   experience row 2 title is the second job
+  ok   experience row 1 start date
+  ok   experience row 2 end date
+  ok   school
+  ok   degree
+  ok   major
+  ok   work authorization
+  ok   sponsorship
+  ok   relocate
+  ok   desired salary
+  ok   source
+
+24/24 checks passed — iCIMS
+

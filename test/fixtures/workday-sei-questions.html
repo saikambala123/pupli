@@ -1,0 +1,403 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Senior DevOps/SRE Engineer — Workday</title>
+<style>
+body{font-family:system-ui;padding:20px;max-width:820px}
+[data-fkit-id]{margin-bottom:16px}
+label,legend{display:block;font-weight:600;margin-bottom:4px;font-size:13px}
+input[type=text]{width:100%;padding:7px;border:1px solid #ccd;border-radius:5px;box-sizing:border-box}
+button.wd{padding:7px 10px;font:inherit;cursor:pointer;text-align:left;width:100%;background:#fff;border:1px solid #ccd;border-radius:5px}
+ul[role=listbox]{list-style:none;margin:0;padding:4px 0;border:1px solid #ccd;background:#fff;position:absolute;z-index:99;max-height:260px;overflow:auto}
+ul[role=listbox] li{padding:6px 10px;cursor:pointer}
+fieldset{border:0;padding:0;margin:0 0 16px}
+.wd-date{display:inline-flex;align-items:center;border:1px solid #ccd;border-radius:5px;padding:2px 6px}
+.wd-date input{border:0;text-align:center;font:inherit;padding:4px 2px;width:2.4em}
+.wd-date input[data-automation-id$="Year-input"]{width:3.6em}
+.err{color:#b00;font-size:12px;margin-top:2px}
+</style></head><body>
+<!--
+  SEI's Workday "Application Questions" step (seic.wd1.myworkdayjobs.com), as in
+  the report: rich-text notices, then Employment Type Desired, Shift Preference,
+  an Available Start Date drawn as MM / DD / YYYY boxes, "Do you wish to be
+  considered for other opportunities?", the base-salary question and the bonus
+  question. Workday prints each question's label in an element that looks like
+  a heading: a label with data-automation-id="formLabel" (window.__SEI_VARIANT
+  = "formLabel", the default) or a <legend> ("legend").
+
+  window.__SEI_GROUPED = true puts the questions inside one role="group", as a
+  tenant can: then every box on the page shares that group with the date.
+-->
+<ol data-automation-id="progressBar">
+  <li data-automation-id="progressBarCompletedStep"><div>My Information</div></li>
+  <li data-automation-id="progressBarCompletedStep"><div>My Experience</div></li>
+  <li data-automation-id="progressBarActiveStep"><div>Application Questions</div></li>
+  <li data-automation-id="progressBarInactiveStep"><div>Review</div></li>
+</ol>
+<div data-automation-id="applyFlowPage">
+  <h2 data-automation-id="jobPostingHeader">Senior DevOps/SRE Engineer</h2>
+  <h3>Application Questions</h3>
+  <div data-automation-id="primaryQuestionnairePage" id="primary"></div>
+  <button type="button" data-automation-id="bottom-navigation-next-button" id="save">Save and Continue</button>
+</div>
+
+<script>
+const VARIANT = window.__SEI_VARIANT || "formLabel";
+const host = document.getElementById("primary");
+if (window.__SEI_GROUPED) {
+  host.setAttribute("role", "group");
+  host.setAttribute("aria-label", "Application Questions");
+}
+const id = (n) => `primaryQuestionnaire--7e2a91c0d4b35f6e8a1b2c3d4e5f60${n}`;
+
+function wrapper(n, kind) {
+  const wrap = document.createElement(VARIANT === "legend" ? "fieldset" : "div");
+  wrap.setAttribute("data-automation-id", `formField-q${n}`);
+  wrap.setAttribute("data-fkit-id", id(n));
+  wrap.dataset.q = kind;
+  return wrap;
+}
+function labelFor(n, text, { forId = id(n), labelId } = {}) {
+  const el = document.createElement(VARIANT === "legend" ? "legend" : "label");
+  if (VARIANT !== "legend") {
+    el.setAttribute("data-automation-id", "formLabel");
+    if (forId) el.setAttribute("for", forId);
+  }
+  if (labelId) el.id = labelId;
+  el.innerHTML = `<div data-automation-id="richText"><p></p></div><abbr title="required">*</abbr>`;
+  el.querySelector("p").textContent = text;
+  return el;
+}
+
+/* Rich-text notices above the questions. */
+const notice = document.createElement("div");
+notice.setAttribute("data-automation-id", "richText");
+notice.innerHTML = `<p><u>Notice to Applicant:</u> Any individual, who, because of a disability, needs accommodations or assistance in completing an application or at any time during the application process, should contact the Workforce Development team at workforcedevelopment@seic.com or any HR Partner. We will work with you to meet your accommodation needs.</p>
+<p><u>Notice to Applicants in Massachusetts:</u> It is unlawful in Massachusetts to require or administer a lie detector test as a condition of employment or continued employment. An employer who violates this law shall be subject to criminal penalties and civil liability.</p>`;
+host.appendChild(notice);
+
+const MENUS = [
+  ["01", "emptype", "Employment Type Desired", "Full-Time|Part-Time|Temporary|Intern"],
+  ["02", "shift", "Shift Preference", "Day|Evening|Night|Weekend"],
+];
+for (const [n, kind, question, options] of MENUS) {
+  const wrap = wrapper(n, kind);
+  wrap.appendChild(labelFor(n, question));
+  const btn = document.createElement("button");
+  btn.className = "wd"; btn.type = "button"; btn.id = id(n); btn.name = id(n).split("--")[1];
+  btn.setAttribute("aria-haspopup", "listbox"); btn.dataset.options = options; btn.value = "";
+  btn.textContent = "Select One";
+  btn.setAttribute("aria-label", `${question} Select One Required`);
+  btn.dataset.question = question;
+  wrap.appendChild(btn);
+  host.appendChild(wrap);
+}
+
+/* Available Start Date: three spinbutton boxes in one widget. */
+{
+  const n = "03";
+  const wrap = wrapper(n, "start");
+  wrap.appendChild(labelFor(n, "Available Start Date", { forId: `${id(n)}-dateSectionMonth-input`, labelId: "asd-label" }));
+  const widget = document.createElement("div");
+  widget.className = "wd-date"; widget.setAttribute("role", "group");
+  widget.setAttribute("data-automation-id", "dateInputWrapper");
+  widget.setAttribute("aria-labelledby", "asd-label");
+  widget.innerHTML = ["Month", "Day", "Year"].map((part, i) => `
+    <div data-automation-id="dateSection${part}">
+      <input id="${id(n)}-dateSection${part}-input" type="text" role="spinbutton"
+             data-automation-id="dateSection${part}-input" aria-label="${part}"
+             aria-valuemin="${part === "Year" ? 1900 : 1}" aria-valuemax="${part === "Month" ? 12 : part === "Day" ? 31 : 2100}"
+             aria-valuetext="${part === "Month" ? "MM" : part === "Day" ? "DD" : "YYYY"}" autocomplete="off">
+    </div>${i < 2 ? '<span class="sep">/</span>' : ""}`).join("") +
+    `<div data-automation-id="dateIcon" role="button" aria-label="Calendar">&#128197;</div>`;
+  wrap.appendChild(widget);
+  const err = document.createElement("div");
+  err.className = "err"; err.id = "start-err"; err.setAttribute("data-automation-id", "errorMessage");
+  wrap.appendChild(err);
+  host.appendChild(wrap);
+}
+
+{
+  const n = "04";
+  const question = "Do you wish to be considered for other opportunities?";
+  const wrap = wrapper(n, "other");
+  wrap.appendChild(labelFor(n, question));
+  const btn = document.createElement("button");
+  btn.className = "wd"; btn.type = "button"; btn.id = id(n); btn.name = id(n).split("--")[1];
+  btn.setAttribute("aria-haspopup", "listbox"); btn.dataset.options = "Yes|No"; btn.value = "";
+  btn.textContent = "Select One";
+  btn.setAttribute("aria-label", `${question} Select One Required`);
+  btn.dataset.question = question;
+  wrap.appendChild(btn);
+  host.appendChild(wrap);
+}
+
+for (const [n, kind, question] of [
+  ["05", "salary", "What are your expectations with regards to base salary?"],
+  ["06", "bonus", "What is your desired Annual bonus?"],
+]) {
+  const wrap = wrapper(n, kind);
+  wrap.appendChild(labelFor(n, question));
+  const input = document.createElement("input");
+  input.type = "text"; input.id = id(n); input.setAttribute("aria-required", "true");
+  wrap.appendChild(input);
+  host.appendChild(wrap);
+}
+
+/* ---------------------------------------------------------------------------
+ * Workday's menu: portalled listbox, the pick painted onto the button.
+ * ------------------------------------------------------------------------- */
+let openMenu = null;
+function closeMenus() {
+  if (openMenu) { openMenu.menu.remove(); openMenu.btn.setAttribute("aria-expanded", "false"); openMenu = null; }
+}
+function wire(btn) {
+  btn.addEventListener("click", () => {
+    const wasOpen = openMenu && openMenu.btn === btn;
+    closeMenus();
+    if (wasOpen) return;
+    const menu = document.createElement("ul");
+    menu.setAttribute("role", "listbox");
+    btn.dataset.options.split("|").forEach((text, i) => {
+      const li = document.createElement("li");
+      li.setAttribute("role", "option");
+      li.setAttribute("aria-selected", String(btn.textContent.trim() === text));
+      const div = document.createElement("div");
+      div.textContent = text;
+      li.appendChild(div);
+      li.addEventListener("click", () => {
+        btn.textContent = text; btn.value = `${btn.name}-${i}`;
+        btn.setAttribute("aria-label", `${btn.dataset.question} ${text} Required`);
+        closeMenus();
+        btn.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+      menu.appendChild(li);
+    });
+    openMenu = { btn, menu };
+    btn.setAttribute("aria-expanded", "true");
+    setTimeout(() => {
+      if (!openMenu || openMenu.menu !== menu) return;
+      const r = btn.getBoundingClientRect();
+      menu.style.top = (r.bottom + window.scrollY) + "px";
+      menu.style.left = (r.left + window.scrollX) + "px";
+      menu.style.width = r.width + "px";
+      document.body.appendChild(menu);
+    }, 60);
+  });
+}
+document.querySelectorAll("button.wd").forEach(wire);
+document.addEventListener("click", (e) => {
+  if (!openMenu) return;
+  if (openMenu.btn.contains(e.target) || openMenu.menu.contains(e.target)) return;
+  closeMenus();
+}, true);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenus(); }, true);
+
+/* ---------------------------------------------------------------------------
+ * The date boxes: digits only, each box its own part, the caret moves on by
+ * itself once a box is full, and the widget validates all three together when
+ * the caret leaves it — "Error: Invalid Date: 01//2022" when the day is missing.
+ *
+ * Like Workday's, the widget is a React component. The boxes show the date it
+ * last rendered; a change to a box is applied to that date, and the page only
+ * renders again once the script that made the change has finished (a
+ * microtask later). Several boxes changed in one go are therefore each applied
+ * to the same old date and only the last one survives — the other boxes go
+ * back to what was rendered before. A box changed, the page rendered, then the
+ * next box changed, is how a person's typing reaches it.
+ * ------------------------------------------------------------------------- */
+const boxes = Array.from(document.querySelectorAll(".wd-date input"));
+const kindOf = (el) => /Month/.test(el.dataset.automationId) ? "month" : /Day/.test(el.dataset.automationId) ? "day" : "year";
+const capOf = (el) => kindOf(el) === "year" ? 4 : 2;
+/* window.__DATE_WIDGET:
+     "react"  (default) — as above: each box's input is applied to the date as
+              last rendered;
+     "keys"   — the widget reads keystrokes itself: a digit's keydown goes
+              into the box's own buffer (and is not typed), Backspace takes
+              one off, and the boxes are controlled — text put into them any
+              other way is put back as it was;
+     "sticky" — whatever complete date it is given, the widget shows
+              01/01/2000 once the caret leaves it;
+     "spin"   — the boxes only take the arrow keys: ArrowUp / ArrowDown move
+              the number in the box on by one (what other Workday fillers
+              found), and anything typed is put back as it was;
+     "picker" — the boxes take nothing typed at all; ArrowUp turns an empty
+              box to its first value (01, 01, 2000 — the reported 01/01/2000);
+              the calendar button beside them opens Workday's calendar, and a
+              day picked there is the date.
+   In every mode a year under 100 is read as 20xx when the caret leaves the
+   widget, so a year typed as "0000" shows as 2000. */
+const MODE = window.__DATE_WIDGET || "react";
+let rendered = { month: "", day: "", year: "" };
+let pending = null;
+window.__dateRenders = 0;
+function setDate(next) {
+  if (!pending) queueMicrotask(render);
+  pending = next;
+}
+function render() {
+  if (!pending) return;
+  rendered = pending;
+  pending = null;
+  window.__dateRenders++;
+  for (const b of boxes) {
+    const v = rendered[kindOf(b)];
+    if (b.value !== v) b.value = v;
+    b._valueTracker.setValue(v);
+    b.setAttribute("aria-valuetext", v || (kindOf(b) === "month" ? "MM" : kindOf(b) === "day" ? "DD" : "YYYY"));
+  }
+}
+boxes.forEach((el, i) => {
+  const cap = capOf(el);
+  el._valueTracker = { _v: el.value, getValue() { return this._v; }, setValue(v) { this._v = String(v); } };
+  el.addEventListener("beforeinput", (e) => { if (e.data && /\D/.test(e.data)) e.preventDefault(); });
+  if (MODE === "picker") {
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+        e.preventDefault();
+        const kind = kindOf(el);
+        const first = kind === "year" ? "2000" : "01";
+        const now = rendered[kind];
+        setDate({ ...rendered, [kind]: now ? String(Number(now) + (e.key === "ArrowUp" ? 1 : -1)).padStart(cap, "0") : first });
+        return;
+      }
+      if (/^\d$/.test(e.key) || e.key === "Backspace") e.preventDefault();
+    });
+    el.addEventListener("keypress", (e) => e.preventDefault());
+    el.addEventListener("beforeinput", (e) => e.preventDefault());
+    el.addEventListener("input", () => { const v = rendered[kindOf(el)]; if (el.value !== v) el.value = v; }, true);
+    return;
+  }
+  if (MODE === "spin") {
+    el.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowUp" && e.key !== "ArrowDown") { if (/^\d$/.test(e.key)) e.preventDefault(); return; }
+      e.preventDefault();
+      const min = Number(el.getAttribute("aria-valuemin")), max = Number(el.getAttribute("aria-valuemax"));
+      const now = parseInt(e.currentTarget.value, 10);
+      let next = Number.isNaN(now) ? (e.key === "ArrowUp" ? min : max) : now + (e.key === "ArrowUp" ? 1 : -1);
+      if (next > max) next = min;
+      if (next < min) next = max;
+      setDate({ ...rendered, [kindOf(el)]: String(next).padStart(cap, "0") });
+    });
+    el.addEventListener("input", () => { const v = rendered[kindOf(el)]; if (el.value !== v) el.value = v; }, true);
+    return;
+  }
+  if (MODE === "keys") {
+    el.addEventListener("keydown", (e) => {
+      if (/^\d$/.test(e.key)) {
+        e.preventDefault();
+        const current = rendered[kindOf(el)];
+        const next = (current.length >= cap ? "" : current) + e.key;
+        setDate({ ...rendered, [kindOf(el)]: next });
+        if (next.length === cap && boxes[i + 1]) setTimeout(() => boxes[i + 1].focus(), 0);
+      } else if (e.key === "Backspace") {
+        e.preventDefault();
+        setDate({ ...rendered, [kindOf(el)]: rendered[kindOf(el)].slice(0, -1) });
+      }
+    });
+    // Controlled: whatever was put in any other way goes back.
+    el.addEventListener("input", () => { const v = rendered[kindOf(el)]; if (el.value !== v) el.value = v; }, true);
+    return;
+  }
+  el.addEventListener("input", () => {
+    const digits = el.value.replace(/\D/g, "").slice(0, cap);
+    // The date as it was last rendered, with this box changed.
+    setDate({ ...rendered, [kindOf(el)]: digits });
+    if (digits.length === cap && boxes[i + 1]) setTimeout(() => boxes[i + 1].focus(), 0);
+  }, true);
+});
+/* Workday's calendar: the button beside the boxes opens it; today is marked
+   datePickerSelectedToday; a day picked sets the date and closes it. */
+(() => {
+  const icon = document.querySelector('[data-automation-id="dateIcon"]');
+  // window.__NO_CALENDAR: a widget with no calendar button, typed into only.
+  if (window.__NO_CALENDAR) { icon.remove(); return; }
+  const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  let pop = null;
+  window.__calendarOpened = 0;
+  const close = () => { if (pop) { pop.remove(); pop = null; } };
+  function draw(year, month) {
+    close();
+    pop = document.createElement("div");
+    pop.setAttribute("data-automation-id", "datePicker");
+    pop.setAttribute("role", "dialog");
+    pop.style.cssText = "position:absolute;z-index:99;background:#fff;border:1px solid #ccd;padding:8px;";
+    const r = icon.getBoundingClientRect();
+    pop.style.top = `${r.bottom + scrollY + 4}px`;
+    pop.style.left = `${r.left + scrollX - 150}px`;
+    const head = document.createElement("div");
+    head.innerHTML = `<button type="button" aria-label="Previous Month" data-automation-id="datePickerPrevMonth">&lt;</button>
+      <span data-automation-id="datePickerMonth">${MONTHS[month]} ${year}</span>
+      <button type="button" aria-label="Next Month" data-automation-id="datePickerNextMonth">&gt;</button>`;
+    head.querySelector('[aria-label="Previous Month"]').addEventListener("click", () => draw(month ? year : year - 1, month ? month - 1 : 11));
+    head.querySelector('[aria-label="Next Month"]').addEventListener("click", () => draw(month === 11 ? year + 1 : year, (month + 1) % 12));
+    pop.appendChild(head);
+    const grid = document.createElement("div");
+    grid.setAttribute("role", "grid");
+    const today = new Date();
+    for (let d = 1; d <= new Date(year, month + 1, 0).getDate(); d++) {
+      const day = new Date(year, month, d);
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = String(d);
+      b.setAttribute("role", "gridcell");
+      b.setAttribute("aria-label", `${DAYS[day.getDay()]}, ${MONTHS[month]} ${d}, ${year}`);
+      const isToday = day.toDateString() === today.toDateString();
+      b.setAttribute("data-automation-id", isToday ? "datePickerSelectedToday" : "datePickerDay");
+      b.addEventListener("click", () => {
+        setDate({ month: String(month + 1).padStart(2, "0"), day: String(d).padStart(2, "0"), year: String(year) });
+        window.__pickedFromCalendar = b.getAttribute("aria-label");
+        close();
+      });
+      grid.appendChild(b);
+    }
+    pop.appendChild(grid);
+    document.body.appendChild(pop);
+  }
+  icon.addEventListener("click", () => {
+    if (pop) { close(); return; }
+    window.__calendarOpened++;
+    const shown = rendered.year && rendered.month ? new Date(+rendered.year, +rendered.month - 1, 1) : new Date();
+    window.__calendarOpenedOn = `${MONTHS[shown.getMonth()]} ${shown.getFullYear()}`;
+    draw(shown.getFullYear(), shown.getMonth());
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); }, true);
+})();
+/* window.__DATE_PREFILL = "MM/DD/YYYY": the widget already shows a date, as
+   one left by an earlier fill. */
+if (window.__DATE_PREFILL) {
+  const [month, day, year] = String(window.__DATE_PREFILL).split("/");
+  setDate({ month, day, year });
+}
+if (MODE === "sticky") {
+  document.addEventListener("focusout", (e) => {
+    if (!boxes.includes(e.target)) return;
+    setTimeout(() => {
+      if (boxes.includes(document.activeElement)) return;
+      const { month, day, year } = rendered;
+      if (month && day && year) setDate({ month: "01", day: "01", year: "2000" });
+    }, 0);
+  }, true);
+}
+function validateDate() {
+  const [m, d, y] = boxes.map((b) => b.value);
+  const node = document.getElementById("start-err");
+  if (!m && !d && !y) { node.textContent = ""; return; }
+  const ok = /^\d{2}$/.test(m) && +m >= 1 && +m <= 12 && /^\d{2}$/.test(d) && +d >= 1 && +d <= 31 && /^\d{4}$/.test(y);
+  node.textContent = ok ? "" : `Error: Invalid Date: ${m}/${d}/${y}`;
+}
+document.addEventListener("focusout", (e) => {
+  if (!boxes.includes(e.target)) return;
+  setTimeout(() => {
+    if (boxes.includes(document.activeElement)) return;
+    // A two-digit year is this century's: "0000" is shown as 2000.
+    if (rendered.year && Number(rendered.year) < 100) setDate({ ...rendered, year: String(2000 + Number(rendered.year)) });
+    queueMicrotask(() => queueMicrotask(validateDate));
+  }, 0);
+}, true);
+document.getElementById("save").addEventListener("click", () => {
+  validateDate();
+  const node = document.getElementById("start-err");
+  if (boxes.every((b) => !b.value)) node.textContent = "The field Available Start Date is required and must have a value.";
+  window.__dateError = node.textContent;
+});
+</script>
+</body></html>

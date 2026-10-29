@@ -1,0 +1,17 @@
+
+A list of countries (typing "uni" offers United States, United Kingdom, …)
+  ok   the Location question is recognised despite "office" in its description
+  ok   United States is picked from the list
+  ok   …and stays after leaving the box
+  ok   never a look-alike (US Virgin Islands, Minor Outlying Islands)
+  ok   done in 5633ms
+  ok   not offered as an answer the applicant typed
+  ok   an applicant in India gets India
+
+A list of places (cities, states and countries)
+  ok   the applicant's city in the applicant's state is picked
+  ok   not Jacksonville Beach, nor another state's Jacksonville
+  ok   a state stored as a code still finds the right Stanley
+
+10/10 checks passed
+

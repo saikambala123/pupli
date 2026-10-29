@@ -1,0 +1,13 @@
+  ok   the account step gets the email filled in
+  ok   the run reports it as the account step
+  ok   no password is invented
+  ok   no confirmation password is invented
+  ok   the page really did re-render and clear the fields
+  ok   first name survives the page's re-render
+  ok   last name survives the page's re-render
+  ok   Next reports no validation errors
+  ok   the page's own model has the names
+  ok   a value the applicant typed is not overwritten
+
+10/10 checks passed
+

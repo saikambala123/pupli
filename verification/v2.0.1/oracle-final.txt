@@ -1,0 +1,184 @@
+
+Personal Info, with the page focused
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok     ZIP Code, City, State and County came from the address picked, not typed by Appli-Fill
+  ok   Next reports nothing missing or invalid
+
+Personal Info, filled from the popup (the page has no focus)
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok     ZIP Code, City, State and County came from the address picked, not typed by Appli-Fill
+  ok   Next reports nothing missing or invalid
+
+lists that only the keyboard (or a person's click) moves
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok   Next reports nothing missing or invalid
+
+an address picked, and Oracle fills nothing from it
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok     ZIP Code chosen from its own list first (it brings the City, State and County)
+  ok   Next reports nothing missing or invalid
+
+Oracle's search finds no such address
+  ok   Address Line 1 is outlined for the applicant, not reported as filled
+  ok     ZIP Code, City, State and County are chosen from their own lists all the same
+  ok     so Next asks for Address Line 1 alone
+
+no such address, on a page whose Address Line 1 keeps a typed street
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok   Address Line 1 keeps the street, typed (its apartment in Address Line 2)
+  ok   Next reports nothing missing or invalid
+
+a slow server (2 s for every list)
+  ok   Title: Mr., the title that goes with the gender in the profile
+  ok   Legal First and Last Name
+  ok   Phone Number kept by the page, as ten digits
+  ok   Address Line 1: the applicant's own address picked from Oracle's search (validated, not just typed)
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County all filled
+  ok   no list left open
+  ok   Next reports nothing missing or invalid
+
+Application Questions and Diversity Information, with the page focused
+  ok   restrictive covenants: explicit profile No
+  ok   former employee: No (the profile's)
+  ok   authorized to work without requiring sponsorship: Yes
+  ok   salary expectations: 120000
+  ok   I am Hispanic or Latino.: left unticked (the profile says No)
+  ok   races: Asian ticked, and only Asian
+  ok   Gender: Male
+  ok   Veteran Self-Identification Status: I am not a protected veteran
+  ok     the protected-veteran categories left unticked, and not outlined
+  ok     the discharge date left blank, and not outlined
+  ok   Sex at Birth and Visually identified Sex at Birth: Male
+  ok   I choose not to disclose my sex: No
+  ok   Visually identified and Regional Ethnicity or Race: Asian
+  ok   I choose not to disclose my ethnicity or race: No
+  ok   nothing left outlined
+  ok   Next reports nothing missing
+  ok   no list left open
+
+Application Questions and Diversity Information, filled from the popup (the page has no focus)
+  ok   restrictive covenants: explicit profile No
+  ok   former employee: No (the profile's)
+  ok   authorized to work without requiring sponsorship: Yes
+  ok   salary expectations: 120000
+  ok   I am Hispanic or Latino.: left unticked (the profile says No)
+  ok   races: Asian ticked, and only Asian
+  ok   Gender: Male
+  ok   Veteran Self-Identification Status: I am not a protected veteran
+  ok     the protected-veteran categories left unticked, and not outlined
+  ok     the discharge date left blank, and not outlined
+  ok   Sex at Birth and Visually identified Sex at Birth: Male
+  ok   I choose not to disclose my sex: No
+  ok   Visually identified and Regional Ethnicity or Race: Asian
+  ok   I choose not to disclose my ethnicity or race: No
+  ok   nothing left outlined
+  ok   Next reports nothing missing
+  ok   no list left open
+
+Application Questions and Diversity Information, lists that only the keyboard moves
+  ok   restrictive covenants: explicit profile No
+  ok   former employee: No (the profile's)
+  ok   authorized to work without requiring sponsorship: Yes
+  ok   salary expectations: 120000
+  ok   I am Hispanic or Latino.: left unticked (the profile says No)
+  ok   races: Asian ticked, and only Asian
+  ok   Gender: Male
+  ok   Veteran Self-Identification Status: I am not a protected veteran
+  ok     the protected-veteran categories left unticked, and not outlined
+  ok     the discharge date left blank, and not outlined
+  ok   Sex at Birth and Visually identified Sex at Birth: Male
+  ok   I choose not to disclose my sex: No
+  ok   Visually identified and Regional Ethnicity or Race: Asian
+  ok   I choose not to disclose my ethnicity or race: No
+  ok   nothing left outlined
+  ok   Next reports nothing missing
+  ok   no list left open
+
+Application Questions and Diversity Information, a slow server (1.8 s for every list)
+  ok   restrictive covenants: explicit profile No
+  ok   former employee: No (the profile's)
+  ok   authorized to work without requiring sponsorship: Yes
+  ok   salary expectations: 120000
+  ok   I am Hispanic or Latino.: left unticked (the profile says No)
+  ok   races: Asian ticked, and only Asian
+  ok   Gender: Male
+  ok   Veteran Self-Identification Status: I am not a protected veteran
+  ok     the protected-veteran categories left unticked, and not outlined
+  ok     the discharge date left blank, and not outlined
+  ok   Sex at Birth and Visually identified Sex at Birth: Male
+  ok   I choose not to disclose my sex: No
+  ok   Visually identified and Regional Ethnicity or Race: Asian
+  ok   I choose not to disclose my ethnicity or race: No
+  ok   nothing left outlined
+  ok   Next reports nothing missing
+  ok   no list left open
+
+an applicant who declines to self-identify
+  ok   Gender: I do not wish to disclose
+  ok   I choose not to disclose my sex / my ethnicity or race: Yes
+  ok     no race ticked
+
+Oracle JET's lists (oj-select-single), with the page focused
+  ok   Address Line 1: the applicant's address picked — the drop-down holds its key
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County filled
+  ok   Gender: Male, and Veteran Status: not a protected veteran
+  ok   no list left open, nothing outlined
+  ok   Next reports nothing missing
+
+Oracle JET's lists (oj-select-single), filled from the popup (the page has no focus)
+  ok   Address Line 1: the applicant's address picked — the drop-down holds its key
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County filled
+  ok   Gender: Male, and Veteran Status: not a protected veteran
+  ok   no list left open, nothing outlined
+  ok   Next reports nothing missing
+
+Oracle JET's lists (oj-select-single), lists that only the keyboard moves
+  ok   Address Line 1: the applicant's address picked — the drop-down holds its key
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County filled
+  ok   Gender: Male, and Veteran Status: not a protected veteran
+  ok   no list left open, nothing outlined
+  ok   Next reports nothing missing
+
+Oracle JET's lists (oj-select-single), a slow server (2 s for every list)
+  ok   Address Line 1: the applicant's address picked — the drop-down holds its key
+  ok     the apartment in Address Line 2
+  ok   ZIP Code, City, State and County filled
+  ok   Gender: Male, and Veteran Status: not a protected veteran
+  ok   no list left open, nothing outlined
+  ok   Next reports nothing missing
+
+149/149 checks passed
+

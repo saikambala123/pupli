@@ -1,0 +1,48 @@
+
+only real controls are fields
+  ok   no wrapper is collected
+  ok   the boxes themselves are
+
+fill with the caret left in Phone
+  ok   Phone keeps exactly the number
+  ok   Current location is Lever's own suggestion
+  ok     and the place Lever submits is set
+  ok     and the box is not left outlined
+  ok   Current company is the current employer
+  ok   the work-authorization question is answered
+  ok   nothing Appli-Fill filled is offered as a pending answer
+  ok   no answer of "0" from a wrapper
+
+a click elsewhere on the page is not an edit
+  ok   still nothing pending after clicking around
+
+what the applicant changes by hand is pending
+  ok   changing a filled answer is held
+  ok   typing an answer by hand is held
+  ok   only what was changed is held
+
+putting Appli-Fill's answer back
+  ok   withdraws the answer held for the detour
+
+the right Jacksonville
+  ok   Texas picks Jacksonville, TX — not Florida, not the beach
+  ok     and sets the submitted place
+  ok     after narrowing a search that found nothing
+
+no suggestion is the applicant's place
+  ok   a different state's Springfield is never picked
+  ok     the box keeps the applicant's full answer
+  ok     and is outlined for them to choose
+  ok     and Phone is untouched
+
+a slow location search
+  ok   Lever's own suggestion is still picked
+  ok     and the place Lever submits is set
+  ok     with a single search, not one per retry
+
+the caret stays in the box until a place is picked
+  ok   the suggestion is picked while the list is up
+  ok     and survives leaving the box
+
+27/27 checks passed
+

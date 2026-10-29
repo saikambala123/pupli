@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Create Account</title>
+<style>body{font-family:system-ui;padding:24px;max-width:460px}
+.f{margin-bottom:14px}label{display:block;font-weight:600;margin-bottom:4px}
+input[type=text],input[type=password]{width:100%;padding:8px;border:1px solid #ccd;border-radius:5px;box-sizing:border-box}
+.err{color:#b42318;font-size:12px}</style></head><body>
+<!--
+  Workday's Create Account step as centric.wd501 draws it: email, password,
+  verify, and an "I consent" box that must be ticked before Create Account
+  is accepted ("Error: Please check the box to continue").
+-->
+<div data-automation-id="authPage">
+  <h2>Create Account</h2>
+  <div data-automation-id="passwordRequirements">
+    <p>Password Requirements:</p>
+    <ul><li>An uppercase character</li><li>A special character</li><li>A minimum of 8 characters</li>
+      <li>A lowercase character</li><li>An alphabetic character</li><li>A numeric character</li></ul>
+  </div>
+  <div class="f"><label for="a-email">Email Address<abbr title="required">*</abbr></label>
+    <input id="a-email" data-automation-id="email" type="text" aria-required="true"></div>
+  <div class="f"><label for="a-pass">Password<abbr title="required">*</abbr></label>
+    <input id="a-pass" data-automation-id="password" type="password" aria-required="true"></div>
+  <div class="f"><label for="a-pass2">Verify New Password<abbr title="required">*</abbr></label>
+    <input id="a-pass2" data-automation-id="verifyPassword" type="password" aria-required="true"></div>
+  <p>Please create an account to check your application status, manage in-progress applications and quickly apply to future jobs.</p>
+  <div class="f"><input id="a-consent" data-automation-id="createAccountCheckbox" type="checkbox" aria-required="true">
+    <label for="a-consent" style="display:inline">I consent</label></div>
+  <p class="err" id="a-err" hidden>Error: Please check the box to continue</p>
+  <button type="button" data-automation-id="createAccountSubmitButton" id="a-submit">Create Account</button>
+  <p>Already have an account? <a href="#">Sign In</a></p>
+</div>
+<script>
+window.__submits = 0;
+window.__rejected = 0;
+document.getElementById("a-submit").addEventListener("click", () => {
+  if (!document.getElementById("a-consent").checked) {
+    window.__rejected++;
+    document.getElementById("a-err").hidden = false;
+    return;
+  }
+  window.__submits++;
+});
+</script>
+</body></html>

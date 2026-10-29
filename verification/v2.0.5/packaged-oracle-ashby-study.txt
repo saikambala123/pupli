@@ -1,0 +1,76 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.5 test:oracle-ashby
+> node test/oracle-education-phone.spec.mjs && node test/ashby-submission-state.spec.mjs && node test/study-matching.spec.mjs
+
+PASS national
+PASS major0
+PASS major1
+PASS acquired0-m
+PASS acquired0-y
+PASS acquired1-m
+PASS acquired1-y
+PASS jobStart0-m
+PASS jobStart0-y
+PASS jobStart1-m
+PASS jobStart1-y
+PASS jobEnd0-m
+PASS jobEnd0-y
+PASS jobEnd1-m
+PASS jobEnd1-y
+PASS national portal model
+PASS major0 portal model
+PASS major1 portal model
+PASS acquired0-m portal model
+PASS acquired0-y portal model
+PASS jobStart0-m portal model
+PASS jobStart1-y portal model
+PASS no automatic submit
+PASS manual phone preserved
+PASS manual year preserved
+PASS manual date is not mixed with a profile month
+PASS whole education acquisition date
+PASS education date never copied into unrelated certification
+28/28 Oracle phone/education/date checks passed
+PASS focused auth committed
+PASS focused sponsor committed
+PASS focused prior committed
+PASS focused relocate committed
+PASS focused sms committed
+PASS focused name committed
+PASS focused email committed
+PASS focused no fake button value events
+PASS focused no automatic submit
+PASS focused submit validation
+PASS focused manual choice preserved
+PASS popup focus auth committed
+PASS popup focus sponsor committed
+PASS popup focus prior committed
+PASS popup focus relocate committed
+PASS popup focus sms committed
+PASS popup focus name committed
+PASS popup focus email committed
+PASS popup focus no fake button value events
+PASS popup focus no automatic submit
+PASS popup focus submit validation
+PASS popup focus manual choice preserved
+22/22 Ashby submission-state checks passed
+PASS CSE nearest offered subject
+PASS Computer Science and Engineering nearest offered subject
+PASS Information Technology nearest offered subject
+PASS ECE nearest offered subject
+PASS Bachelor of Science in Computer Science nearest offered subject
+PASS MBA nearest offered subject
+PASS Mechanical Engineering nearest offered subject
+PASS Engineering nearest offered subject
+PASS Greenhouse native selection committed
+PASS Greenhouse custom selection committed
+PASS Lever native selection committed
+PASS Lever custom selection committed
+PASS iCIMS native selection committed
+PASS iCIMS custom selection committed
+PASS Workday native selection committed
+PASS Workday custom selection committed
+PASS generic native selection committed
+PASS generic custom selection committed
+18/18 study matching checks passed

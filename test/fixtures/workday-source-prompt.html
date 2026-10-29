@@ -1,0 +1,184 @@
+<!doctype html><html><head><meta charset="utf-8"><title>My Information — Workday</title>
+<style>
+body{font-family:system-ui;padding:20px;max-width:860px}
+[data-automation-id^="formField"]{margin-bottom:16px}
+label,legend{display:block;font-weight:600;font-size:13px;margin-bottom:3px}
+input[type=text]{width:100%;padding:7px;border:1px solid #ccd;border-radius:5px;box-sizing:border-box}
+button.wd{padding:7px 10px;font:inherit;cursor:pointer;text-align:left;width:100%;background:#fff;border:1px solid #ccd;border-radius:5px}
+[data-automation-id="multiselectInputContainer"]{border:1px solid #ccd;border-radius:5px;padding:4px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+[data-automation-id="multiselectInputContainer"] input{border:0;flex:1;min-width:140px;width:auto}
+ul[data-automation-id="selectedItemList"]{list-style:none;margin:0;padding:0;display:flex;gap:4px}
+[data-automation-id="selectedItem"]{background:#eef;border-radius:10px;padding:2px 8px;display:inline-flex;gap:6px}
+[data-automation-id="activeListContainer"]{position:absolute;z-index:99;background:#fff;border:1px solid #ccd;max-height:300px;overflow:auto;min-width:320px}
+[data-automation-id="menuItem"]{padding:6px 10px;cursor:pointer;display:flex;justify-content:space-between}
+[data-automation-id="promptTitle"]{padding:6px 10px;font-weight:600;border-bottom:1px solid #eee}
+.err{color:#b00;font-size:12px}
+fieldset{border:0;padding:0;margin:0 0 16px}
+</style></head><body>
+<!--
+  Workday's My Information step (seic.wd1): "How Did You Hear About Us?" is a
+  prompt, not a menu. A click opens its list: categories drawn with a chevron
+  ("Job Board ›", "Social Media ›") and a few entries of their own. A category
+  opens its entries in place, with a back button. Typing and Enter searches
+  every entry. Only a picked entry counts, as a pill; Save and Continue refuses
+  the step while there is none, whatever the search box says.
+
+  Options (set before the page script runs):
+    window.__SOURCE_SEARCH = false   the search answers "No Items." (browse only)
+    window.__SOURCE_TREE             a different list
+    window.__SOURCE_PREFILL          a pill already there (a returning applicant)
+-->
+<div data-automation-id="applyFlowPage">
+  <h2>My Information</h2>
+  <p>* Indicates a required field</p>
+
+  <div data-automation-id="formField-source" data-fkit-id="source--source">
+    <label for="source--source" data-automation-id="formLabel">How Did You Hear About Us?<abbr title="required">*</abbr></label>
+    <div data-automation-id="multiselectInputContainer">
+      <ul data-automation-id="selectedItemList" role="listbox" aria-orientation="horizontal"></ul>
+      <input type="text" id="source--source" data-automation-id="searchBox" data-uxi-widget-type="selectinput"
+             placeholder="Search" autocomplete="off" aria-required="true">
+      <span data-automation-id="promptIcon" aria-hidden="true">&#9776;</span>
+    </div>
+    <div class="err" id="source-err" data-automation-id="errorMessage"></div>
+  </div>
+
+  <fieldset data-automation-id="formField-candidateIsPreviousWorker" data-fkit-id="previousWorker">
+    <legend>Have you previously been employed by SEI? CURRENT EMPLOYEES: Please apply through the internal Career Site.<abbr>*</abbr></legend>
+    <label><input type="radio" name="candidateIsPreviousWorker" value="true"> Yes</label>
+    <label><input type="radio" name="candidateIsPreviousWorker" value="false"> No</label>
+  </fieldset>
+
+  <div data-automation-id="formField-country" data-fkit-id="country--country">
+    <label for="country--country">Country<abbr title="required">*</abbr></label>
+    <button class="wd" type="button" id="country--country" aria-haspopup="listbox">United States of America</button>
+  </div>
+
+  <button type="button" data-automation-id="bottom-navigation-next-button" id="save">Save and Continue</button>
+</div>
+
+<script>
+const TREE = window.__SOURCE_TREE || [
+  { name: "Career Fair / Event", children: ["Career Fair", "Conference", "University Event"] },
+  { name: "Job Board", children: ["Dice", "Glassdoor", "Indeed", "LinkedIn", "ZipRecruiter"] },
+  { name: "Referral", children: ["Employee Referral", "Friend or Family"] },
+  { name: "SEI Careers Website" },
+  { name: "Social Media", children: ["Facebook", "Instagram", "LinkedIn", "Twitter"] },
+  { name: "Recruiter / Staffing Agency" },
+  { name: "Other" },
+];
+const SEARCHES = window.__SOURCE_SEARCH !== false;
+window.__searches = [];
+window.__opened = [];
+
+const input = document.getElementById("source--source");
+const box = input.closest('[data-automation-id="multiselectInputContainer"]');
+const pills = box.querySelector('[data-automation-id="selectedItemList"]');
+let popup = null;
+let seq = 0;
+
+function close() { if (popup) { popup.remove(); popup = null; } }
+function addPill(name) {
+  pills.innerHTML = "";
+  const li = document.createElement("li");
+  li.setAttribute("role", "option");
+  li.innerHTML = `<div data-automation-id="selectedItem"><p data-automation-id="promptOption"></p><div data-automation-id="DELETE_charm" role="button">×</div></div>`;
+  li.firstElementChild.title = name;
+  const p = li.querySelector("p");
+  p.textContent = name;
+  p.setAttribute("data-automation-label", name);
+  li.querySelector('[data-automation-id="DELETE_charm"]').addEventListener("click", () => { pills.innerHTML = ""; });
+  pills.appendChild(li);
+  document.getElementById("source-err").textContent = "";
+}
+if (window.__SOURCE_PREFILL) addPill(window.__SOURCE_PREFILL);
+
+function row(name, { category = false, onPick }) {
+  const r = document.createElement("div");
+  r.setAttribute("role", "option");
+  r.setAttribute("data-automation-id", "menuItem");
+  r.setAttribute("aria-selected", "false");
+  const opt = document.createElement("div");
+  opt.setAttribute("data-automation-id", "promptOption");
+  opt.setAttribute("data-automation-label", name);
+  opt.textContent = name;
+  r.appendChild(opt);
+  if (category) {
+    r.setAttribute("aria-label", `${name} press right arrow to access Submenu Items`);
+    r.insertAdjacentHTML("beforeend", `<svg class="wd-icon-chevron-right-small wd-icon" width="12" height="12" aria-hidden="true"><path d="M4 2l4 4-4 4"/></svg>`);
+  } else {
+    // A leaf carries an icon too — a bare svg says nothing about a submenu.
+    r.insertAdjacentHTML("afterbegin", `<svg class="wd-icon-radio wd-icon" width="10" height="10" aria-hidden="true"><circle cx="5" cy="5" r="4"/></svg>`);
+  }
+  r.addEventListener("click", () => onPick());
+  return r;
+}
+function show(build) {
+  close();
+  popup = document.createElement("div");
+  popup.setAttribute("data-automation-id", "activeListContainer");
+  popup.setAttribute("role", "listbox");
+  build(popup);
+  const r = box.getBoundingClientRect();
+  popup.style.top = (r.bottom + window.scrollY + 2) + "px";
+  popup.style.left = (r.left + window.scrollX) + "px";
+  document.body.appendChild(popup);
+}
+function pick(name) { addPill(name); input.value = ""; close(); }
+function showTop() {
+  show((p) => {
+    for (const entry of TREE) {
+      if (entry.children) p.appendChild(row(entry.name, { category: true, onPick: () => showCategory(entry) }));
+      else p.appendChild(row(entry.name, { onPick: () => pick(entry.name) }));
+    }
+  });
+}
+function showCategory(entry) {
+  window.__opened.push(entry.name);
+  show((p) => {
+    const title = document.createElement("div");
+    title.setAttribute("data-automation-id", "promptTitle");
+    title.innerHTML = `<button type="button" data-automation-id="promptBackButton" aria-label="Back">&#8592;</button> `;
+    title.appendChild(document.createTextNode(entry.name));
+    title.querySelector("button").addEventListener("click", showTop);
+    p.appendChild(title);
+    for (const name of entry.children) p.appendChild(row(name, { onPick: () => pick(name) }));
+  });
+}
+function showResults(query) {
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const leaves = [];
+  for (const entry of TREE) {
+    for (const name of entry.children || [entry.name]) {
+      if (words.every((w) => name.toLowerCase().split(/[^a-z0-9]+/).some((part) => part.startsWith(w)))) leaves.push(name);
+    }
+  }
+  show((p) => {
+    if (!SEARCHES || !leaves.length) { p.innerHTML = `<div data-automation-id="promptEmptyState">No Items.</div>`; return; }
+    for (const name of leaves) p.appendChild(row(name, { onPick: () => pick(name) }));
+  });
+}
+
+input.addEventListener("click", () => { if (!popup) showTop(); });
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") { close(); return; }
+  if (e.key !== "Enter") return;
+  e.preventDefault();
+  const query = input.value.trim();
+  window.__searches.push(query);
+  const mine = ++seq;
+  close();
+  if (!query) { showTop(); return; }
+  setTimeout(() => { if (mine === seq) showResults(query); }, 350);   // the server answers
+});
+document.addEventListener("click", (e) => {
+  if (popup && !popup.contains(e.target) && !box.contains(e.target)) close();
+}, true);
+
+document.getElementById("save").addEventListener("click", () => {
+  const picked = pills.querySelector('[data-automation-id="selectedItem"]');
+  document.getElementById("source-err").textContent = picked ? "" : "Error: The field How Did You Hear About Us? is required and must have a value.";
+  window.__sourceError = document.getElementById("source-err").textContent;
+});
+</script>
+</body></html>

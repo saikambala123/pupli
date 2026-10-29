@@ -1,0 +1,70 @@
+
+Personal Info, with the page focused
+  ok   Phone Number: the number is in its box and kept by the page
+  ok     the country code is left as it was (+1), not typed over
+  ok   Address Line 1: the street typed and the applicant's own address picked from Oracle's suggestions
+  ok     ZIP Code, City, State and County filled by Oracle from that pick
+  ok     and never typed into or picked by Appli-Fill
+  ok   Next reports nothing missing or invalid
+  ok   First Name and Last Name filled
+
+Personal Info, filled from the popup (the page has no focus)
+  ok   Phone Number: the number is in its box and kept by the page
+  ok     the country code is left as it was (+1), not typed over
+  ok   Address Line 1: the street typed and the applicant's own address picked from Oracle's suggestions
+  ok     ZIP Code, City, State and County filled by Oracle from that pick
+  ok     and never typed into or picked by Appli-Fill
+  ok   Next reports nothing missing or invalid
+  ok   First Name and Last Name filled
+
+the row's Phone Number label belongs to nothing
+  ok   Phone Number: the number is in its box and kept by the page
+  ok     the country code is left as it was (+1), not typed over
+  ok   Address Line 1: the street typed and the applicant's own address picked from Oracle's suggestions
+  ok     ZIP Code, City, State and County filled by Oracle from that pick
+  ok     and never typed into or picked by Appli-Fill
+  ok   Next reports nothing missing or invalid
+
+the number box says nothing about itself (a generated id, no name)
+  ok   Phone Number: the number is in its box and kept by the page
+  ok     the country code is left as it was (+1), not typed over
+  ok   Address Line 1: the street typed and the applicant's own address picked from Oracle's suggestions
+  ok     ZIP Code, City, State and County filled by Oracle from that pick
+  ok     and never typed into or picked by Appli-Fill
+  ok   Next reports nothing missing or invalid
+
+the street alone finds the same street in five other towns first
+  ok   Phone Number: the number is in its box and kept by the page
+  ok     the country code is left as it was (+1), not typed over
+  ok   Address Line 1: the street typed and the applicant's own address picked from Oracle's suggestions
+  ok     ZIP Code, City, State and County filled by Oracle from that pick
+  ok     and never typed into or picked by Appli-Fill
+  ok   Next reports nothing missing or invalid
+
+suggestions slow to arrive (1.5 s)
+  ok   Phone Number: the number is in its box and kept by the page
+  ok     the country code is left as it was (+1), not typed over
+  ok   Address Line 1: the street typed and the applicant's own address picked from Oracle's suggestions
+  ok     ZIP Code, City, State and County filled by Oracle from that pick
+  ok     and never typed into or picked by Appli-Fill
+  ok   Next reports nothing missing or invalid
+
+no suggestion is the applicant's address
+  ok   no other address is picked: Address Line 1 is outlined for the applicant, not reported as filled
+  ok     ZIP Code, City and State are chosen from their own lists all the same
+  ok     and the phone number is filled all the same
+
+the profile's phone saved as "+1 516-205-8456"
+  ok   the national number goes in the box, without the country code the +1 box already has
+  ok   Next reports nothing missing or invalid
+
+the profile's phone saved as "+15162058456"
+  ok   the national number goes in the box, without the country code the +1 box already has
+  ok   Next reports nothing missing or invalid
+
+the profile's phone saved as "1 (516) 205-8456"
+  ok   the national number goes in the box, without the country code the +1 box already has
+  ok   Next reports nothing missing or invalid
+
+47/47 checks passed
+

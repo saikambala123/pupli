@@ -1,0 +1,334 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Appli-Fill autofill fixtures — careers apply</title>
+  <style>
+    body { font: 14px system-ui; margin: 24px; }
+    .field { margin: 6px 0; display: flex; gap: 8px; align-items: center; }
+    label { min-width: 220px; display: inline-block; }
+    fieldset { margin: 10px 0; }
+    h2 { margin-top: 28px; font-size: 15px; }
+    input, select, button { min-height: 22px; }
+  </style>
+</head>
+<body>
+<!-- A site header built from markup that looks exactly like an open menu.
+     Nothing here should ever be treated as a dropdown belonging to a field. -->
+<nav class="dropdown">
+  <ul>
+    <li data-value="home">Home</li>
+    <li data-value="jobs">Search Jobs</li>
+    <li data-value="United States">United States</li>
+    <li data-value="2035">2035</li>
+    <li data-value="Master's Degree">Master's Degree</li>
+  </ul>
+</nav>
+<h1>Application</h1>
+<form id="app-form">
+  <h2>Personal Information</h2>
+  <div id="personal"></div>
+
+  <h2 id="wx-1-heading">Work Experience 1</h2>
+  <div id="wx-1"></div>
+
+  <h2 id="wx-2-heading">Work Experience 2</h2>
+  <div id="wx-2"></div>
+
+  <h2 id="edu-heading">Education 1</h2>
+  <div id="edu"></div>
+
+  <h2>Professional Experience (1)</h2>
+  <div id="icims-1"></div>
+
+  <h2>Professional Experience (2)</h2>
+  <div id="icims-2"></div>
+
+  <h2>Voluntary Self-Identification</h2>
+  <div id="eeo"></div>
+
+  <h2>Additional Information</h2>
+  <div id="extra"></div>
+
+  <!-- Greenhouse renders custom questions as label/input pairs that are flat
+       siblings of one another inside a single container. Walking up from an
+       input and taking the first label found in that container returns a
+       *different* question's label — the bug that put "Immediately" into a
+       "full legal name" box. -->
+  <h2>Custom Questions</h2>
+  <div id="greenhouse">
+    <label for="gh-years">Years of relevant experience:</label>
+    <input id="gh-years" name="gh-years" type="text">
+
+    <label for="gh-start">What is your earliest available start date?</label>
+    <input id="gh-start" name="gh-start" type="text">
+
+    <label for="gh-comp">What are your compensation expectations?</label>
+    <input id="gh-comp" name="gh-comp" type="text">
+
+    <label for="gh-designee">Confidentiality Agreement Designee full legal name:</label>
+    <input id="gh-designee" name="gh-designee" type="text">
+
+    <label for="gh-designee-email">Confidentiality Agreement Designee email:</label>
+    <input id="gh-designee-email" name="gh-designee-email" type="text">
+
+    <label for="gh-locationreq">Are you able to meet the location requirements for this role?</label>
+    <select id="gh-locationreq" name="gh-locationreq">
+      <option value="">Select</option><option>Yes</option><option>No</option>
+    </select>
+  </div>
+
+  <!-- The Greenhouse job-boards form from the bug video. Every choice question
+       there is a react-select: the control is an <input> whose value is always
+       empty, and the answer is rendered in a sibling div. Nothing in this
+       section may be written twice, reopened, or re-answered by the AI pass. -->
+  <h2>Greenhouse Application Questions</h2>
+  <div id="greenhouse-rs"></div>
+
+  <!-- The iCIMS candidate profile from the bug report: a Country picker that is
+       a hidden <select> behind a div, with a 250-row portalled list and a
+       floating "— Type to Search —" box; a State/Province select that reads
+       "Please select a country" until Country is answered; and a "Please
+       specify" that waits on "How did you hear about us?". -->
+  <h2>Addresses (1)</h2>
+  <div id="icims-profile"></div>
+
+  <!-- A later step of the form, not on screen. Its controls are in the DOM but
+       nobody is looking at them, so nothing here may be filled. -->
+  <div id="hidden-step" style="display:none">
+    <label for="hidden-country">Country</label>
+    <select id="hidden-country" name="hidden-country">
+      <option value="">Select One</option><option>Canada</option><option>United States</option>
+    </select>
+  </div>
+
+  <input type="file" id="resume" name="resume" aria-label="Resume">
+  <button type="submit">Submit Application</button>
+</form>
+
+<script src="widgets.js"></script>
+<script>
+const W = window.ZWIDGETS;
+const mkCombo = W.makeCombobox, mkInput = W.makeInput, mkSelect = W.makeSelect, mkRadios = W.makeRadioGroup;
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const YEARS = Array.from({ length: 40 }, (_, i) => String(2040 - i));
+const DAYS = Array.from({ length: 31 }, (_, i) => String(i + 1));
+
+/* ---- Personal ---- */
+const personal = document.getElementById("personal");
+personal.append(
+  mkInput({ id: "firstName", label: "First Name" }),
+  mkInput({ id: "lastName", label: "Last Name" }),
+  mkInput({ id: "email", label: "Email Address", type: "email" }),
+  mkInput({ id: "phone", label: "Phone Number", type: "tel" }),
+  mkInput({ id: "street", label: "Street Address" }),
+  mkInput({ id: "city", label: "City" }),
+  mkInput({ id: "zip", label: "Zip/Postal Code" }),
+  mkCombo({ id: "country", label: "Country", options: ["Canada", "India", "United Kingdom", "United States", "United States Minor Outlying Islands"] }),
+  mkSelect({ id: "state", label: "State/Province", options: ["California", "Illinois", "New York", "North Carolina", "Texas"] }),
+);
+
+/* ---- Workday-style work experience, numbered headings, portalled menus ---- */
+function workRow(host, n) {
+  host.append(
+    mkInput({ id: `wx${n}-employer`, label: "Employer" }),
+    mkInput({ id: `wx${n}-title`, label: "Job Title" }),
+    mkInput({ id: `wx${n}-location`, label: "Location" }),
+    // Two side-by-side portalled menus: the exact Oracle shape from the video
+    // where a Month list and a Year list ended up open at the same time.
+    mkCombo({ id: `wx${n}-start-month`, label: "Start Date Month", options: MONTHS, stubborn: true }),
+    mkCombo({ id: `wx${n}-start-year`, label: "Start Date Year", options: YEARS, stubborn: true }),
+    mkCombo({ id: `wx${n}-end-month`, label: "End Date Month", options: MONTHS, stubborn: true }),
+    mkCombo({ id: `wx${n}-end-year`, label: "End Date Year", options: YEARS, stubborn: true }),
+    // Row 1's country list deliberately omits the profile's answer. A menu
+    // that cannot be satisfied is the case the old close logic could not
+    // handle: Escape is ignored and a synthetic body click does nothing, so it
+    // stayed on screen for the rest of the run and every later dropdown opened
+    // on top of it — the stack of overlapping menus in the bug video.
+    mkCombo({
+      id: `wx${n}-employer-country`, label: "Employer Country", stubborn: true,
+      options: n === 1
+        ? ["Canada", "India", "United Kingdom"]
+        : ["Canada", "India", "United Kingdom", "United States", "United States Minor Outlying Islands"],
+    }),
+  );
+}
+workRow(document.getElementById("wx-1"), 1);
+workRow(document.getElementById("wx-2"), 2);
+
+/* ---- Education, with a SAP-style widget that reverts on a body click ---- */
+document.getElementById("edu").append(
+  mkInput({ id: "edu-school", label: "College/University" }),
+  mkCombo({
+    id: "edu-degree", label: "Degree",
+    options: ["Associate Degree", "Bachelor's Degree", "Doctorate", "High School", "Master's Degree"],
+    revertOnBodyClick: true,
+  }),
+  mkInput({ id: "edu-major", label: "Branch of Study" }),
+  mkSelect({ id: "edu-end-year", label: "End Date Year", options: YEARS }),
+);
+
+/* ---- iCIMS-style: parenthesised section numbers, split M/D/Y selects ---- */
+function icimsRow(host, n) {
+  const employer = mkInput({ id: `ic${n}-employer`, label: "Employer" });
+  const title = mkInput({ id: `ic${n}-title`, label: "Title" });
+
+  const startGroup = document.createElement("div");
+  startGroup.innerHTML = "<div class='grouplabel'>Start Date (Month / Day / Year)</div>";
+  startGroup.append(
+    mkSelect({ id: `ic${n}-start-mm`, label: "Month", options: MONTHS }),
+    mkSelect({ id: `ic${n}-start-dd`, label: "Day", options: DAYS }),
+    mkInput({ id: `ic${n}-start-yyyy`, label: "Year" }),
+  );
+
+  const endGroup = document.createElement("div");
+  endGroup.innerHTML = "<div class='grouplabel'>End Date (Month / Day / Year)</div>";
+  endGroup.append(
+    mkSelect({ id: `ic${n}-end-mm`, label: "Month", options: MONTHS }),
+    mkSelect({ id: `ic${n}-end-dd`, label: "Day", options: DAYS }),
+    mkInput({ id: `ic${n}-end-yyyy`, label: "Year" }),
+  );
+
+  const desc = document.createElement("div");
+  desc.className = "field";
+  desc.innerHTML = "<label for='ic" + n + "-desc'>Description</label>";
+  const ta = document.createElement("textarea");
+  ta.id = `ic${n}-desc`;
+  ta.name = `ic${n}-desc`;
+  desc.appendChild(ta);
+
+  host.append(employer, title, startGroup, endGroup, desc);
+}
+icimsRow(document.getElementById("icims-1"), 1);
+icimsRow(document.getElementById("icims-2"), 2);
+
+/* ---- EEO: one radio group (iCIMS) and three dropdowns (Workday) ---- */
+document.getElementById("eeo").append(
+  mkRadios({
+    name: "veteran-radio",
+    legend: "Please select the veteran status which most accurately describes your status.",
+    options: [
+      "I IDENTIFY AS ONE OR MORE OF THE CLASSIFICATIONS OF PROTECTED VETERAN LISTED ABOVE",
+      "I AM NOT A PROTECTED VETERAN",
+      "I DON'T WISH TO ANSWER",
+    ],
+  }),
+  mkSelect({
+    id: "ethnicity",
+    label: "Please select the ethnicity which most accurately describes how you identify yourself.",
+    options: ["Asian (United States of America)", "Black or African American (United States of America)", "Hispanic or Latino (United States of America)", "White (United States of America)", "Decline to Self-Identify"],
+  }),
+  mkSelect({
+    id: "gender",
+    label: "Please select your gender.",
+    options: ["Male", "Female", "Not Declared"],
+  }),
+  mkCombo({
+    id: "disability",
+    label: "Disability Status",
+    options: [
+      "Yes, I have a disability, or have had one in the past",
+      "No, I do not have a disability and have not had one in the past",
+      "I do not want to answer",
+    ],
+  }),
+);
+
+/* ---- Extra questions, one of which only exists as a saved answer ---- */
+document.getElementById("extra").append(
+  mkSelect({ id: "sponsorship", label: "Will you now or in the future require sponsorship for employment visa status?", options: ["Yes", "No"] }),
+  mkSelect({ id: "authorized", label: "Are you legally authorized to work in the United States?", options: ["Yes", "No"] }),
+  mkSelect({ id: "hear", label: "How did you hear about this opportunity?", options: ["Job Board", "LinkedIn", "Referral", "Company Website"] }),
+  mkInput({ id: "noticeperiod", label: "What is your notice period?" }),
+  mkInput({ id: "relocate", label: "Are you willing to relocate?" }),
+);
+
+/* ---- Greenhouse react-select questions (the bug video) ---- */
+document.getElementById("greenhouse-rs").append(
+  W.makeReactSelect({
+    id: "gh-eligible",
+    label: "Are you eligible to work in the country where this role is posted?",
+    options: ["Yes", "No"],
+  }),
+  W.makeReactSelect({
+    id: "gh-sponsorship",
+    label: "Will you now or in the future require company sponsorship for a visa or work authorization to work in the country where this role is based?",
+    options: ["Yes", "No"],
+  }),
+  W.makeReactSelect({
+    id: "gh-residence",
+    label: "Country of Residence",
+    options: ["Canada", "India", "United Kingdom", "United States of America"],
+  }),
+  W.makeReactSelect({
+    id: "gh-gender",
+    label: "Gender",
+    options: ["Male", "Female", "Decline To Self Identify"],
+  }),
+  // Nothing in the profile or the saved answers covers this one. It must be
+  // left blank and reported as needing the applicant — never guessed.
+  W.makeReactSelect({
+    id: "gh-office",
+    label: "Are you ready to attend the office (San Jose, California) at least three days per week?",
+    options: ["Yes", "No"],
+  }),
+  // The same "answer lives outside the control" problem in the other two
+  // shapes the rest of the web uses.
+  W.makeLibrarySelect({
+    id: "antd-country", flavour: "antd", label: "Country",
+    options: ["Canada", "India", "United Kingdom", "United States"],
+  }),
+  W.makeLibrarySelect({
+    id: "ds-authorized", flavour: "downshift",
+    label: "Are you legally authorized to work in the United States?",
+    options: ["Yes", "No"],
+  }),
+);
+
+/* ---- iCIMS candidate profile ---- */
+const COUNTRIES = ["Afghanistan","Albania","Algeria","American Samoa","Andorra","Angola","Anguilla",
+  "Antarctica","Antigua And Barbuda","Argentina","Armenia","Australia","Austria","Bangladesh","Belgium",
+  "Brazil","Canada","China","Denmark","Egypt","France","Germany","India","Indonesia","Ireland","Italy",
+  "Japan","Kenya","Malaysia","Mexico","Nepal","Netherlands","New Zealand","Nigeria","Norway","Pakistan",
+  "Philippines","Poland","Portugal","Singapore","South Africa","Spain","Sri Lanka","Sweden","Switzerland",
+  "Thailand","Turkey","Ukraine","United Arab Emirates","United Kingdom","United States",
+  "United States Minor Outlying Islands","Uruguay","Vietnam","Zambia","Zimbabwe"];
+
+const STATES = {
+  "United States": ["California","Illinois","New York","North Carolina","Texas"],
+  "India": ["Karnataka","Maharashtra","Telangana"],
+};
+
+const SOURCES = {
+  "Job Board": ["Indeed","LinkedIn","Monster","ZipRecruiter"],
+  "Referral": ["Employee Referral","Friend"],
+  "Social Media": ["Facebook","Instagram","LinkedIn"],
+};
+
+document.getElementById("icims-profile").append(
+  mkSelect({ id: "ic-addr-type", label: "Type", options: ["Home", "Work"] }),
+  mkInput({ id: "ic-address", label: "Address" }),
+  mkInput({ id: "ic-city", label: "City" }),
+  mkInput({ id: "ic-zip", label: "Zip/Postal Code" }),
+  // The screenshot's Country control, ARIA and all.
+  W.makeBackedDropdown({ id: "ic-country", label: "Country", options: COUNTRIES }),
+  W.makeDependentSelect({
+    id: "ic-state", label: "State/Province", parentId: "ic-country",
+    waitingText: "Please select a country",
+    optionsFor: (country) => STATES[country] || [],
+  }),
+  // Same shape but with no ARIA on the visible widget at all: the hidden
+  // select is the only thing the extension can find.
+  W.makeBackedDropdown({
+    id: "ic-hear", label: "How did you hear about us?", exposeRole: false,
+    options: ["Job Board", "Referral", "Social Media", "Career Fair"],
+  }),
+  W.makeDependentSelect({
+    id: "ic-specify", label: "Please specify", parentId: "ic-hear",
+    waitingText: "Please select a source",
+    optionsFor: (source) => SOURCES[source] || [],
+  }),
+);
+</script>
+</body>
+</html>

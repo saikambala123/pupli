@@ -1,0 +1,19 @@
+PASS CSE nearest offered subject
+PASS Computer Science and Engineering nearest offered subject
+PASS Information Technology nearest offered subject
+PASS ECE nearest offered subject
+PASS Bachelor of Science in Computer Science nearest offered subject
+PASS MBA nearest offered subject
+PASS Mechanical Engineering nearest offered subject
+PASS Engineering nearest offered subject
+PASS Greenhouse native selection committed
+PASS Greenhouse custom selection committed
+PASS Lever native selection committed
+PASS Lever custom selection committed
+PASS iCIMS native selection committed
+PASS iCIMS custom selection committed
+PASS Workday native selection committed
+PASS Workday custom selection committed
+PASS generic native selection committed
+PASS generic custom selection committed
+18/18 study matching checks passed

@@ -1,0 +1,27 @@
+
+manual edits are on screen as soon as the popup opens
+  ok   the pending list opens by itself when there are edits to review
+  ok   both edits are listed
+  ok   each has an Edit button
+  ok   there is no 'attach my resume' switch
+
+correcting an answer before saving it
+  ok   the editor opens in place
+  ok   a dropdown answer is edited from the question's own choices
+  ok   a live update waits while an answer is being edited
+  ok   the edit is sent with the new answer
+  ok   and the corrected answer is saved in the same step
+  ok   the saved answer leaves the list and the late capture appears
+  ok   the saved-answer count moves
+
+the list stays current while the popup is open
+  ok   an answer captured on the page appears without reopening the popup
+
+typing an answer in by hand
+  ok   the form opens
+  ok   it is added
+  ok   and saved to the dashboard straight away
+  ok   the form closes afterwards
+
+16/16 checks passed
+

@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Personal Info - Senior Site Reliability Engineer</title>
+<style>
+body{font-family:system-ui;margin:0;background:#f5f4f2}
+main{max-width:760px;margin:0 auto;padding:20px}
+.apply-flow-block{background:#fff;border-radius:10px;padding:18px 20px;margin-bottom:18px}
+.input-row{margin-bottom:16px;position:relative}
+.input-row__label{display:block;font-size:13px;margin-bottom:6px;color:#444}
+.input-row__control,.cx-select-input{width:100%;box-sizing:border-box;padding:10px;border:1px solid #c9c9c4;border-radius:6px;font:inherit;background:#fff}
+.input-row__control[readonly],.input-row__control[disabled]{background:#eee;color:#666}
+.cx-select-container{position:relative;display:flex;align-items:center;gap:4px}
+.cx-select-container .input-field__label{position:absolute;left:10px;top:2px;font-size:10px;color:#666}
+.cx-select__clear,.cx-select__toggle{border:0;background:none;cursor:pointer}
+.phone-number-input{display:flex;gap:8px;align-items:stretch}
+.phone-number-input .cx-select-container{width:40%}
+.phone-number-input .cx-select-input{padding-top:16px}
+.input-row__helper{font-size:11px;color:#666;margin-top:4px}
+.input-row__error{color:#c0392b;font-size:12px;margin-top:4px}
+.input-row__error[hidden]{display:none}
+.input-row--invalid .cx-select-input,.input-row--invalid .input-row__control{border-color:#c0392b}
+ul.cx-select__list{position:absolute;z-index:50;list-style:none;margin:0;padding:4px 0;background:#fff;border:1px solid #c9c9c4;border-radius:6px;max-height:260px;overflow:auto;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+ul.cx-select__list li{padding:8px 10px;cursor:pointer}
+ul.cx-select__list li:hover{background:#eee}
+</style></head>
+<body>
+<!--
+  Oracle Recruiting Cloud, refreshed Candidate Experience (2025): "Personal
+  Info" (…/hcmUI/CandidateExperience/en/sites/CX/job/34866/apply/section/1/),
+  as in the report of 1 October 2026.
+
+  - Phone Number is ONE row: a "Country code" list box (+1) and, beside it in
+    the same row, the box for the number. The row's label belongs to the
+    number box (window.__ocx.phoneLabelFor = false: it belongs to nothing).
+  - Address Line 1, ZIP Code and City are list boxes you type into
+    (input.cx-select-input, role="combobox"): Address Line 1 offers addresses
+    as you type ("Enter your street name and other address details to see
+    suggestions"). Picking one fills Address Line 1 with the street, and ZIP
+    Code, City, State and County with the rest. Text that is not picked from
+    a list is thrown away when the box loses focus.
+  - The number box keeps its value only when it is left (the page's model is
+    written on blur, as Oracle JET's inputs do).
+
+  window.__ocx = { latency: ms, phoneLabelFor: bool, keepTyped: bool, crowded: bool, bareNumber: bool }
+    bareNumber: the number box says nothing about itself (a generated id, no
+    name, type "text"); only the row's "Phone Number" names it.
+    crowded: the street alone finds the same street in other towns (the list
+    shows the first five); with the city and state the applicant's is found.
+-->
+<main class="apply-flow">
+  <h1>Senior Site Reliability Engineer</h1>
+
+  <section class="apply-flow-block" data-block="contact">
+    <div class="apply-flow-block__header"><h3>Contact Information</h3></div>
+
+    <div class="input-row"><label class="input-row__label" for="firstName-1"><span class="input-row__label-text">First Name</span></label>
+      <input class="input-row__control" id="firstName-1" name="firstName" type="text" aria-required="true"></div>
+    <div class="input-row"><label class="input-row__label" for="lastName-1"><span class="input-row__label-text">Last Name</span></label>
+      <input class="input-row__control" id="lastName-1" name="lastName" type="text" aria-required="true"></div>
+    <div class="input-row"><label class="input-row__label" for="email-1"><span class="input-row__label-text">Email Address</span></label>
+      <input class="input-row__control" id="email-1" name="email" type="email" readonly value="pradeepbeeram91@gmail.com"></div>
+
+    <div class="input-row" data-row="phone">
+      <label class="input-row__label" id="phone-label" for="phoneNumber-3"><span class="input-row__label-text">Phone Number</span></label>
+      <div class="phone-number-input">
+        <div class="cx-select-container">
+          <span class="input-field__label">Country code</span>
+          <input class="cx-select-input" id="countryCodesDropDownPhoneNumber-3" name="countryCodesDropDownPhoneNumber" type="text"
+                 role="combobox" aria-autocomplete="list" aria-expanded="false" autocomplete="off" value="+1">
+          <button type="button" class="cx-select__clear" aria-label="Clear">&times;</button>
+          <button type="button" class="cx-select__toggle" id="countryCodesDropDownPhoneNumber-3-toggle-button" aria-label="Show options">&#9662;</button>
+        </div>
+        <input class="input-row__control" id="phoneNumber-3" name="phoneNumber" type="tel" aria-required="true" autocomplete="off">
+      </div>
+      <div class="input-row__error" hidden>Enter a valid phone number.</div>
+    </div>
+  </section>
+
+  <section class="apply-flow-block" data-block="address">
+    <div class="apply-flow-block__header"><h3>Address</h3></div>
+    <p>Please enter your home address.</p>
+
+    <div class="input-row"><label class="input-row__label" for="country-5"><span class="input-row__label-text">Country</span></label>
+      <div class="cx-select-container">
+        <input class="cx-select-input" id="country-5" name="country" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" autocomplete="off" value="United States" aria-required="true">
+        <button type="button" class="cx-select__toggle" id="country-5-toggle-button" aria-label="Show options">&#9662;</button>
+      </div></div>
+
+    <div class="input-row" data-row="line1"><label class="input-row__label" for="addressLine1-5"><span class="input-row__label-text">Address Line 1</span></label>
+      <div class="cx-select-container">
+        <input class="cx-select-input cx-select-input--auto-suggest" id="addressLine1-5" name="addressLine1" type="text" role="combobox"
+               aria-autocomplete="list" aria-expanded="false" autocomplete="off" aria-required="true">
+        <button type="button" class="cx-select__clear" aria-label="Clear">&times;</button>
+        <button type="button" class="cx-select__toggle" id="addressLine1-5-toggle-button" aria-label="Show options">&#9662;</button>
+      </div>
+      <div class="input-row__helper">Enter your street name and other address details to see suggestions</div>
+      <div class="input-row__error" hidden>This field is required.</div></div>
+
+    <div class="input-row"><label class="input-row__label" for="addressLine2-5"><span class="input-row__label-text">Address Line 2</span></label>
+      <input class="input-row__control" id="addressLine2-5" name="addressLine2" type="text"></div>
+
+    <div class="input-row" data-row="zip"><label class="input-row__label" for="postalCode-5"><span class="input-row__label-text">ZIP Code</span></label>
+      <div class="cx-select-container">
+        <input class="cx-select-input cx-select-input--auto-suggest" id="postalCode-5" name="postalCode" type="text" role="combobox"
+               aria-autocomplete="list" aria-expanded="false" autocomplete="off" aria-required="true">
+      </div>
+      <div class="input-row__error" hidden>Select a value from the list.</div></div>
+
+    <div class="input-row" data-row="city"><label class="input-row__label" for="city-5"><span class="input-row__label-text">City</span></label>
+      <div class="cx-select-container">
+        <input class="cx-select-input cx-select-input--auto-suggest" id="city-5" name="city" type="text" role="combobox"
+               aria-autocomplete="list" aria-expanded="false" autocomplete="off" aria-required="true">
+        <button type="button" class="cx-select__toggle" id="city-5-toggle-button" aria-label="Show options">&#9662;</button>
+      </div>
+      <div class="input-row__error" hidden>Select a value from the list.</div></div>
+
+    <div class="input-row" data-row="state"><label class="input-row__label" for="region2-5"><span class="input-row__label-text">State</span></label>
+      <div class="cx-select-container">
+        <input class="cx-select-input" id="region2-5" name="region2" type="text" role="combobox" readonly aria-haspopup="listbox"
+               aria-expanded="false" placeholder="Select a value" aria-required="true">
+        <button type="button" class="cx-select__toggle" id="region2-5-toggle-button" aria-label="Show options">&#9662;</button>
+      </div></div>
+
+    <div class="input-row" data-row="county"><label class="input-row__label" for="region1-5"><span class="input-row__label-text">County</span></label>
+      <div class="cx-select-container">
+        <input class="cx-select-input" id="region1-5" name="region1" type="text" role="combobox" readonly aria-haspopup="listbox"
+               aria-expanded="false" placeholder="Select a value" aria-required="true">
+        <button type="button" class="cx-select__toggle" id="region1-5-toggle-button" aria-label="Show options">&#9662;</button>
+      </div></div>
+  </section>
+
+  <div class="apply-flow-pagination"><button type="button" id="next">Next</button></div>
+</main>
+
+<script>
+(() => {
+  const MODE = Object.assign({ latency: 600, phoneLabelFor: true, keepTyped: false, crowded: false, bareNumber: false }, window.__ocx || {});
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const $ = (id) => document.getElementById(id);
+  if (!MODE.phoneLabelFor) $("phone-label").removeAttribute("for");
+  if (MODE.bareNumber) {
+    const box = $("phoneNumber-3");
+    box.removeAttribute("name");
+    box.removeAttribute("autocomplete");
+    box.type = "text";
+    box.id = "input-27";
+    box.name = "phoneNumber";            // the model's name for it, set after
+    box.removeAttribute("name");
+    box.dataset.model = "phoneNumber";
+    $("phone-label").removeAttribute("for");
+  }
+
+  window.__log = [];           // every box the extension typed into or picked from
+  window.__model = {};         // what the page itself will submit
+  const note = (what) => window.__log.push(what);
+
+  const ADDRESSES = [
+    { street: "4685 Old Oaks Dr", city: "Jacksonville", state: "Florida", st: "FL", zip: "32256", county: "Duval" },
+    { street: "4685 Old Oaks Ct", city: "Middleburg", state: "Florida", st: "FL", zip: "32068", county: "Clay" },
+    { street: "4685 Old Oak Rd", city: "Jacksonville", state: "Florida", st: "FL", zip: "32210", county: "Duval" },
+    { street: "4685 Old Oaks Dr", city: "Austin", state: "Texas", st: "TX", zip: "78750", county: "Travis" },
+  ];
+  if (MODE.crowded) {
+    for (const [city, st, state, zip, county] of [["Ocala", "FL", "Florida", "34471", "Marion"], ["Orlando", "FL", "Florida", "32801", "Orange"],
+      ["Tampa", "FL", "Florida", "33602", "Hillsborough"], ["Atlanta", "GA", "Georgia", "30301", "Fulton"], ["Dallas", "TX", "Texas", "75201", "Dallas"]]) {
+      ADDRESSES.unshift({ street: "4685 Old Oaks Dr", city, state, st, zip, county });
+    }
+  }
+  const ZIPS = { "32256": { city: "Jacksonville" }, "32210": { city: "Jacksonville" }, "32068": { city: "Middleburg" } };
+  const STATES = ["Florida", "Georgia", "Texas"];
+  const COUNTIES = { Florida: ["Clay", "Duval", "Nassau"], Texas: ["Travis"], Georgia: ["Fulton"] };
+
+  let open = null;
+  function closeList() {
+    if (!open) return;
+    open.list.remove();
+    open.owner.setAttribute("aria-expanded", "false");
+    open = null;
+  }
+  function showList(owner, items, onPick) {
+    closeList();
+    const list = document.createElement("ul");
+    list.className = "cx-select__list";
+    list.id = `${owner.id}-listbox`;
+    list.setAttribute("role", "listbox");
+    items.forEach((text, i) => {
+      const li = document.createElement("li");
+      li.setAttribute("role", "option");
+      li.id = `${list.id}-${i}`;
+      li.textContent = text;
+      li.addEventListener("mousedown", (e) => e.preventDefault());
+      li.addEventListener("click", () => { closeList(); onPick(text, i); });
+      list.appendChild(li);
+    });
+    const r = owner.getBoundingClientRect();
+    list.style.top = `${r.bottom + scrollY + 2}px`;
+    list.style.left = `${r.left + scrollX}px`;
+    list.style.width = `${r.width}px`;
+    document.body.appendChild(list);
+    owner.setAttribute("aria-expanded", "true");
+    owner.setAttribute("aria-controls", list.id);
+    open = { owner, list };
+  }
+  document.addEventListener("mousedown", (e) => {
+    if (open && !open.owner.contains(e.target) && !open.list.contains(e.target)) closeList();
+  }, true);
+
+  const rowOf = (el) => el.closest(".input-row");
+  function setError(el, on) {
+    rowOf(el).classList.toggle("input-row--invalid", on);
+    const err = rowOf(el).querySelector(".input-row__error");
+    if (err) err.hidden = !on;
+    el.setAttribute("aria-invalid", on ? "true" : "false");
+  }
+  /** A value picked from a list: what the page keeps. */
+  function commit(el, text, by = "page") {
+    el.value = text;
+    el.dataset.value = text;
+    window.__model[el.name] = text;
+    setError(el, false);
+    if (by !== "page") note(`picked ${el.name}: ${text}`);
+  }
+
+  /* A list box you type into: the list comes from the server, only while the
+     box has the caret, and only a picked value is kept. */
+  function searchBox(el, search, onPick) {
+    let timer = null;
+    el.addEventListener("input", (e) => {
+      if (e.isTrusted || true) note(`typed ${el.name}: ${el.value}`);
+      el.dataset.value = "";
+      delete window.__model[el.name];
+      clearTimeout(timer);
+      const q = el.value.trim();
+      if (q.length < 3) { if (open && open.owner === el) closeList(); return; }
+      timer = setTimeout(async () => {
+        await wait(MODE.latency);
+        if (el.value.trim() !== q || document.activeElement !== el) return;
+        const items = search(q);
+        if (!items.length) { if (open && open.owner === el) closeList(); return; }
+        showList(el, items.map((x) => x.text), (text, i) => { onPick(items[i]); });
+      }, 300);
+    });
+    el.addEventListener("blur", () => {
+      setTimeout(() => {
+        if (document.activeElement === el) return;
+        if (open && open.owner === el) closeList();
+        if (el.value && el.value !== el.dataset.value && !MODE.keepTyped) {
+          note(`cleared ${el.name}: ${el.value}`);
+          el.value = "";
+          setError(el, true);
+        }
+      }, 150);
+    });
+  }
+
+  const words = (s) => s.toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(Boolean);
+  searchBox($("addressLine1-5"), (q) => {
+    const want = words(q);
+    return ADDRESSES.filter((a) => {
+      const have = words(`${a.street} ${a.city} ${a.st} ${a.zip}`);
+      return want[0] === have[0] && want.slice(1).every((w) => have.some((h) => h.startsWith(w)));
+    }).slice(0, 5).map((a) => ({ a, text: `${a.street}, ${a.city}, ${a.st} ${a.zip}` }));
+  }, ({ a }) => {
+    commit($("addressLine1-5"), a.street, "applicant");
+    // The rest of the address arrives from the server a moment later.
+    setTimeout(() => {
+      commit($("postalCode-5"), a.zip);
+      commit($("city-5"), a.city);
+      commit($("region2-5"), a.state);
+      commit($("region1-5"), a.county);
+    }, 250);
+  });
+  searchBox($("postalCode-5"), (q) => Object.keys(ZIPS).filter((z) => z.startsWith(q)).map((z) => ({ z, text: z })),
+    ({ z }) => commit($("postalCode-5"), z, "applicant"));
+  searchBox($("city-5"), (q) => ["Jacksonville", "Jacksonville Beach", "Middleburg"].filter((c) => c.toLowerCase().startsWith(q.toLowerCase()))
+    .map((c) => ({ c, text: c })), ({ c }) => commit($("city-5"), c, "applicant"));
+
+  /* Read-only list boxes. */
+  function listBox(el, source) {
+    const toggle = () => {
+      if (open && open.owner === el) { closeList(); return; }
+      const items = source();
+      if (items.length) showList(el, items, (text) => commit(el, text, "applicant"));
+    };
+    el.addEventListener("click", toggle);
+    $(`${el.id}-toggle-button`)?.addEventListener("click", toggle);
+  }
+  listBox($("region2-5"), () => STATES);
+  listBox($("region1-5"), () => COUNTIES[$("region2-5").dataset.value] || []);
+  listBox($("country-5"), () => ["Canada", "India", "United States"]);
+  listBox($("countryCodesDropDownPhoneNumber-3"), () => ["+1", "+44", "+91"]);
+  window.__model.country = "United States";
+  window.__model.countryCodesDropDownPhoneNumber = "+1";
+  $("countryCodesDropDownPhoneNumber-3").addEventListener("input", () => note("typed countryCodesDropDownPhoneNumber"));
+
+  /* The number box: its value reaches the page's model when the box is left. */
+  const phone = $("phoneNumber-3") || $("input-27");
+  phone.addEventListener("input", () => note(`typed phoneNumber: ${phone.value}`));
+  const keepPhone = () => {
+    const v = phone.value.trim();
+    if (v) window.__model.phoneNumber = v; else delete window.__model.phoneNumber;
+  };
+  phone.addEventListener("blur", keepPhone);
+  phone.addEventListener("change", keepPhone);
+  for (const plain of ["firstName-1", "lastName-1", "addressLine2-5"]) {
+    const box = $(plain);
+    const keep = () => { if (box.value.trim()) window.__model[box.name] = box.value.trim(); };
+    box.addEventListener("blur", keep);
+    box.addEventListener("change", keep);
+  }
+
+  $("next").addEventListener("click", () => {
+    const errors = [];
+    const digits = String(window.__model.phoneNumber || "").replace(/\D+/g, "");
+    if (!window.__model.phoneNumber) errors.push("phoneNumber: required");
+    else if (/\+/.test(window.__model.phoneNumber) || digits.length !== 10) errors.push(`phoneNumber: invalid ${window.__model.phoneNumber}`);
+    for (const name of ["addressLine1", "postalCode", "city", "region2", "region1"]) {
+      if (!window.__model[name]) errors.push(`${name}: required`);
+    }
+    window.__errors = errors;
+  });
+})();
+</script>
+</body></html>

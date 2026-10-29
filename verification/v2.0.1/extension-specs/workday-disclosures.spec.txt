@@ -1,0 +1,18 @@
+
+The page from the report
+  ok   Asian is ticked
+  ok   gender, Hispanic and veteran are still answered
+  ok   nothing is left needing the applicant
+  ok   nothing Appli-Fill ticked is offered as a manual edit
+
+However the profile words it
+  ok   "White" ticks its own box only
+  ok   "Black or African American" ticks its own box only
+  ok   "American Indian or Alaska Native" ticks its own box only
+  ok   "Native Hawaiian or Other Pacific Islander" ticks its own box only
+  ok   "Asian (Not Hispanic or Latino)" ticks its own box only
+  ok   a category the list does not offer ticks nothing
+  ok   Hispanic is answered by its own question, and no box is guessed
+
+11/11 checks passed
+

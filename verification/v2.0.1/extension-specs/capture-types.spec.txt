@@ -1,0 +1,14 @@
+  ok   a typed answer is queued
+  ok   a native dropdown answer is queued
+  ok   a radio answer is queued
+  ok   a checkbox answer is queued
+  ok   a segmented button answer is queued
+  ok   a custom combobox answer is queued
+  ok   a radio is stored under the question, not the option picked
+  ok   a checkbox is stored under the question, not the option picked
+  ok   every queued question appears once
+  ok   running a fill does not queue Appli-Fill's own answers
+  ok   re-answering queues the newer answer
+
+11/11 checks passed
+

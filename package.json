@@ -1,0 +1,65 @@
+{
+  "name": "appli-fill",
+  "version": "2.0.5",
+  "private": true,
+  "description": "Appli-Fill \u2014 one-click job application autofill, tracking and AI answers.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seed": "node --env-file=.env.local scripts/seed.mjs",
+    "ext:build": "node scripts/build-extension.mjs",
+    "ext:test": "node test/oracle-education-phone.spec.mjs && node test/ashby-submission-state.spec.mjs && node test/study-matching.spec.mjs && node test/icims-screenshots.spec.mjs && node test/icims-frames.spec.mjs && node test/career-registration.spec.mjs && node test/portal-contact-regressions.spec.mjs && node test/answer-accuracy-latency.spec.mjs && node test/career-profile.spec.mjs && node test/career-fields.spec.mjs && node test/self-id.spec.mjs && node test/row-index.spec.mjs && node test/held-answers.spec.mjs && node test/saved-answers.spec.mjs && node test/ashby-capture.spec.mjs && node test/late-fields.spec.mjs && node test/workday-fields.spec.mjs && node test/autofill.spec.mjs && node test/scope.spec.mjs && node test/segmented.spec.mjs && node test/workday.spec.mjs && node test/workday-flow.spec.mjs && node test/workday-experience.spec.mjs && node test/workday-dates.spec.mjs && node test/current-job.spec.mjs && node test/workday-address.spec.mjs && node test/greenhouse-rows.spec.mjs && node test/eligibility.spec.mjs && node test/capture.spec.mjs && node test/capture-types.spec.mjs && node test/settings.spec.mjs && node test/background.spec.mjs && node test/answer-route.spec.mjs && node test/canonical-choices.spec.mjs && node test/workday-questions.spec.mjs && node test/workday-capture.spec.mjs && node test/pending-edit.spec.mjs && node test/popup-pending.spec.mjs && node test/lever-location.spec.mjs && node test/workday-selfid.spec.mjs && node test/provenance.spec.mjs && node test/app-questions-rules.spec.mjs && node test/workday-app-questions.spec.mjs && node test/ashby-location.spec.mjs && node test/account-password.spec.mjs && node test/workday-disclosures.spec.mjs && node test/oracle-cx.spec.mjs && node test/oracle-cx-redwood.spec.mjs && node test/oracle-cx-live.spec.mjs && node test/adp-myjobs.spec.mjs && node test/adp-wfn.spec.mjs && node test/cross-site-guards.spec.mjs && node test/ashby-yesno.spec.mjs && node test/workday-sei-questions.spec.mjs && node test/workday-education-prompt.spec.mjs && node test/lever-location-pick.spec.mjs && node test/ashby-survey.spec.mjs && node test/workday-source-prompt.spec.mjs && node test/popup-open.spec.mjs && node test/react-commit.spec.mjs && node test/start-date-other.spec.mjs && node test/adp-wfn-questions.spec.mjs && node test/eligibility-wording.spec.mjs",
+    "test:api": "node test/api-regressions.spec.mjs",
+    "test": "npm run ext:test && npm run test:api && npm run test:ui && npm run test:portals",
+    "ext:compare": "node test/compare.mjs",
+    "test:ui": "node test/career-profile-editor.spec.mjs && node test/ui-regressions.spec.mjs && node test/portal-signout.spec.mjs",
+    "test:portals": "node test/portals/greenhouse.spec.mjs && node test/portals/lever.spec.mjs && node test/portals/ashby.spec.mjs && node test/portals/workable.spec.mjs && node test/portals/smartrecruiters.spec.mjs && node test/portals/workday.spec.mjs && node test/portals/icims.spec.mjs && node test/portals/taleo.spec.mjs && node test/portals/successfactors.spec.mjs && node test/portals/oraclehcm.spec.mjs && node test/portals/generic.spec.mjs && node test/portals/ai.spec.mjs",
+    "brand:build": "node scripts/build-brand.mjs",
+    "test:setup": "playwright install chromium",
+    "test:icims": "node test/icims-screenshots.spec.mjs && node test/icims-frames.spec.mjs && node test/portals/icims.spec.mjs",
+    "test:oracle-ashby": "node test/oracle-education-phone.spec.mjs && node test/ashby-submission-state.spec.mjs && node test/study-matching.spec.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
+    "jose": "^5.9.6",
+    "lucide-react": "^0.454.0",
+    "mammoth": "^1.12.1",
+    "mongoose": "^8.8.1",
+    "next": "^14.2.35",
+    "playwright": "^1.63.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.13.3",
+    "sharp": "^0.35.5",
+    "stripe": "^17.4.0",
+    "unpdf": "^1.8.1",
+    "word-extractor": "^1.0.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.35",
+    "mongodb-memory-server": "^11.2.0",
+    "mongodb-memory-server-core": "^11.2.0",
+    "postcss": "^8.5.26",
+    "tailwind-merge": "^2.6.1",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "optionalDependencies": {
+    "@next/swc-linux-x64-gnu": "^16.3.5"
+  }
+}

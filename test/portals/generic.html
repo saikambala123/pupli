@@ -1,0 +1,49 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Careers at Vantage — Site Reliability Engineer</title>
+<meta property="og:site_name" content="Vantage"></head>
+<body>
+<!-- A real company careers page: a newsletter form and a site-search form both
+     come before the application form in the document. -->
+<header>
+  <form id="site-search" action="/search">
+    <label for="site-q">Search</label>
+    <input type="search" id="site-q" name="q" placeholder="Search the site">
+    <button type="submit">Go</button>
+  </form>
+</header>
+
+<section id="newsletter">
+  <h2>Stay in touch</h2>
+  <form id="newsletter-form" action="/subscribe">
+    <label for="nl-email">Email</label>
+    <input type="email" id="nl-email" name="email" placeholder="you@company.com">
+    <label for="nl-name">Name</label>
+    <input type="text" id="nl-name" name="name">
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<main>
+  <h1>Site Reliability Engineer</h1>
+  <p class="location">Charlotte, NC</p>
+
+  <form id="apply-form" action="/careers/apply" method="post" enctype="multipart/form-data">
+    <h2>Apply for this role</h2>
+    <div><label for="g-first">First name *</label><input type="text" id="g-first" name="first_name" required></div>
+    <div><label for="g-last">Last name *</label><input type="text" id="g-last" name="last_name" required></div>
+    <div><label for="g-email">Email address *</label><input type="email" id="g-email" name="email" required></div>
+    <div><label for="g-phone">Phone number</label><input type="tel" id="g-phone" name="phone"></div>
+    <div><label for="g-city">City</label><input type="text" id="g-city" name="city"></div>
+    <div><label for="g-country">Country</label>
+      <select id="g-country" name="country"><option value="">Choose…</option><option>Canada</option><option>India</option><option>United States</option></select></div>
+    <div><label for="g-linkedin">LinkedIn profile</label><input type="url" id="g-linkedin" name="linkedin"></div>
+    <div><label for="g-resume">Upload your CV *</label><input type="file" id="g-resume" name="cv" required></div>
+    <div><label for="g-notice">Notice period</label><input type="text" id="g-notice" name="notice"></div>
+    <div><label for="g-salary">Salary expectation (USD)</label><input type="text" id="g-salary" name="salary"></div>
+    <div><label for="g-auth">Do you have the right to work in the US?</label>
+      <select id="g-auth" name="auth"><option value="">Choose…</option><option>Yes</option><option>No</option></select></div>
+    <div><label for="g-cover">Anything else you'd like us to know?</label><textarea id="g-cover" name="cover" rows="5"></textarea></div>
+    <button type="submit">Send application</button>
+  </form>
+</main>
+</body></html>

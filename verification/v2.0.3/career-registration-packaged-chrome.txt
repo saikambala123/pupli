@@ -1,0 +1,61 @@
+PASS email
+PASS email2
+PASS pw
+PASS pw2
+PASS first
+PASS last
+PASS country
+PASS state
+PASS city
+PASS zip
+PASS authorized
+PASS sponsor
+PASS diploma
+PASS relatives
+PASS salary
+PASS ethnicity
+PASS race
+PASS genderIdentity
+PASS orientation
+PASS language
+PASS residence
+PASS aliases
+PASS unknown
+PASS withoutInstruction
+PASS forbidden
+PASS number
+PASS date
+PASS naSelect
+PASS helpNA
+PASS male radio
+PASS explicit profile visibility
+PASS explicit job alerts
+PASS terms checkbox
+PASS marketing untouched
+PASS asynchronous privacy accepted once
+PASS Apply never submitted
+PASS cookie Accept untouched
+PASS Decline untouched
+PASS Print untouched
+PASS sponsor change reaches model
+PASS diploma change reaches model
+PASS ethnicity change reaches model
+PASS aliases change reaches model
+PASS naSelect change reaches model
+PASS state change reaches model
+PASS terms change reaches model
+PASS manual alias preserved
+PASS manual terms refusal preserved
+PASS exact saved diploma answer
+PASS known alias wins over N/A
+PASS missing saved password stays empty
+PASS missing orientation not guessed
+PASS missing gender identity not guessed
+PASS higher education does not invent diploma declaration
+PASS asynchronous SAP State after Country
+PASS legacy JavaScript policy link opens and accepts
+PASS plain Terms of Use checkbox accepts
+PASS legacy policy never submits Apply
+PASS shown password with SAP description label
+PASS preferred language with SAP description label
+60/60 career registration checks passed

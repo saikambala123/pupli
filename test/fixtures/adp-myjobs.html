@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Career Site</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#f4f5f7;color:#222}
+header.cx-header{background:#1a1a2e;color:#fff;padding:10px 20px}
+main{max-width:760px;margin:0 auto;padding:20px}
+.page-content-container{background:#fff;border-radius:8px;padding:18px 22px;margin-bottom:18px}
+adp-form-group{display:block;margin-bottom:14px}
+.form-control-label{display:block;font-size:13px;margin-bottom:4px;color:#333}
+.form-control-label .required{color:#c0392b;margin-left:2px}
+.form-control-error{color:#c0392b;font-size:12px;min-height:0}
+adp-form-group.has-error .form-control-error::before,.question.has-error .form-control-error::before{content:attr(data-message)}
+#prescreeningForm .question{margin-bottom:16px}
+#prescreeningForm .section-row{margin-bottom:4px}
+.question-text{font-size:14px}
+.wizard-footer{display:flex;justify-content:flex-end;gap:10px}
+p.notice{font-size:12px;color:#555}
+</style></head>
+<body>
+<!--
+  ADP Recruiting Management's apply flow (myjobs.adp.com/<site>/cx/…), drawn the
+  way the live pages are (see adp-sdf-kit.js for the components):
+
+  - Contact Information: every question is an `adp-form-group[data-name]` whose
+    label is `label.form-control-label` (`.valid-label` + `.required`) and whose
+    control is an SDF element — the box itself sits in that element's shadow
+    root, so nothing labels it there.
+  - Questions: `form#prescreeningForm`, one question per block; the question is
+    the text of the row above the control (or the control's aria-label, or the
+    radio group's own `.sdf-form-control-wrapper--label`).
+  - Voluntary Self-Identification: Gender, Hispanic or Latino, Race, Veteran
+    Status, Disability Status, and the CC-305 signature (Name and Date).
+
+  window.__adp = {
+    section: "contact" | "questions" | "eeo",
+    commitOnChange: bool,  the form keeps a box's text only once the box is left
+  }
+  window.__sdf = { pickLatency: ms }   a choice is shown a moment after the click
+  window.__model   what the form keeps; window.__log   what was picked, answered or ticked
+  #next            the page's own check → window.__errors
+-->
+<header class="cx-header">Acme Corporation Careers</header>
+<main>
+  <h1 class="job-title">Senior Site Reliability Engineer</h1>
+
+  <div data-section="contact" class="page-content-container" aria-label="Contact Information">
+    <h2>Contact Information</h2>
+    <adp-form-group data-name="firstName" id="cx__group__firstName">
+      <div class="form-group">
+        <label class="form-control-label" for="firstName"><span class="valid-label">First Name</span><span class="required">*</span></label>
+        <sdf-input id="firstName" formcontrolname="firstName" required maxlength="50"></sdf-input>
+        <div class="form-control-error" role="alert" data-message="First Name is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="middleName" id="cx__group__middleName">
+      <div class="form-group">
+        <label class="form-control-label" for="middleName"><span class="valid-label">Middle Name</span></label>
+        <sdf-input id="middleName" formcontrolname="middleName" maxlength="50"></sdf-input>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="lastName" id="cx__group__lastName">
+      <div class="form-group">
+        <label class="form-control-label" for="lastName"><span class="valid-label">Last Name</span><span class="required">*</span></label>
+        <sdf-input id="lastName" formcontrolname="lastName" required maxlength="50"></sdf-input>
+        <div class="form-control-error" role="alert" data-message="Last Name is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="email" id="cx__group__email">
+      <div class="form-group">
+        <label class="form-control-label" for="email"><span class="valid-label">Email</span><span class="required">*</span></label>
+        <sdf-input id="email" formcontrolname="email" type="email" required></sdf-input>
+        <div class="form-control-error" role="alert" data-message="Email is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="phone" id="cx__group__phone">
+      <div class="form-group">
+        <label class="form-control-label" for="phone"><span class="valid-label">Phone</span><span class="required">*</span></label>
+        <sdf-phone-number-input id="phone" formcontrolname="phone" required></sdf-phone-number-input>
+        <div class="form-control-error" role="alert" data-message="Phone is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="phoneType" id="cx__group__phoneType">
+      <div class="form-group">
+        <label class="form-control-label" for="phoneType"><span class="valid-label">Phone Type</span><span class="required">*</span></label>
+        <sdf-select-simple id="phoneType" formcontrolname="phoneType" required>
+          <sdf-select-item value="M">Mobile</sdf-select-item>
+          <sdf-select-item value="H">Home</sdf-select-item>
+          <sdf-select-item value="W">Work</sdf-select-item>
+        </sdf-select-simple>
+        <div class="form-control-error" role="alert" data-message="Phone Type is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="addressLine1" id="cx__group__addressLine1">
+      <div class="form-group">
+        <label class="form-control-label" for="addressLine1"><span class="valid-label">Address Line 1</span><span class="required">*</span></label>
+        <sdf-input id="addressLine1" formcontrolname="addressLine1" required></sdf-input>
+        <div class="form-control-error" role="alert" data-message="Address Line 1 is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="addressLine2" id="cx__group__addressLine2">
+      <div class="form-group">
+        <label class="form-control-label" for="addressLine2"><span class="valid-label">Address Line 2</span></label>
+        <sdf-input id="addressLine2" formcontrolname="addressLine2"></sdf-input>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="city" id="cx__group__city">
+      <div class="form-group">
+        <label class="form-control-label" for="city"><span class="valid-label">City</span><span class="required">*</span></label>
+        <sdf-input id="city" formcontrolname="city" required></sdf-input>
+        <div class="form-control-error" role="alert" data-message="City is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="country" id="cx__group__country">
+      <div class="form-group">
+        <label class="form-control-label" for="country"><span class="valid-label">Country</span><span class="required">*</span></label>
+        <sdf-select-simple id="country" formcontrolname="country" required filterable data-items="countries"></sdf-select-simple>
+        <div class="form-control-error" role="alert" data-message="Country is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="state" id="cx__group__state">
+      <div class="form-group">
+        <label class="form-control-label" for="state"><span class="valid-label">State/Province</span><span class="required">*</span></label>
+        <sdf-select-simple id="state" formcontrolname="state" required filterable data-items="states"></sdf-select-simple>
+        <div class="form-control-error" role="alert" data-message="State/Province is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="zipCode" id="cx__group__zipCode">
+      <div class="form-group">
+        <label class="form-control-label" for="zipCode"><span class="valid-label">Zip/Postal Code</span><span class="required">*</span></label>
+        <sdf-input id="zipCode" formcontrolname="zipCode" required maxlength="10"></sdf-input>
+        <div class="form-control-error" role="alert" data-message="Zip/Postal Code is required."></div>
+      </div>
+    </adp-form-group>
+  </div>
+
+  <form data-section="questions" id="prescreeningForm" class="page-content-container" novalidate>
+    <h2>Questions</h2>
+    <div class="question">
+      <div class="section-row"><div class="question-text">Are you at least 18 years of age?</div></div>
+      <div class="section-row">
+        <sdf-radio-group id="q_1001" formcontrolname="q_1001" aria-label="Are you at least 18 years of age?" required>
+          <sdf-radio-button value="Y">Yes</sdf-radio-button>
+          <sdf-radio-button value="N">No</sdf-radio-button>
+        </sdf-radio-group>
+        <div class="form-control-error" data-message="This question is required."></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="section-row">
+        <sdf-radio-group id="q_1002" formcontrolname="q_1002" label="Are you legally authorized to work in the United States?" required>
+          <sdf-radio-button value="Y">Yes</sdf-radio-button>
+          <sdf-radio-button value="N">No</sdf-radio-button>
+        </sdf-radio-group>
+        <div class="form-control-error" data-message="This question is required."></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="section-row"><div class="question-text">Will you now or in the future require sponsorship for employment visa status (e.g., H-1B visa status)?</div></div>
+      <div class="section-row">
+        <sdf-radio-group id="q_1003" formcontrolname="q_1003" required>
+          <sdf-radio-button value="Y" label="Yes"></sdf-radio-button>
+          <sdf-radio-button value="N" label="No"></sdf-radio-button>
+        </sdf-radio-group>
+        <div class="form-control-error" data-message="This question is required."></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="section-row"><div class="question-text">How did you hear about this position?</div></div>
+      <div class="section-row">
+        <sdf-select-simple id="q_1004" formcontrolname="q_1004" required>
+          <sdf-select-item value="CW">Company Website</sdf-select-item>
+          <sdf-select-item value="IN">Indeed</sdf-select-item>
+          <sdf-select-item value="LI">LinkedIn</sdf-select-item>
+          <sdf-select-item value="JB">Other Job Board</sdf-select-item>
+          <sdf-select-item value="ER">Employee Referral</sdf-select-item>
+          <sdf-select-item value="OT">Other</sdf-select-item>
+        </sdf-select-simple>
+        <div class="form-control-error" data-message="This question is required."></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="section-row"><div class="question-text">What are your salary expectations for this role?</div></div>
+      <div class="section-row">
+        <sdf-input id="q_1005" formcontrolname="q_1005" required></sdf-input>
+        <div class="form-control-error" data-message="This question is required."></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="section-row"><div class="question-text">Have you ever been employed by Acme Corporation?</div></div>
+      <div class="section-row">
+        <sdf-radio-group id="q_1006" formcontrolname="q_1006" required>
+          <sdf-radio-button value="Y">Yes</sdf-radio-button>
+          <sdf-radio-button value="N">No</sdf-radio-button>
+        </sdf-radio-group>
+        <div class="form-control-error" data-message="This question is required."></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="section-row"><div class="question-text">What is your earliest available start date?</div></div>
+      <div class="section-row">
+        <sdf-date-picker id="q_1007" formcontrolname="q_1007" required></sdf-date-picker>
+        <div class="form-control-error" data-message="This question is required."></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="section-row">
+        <sdf-checkbox id="q_1008" formcontrolname="q_1008" required label="I agree to a background check if I am offered employment."></sdf-checkbox>
+        <div class="form-control-error" data-message="This question is required."></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="section-row"><div class="question-text">Describe a production incident you led the response to.</div></div>
+      <div class="section-row">
+        <sdf-textarea id="q_1009" formcontrolname="q_1009"></sdf-textarea>
+      </div>
+    </div>
+  </form>
+
+  <div data-section="employment" class="page-content-container" aria-label="Employment History">
+    <h2>Employment History</h2>
+    <rm-repeating-form id="employers">
+      <template id="employer-template">
+        <sdf-expandable-box class="employer-box">
+          <div slot="header" class="box-header">Employer __N__</div>
+          <adp-form-group data-name="employerName___N__">
+            <div class="form-group">
+              <label class="form-control-label" for="employerName___N__"><span class="valid-label">Employer</span><span class="required">*</span></label>
+              <sdf-input id="employerName___N__" formcontrolname="employerName___N__" required></sdf-input>
+            </div>
+          </adp-form-group>
+          <adp-form-group data-name="jobTitle___N__">
+            <div class="form-group">
+              <label class="form-control-label" for="jobTitle___N__"><span class="valid-label">Job Title</span><span class="required">*</span></label>
+              <sdf-input id="jobTitle___N__" formcontrolname="jobTitle___N__" required></sdf-input>
+            </div>
+          </adp-form-group>
+          <adp-form-group data-name="startDate___N__">
+            <div class="form-group">
+              <label class="form-control-label" for="startDate___N__"><span class="valid-label">Start Date</span><span class="required">*</span></label>
+              <sdf-date-picker id="startDate___N__" formcontrolname="startDate___N__" required></sdf-date-picker>
+            </div>
+          </adp-form-group>
+          <adp-form-group data-name="endDate___N__">
+            <div class="form-group">
+              <label class="form-control-label" for="endDate___N__"><span class="valid-label">End Date</span></label>
+              <sdf-date-picker id="endDate___N__" formcontrolname="endDate___N__"></sdf-date-picker>
+            </div>
+          </adp-form-group>
+          <adp-form-group data-name="currentEmployer___N__">
+            <div class="form-group">
+              <label class="form-control-label"><span class="valid-label">I currently work here</span></label>
+              <sdf-checkbox id="currentEmployer___N__" formcontrolname="currentEmployer___N__" label="I currently work here"></sdf-checkbox>
+            </div>
+          </adp-form-group>
+        </sdf-expandable-box>
+      </template>
+      <div class="employer-list"></div>
+      <sdf-button class="add-employer" aria-label="Add Employer">Add Employer</sdf-button>
+    </rm-repeating-form>
+  </div>
+
+  <div data-section="eeo" class="page-content-container" aria-label="Voluntary Self-Identification">
+    <h2>Voluntary Self-Identification</h2>
+    <p class="notice">Acme Corporation is an equal opportunity employer. Providing this information is voluntary.</p>
+    <adp-form-group data-name="gender" id="cx__group__gender">
+      <div class="form-group">
+        <label class="form-control-label" for="gender"><span class="valid-label">Gender</span><span class="required">*</span></label>
+        <sdf-select-simple id="gender" formcontrolname="gender" required>
+          <sdf-select-item value="M">Male</sdf-select-item>
+          <sdf-select-item value="F">Female</sdf-select-item>
+          <sdf-select-item value="X">I do not wish to self-identify</sdf-select-item>
+        </sdf-select-simple>
+        <div class="form-control-error" role="alert" data-message="Gender is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="hispanicLatino" id="cx__group__hispanicLatino">
+      <div class="form-group">
+        <label class="form-control-label"><span class="valid-label">Are you Hispanic or Latino?</span><span class="required">*</span></label>
+        <sdf-radio-group id="hispanicLatino" formcontrolname="hispanicLatino" required>
+          <sdf-radio-button value="Y">Yes</sdf-radio-button>
+          <sdf-radio-button value="N">No</sdf-radio-button>
+          <sdf-radio-button value="X">I do not wish to self-identify</sdf-radio-button>
+        </sdf-radio-group>
+        <div class="form-control-error" role="alert" data-message="This question is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="race" id="cx__group__race">
+      <div class="form-group">
+        <label class="form-control-label" for="race"><span class="valid-label">Race</span><span class="required">*</span></label>
+        <sdf-select-simple id="race" formcontrolname="race" required>
+          <sdf-select-item value="AI">American Indian or Alaska Native</sdf-select-item>
+          <sdf-select-item value="AS">Asian</sdf-select-item>
+          <sdf-select-item value="BL">Black or African American</sdf-select-item>
+          <sdf-select-item value="NH">Native Hawaiian or Other Pacific Islander</sdf-select-item>
+          <sdf-select-item value="WH">White</sdf-select-item>
+          <sdf-select-item value="TW">Two or More Races</sdf-select-item>
+          <sdf-select-item value="X">I do not wish to self-identify</sdf-select-item>
+        </sdf-select-simple>
+        <div class="form-control-error" role="alert" data-message="Race is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="veteranStatus" id="cx__group__veteranStatus">
+      <div class="form-group">
+        <label class="form-control-label" for="veteranStatus"><span class="valid-label">Veteran Status</span><span class="required">*</span></label>
+        <sdf-select-simple id="veteranStatus" formcontrolname="veteranStatus" required>
+          <sdf-select-item value="P">I identify as one or more of the classifications of protected veteran</sdf-select-item>
+          <sdf-select-item value="N">I am not a protected veteran</sdf-select-item>
+          <sdf-select-item value="X">I do not wish to self-identify</sdf-select-item>
+        </sdf-select-simple>
+        <div class="form-control-error" role="alert" data-message="Veteran Status is required."></div>
+      </div>
+    </adp-form-group>
+    <p class="notice">Voluntary Self-Identification of Disability · Form CC-305 · OMB Control Number 1250-0005 · Expires 04/30/2026</p>
+    <adp-form-group data-name="disabilityStatus" id="cx__group__disabilityStatus">
+      <div class="form-group">
+        <label class="form-control-label"><span class="valid-label">Please check one of the boxes below:</span><span class="required">*</span></label>
+        <sdf-radio-group id="disabilityStatus" formcontrolname="disabilityStatus" required>
+          <sdf-radio-button value="Y">Yes, I have a disability (or previously had a disability)</sdf-radio-button>
+          <sdf-radio-button value="N">No, I do not have a disability and have not had one in the past</sdf-radio-button>
+          <sdf-radio-button value="X">I do not want to answer</sdf-radio-button>
+        </sdf-radio-group>
+        <div class="form-control-error" role="alert" data-message="This question is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="selfIdName" id="cx__group__selfIdName">
+      <div class="form-group">
+        <label class="form-control-label" for="selfIdName"><span class="valid-label">Name</span><span class="required">*</span></label>
+        <sdf-input id="selfIdName" formcontrolname="selfIdName" required></sdf-input>
+        <div class="form-control-error" role="alert" data-message="Name is required."></div>
+      </div>
+    </adp-form-group>
+    <adp-form-group data-name="selfIdDate" id="cx__group__selfIdDate">
+      <div class="form-group">
+        <label class="form-control-label" for="selfIdDate"><span class="valid-label">Date</span><span class="required">*</span></label>
+        <sdf-date-picker id="selfIdDate" formcontrolname="selfIdDate" required></sdf-date-picker>
+        <div class="form-control-error" role="alert" data-message="Date is required."></div>
+      </div>
+    </adp-form-group>
+  </div>
+
+  <div class="wizard-footer">
+    <sdf-button class="wizard-previous-step-btn">Previous</sdf-button>
+    <sdf-button id="next" class="wizard-next-step-btn">Next</sdf-button>
+  </div>
+</main>
+<!--SDF-KIT-->
+<script>
+(function () {
+  const cfg = window.__adp || {};
+  const section = cfg.section || "contact";
+  document.querySelectorAll("[data-section]").forEach((s) => { if (s.dataset.section !== section) s.remove(); });
+  window.__model = {};
+  window.__log = window.__log || [];
+  window.__errors = null;
+
+  const COUNTRIES = ["Afghanistan", "Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Brazil", "Canada", "Chile", "China",
+    "Colombia", "Denmark", "Egypt", "Finland", "France", "Germany", "Greece", "India", "Indonesia", "Ireland", "Israel", "Italy",
+    "Japan", "Kenya", "Mexico", "Netherlands", "New Zealand", "Nigeria", "Norway", "Pakistan", "Philippines", "Poland", "Portugal",
+    "Singapore", "South Africa", "Spain", "Sweden", "Switzerland", "United Arab Emirates", "United Kingdom", "United States",
+    "United States Minor Outlying Islands", "Vietnam"];
+  const STATES = [["AL","Alabama"],["AK","Alaska"],["AZ","Arizona"],["AR","Arkansas"],["CA","California"],["CO","Colorado"],
+    ["CT","Connecticut"],["DE","Delaware"],["DC","District of Columbia"],["FL","Florida"],["GA","Georgia"],["HI","Hawaii"],
+    ["ID","Idaho"],["IL","Illinois"],["IN","Indiana"],["IA","Iowa"],["KS","Kansas"],["KY","Kentucky"],["LA","Louisiana"],
+    ["ME","Maine"],["MD","Maryland"],["MA","Massachusetts"],["MI","Michigan"],["MN","Minnesota"],["MS","Mississippi"],
+    ["MO","Missouri"],["MT","Montana"],["NE","Nebraska"],["NV","Nevada"],["NH","New Hampshire"],["NJ","New Jersey"],
+    ["NM","New Mexico"],["NY","New York"],["NC","North Carolina"],["ND","North Dakota"],["OH","Ohio"],["OK","Oklahoma"],
+    ["OR","Oregon"],["PA","Pennsylvania"],["RI","Rhode Island"],["SC","South Carolina"],["SD","South Dakota"],["TN","Tennessee"],
+    ["TX","Texas"],["UT","Utah"],["VT","Vermont"],["VA","Virginia"],["WA","Washington"],["WV","West Virginia"],["WI","Wisconsin"],["WY","Wyoming"]];
+  const LISTS = {
+    countries: COUNTRIES.map((c) => ({ value: c === "United States" ? "USA" : c.slice(0, 3).toUpperCase(), label: c })),
+    states: STATES.map(([code, name]) => ({ value: code, label: name })),
+  };
+  document.querySelectorAll("sdf-select-simple[data-items]").forEach((s) => { s.items = LISTS[s.dataset.items]; });
+
+  // Employment History: one employer block, and "Add Employer" for the next.
+  const employers = document.querySelector("#employers .employer-list");
+  if (employers) {
+    const template = document.getElementById("employer-template");
+    let count = 0;
+    const addEmployer = () => {
+      count++;
+      const html = template.innerHTML.replace(/__N__/g, String(count));
+      const holder = document.createElement("div");
+      holder.innerHTML = html;
+      while (holder.firstElementChild) employers.appendChild(holder.firstElementChild);
+      window.__log.push(`added employer ${count}`);
+    };
+    addEmployer();
+    document.querySelector("sdf-button.add-employer").addEventListener("click", () => { if (count < 6) addEmployer(); });
+  }
+
+  const nameOf = (host) => host?.getAttribute?.("formcontrolname");
+  const boxOf = (host) => host.closest("adp-form-group, .question");
+  for (const type of ["sdfInput", "sdfChange"]) {
+    document.addEventListener(type, (e) => {
+      const host = e.target;
+      const name = nameOf(host);
+      if (!name) return;
+      // The form keeps a box's text when it is left, where it is set up that way.
+      const typed = ["SDF-INPUT", "SDF-TEXTAREA", "SDF-DATE-PICKER", "SDF-PHONE-NUMBER-INPUT"].includes(host.tagName);
+      if (cfg.commitOnChange && typed && type === "sdfInput") return;
+      let value = e.detail;
+      if (host.tagName === "SDF-PHONE-NUMBER-INPUT") value = String(value?.number ?? "");
+      window.__model[name] = value;
+      host.removeAttribute("invalid");
+      boxOf(host)?.classList.remove("has-error");
+    });
+  }
+
+  const choiceOk = (host, value) => {
+    if (host.tagName === "SDF-SELECT-SIMPLE") {
+      const values = host.items ? host.items.map((i) => String(i.value)) : Array.from(host.querySelectorAll("sdf-select-item")).map((n) => n.getAttribute("value"));
+      return values.includes(String(value)) && host.value === value;
+    }
+    if (host.tagName === "SDF-RADIO-GROUP") return Array.from(host.querySelectorAll("sdf-radio-button")).some((b) => b.getAttribute("value") === value);
+    return true;
+  };
+  document.getElementById("next").addEventListener("click", () => {
+    const errors = [];
+    document.querySelectorAll("[formcontrolname]").forEach((host) => {
+      const name = nameOf(host);
+      const value = window.__model[name];
+      const empty = value === undefined || value === null || value === false || String(value).trim() === "";
+      let problem = null;
+      if (host.hasAttribute("required") && empty) problem = "required";
+      else if (!empty) {
+        if (!choiceOk(host, value)) problem = "not one of its choices";
+        else if (name === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) problem = "invalid email";
+        else if (name === "phone" && String(value).replace(/\D+/g, "").length !== 10) problem = `invalid phone ${value}`;
+        else if (name === "zipCode" && !/^\d{5}(-\d{4})?$/.test(String(value).trim())) problem = `invalid zip ${value}`;
+        else if (host.tagName === "SDF-DATE-PICKER" && !/^\d{2}\/\d{2}\/\d{4}$/.test(String(value).trim())) problem = `invalid date ${value}`;
+      }
+      if (problem) {
+        errors.push(`${name}: ${problem}`);
+        host.setAttribute("invalid", "");
+        boxOf(host)?.classList.add("has-error");
+      }
+    });
+    // A job that has ended needs its end date.
+    document.querySelectorAll("sdf-date-picker[formcontrolname^='endDate_']").forEach((host) => {
+      const n = host.getAttribute("formcontrolname").split("_")[1];
+      const current = window.__model[`currentEmployer_${n}`] === true;
+      if (!current && !String(window.__model[`endDate_${n}`] ?? "").trim()) errors.push(`endDate_${n}: required unless current`);
+      if (current && String(window.__model[`endDate_${n}`] ?? "").trim()) errors.push(`endDate_${n}: set on the current job`);
+    });
+    window.__errors = errors;
+  });
+})();
+</script>
+</body></html>

@@ -1,0 +1,19 @@
+  ok   an exact option is returned unchanged
+  ok   case and punctuation differences still name the option
+  ok   an option quoted inside a sentence is recovered
+  ok   a reply naming two options is refused rather than guessed
+  ok   a reply that names nothing on the menu is refused
+  ok   a longer option is not confused with a shorter one it contains
+  ok   regex metacharacters in a question are escaped, not executed
+  ok   the route escapes before building the expression
+  ok   a single-choice reply is snapped before it is returned
+  ok   the route answers a page of questions with one model call
+  ok   questions are bounded and cleaned
+  ok   identity, self-identification and record questions are never put to the model
+  ok   saved passwords never reach the prompt
+  ok   the most relevant saved answers are chosen when there are many
+  ok   the prompt carries today's date, the options and every question id
+  ok   replies are made safe for the question they answer
+  ok   the output budget grows with the page and stays bounded
+
+17 checks passed

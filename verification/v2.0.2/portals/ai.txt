@@ -1,0 +1,22 @@
+
+AI pass — 4 questions sent, 4 drafted
+
+questions sent over the wire:
+   • "Why are you interested in joining Orbit?"  [textarea] options=0
+   • "Describe a project you are proud of."  [textarea] options=0
+   • "Which of these have you used in production?"  [select] options=4
+   • "How many days per week would you come to the office?"  [select] options=5
+
+  ok   the page's questions go in one request
+  ok   the open question is sent as the question alone
+  ok   no question carries the pipe-joined label blob
+  ok   no question leaks the machine name
+  ok   the 'why' answer landed
+  ok   the 'proud of' answer landed
+  ok   the menu question was given its options
+  ok   the menu answer landed
+  ok   the numeric menu answer landed
+  ok   identity fields were never sent to the model
+
+10/10 checks passed — AI answers
+

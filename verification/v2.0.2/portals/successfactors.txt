@@ -1,0 +1,18 @@
+
+SuccessFactors — detected "sapSuccessFactors", 11 filled, 0 left
+
+  ok   detected as SAP SuccessFactors
+  ok   first name
+  ok   last name
+  ok   e-mail
+  ok   day time number
+  ok   street address
+  ok   city
+  ok   postal code
+  ok   country
+  ok   work authorization
+  ok   sponsorship
+  ok   source
+
+12/12 checks passed — SAP SuccessFactors
+

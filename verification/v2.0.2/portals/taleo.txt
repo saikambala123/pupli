@@ -1,0 +1,24 @@
+
+Taleo — detected "taleo", 17 filled, 0 left
+
+  ok   detected as Taleo
+  ok   first name
+  ok   middle initial fits maxlength=1
+  ok   last name
+  ok   e-mail address
+  ok   primary number
+  ok   address line 1 carries street + apartment
+  ok   city
+  ok   state select
+  ok   zip
+  ok   country select
+  ok   eligible to work = Yes
+  ok   sponsorship = No
+  ok   most recent employer
+  ok   most recent job title
+  ok   highest education = Master's Degree
+  ok   school
+  ok   how did you hear = LinkedIn
+
+18/18 checks passed — Taleo
+

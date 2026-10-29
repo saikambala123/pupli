@@ -1,0 +1,71 @@
+<!doctype html><html><head><meta charset="utf-8"><title>My Information — Workday</title>
+<style>body{font-family:system-ui;padding:20px;max-width:720px}
+.f{margin-bottom:14px}label{display:block;font-weight:600;margin-bottom:4px}
+input,select{width:100%;padding:7px;border:1px solid #ccd;border-radius:5px}
+.sec{border:1px solid #dde;border-radius:8px;padding:12px;margin-bottom:14px}
+button{padding:7px 14px;font:inherit;cursor:pointer}
+.menu{border:1px solid #ccd;background:#fff}.menu[hidden]{display:none}
+.menu div{padding:6px 10px;cursor:pointer}
+</style></head><body>
+<div data-automation-id="applyFlowPage">
+  <h2>Contact Information</h2>
+  <div class="f"><label for="em">Email Address</label><input id="em" data-automation-id="email" type="text"></div>
+  <div class="f"><label for="pdt">Phone Device Type</label>
+    <select id="pdt" data-automation-id="phone-device-type"><option value="">Select…</option><option>Mobile</option><option>Home</option></select></div>
+  <div class="f"><label for="cc">Country Phone Code</label><input id="cc" data-automation-id="countryPhoneCode" type="text"></div>
+  <div class="f"><label for="ph">Phone Number</label><input id="ph" data-automation-id="phone-number" type="text"></div>
+  <div class="f"><label for="ext">Phone Extension</label><input id="ext" data-automation-id="phone-extension" type="text"></div>
+
+  <h2>Education</h2>
+  <div class="sec" data-automation-id="education-1">
+    <div class="f"><label for="sch1">School or University</label><input id="sch1" type="text"></div>
+    <div class="f"><label for="deg1">Degree</label>
+      <select id="deg1"><option value="">Select…</option><option>Bachelor's Degree</option><option>Master's Degree</option></select></div>
+    <!-- Workday's section toggles and add controls carry aria-expanded. -->
+    <button id="add-edu" type="button" data-automation-id="add-button" aria-expanded="false">Add</button>
+  </div>
+
+  <h2>Application Questions</h2>
+  <div class="f"><label id="hdyh-l">How did you hear about us?</label>
+    <button id="hdyh" type="button" data-automation-id="hearAboutUsDropdown" role="button"
+            aria-haspopup="listbox" aria-expanded="false" aria-labelledby="hdyh-l">Select One</button>
+    <div class="menu" id="hdyh-menu" role="listbox" hidden>
+      <div role="option">Employee Referral</div>
+      <div role="option">Job Board</div>
+      <div role="option">LinkedIn</div>
+      <div role="option">Social Media</div>
+      <div role="option">University Career Fair</div>
+    </div></div>
+
+  <!-- Workday also renders selects as buttons that carry only aria-expanded:
+       no aria-haspopup, no telling automation id. -->
+  <div class="f"><label id="src-l">Preferred Work Location</label>
+    <button id="loc" type="button" aria-expanded="false" aria-labelledby="src-l" class="wd-sel">Select One</button>
+    <div class="menu" id="loc-menu" role="listbox" hidden>
+      <div role="option">Remote</div><div role="option">North Kingstown, Rhode Island</div><div role="option">Hybrid</div>
+    </div></div>
+
+  <div class="f"><label for="today">Today's Date</label><input id="today" type="text" placeholder="MM/DD/YYYY"></div>
+  <div class="f"><label for="sigdate">Signature Date</label><input id="sigdate" type="date"></div>
+</div>
+<script>
+let eduCount = 1;
+window.__addClicks = 0;
+document.getElementById("add-edu").addEventListener("click", () => {
+  window.__addClicks++; eduCount++;
+  const d = document.createElement("div");
+  d.className = "sec"; d.setAttribute("data-automation-id", "education-" + eduCount);
+  d.innerHTML = '<div class="f"><label>School or University</label><input type="text"></div>' +
+                '<div class="f"><label>Degree</label><select><option value="">Select…</option>' +
+                '<option>Bachelor\'s Degree</option><option>Master\'s Degree</option></select></div>';
+  document.querySelector("[data-automation-id='education-1']").after(d);
+});
+const lb = document.getElementById("loc"), lm = document.getElementById("loc-menu");
+lb.addEventListener("click", () => { const o = lm.hidden; lm.hidden = !o; lb.setAttribute("aria-expanded", String(o)); });
+lm.querySelectorAll("[role=option]").forEach(o => o.addEventListener("click", () => {
+  lb.textContent = o.textContent; lm.hidden = true; lb.setAttribute("aria-expanded","false"); }));
+const hb = document.getElementById("hdyh"), hm = document.getElementById("hdyh-menu");
+hb.addEventListener("click", () => { const o = hm.hidden; hm.hidden = !o; hb.setAttribute("aria-expanded", String(o)); });
+hm.querySelectorAll("[role=option]").forEach(o => o.addEventListener("click", () => {
+  hb.textContent = o.textContent; hm.hidden = true; hb.setAttribute("aria-expanded","false"); }));
+</script></body></html>

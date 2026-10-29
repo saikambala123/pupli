@@ -1,0 +1,12 @@
+  ok   a late dropdown answer is held
+  ok   a late radio answer is held
+  ok   a late checkbox answer is held
+  ok   a late text answer is held
+  ok   a custom radio group answer is held
+  ok   a custom checkbox group answer is held
+  ok   each late answer carries its own control type
+  ok   no question is held twice
+  ok   changing a late dropdown holds the newer answer
+
+9/9 checks passed
+

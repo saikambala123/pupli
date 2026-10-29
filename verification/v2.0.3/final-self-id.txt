@@ -1,0 +1,110 @@
+
+CC-305 block
+  ok   Name matches the self-ID rule
+  ok   Name is the applicant's legal name
+  ok   Employee ID matches its own rule
+  ok   Employee ID is left blank
+  ok   Date matches the self-ID date rule
+  ok   Date is today, MM/DD/YYYY
+  ok   Date is ISO for a native date input
+
+the same labels elsewhere are unaffected
+  ok   a bare Name still resolves to fullName
+  ok   a bare Date is still left alone
+  ok   Graduation Date is not today
+  ok   Employment Start Date is not today
+
+identity fields are unreachable by the model
+  ok   First Name is flagged identity
+  ok   Email is flagged identity
+  ok   Please specify your gender. is flagged identity
+  ok   Please specify your veteran status. is flagged identity
+
+EEO canonicalisation
+  ok   classifications option
+  ok   veteran-but-not-protected is its own branch
+  ok   not-a-protected-veteran
+  ok   Asian (Not Hispanic or Latino)
+  ok   American Indian or Alaska Native (Not Hispanic or Latino)
+  ok   White (Not Hispanic or Latino)
+  ok   Black or African American (Not Hispanic or Latino)
+  ok   Native Hawaiian or Other Pacific Islander (Not Hispanic or Latino)
+  ok   Two or More Races (Not Hispanic or Latino)
+  ok   Hispanic or Latino
+  ok   'I do not want to answer' is a decline
+  ok   'I do not wish to answer' is a decline
+
+veteran dropdown
+  ok   a non-veteran gets the plain 'not' wording
+  ok   a decline gets the decline option
+  ok   a protected veteran gets the classifications option
+  ok   a non-protected veteran can still reach their wording
+  ok   a non-veteran refuses a list offering only the veteran wording
+
+race dropdown
+  ok   Asian does not land on American Indian
+  ok   Asian Indian lands on Asian
+  ok   Two or More Races is not read as Hispanic
+  ok   American Indian is still reachable
+
+gender dropdown
+  ok   Male resolves to Man
+  ok   Female resolves to Woman
+
+Oracle Recruiting contact section
+  ok   Address Line 1 takes the street
+  ok   Address Line 2 does not take the street
+  ok   Address Line 3 does not take the street
+  ok   Address Line 4 does not take the street
+  ok   Address Line 3 is left blank
+  ok   Address Line 4 is left blank
+  ok   Tax District is left blank
+  ok   Tax District is not the address
+  ok   Suffix has its own rule
+  ok   Suffix is empty without a profile value
+  ok   Title has its own rule
+  ok   Second Last Name is not the surname
+  ok   Second Last Name is left blank
+  ok   City still fills
+  ok   ZIP Code still fills
+  ok   Legal First Name still fills
+  ok   Legal Last Name still fills
+
+length caps
+  ok   a value past the field's maxlength is refused
+  ok   a value within the cap is written
+
+race vs Hispanic/Latino routing
+  ok   Workday race dropdown reaches the race rule
+  ok   a plain Race label reaches the race rule
+  ok   Ethnicity reaches the race rule
+  ok   the Hispanic yes/no question is left to its own rule
+  ok   ...even under an Ethnicity heading
+
+work eligibility
+  ok   eligibility rules are profile-only
+  ok   citizenship alone does not answer country-specific authorization
+  ok   citizenship alone does not answer sponsorship
+  ok   residency alone does not answer country-specific authorization
+  ok   an explicit stored answer still wins
+  ok   nothing recorded stays blank
+  ok   inverted phrasing still requires an explicit answer
+  ok   inverted phrasing, needs sponsorship
+
+Workday contact block
+  ok   Phone Number -> phone
+  ok     ...and fills "(425) 444-0364"
+  ok   Country Phone Code -> phoneCountryCode
+  ok     ...and fills "+1"
+  ok   Email Address -> email
+  ok     ...and fills "a@b.com"
+  ok   Phone Extension -> phoneExtension
+  ok     ...and fills null
+
+a rule matching the field's own label beats one matching its neighbours
+  ok   First Name among its siblings
+  ok   Last Name among its siblings
+  ok   rules spanning two descriptions still work
+
+all passing
+

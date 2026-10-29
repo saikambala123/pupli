@@ -1,0 +1,10 @@
+  ok   the page really did rebuild its address section
+  ok   address line 1 holds the street once
+  ok   address line 2 is not a copy of line 1
+  ok   city is filled
+  ok   postal code is filled
+  ok   nothing is still required after the re-render
+  ok   the page cleared its own error flags
+
+7/7 checks passed
+

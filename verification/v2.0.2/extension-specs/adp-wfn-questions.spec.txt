@@ -1,0 +1,61 @@
+
+The Questions step, with the page focused
+  ok   At least 18 years of age: Yes
+  ok   Previously employed by the credit union: No (Previously employed at this company?)
+  ok   Willing to relocate, though the question says the job requires it: Yes
+  ok   Relatives employed by the credit union: No (the new profile answer)
+  ok   Date Available: the profile's date, 11/02/2026
+  ok   Desired salary 95000, counted Annually
+  ok   Currency type: USD, the profile's currency
+  ok   Did any current employees inform you: No (heard on LinkedIn, nobody referred)
+  ok   the conflict-of-interest box is never given the current employer's name
+  ok   what no profile holds is left outlined for the applicant (contact employer, within 45 miles, other jobs)
+  ok   Next reports only those three
+  ok   no list is left open
+  ok   the fill is quick (under 6 seconds)
+
+The Questions step, filled from the popup (the page has no focus)
+  ok   At least 18 years of age: Yes
+  ok   Previously employed by the credit union: No (Previously employed at this company?)
+  ok   Willing to relocate, though the question says the job requires it: Yes
+  ok   Relatives employed by the credit union: No (the new profile answer)
+  ok   Date Available: the profile's date, 11/02/2026
+  ok   Desired salary 95000, counted Annually
+  ok   Currency type: USD, the profile's currency
+  ok   Did any current employees inform you: No (heard on LinkedIn, nobody referred)
+  ok   the conflict-of-interest box is never given the current employer's name
+
+Currency type, however the list names itself
+  ok   a list named only by its placeholder: USD
+  ok     and the amount and the Annually / Hourly choice are untouched by it
+  ok   a list whose only name is the text it draws: USD
+  ok     and the amount and the Annually / Hourly choice are untouched by it
+  ok   a react-select whose placeholder says "Select currency type": USD
+  ok     and the amount and the Annually / Hourly choice are untouched by it
+  ok   a profile saved in Indian Rupees: INR
+  ok   a profile whose Period is per hour: Hourly
+
+Saved answers for the questions no profile holds, given on another company's application
+  ok   May we contact your current employer: No
+  ok   Within 45 miles: Yes
+  ok   the conflict-of-interest box: NA (it used to be closed to the saved answer)
+  ok   Next reports nothing missing or invalid
+
+Answered by hand on one company's application, filled on the next company's
+  ok   the previous-employment answer is held under its question, with the company
+  ok   the relatives answer too
+  ok   an answer on an ADP radio group is held under its question (it was never held)
+  ok   nothing is held under the section heading
+  ok   Previously employed by Principal Financial Group: the No given to the credit union
+  ok   Relatives employed by Principal Financial Group: the No given to the credit union
+  ok   May we contact your current employer: No
+  ok   Did any current employees inform you: No
+  ok   a Yes for relatives at one company is never carried to another
+  ok     nor a Yes to "…this company?" given on the credit union's own application
+  ok   answers written in Saved Answers as "this company" fill the credit union's questions
+
+The work history still decides for a company the applicant worked at
+  ok   Previously employed by Hawkeye Community Credit Union: Yes (it is on the work history)
+
+46/46 checks passed
+

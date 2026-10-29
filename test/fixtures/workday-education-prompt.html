@@ -1,0 +1,201 @@
+<!doctype html><html><head><meta charset="utf-8"><title>My Experience — Workday</title>
+<style>
+body{font-family:system-ui;padding:20px;max-width:860px}
+[data-automation-id^="formField"]{margin-bottom:14px}
+label{display:block;font-weight:600;font-size:13px;margin-bottom:3px}
+input[type=text]{width:100%;padding:7px;border:1px solid #ccd;border-radius:5px;box-sizing:border-box}
+button.wd{padding:7px 10px;font:inherit;cursor:pointer;text-align:left;width:100%;background:#fff;border:1px solid #ccd;border-radius:5px}
+[data-automation-id="multiSelectContainer"]{border:1px solid #ccd;border-radius:5px;padding:4px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+[data-automation-id="multiSelectContainer"] input{border:0;flex:1;min-width:140px;width:auto}
+ul[data-automation-id="selectedItemList"]{list-style:none;margin:0;padding:0;display:flex;gap:4px}
+[data-automation-id="selectedItem"]{background:#eef;border-radius:10px;padding:2px 8px;display:inline-flex;gap:6px}
+[data-automation-id="activeListContainer"]{position:absolute;z-index:99;background:#fff;border:1px solid #ccd;max-height:260px;overflow:auto;min-width:320px}
+[data-automation-id="menuItem"]{padding:6px 10px;cursor:pointer}
+.err{color:#b00;font-size:12px}
+ul[role=listbox].menu{list-style:none;margin:0;padding:4px 0;border:1px solid #ccd;background:#fff;position:absolute;z-index:99}
+ul[role=listbox].menu li{padding:6px 10px;cursor:pointer}
+</style></head><body>
+<!--
+  A Workday "My Experience" step whose School or University is a prompt, as
+  many tenants draw it: typing puts text in the search box; Enter searches the
+  tenant's list of schools (the answer arrives a moment later); only clicking a
+  result makes it the answer, as a pill. Save and Continue rejects the field
+  while it has no pill, whatever the search box says. Field of Study is already
+  answered (Workday parsed the résumé). Social Network URLs use the current
+  Workday ids. window.__SCHOOL_PREFILL puts text in the search box first, as a
+  résumé parse or an earlier fill leaves it.
+-->
+<div data-automation-id="applyFlowPage">
+  <h2>My Experience</h2>
+
+  <h3>Education</h3>
+  <div data-automation-id="education-4">
+    <h4>Education 1</h4>
+    <div data-automation-id="formField-school" data-fkit-id="education-4--school">
+      <label for="education-4--school">School or University<abbr title="required">*</abbr></label>
+      <div data-automation-id="multiSelectContainer">
+        <ul data-automation-id="selectedItemList" role="listbox" aria-orientation="horizontal"></ul>
+        <input type="text" id="education-4--school" data-automation-id="searchBox" data-uxi-widget-type="selectinput"
+               placeholder="Search" autocomplete="off" aria-required="true">
+        <span data-automation-id="promptIcon" aria-hidden="true">&#9776;</span>
+      </div>
+      <div class="err" id="school-err" data-automation-id="errorMessage"></div>
+    </div>
+
+    <div data-automation-id="formField-degree" data-fkit-id="education-4--degree">
+      <label for="education-4--degree">Degree<abbr title="required">*</abbr></label>
+      <button class="wd" type="button" id="education-4--degree" aria-haspopup="listbox"
+              data-options="Associate's|Bachelor's|MS|MBA|PhD" aria-label="Degree Select One Required">Select One</button>
+    </div>
+
+    <div data-automation-id="formField-fieldOfStudy" data-fkit-id="education-4--fieldOfStudy">
+      <label for="education-4--fieldOfStudy">Field of Study<abbr title="required">*</abbr></label>
+      <div data-automation-id="multiSelectContainer">
+        <ul data-automation-id="selectedItemList" role="listbox" aria-orientation="horizontal">
+          <li role="option" aria-selected="false"><div data-automation-id="selectedItem" title="Computer and Information Science">
+            <p data-automation-id="promptOption" data-automation-label="Computer and Information Science">Computer and Information Science</p>
+            <div data-automation-id="DELETE_charm" role="button" aria-label="Delete Computer and Information Science">×</div>
+          </div></li>
+        </ul>
+        <input type="text" id="education-4--fieldOfStudy" data-automation-id="searchBox" data-uxi-widget-type="selectinput" placeholder="Search" autocomplete="off">
+        <span data-automation-id="promptIcon" aria-hidden="true">&#9776;</span>
+      </div>
+    </div>
+
+    <div data-automation-id="formField-gradeAverage" data-fkit-id="education-4--gradeAverage">
+      <label for="education-4--gradeAverage">Overall Result (GPA)</label>
+      <input type="text" id="education-4--gradeAverage">
+    </div>
+  </div>
+
+  <h3>Websites</h3>
+  <p>Add any relevant websites.</p>
+  <button type="button" data-automation-id="add-button" id="add-website">Add</button>
+
+  <h3>Social Network URLs</h3>
+  <div data-automation-id="formField-linkedInAccount" data-fkit-id="socialNetworkAccounts--linkedInAccount">
+    <label for="socialNetworkAccounts--linkedInAccount">Please provide your LinkedIn URL:</label>
+    <input type="text" id="socialNetworkAccounts--linkedInAccount" name="linkedInAccount">
+  </div>
+  <div data-automation-id="formField-facebookAccount" data-fkit-id="socialNetworkAccounts--facebookAccount">
+    <label for="socialNetworkAccounts--facebookAccount">Facebook</label>
+    <input type="text" id="socialNetworkAccounts--facebookAccount" name="facebookAccount">
+  </div>
+  <div data-automation-id="formField-twitterAccount" data-fkit-id="socialNetworkAccounts--twitterAccount">
+    <label for="socialNetworkAccounts--twitterAccount">Twitter</label>
+    <input type="text" id="socialNetworkAccounts--twitterAccount" name="twitterAccount">
+  </div>
+
+  <button type="button" data-automation-id="bottom-navigation-next-button" id="save">Save and Continue</button>
+</div>
+
+<script>
+const SCHOOLS = [
+  "Northwestern University", "Northwestern College", "Northwestern Polytechnic University",
+  "Northwestern State University of Louisiana", "Northeastern University",
+  "University of North Carolina at Charlotte", "University of North Carolina at Chapel Hill",
+  "Massachusetts Institute of Technology", "University of Illinois at Chicago",
+  "University of Illinois at Urbana-Champaign", "Jawaharlal Nehru Technological University",
+  "Other",
+];
+window.__searches = [];
+
+function wirePrompt(input, { list, onPick }) {
+  const box = input.closest('[data-automation-id="multiSelectContainer"]');
+  const pills = box.querySelector('[data-automation-id="selectedItemList"]');
+  let popup = null;
+  let seq = 0;
+  const close = () => { if (popup) { popup.remove(); popup = null; } };
+  const addPill = (name) => {
+    pills.innerHTML = "";
+    const li = document.createElement("li");
+    li.setAttribute("role", "option");
+    li.innerHTML = `<div data-automation-id="selectedItem"><p data-automation-id="promptOption"></p><div data-automation-id="DELETE_charm" role="button">×</div></div>`;
+    li.firstElementChild.title = name;
+    const p = li.querySelector("p");
+    p.textContent = name;
+    p.setAttribute("data-automation-label", name);
+    pills.appendChild(li);
+  };
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { close(); return; }
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    const query = input.value.trim();
+    window.__searches.push(query);
+    const mine = ++seq;
+    close();
+    setTimeout(() => {                                   // the server answers
+      if (mine !== seq) return;
+      const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+      const hits = list.filter((s) => words.every((w) => s.toLowerCase().split(/[^a-z0-9]+/).some((part) => part.startsWith(w))));
+      popup = document.createElement("div");
+      popup.setAttribute("data-automation-id", "activeListContainer");
+      popup.setAttribute("role", "listbox");
+      if (!hits.length) {
+        popup.innerHTML = `<div data-automation-id="promptEmptyState">No Items.</div>`;
+      }
+      hits.forEach((name) => {
+        const row = document.createElement("div");
+        row.setAttribute("role", "option");
+        row.setAttribute("data-automation-id", "menuItem");
+        row.setAttribute("aria-selected", "false");
+        const opt = document.createElement("div");
+        opt.setAttribute("data-automation-id", "promptOption");
+        opt.setAttribute("data-automation-label", name);
+        opt.textContent = name;
+        row.appendChild(opt);
+        row.addEventListener("click", () => {
+          addPill(name);
+          input.value = "";
+          close();
+          onPick?.(name);
+        });
+        popup.appendChild(row);
+      });
+      const r = input.getBoundingClientRect();
+      popup.style.top = (r.bottom + window.scrollY + 2) + "px";
+      popup.style.left = (r.left + window.scrollX) + "px";
+      document.body.appendChild(popup);
+    }, 450);
+  });
+  document.addEventListener("click", (e) => {
+    if (popup && !popup.contains(e.target) && !box.contains(e.target)) close();
+  }, true);
+  return { addPill };
+}
+
+const school = document.getElementById("education-4--school");
+wirePrompt(school, { list: SCHOOLS, onPick: () => { document.getElementById("school-err").textContent = ""; } });
+wirePrompt(document.getElementById("education-4--fieldOfStudy"), { list: ["Computer and Information Science", "Computer Engineering"] });
+if (window.__SCHOOL_PREFILL) school.value = window.__SCHOOL_PREFILL;
+
+/* The Degree menu, as on every Workday step. */
+let openMenu = null;
+const degree = document.getElementById("education-4--degree");
+degree.addEventListener("click", () => {
+  if (openMenu) { openMenu.remove(); openMenu = null; return; }
+  const menu = document.createElement("ul");
+  menu.className = "menu"; menu.setAttribute("role", "listbox");
+  degree.dataset.options.split("|").forEach((text) => {
+    const li = document.createElement("li");
+    li.setAttribute("role", "option");
+    li.textContent = text;
+    li.addEventListener("click", () => { degree.textContent = text; menu.remove(); openMenu = null; });
+    menu.appendChild(li);
+  });
+  const r = degree.getBoundingClientRect();
+  menu.style.top = (r.bottom + window.scrollY) + "px";
+  menu.style.left = (r.left + window.scrollX) + "px";
+  document.body.appendChild(menu);
+  openMenu = menu;
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && openMenu) { openMenu.remove(); openMenu = null; } }, true);
+
+document.getElementById("save").addEventListener("click", () => {
+  const picked = school.closest('[data-automation-id="multiSelectContainer"]').querySelector('[data-automation-id="selectedItem"]');
+  document.getElementById("school-err").textContent = picked ? "" : "The field School or University is required and must have a value.";
+  window.__schoolError = document.getElementById("school-err").textContent;
+});
+</script>
+</body></html>

@@ -1,0 +1,21 @@
+
+Workable — detected "workable", 13 filled, 2 left
+
+  ok   detected as Workable
+  ok   first name
+  ok   last name
+  ok   email
+  ok   phone
+  ok   location
+  ok   summary
+  ok   LinkedIn
+  ok   GitHub
+  ok   Portfolio
+  ok   education level
+  ok   years of experience
+  ok   work authorization = Yes
+  ok   sponsorship = No
+  ok   skills checkbox group left for the applicant
+
+15/15 checks passed — Workable
+

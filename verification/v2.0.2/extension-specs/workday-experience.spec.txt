@@ -1,0 +1,16 @@
+  ok   job title is filled
+  ok   company is filled
+  ok   work dates are filled
+  ok   school is filled
+  ok   degree is filled
+  ok   field of study is filled
+  ok   education start year is filled
+  ok   education end year is filled
+  ok   the two education years differ
+  ok   the page's own model has every required value
+  ok   the LinkedIn box is left blank when the profile has no URL
+  ok   a drafted sentence is not written into the LinkedIn box
+  ok   a real URL from the model is accepted
+
+13/13 checks passed
+

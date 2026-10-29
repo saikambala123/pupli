@@ -1,0 +1,29 @@
+
+typed earlier and never picked
+  ok   the box is not taken as answered
+  ok   Lever's own place is picked
+  ok     the application submits
+
+Lever's first lookup is slow (its check runs first)
+  ok   the list is waited for and the place picked
+  ok     the application submits
+  ok     not outlined (6020ms)
+
+the first keystrokes arrive before Lever's check is ready
+  ok   the search is asked for again and the place picked
+
+Lever wants a human to pass its check first
+  ok   the place is not reported as filled
+  ok     it is counted as needing the applicant
+  ok     and the box is outlined
+  ok     (Lever would refuse it as it stands)
+  ok   clicking into the box finishes the pick
+  ok     the outline goes
+  ok     the application submits
+  ok     and Appli-Fill's pick is not offered as the applicant's answer
+
+the applicant types a different place themselves
+  ok   their own text is left for them to pick from
+
+16/16 checks passed
+

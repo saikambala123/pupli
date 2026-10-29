@@ -1,0 +1,57 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Job Application — demographic questions</title>
+<style>body{font-family:system-ui;padding:24px;max-width:720px}
+.field{margin-bottom:22px}
+.qtext{display:block;font-weight:600;margin-bottom:8px}
+.opt{display:block;margin:2px 0}
+input[type=text],textarea,select{width:100%;padding:8px;border:1px solid #ccd;border-radius:6px}
+</style></head><body>
+<h1>Software Engineer</h1>
+<form id="application_form">
+
+  <!-- Normal profile-owned fields: must NEVER reach the pending list -->
+  <div class="field"><label class="qtext" for="f-first">First Name</label>
+    <input id="f-first" name="first_name" type="text"></div>
+  <div class="field"><label class="qtext" for="f-last">Last Name</label>
+    <input id="f-last" name="last_name" type="text"></div>
+  <div class="field"><label class="qtext" for="f-email">Email</label>
+    <input id="f-email" name="email" type="email"></div>
+
+  <!-- Free text the profile can't answer -->
+  <div class="field"><label class="qtext" for="q-why">Why do you want to work here?</label>
+    <textarea id="q-why" name="q_why" rows="2"></textarea></div>
+
+  <!-- Radio group WITH a shared name, question in a sibling div -->
+  <div class="field">
+    <div class="qtext">Are you the first member of your immediate family to attend university?</div>
+    <label class="opt"><input type="radio" name="first_gen" value="Yes"> Yes</label>
+    <label class="opt"><input type="radio" name="first_gen" value="No"> No</label>
+    <label class="opt"><input type="radio" name="first_gen" value="Prefer not to say"> Prefer not to say</label>
+  </div>
+
+  <!-- Radio group WITHOUT a shared name attribute (the screenshot's case).
+       Greenhouse renders demographic questions with per-option ids and no name,
+       grouped only by a wrapper div. -->
+  <div class="field" role="group">
+    <div class="qtext">Do you identify with the experience of growing up in a lower-income household?</div>
+    <label class="opt"><input type="radio" id="li-yes" value="Yes"> Yes</label>
+    <label class="opt"><input type="radio" id="li-no" value="No"> No</label>
+    <label class="opt"><input type="radio" id="li-pnts" value="Prefer not to say"> Prefer not to say</label>
+  </div>
+
+  <!-- Checkbox group with a heading -->
+  <div class="field" role="group">
+    <div class="qtext">Have you participated in the following organizations?</div>
+    <label class="opt"><input type="checkbox" name="orgs" value="AfroTech Conference"> AfroTech Conference</label>
+    <label class="opt"><input type="checkbox" name="orgs" value="ALPFA"> Association of Latino Professionals For America (ALPFA)</label>
+    <label class="opt"><input type="checkbox" name="orgs" value="None"> None of the above</label>
+  </div>
+
+  <!-- Native select -->
+  <div class="field"><label class="qtext" for="q-notice">What is your notice period?</label>
+    <select id="q-notice" name="notice"><option value="">Select…</option>
+      <option>Immediately</option><option>2 weeks</option><option>30 days</option></select></div>
+
+  <button type="submit">Submit application</button>
+</form>
+</body></html>

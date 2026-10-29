@@ -1,0 +1,17 @@
+
+Ashby — detected "ashby", 10 filled, 0 left
+
+  ok   detected as Ashby
+  ok   name
+  ok   email
+  ok   phone
+  ok   LinkedIn despite a uuid field name
+  ok   location
+  ok   work authorization radio = Yes
+  ok   sponsorship radio = No
+  ok   how did you hear = LinkedIn
+  ok   notice period from saved answers
+  ok   gender from profile
+
+11/11 checks passed — Ashby
+

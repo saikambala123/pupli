@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Apply — Capture fixture</title>
+<style>body{font-family:system-ui;padding:24px;max-width:640px}
+.field{margin-bottom:18px}label{display:block;font-weight:600;margin-bottom:6px}
+input,textarea,select{width:100%;padding:8px;border:1px solid #ccd;border-radius:6px}</style>
+</head><body>
+<h1>Job Application</h1>
+<form id="application_form">
+  <div class="field"><label for="f-first">First Name</label><input id="f-first" type="text" name="firstName"></div>
+  <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" name="email"></div>
+  <div class="field"><label for="q-custom">What excites you most about this opportunity?</label>
+    <textarea id="q-custom" rows="3"></textarea></div>
+  <div class="field"><label for="q-why">Why are you interested in this role?</label>
+    <textarea id="q-why" rows="3"></textarea></div>
+  <div class="field"><label for="q-notice">What is your notice period?</label>
+    <input id="q-notice" type="text"></div>
+  <div class="field"><label for="q-auth">Are you legally authorized to work in the United States?</label>
+    <select id="q-auth"><option value="">Select…</option><option>Yes</option><option>No</option></select></div>
+  <div class="field"><label for="f-resume">Resume</label><input id="f-resume" type="file"></div>
+  <button type="submit">Submit</button>
+</form>
+</body></html>

@@ -1,0 +1,183 @@
+
+Contact Information, with the page focused
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information, filled from the popup (the page has no focus)
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: the form keeps a box only once it is left, and a choice shows 0.4 s after the click
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: the boxes drawn in the components' light DOM
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: each open list drawn at the end of the page
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: list items named only by their `label`
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: each open list drawn at the end of the page, and nothing on the list itself says it is open
+  ok   First Name, Last Name and Email kept by the form (the boxes inside the components)
+  ok     and the same text shows in the boxes
+  ok   Phone: the number in its box, ten digits, the country list left at United States (+1)
+  ok   Phone Type: Mobile, picked from its list
+  ok   Address Line 1, City and Zip/Postal Code
+  ok   Country: United States picked from the long list (not United States Minor Outlying Islands)
+  ok   State/Province: Florida, found through the list's search for the profile's "FL"
+  ok   Middle Name and Address Line 2 left empty, and not outlined (optional, nothing in the profile)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: the profile's state saved as "TX"
+  ok   State/Province: Texas, found through the list's search
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: the profile's state saved as "Texas"
+  ok   State/Province: Texas, found through the list's search
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Contact Information: a country the list does not offer
+  ok   Country left empty and outlined for the applicant
+  ok     its search box emptied again, and the list closed
+  ok     and the rest of the page filled as usual
+
+Contact Information: the profile's phone saved as "+1 516-205-8456"
+  ok   the national number goes in the box, without the +1 the country list already has
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions (#prescreeningForm), with the page focused
+  ok   At least 18: Yes (the question as the group's aria-label)
+  ok   Authorized to work: Yes (the question as the group's own label)
+  ok   Sponsorship: No (the question in the row above, the choices named only by `label`)
+  ok   How did you hear: LinkedIn, picked from the list
+  ok   Salary expectations: the profile's 120000
+  ok   Ever employed by Acme Corporation: No
+  ok   Earliest start date: today (10/27/2026), as MM/DD/YYYY
+  ok   Background check: ticked, as the profile consents
+  ok   the free-text question nothing in the profile answers is left for the applicant, outlined
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions (#prescreeningForm), from the popup
+  ok   At least 18: Yes (the question as the group's aria-label)
+  ok   Authorized to work: Yes (the question as the group's own label)
+  ok   Sponsorship: No (the question in the row above, the choices named only by `label`)
+  ok   How did you hear: LinkedIn, picked from the list
+  ok   Salary expectations: the profile's 120000
+  ok   Ever employed by Acme Corporation: No
+  ok   Earliest start date: today (10/27/2026), as MM/DD/YYYY
+  ok   Background check: ticked, as the profile consents
+  ok   the free-text question nothing in the profile answers is left for the applicant, outlined
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions: the boxes in the components' light DOM
+  ok   every question the profile answers is answered
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions: the lists drawn at the end of the page
+  ok   every question the profile answers is answered
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Questions, with a profile that gives no consent to a background check
+  ok   the consent box is not ticked on the applicant's behalf, and is outlined for them
+
+Employment History: two jobs in the profile, one employer block on the page
+  ok   Add Employer pressed once, for the second job
+  ok   first block: the current job, its start, "I currently work here" ticked and no end date
+  ok   second block: the earlier job, its start and end
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Voluntary Self-Identification, with the page focused
+  ok   Gender: Male
+  ok   Hispanic or Latino: No
+  ok   Race: Asian
+  ok   Veteran Status: not a protected veteran
+  ok   Disability (CC-305): the "No, I do not have a disability" choice
+  ok   CC-305 signature: the applicant's name and today's date (10/27/2026)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Voluntary Self-Identification, from the popup
+  ok   Gender: Male
+  ok   Hispanic or Latino: No
+  ok   Race: Asian
+  ok   Veteran Status: not a protected veteran
+  ok   Disability (CC-305): the "No, I do not have a disability" choice
+  ok   CC-305 signature: the applicant's name and today's date (10/27/2026)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+Voluntary Self-Identification, from the popup, lists drawn at the end of the page
+  ok   Gender: Male
+  ok   Hispanic or Latino: No
+  ok   Race: Asian
+  ok   Veteran Status: not a protected veteran
+  ok   Disability (CC-305): the "No, I do not have a disability" choice
+  ok   CC-305 signature: the applicant's name and today's date (10/27/2026)
+  ok   Next reports nothing missing or invalid
+  ok     and no list is left open over the form
+
+140/140 checks passed
+

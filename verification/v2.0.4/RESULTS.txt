@@ -1,0 +1,27 @@
+Appli-Fill 2.0.4 verification
+
+PASS 47/47 packaged iCIMS screenshot checks.
+PASS 23/23 packaged iCIMS frame checks.
+PASS 24/24 existing packaged iCIMS portal checks.
+PASS 92/92 profile/schema/normalization/helper checks.
+PASS 60/60 career registration regressions.
+PASS 29/29 service-worker regressions.
+PASS 12/12 scope regressions.
+PASS 79/79 autofill regressions.
+PASS self-identification rule checks (all passing).
+PASS 10/10 account-password regressions.
+PASS npm run lint, npx tsc --noEmit, npm run build, npm run ext:build.
+PASS Chrome and Firefox archive integrity, versions, and source parity.
+
+Final packaged command:
+APPLI_FILL_EXT=dist/chrome CHROMIUM_PATH=/tmp/chromium npm run test:icims
+
+Scope: offline Chromium fixtures and model/schema checks, not a live iCIMS
+application or production database. The screenshot fixtures use real extension
+code and change-event validation. The frame test uses the real service-worker
+routing logic and runtime listeners with isolated Chrome API transport over
+real cross-origin and nested srcdoc Chromium documents. No live application
+was submitted. A random build-only JWT_SECRET was used for the production
+build and is not saved in this project. Firefox packaging was verified;
+Firefox itself was not launched. Full historical 2.0.3 logs remain separately
+under verification/v2.0.3; this release used the focused checks listed above.

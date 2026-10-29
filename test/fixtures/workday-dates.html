@@ -1,0 +1,227 @@
+<!doctype html><html><head><meta charset="utf-8"><title>My Experience — Workday</title>
+<style>
+body{font-family:system-ui;padding:20px;max-width:860px}
+.f{margin-bottom:12px}label{display:block;font-weight:600;font-size:13px;margin-bottom:3px}
+input[type=text],textarea,select{padding:7px;border:1px solid #ccd;border-radius:5px}
+.wd-date{display:inline-flex;align-items:center;border:1px solid #ccd;border-radius:5px;padding:2px 6px}
+.wd-date input{border:0;text-align:center;font:inherit;padding:4px 2px}
+.wd-date input[data-automation-id$="Month-input"]{width:2.2em}
+.wd-date input[data-automation-id$="Year-input"]{width:3.4em}
+.sep{color:#666;padding:0 2px}
+.err{color:#b00;font-size:12px;margin-top:2px}
+h3{margin:22px 0 6px}h4{margin:14px 0 6px}
+</style></head><body>
+<div data-automation-id="applyFlowPage">
+  <h2>My Experience</h2>
+  <h3>Work Experience</h3>
+
+  <div data-automation-id="workExperience-1">
+    <h4>Work Experience 1</h4>
+    <div class="f"><label for="w1t">Job Title *</label><input id="w1t" type="text"></div>
+    <div class="f"><label for="w1c">Company *</label><input id="w1c" type="text"></div>
+    <div class="f"><label for="w1l">Location</label><input id="w1l" type="text"></div>
+    <div class="f"><label><input id="w1cur" type="checkbox"> I currently work here</label></div>
+
+    <div class="f" data-automation-id="formField-startDate">
+      <label id="w1-from-l">From *</label>
+      <div class="wd-date" role="group" data-automation-id="dateInputWrapper" aria-labelledby="w1-from-l">
+        <div data-automation-id="dateSectionMonth-display">
+          <input id="w1f-m" type="text" role="spinbutton" data-automation-id="dateSectionMonth-input"
+                 aria-label="Month" aria-valuemin="1" aria-valuemax="12" aria-valuetext="MM" autocomplete="off">
+        </div><span class="sep">/</span>
+        <div data-automation-id="dateSectionYear-display">
+          <input id="w1f-y" type="text" role="spinbutton" data-automation-id="dateSectionYear-input"
+                 aria-label="Year" aria-valuemin="1900" aria-valuemax="2100" aria-valuetext="YYYY" autocomplete="off">
+        </div>
+        <button type="button" data-automation-id="dateIcon" aria-label="Calendar">&#128197;</button>
+      </div>
+      <div class="err" id="w1f-err"></div>
+    </div>
+
+    <div class="f" data-automation-id="formField-endDate">
+      <label id="w1-to-l">To *</label>
+      <div class="wd-date" role="group" data-automation-id="dateInputWrapper" aria-labelledby="w1-to-l">
+        <div data-automation-id="dateSectionMonth-display">
+          <input id="w1to-m" type="text" role="spinbutton" data-automation-id="dateSectionMonth-input"
+                 aria-label="Month" aria-valuemin="1" aria-valuemax="12" aria-valuetext="MM" autocomplete="off">
+        </div><span class="sep">/</span>
+        <div data-automation-id="dateSectionYear-display">
+          <input id="w1to-y" type="text" role="spinbutton" data-automation-id="dateSectionYear-input"
+                 aria-label="Year" aria-valuemin="1900" aria-valuemax="2100" aria-valuetext="YYYY" autocomplete="off">
+        </div>
+        <button type="button" data-automation-id="dateIcon" aria-label="Calendar">&#128197;</button>
+      </div>
+      <div class="err" id="w1to-err"></div>
+    </div>
+
+    <div class="f"><label for="w1d">Role Description</label><textarea id="w1d" rows="2"></textarea></div>
+  </div>
+
+  <div data-automation-id="workExperience-2">
+    <h4>Work Experience 2</h4>
+    <div class="f"><label for="w2t">Job Title *</label><input id="w2t" type="text"></div>
+    <div class="f"><label for="w2c">Company *</label><input id="w2c" type="text"></div>
+    <div class="f"><label for="w2l">Location</label><input id="w2l" type="text"></div>
+    <div class="f"><label><input id="w2cur" type="checkbox"> I currently work here</label></div>
+
+    <div class="f" data-automation-id="formField-startDate">
+      <label id="w2-from-l">From *</label>
+      <div class="wd-date" role="group" data-automation-id="dateInputWrapper" aria-labelledby="w2-from-l">
+        <div data-automation-id="dateSectionMonth-display">
+          <input id="w2f-m" type="text" role="spinbutton" data-automation-id="dateSectionMonth-input"
+                 aria-label="Month" aria-valuemin="1" aria-valuemax="12" aria-valuetext="MM" autocomplete="off">
+        </div><span class="sep">/</span>
+        <div data-automation-id="dateSectionYear-display">
+          <input id="w2f-y" type="text" role="spinbutton" data-automation-id="dateSectionYear-input"
+                 aria-label="Year" aria-valuemin="1900" aria-valuemax="2100" aria-valuetext="YYYY" autocomplete="off">
+        </div>
+        <button type="button" data-automation-id="dateIcon" aria-label="Calendar">&#128197;</button>
+      </div>
+      <div class="err" id="w2f-err"></div>
+    </div>
+
+    <div class="f" data-automation-id="formField-endDate">
+      <label id="w2-to-l">To *</label>
+      <div class="wd-date" role="group" data-automation-id="dateInputWrapper" aria-labelledby="w2-to-l">
+        <div data-automation-id="dateSectionMonth-display">
+          <input id="w2to-m" type="text" role="spinbutton" data-automation-id="dateSectionMonth-input"
+                 aria-label="Month" aria-valuemin="1" aria-valuemax="12" aria-valuetext="MM" autocomplete="off">
+        </div><span class="sep">/</span>
+        <div data-automation-id="dateSectionYear-display">
+          <input id="w2to-y" type="text" role="spinbutton" data-automation-id="dateSectionYear-input"
+                 aria-label="Year" aria-valuemin="1900" aria-valuemax="2100" aria-valuetext="YYYY" autocomplete="off">
+        </div>
+        <button type="button" data-automation-id="dateIcon" aria-label="Calendar">&#128197;</button>
+      </div>
+      <div class="err" id="w2to-err"></div>
+    </div>
+
+    <div class="f"><label for="w2d">Role Description</label><textarea id="w2d" rows="2"></textarea></div>
+  </div>
+
+
+  <div data-automation-id="workExperience-3">
+    <h4>Work Experience 3</h4>
+    <div class="f"><label for="w3t">Job Title *</label><input id="w3t" type="text"></div>
+    <div class="f"><label for="w3c">Company *</label><input id="w3c" type="text"></div>
+
+    <div class="f" data-automation-id="formField-startDate">
+      <label id="w3-from-l">From *</label>
+      <div class="wd-date strict" role="group" data-automation-id="dateInputWrapper" aria-labelledby="w3-from-l">
+        <div data-automation-id="dateSectionMonth-display">
+          <input id="w3f-m" type="text" role="spinbutton" data-automation-id="dateSectionMonth-input"
+                 aria-label="Month" aria-valuemin="1" aria-valuemax="12" aria-valuetext="MM" autocomplete="off">
+        </div><span class="sep">/</span>
+        <div data-automation-id="dateSectionYear-display">
+          <input id="w3f-y" type="text" role="spinbutton" data-automation-id="dateSectionYear-input"
+                 aria-label="Year" aria-valuemin="1900" aria-valuemax="2100" aria-valuetext="YYYY" autocomplete="off">
+        </div>
+      </div>
+      <div class="err" id="w3f-err"></div>
+    </div>
+
+    <div class="f" data-automation-id="formField-endDate">
+      <label id="w3-to-l">To *</label>
+      <div class="wd-date strict" role="group" data-automation-id="dateInputWrapper" aria-labelledby="w3-to-l">
+        <div data-automation-id="dateSectionMonth-display">
+          <input id="w3to-m" type="text" role="spinbutton" data-automation-id="dateSectionMonth-input"
+                 aria-label="Month" aria-valuemin="1" aria-valuemax="12" aria-valuetext="MM" autocomplete="off">
+        </div><span class="sep">/</span>
+        <div data-automation-id="dateSectionYear-display">
+          <input id="w3to-y" type="text" role="spinbutton" data-automation-id="dateSectionYear-input"
+                 aria-label="Year" aria-valuemin="1900" aria-valuemax="2100" aria-valuetext="YYYY" autocomplete="off">
+        </div>
+      </div>
+      <div class="err" id="w3to-err"></div>
+    </div>
+  </div>
+
+  <h3>Application Documents</h3>
+  <div class="f" data-automation-id="fileUploadSection">
+    <label id="upload-l">Upload a file (5MB max) *</label>
+    <div data-automation-id="fileUploadDropZone" role="button" tabindex="0" aria-labelledby="upload-l">
+      <p>Drop files here</p>
+      <label for="resume-file" data-automation-id="select-files">Select files</label>
+      <input id="resume-file" type="file" data-automation-id="file-upload-input-ref" accept=".pdf,.doc,.docx">
+    </div>
+  </div>
+
+  <button type="submit" id="save">Save and Continue</button>
+</div>
+<script>
+/* Workday's date segments: each box holds at most its own part, refuses
+   non-digits, and the widget validates month+year together on blur — which is
+   what produces "Error: Invalid Date: /2021" when only the year lands. */
+const PAIRS = [
+  ["w1f-m", "w1f-y", "w1f-err"], ["w1to-m", "w1to-y", "w1to-err"],
+  ["w2f-m", "w2f-y", "w2f-err"], ["w2to-m", "w2to-y", "w2to-err"],
+];
+const model = Object.create(null);
+document.querySelectorAll('.wd-date input').forEach((el) => {
+  const isYear = el.dataset.automationId.includes("Year");
+  el._valueTracker = { _v: el.value, getValue() { return this._v; }, setValue(v) { this._v = String(v); } };
+  el.addEventListener("beforeinput", (e) => {
+    if (e.data && /\D/.test(e.data)) e.preventDefault();     // digits only
+  });
+  el.addEventListener("input", () => {
+    const cap = isYear ? 4 : 2;
+    const digits = el.value.replace(/\D/g, "").slice(0, cap);
+    if (digits !== el.value) el.value = digits;
+    if (el._valueTracker.getValue() === el.value) return;
+    el._valueTracker.setValue(el.value);
+    model[el.id] = el.value;
+  }, true);
+});
+function validate() {
+  for (const [m, y, err] of PAIRS) {
+    const mv = document.getElementById(m).value, yv = document.getElementById(y).value;
+    const node = document.getElementById(err);
+    if (!mv && !yv) { node.textContent = ""; continue; }
+    node.textContent = (mv && yv) ? "" : "Error: Invalid Date: " + mv + "/" + yv;
+  }
+}
+document.addEventListener("focusout", () => setTimeout(validate, 0), true);
+document.getElementById("save").addEventListener("click", () => { validate(); validateStrict();
+  window.__dateErrors = PAIRS.map(([,,e]) => document.getElementById(e).textContent).filter(Boolean); });
+
+/**
+ * Work Experience 3 models the widget that produced "The field From is required
+ * and must have a value" under a box plainly reading 01/2017.
+ *
+ * Its segments keep their own buffer, filled only from `keydown`. Assigning
+ * `.value` updates what the applicant sees and nothing else, and Save and
+ * Continue validates the buffer — so a fill that never sent real keystrokes
+ * looked completely successful and submitted nothing.
+ */
+const buffers = Object.create(null);
+document.querySelectorAll('.wd-date.strict input').forEach((el) => {
+  const cap = el.dataset.automationId.includes("Year") ? 4 : 2;
+  buffers[el.id] = "";
+  el.addEventListener("keydown", (e) => {
+    if (/^[0-9]$/.test(e.key)) {
+      buffers[el.id] = (buffers[el.id] + e.key).slice(-cap);
+      el.value = buffers[el.id];              // the widget paints its own buffer
+      e.preventDefault();
+    } else if (e.key === "Backspace") {
+      buffers[el.id] = "";
+      el.value = "";
+      e.preventDefault();
+    }
+  });
+});
+window.__buffers = buffers;
+
+const STRICT_PAIRS = [["w3f-m", "w3f-y", "w3f-err", "From"], ["w3to-m", "w3to-y", "w3to-err", "To"]];
+function validateStrict() {
+  for (const [m, y, err, name] of STRICT_PAIRS) {
+    const node = document.getElementById(err);
+    // Validated against the buffer, never against what the box displays.
+    node.textContent = (buffers[m] && buffers[y])
+      ? "" : `Error: The field ${name} is required and must have a value.`;
+  }
+}
+window.__validateStrict = validateStrict;
+
+window.__model = model;
+window.__validate = validate;
+</script></body></html>

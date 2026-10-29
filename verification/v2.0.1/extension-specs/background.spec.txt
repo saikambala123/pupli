@@ -1,0 +1,32 @@
+  ok   Sync now succeeds with an empty local queue
+  ok   Sync now still fetches the dashboard's saved answers
+  ok   Sync now reports how many answers it pulled
+  ok   the pulled answers are cached for the content script
+  ok   queued answers are uploaded
+  ok   the local queue is cleared after a successful upload
+  ok   the upload count is reported
+  ok   a pull still happens after the push
+  ok   Clear reports how many answers it discarded
+  ok   Clear empties the local queue
+  ok   Clear uploads nothing
+  ok   Clear leaves answers already saved in the dashboard alone
+  ok   Clear succeeds with nothing queued
+  ok   one question queues exactly once
+  ok   the newest answer is the one queued
+  ok   a different question queues separately
+  ok   removing one answer reports it
+  ok   the removed answer is gone
+  ok   the other answers are untouched
+  ok   punctuation doesn't stop a removal
+  ok   sync uploads every queued answer
+  ok   a dropdown answer is uploaded
+  ok   a radio answer is uploaded
+  ok   a checkbox answer is uploaded
+  ok   the control type travels with the answer
+  ok   the choices travel with the answer
+  ok   the report counts them
+  ok   the queue is emptied once they are up
+  ok   the content script receives the saved answers
+
+29/29 checks passed
+

@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Apply - Senior Site Reliability Engineer</title>
+<style>
+body{font-family:system-ui;margin:0;background:#f5f4f2;color:#222}
+main{max-width:780px;margin:0 auto;padding:20px}
+apply-flow-block{display:block;background:#fff;border-radius:10px;padding:18px 20px;margin-bottom:18px}
+.input-row{margin-bottom:16px;position:relative}
+.input-row__label{display:block;font-size:13px;margin-bottom:6px;color:#444}
+.input-row__control,.cx-select-input{width:100%;box-sizing:border-box;padding:10px 14px;border:1px solid #c9c9c4;border-radius:22px;font:inherit;background:#fff}
+textarea.input-row__control{min-height:70px;border-radius:12px}
+.cx-select-container{position:relative;display:flex;align-items:center;gap:4px}
+.cx-select-container .input-field__label{position:absolute;left:14px;top:1px;font-size:10px;color:#666}
+.cx-select__remove,.cx-select__toggle{border:0;background:none;cursor:pointer;font-size:14px}
+.input-row--invalid .cx-select-input,.input-row--invalid .input-row__control{border-color:#c0392b}
+.input-row__validation{color:#c0392b;font-size:12px;margin:4px 0 0}
+.input-row__validation[hidden]{display:none}
+.cx-select__list{position:absolute;z-index:50;background:#fff;border:1px solid #c9c9c4;border-radius:8px;max-height:260px;overflow:auto;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.cx-select__list [role=row]{padding:8px 12px;cursor:pointer}
+.cx-select__list-item--active{background:#e8eef7}
+.phone-row{display:flex;gap:8px}.phone-row .cx-select-container{width:38%}
+.datepicker-row{display:flex;gap:8px}.datepicker-row .cx-select-container{flex:1}
+/* Oracle's drawn controls: the input is 0 x 0, its label is what shows. */
+.input-row__hidden-control{position:absolute;width:0;height:0;opacity:0;margin:0;padding:0;border:0}
+.apply-flow-input-radio,.apply-flow-input-checkbox{display:inline-flex;align-items:center;gap:6px;margin:4px 14px 4px 0;cursor:pointer}
+.apply-flow-input-radio::before{content:"";width:18px;height:18px;border:1px solid #777;border-radius:50%}
+.apply-flow-input-checkbox__button{width:18px;height:18px;border:1px solid #777;border-radius:4px;display:inline-block}
+.apply-flow-input-checkbox__button--checked{background:#2b6cb0}
+input:checked + .apply-flow-input-radio::before{background:#2b6cb0}
+.cx-select-pills-container{list-style:none;display:flex;gap:8px;padding:0;margin:0}
+.cx-select-pill-section{border:1px solid #999;border-radius:16px;padding:6px 12px;background:#fff}
+.cx-select-pill-section--selected{background:#2b6cb0;color:#fff}
+</style></head>
+<body>
+<!--
+  Oracle Recruiting Candidate Experience as it is drawn in 2026 (…/hcmUI/
+  CandidateExperience/en/sites/CX/job/34866/apply/section/N/), from the live
+  markup other fillers read (Jobright's Oracle module; OSApplyTrack #318):
+
+  - List boxes are Candidate Experience's own: `input.cx-select-input`
+    (role=combobox) you type into, opened by ArrowDown or by
+    `#<id>-toggle-button`; the choices are rows of a grid in `#<id>-listbox`
+    (`div[role=row] > div[role=gridcell] > span.cx-select__list-item--content`),
+    fetched from the server a moment after the list opens or the search
+    changes (`aria-busy` meanwhile). Only a row picked from the list is kept:
+    typed text is thrown away when the box is left. A picked value shows a
+    "Remove value for the … field." button.
+  - Address Line 1 is Oracle's address search. Picking an address fills ZIP
+    Code, City, State and County a moment later. ZIP Code, City, State and
+    County are list boxes too; picking a ZIP Code fills the City, State and
+    County that go with it.
+  - Yes / No questions and check boxes are inputs drawn at 0 x 0
+    (`.input-row__hidden-control`) behind a `<label for>`; Title is a row of
+    pills.
+
+  window.__cxl = {
+    section: 1 | 2,
+    latency: ms,           every server answer (default 700)
+    keysOnly: bool,        the lists ignore clicks that are not a person's:
+                           only the arrow keys and Enter choose
+    addressFills: bool,    picking an address fills the rest (default true)
+    noSuggestion: bool,    the address search finds nothing
+    freeText: bool,        Address Line 1 keeps a street typed into it
+  }
+  window.__model   what the page keeps; window.__log   what was typed, picked or cleared
+  #next            the page's own check → window.__errors
+-->
+<main class="apply-flow">
+  <h1 class="apply-flow-header__title">Senior Site Reliability Engineer</h1>
+  <div id="section-1" hidden>
+    <apply-flow-block data-block="contact">
+      <div class="apply-flow-block__header"><apply-flow-block-title><h3>Contact Information</h3></apply-flow-block-title></div>
+      <div class="input-row input-row--has-picker">
+        <form-element-label><label class="input-row__label" id="title-label"><span class="input-row__label-text">Title</span></label></form-element-label>
+        <div class="input-row__control-container">
+          <ul role="radiogroup" aria-label="Title" class="cx-select-pills-container" data-name="title">
+            <li role="presentation"><button type="button" role="radio" aria-checked="false" class="cx-select-pill-section"><span class="cx-select-pill-name">Doctor</span></button></li>
+            <li role="presentation"><button type="button" role="radio" aria-checked="false" class="cx-select-pill-section"><span class="cx-select-pill-name">Miss</span></button></li>
+            <li role="presentation"><button type="button" role="radio" aria-checked="false" class="cx-select-pill-section"><span class="cx-select-pill-name">Mr.</span></button></li>
+            <li role="presentation"><button type="button" role="radio" aria-checked="false" class="cx-select-pill-section"><span class="cx-select-pill-name">Mrs.</span></button></li>
+            <li role="presentation"><button type="button" role="radio" aria-checked="false" class="cx-select-pill-section"><span class="cx-select-pill-name">Ms.</span></button></li>
+            <li role="presentation"><button type="button" role="radio" aria-checked="false" class="cx-select-pill-section"><span class="cx-select-pill-name">Mx.</span></button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="input-row"><form-element-label><label class="input-row__label" for="firstName-1"><span class="input-row__label-text">Legal First Name</span><span class="input-row__label--required-star">*</span></label></form-element-label>
+        <input class="input-row__control" id="firstName-1" name="firstName" type="text" aria-required="true"></div>
+      <div class="input-row"><form-element-label><label class="input-row__label" for="middleNames-1"><span class="input-row__label-text">Middle Name</span></label></form-element-label>
+        <input class="input-row__control" id="middleNames-1" name="middleNames" type="text"></div>
+      <div class="input-row"><form-element-label><label class="input-row__label" for="lastName-2"><span class="input-row__label-text">Legal Last Name</span><span class="input-row__label--required-star">*</span></label></form-element-label>
+        <input class="input-row__control" id="lastName-2" name="lastName" type="text" aria-required="true"></div>
+      <div class="input-row"><form-element-label><label class="input-row__label" for="email-3"><span class="input-row__label-text">Email Address</span></label></form-element-label>
+        <input class="input-row__control" id="email-3" name="email" type="email" readonly value="pradeepbeeram91@gmail.com"></div>
+      <div class="input-row" data-row="phone"><form-element-label><label class="input-row__label" for="phoneNumber-4"><span class="input-row__label-text">Phone Number</span><span class="input-row__label--required-star">*</span></label></form-element-label>
+        <div class="phone-row">
+          <div data-cx="countryCodesDropDownPhoneNumber-4" data-name="countryCodesDropDownPhoneNumber" data-label="Country code" data-floating="Country code" data-value="+1" data-list="phoneCodes"></div>
+          <input class="input-row__control" id="phoneNumber-4" name="phoneNumber" type="tel" aria-required="true" autocomplete="off">
+        </div></div>
+    </apply-flow-block>
+
+    <apply-flow-block data-block="address">
+      <div class="apply-flow-block__header"><apply-flow-block-title><h3>Address</h3></apply-flow-block-title></div>
+      <div data-cx="country-5" data-name="country" data-label="Country" data-value="United States" data-list="countries" data-required></div>
+      <div data-cx="addressLine1-5" data-name="addressLine1" data-label="Address Line 1" data-list="addresses" data-search data-required
+           data-helper="Enter your street name and other address details to see suggestions"></div>
+      <div class="input-row"><form-element-label><label class="input-row__label" for="addressLine2-5"><span class="input-row__label-text">Address Line 2</span></label></form-element-label>
+        <input class="input-row__control" id="addressLine2-5" name="addressLine2" type="text"></div>
+      <div data-cx="postalCode-5" data-name="postalCode" data-label="ZIP Code" data-list="zips" data-search data-required data-notoggle></div>
+      <div data-cx="city-5" data-name="city" data-label="City" data-list="cities" data-search data-required></div>
+      <div data-cx="region2-5" data-name="region2" data-label="State" data-list="states" data-required></div>
+      <div data-cx="region1-5" data-name="region1" data-label="County" data-list="counties" data-required></div>
+    </apply-flow-block>
+  </div>
+
+  <div id="section-2" hidden>
+    <apply-flow-block data-block="questions">
+      <div class="apply-flow-block__header"><apply-flow-block-title><h3>Application Questions</h3></apply-flow-block-title></div>
+      <p>Please answer the following questions.</p>
+      <div data-radio="q-covenant" data-name="300000469539525-22" data-options="Yes|No|NA" data-required
+           data-question="Do you have any restrictive covenants (e.g., non-compete or non-solicit agreements) with any current or previous employers (any industry)?"></div>
+      <div data-radio="q-former" data-name="300000469539525-23" data-options="Yes|No" data-required
+           data-question="Are you a former employee (including full time and part time employees, temps, interns/co-ops)?"></div>
+      <div data-radio="q-auth" data-name="300000469539525-24" data-options="Yes|No" data-required
+           data-question="Are you authorized to legally work in the location in which you are expressing an interest without requiring sponsorship from an employer? If you are currently on a student visa, work visa, or any other type of government sanctioned work status, and will require employer immigration sponsorship, please select “No” to provide additional details. Based upon the work location, you may be required to provide documentation proving your authorization to work within three days of the start of employment."></div>
+      <div class="input-row"><form-element-label><label class="input-row__label" for="q-salary"><span class="input-row__label-text">What are your salary expectations?</span><span class="input-row__label--required-star">*</span></label></form-element-label>
+        <textarea class="input-row__control" id="q-salary" name="300000469539525-25" aria-required="true"></textarea></div>
+    </apply-flow-block>
+
+    <apply-flow-block data-block="diversity">
+      <div class="apply-flow-block__header"><apply-flow-block-title><h3>Diversity Information</h3></apply-flow-block-title></div>
+      <div data-checks="ethnicity" data-question="Ethnicity" data-options="I am Hispanic or Latino."></div>
+      <div data-checks="races" data-question="Select the races you identify with."
+           data-options="American Indian or Alaska Native|Asian|Black or African American|Native Hawaiian or other Pacific Islander|White"></div>
+      <div data-cx="gender-7" data-name="gender" data-label="Gender" data-list="genders"></div>
+      <div data-cx="veteran-7" data-name="veteranStatus" data-label="Veteran Self-Identification Status" data-list="veterans"></div>
+      <div data-checks="vetcat" data-question="" data-options="Disabled Veteran|Active Duty Wartime or Campaign Badge Veterans|Armed Forces Service Medal Veteran|Recently Separated Veteran"></div>
+      <div class="input-row" data-row="discharge"><form-element-label><label class="input-row__label"><span class="input-row__label-text">Newly Separated Veteran Discharge Date</span></label></form-element-label>
+        <div class="datepicker-row">
+          <div data-cx="dischargeDay-7" data-name="dischargeDay" data-label="Day" data-floating="Day" data-list="days" data-bare></div>
+          <div data-cx="dischargeMonth-7" data-name="dischargeMonth" data-label="Month" data-floating="Month" data-list="months" data-bare></div>
+          <div data-cx="dischargeYear-7" data-name="dischargeYear" data-label="Year" data-floating="Year" data-list="years" data-bare></div>
+        </div></div>
+      <div data-cx="sexAtBirth-7" data-name="sexAtBirth" data-label="Sex at Birth" data-list="sexes"></div>
+      <div data-cx="visualSex-7" data-name="visualSex" data-label="Visually identified Sex at Birth" data-list="sexes"></div>
+      <div data-cx="declineSex-7" data-name="declineSex" data-label="I choose not to disclose my sex" data-list="yesNo"></div>
+      <div data-cx="visualRace-7" data-name="visualRace" data-label="Visually identified Ethnicity or Race" data-list="raceList"></div>
+      <div data-cx="regionalRace-7" data-name="regionalRace" data-label="Regional Ethnicity or Race" data-list="regionalRaces"></div>
+      <div data-cx="declineRace-7" data-name="declineRace" data-label="I choose not to disclose my ethnicity or race" data-list="yesNo"></div>
+    </apply-flow-block>
+  </div>
+  <div class="apply-flow-pagination"><button type="button" id="next">Next</button></div>
+</main>
+
+<script>
+(() => {
+  const MODE = Object.assign({ section: 1, latency: 700, keysOnly: false, addressFills: true, noSuggestion: false, freeText: false }, window.__cxl || {});
+  document.getElementById(`section-${MODE.section}`).hidden = false;
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const $ = (id) => document.getElementById(id);
+  window.__log = [];
+  window.__model = { country: "United States", countryCodesDropDownPhoneNumber: "+1" };
+  const note = (what) => window.__log.push(what);
+
+  const ADDRESSES = [
+    { street: "8451 Gate Pkwy W", city: "Jacksonville", st: "FL", state: "Florida", zip: "32216", county: "Duval" },
+    { street: "8451 Gate Pkwy E", city: "Jacksonville", st: "FL", state: "Florida", zip: "32216", county: "Duval" },
+    { street: "8451 Gate Pkwy W", city: "Orlando", st: "FL", state: "Florida", zip: "32801", county: "Orange" },
+    { street: "8451 Gatewood Dr", city: "Austin", st: "TX", state: "Texas", zip: "78750", county: "Travis" },
+  ];
+  const ZIPS = {
+    "32216": { city: "Jacksonville", state: "Florida", county: "Duval" },
+    "32256": { city: "Jacksonville", state: "Florida", county: "Duval" },
+    "32210": { city: "Jacksonville", state: "Florida", county: "Duval" },
+    "32068": { city: "Middleburg", state: "Florida", county: "Clay" },
+    "32801": { city: "Orlando", state: "Florida", county: "Orange" },
+  };
+  const LISTS = {
+    phoneCodes: () => ["+1", "+44", "+91"],
+    countries: () => ["Canada", "India", "United States"],
+    addresses: (q) => {
+      if (MODE.noSuggestion) return [];
+      const words = q.toUpperCase().replace(/[,.]/g, " ").split(/\s+/).filter(Boolean);
+      if (!words.length || !/^\d+$/.test(words[0])) return [];
+      // Oracle's address search knows no apartments: a search with one finds nothing.
+      if (/\b(APT|UNIT|STE|SUITE|#)\b/.test(q.toUpperCase())) return [];
+      return ADDRESSES.filter((a) => {
+        const have = `${a.street} ${a.city} ${a.st} ${a.state} ${a.zip}`.toUpperCase().split(/\s+/);
+        return words.every((w) => have.some((h) => h.startsWith(w)));
+      }).map((a) => ({ text: `${a.street}, ${a.city}, ${a.st} ${a.zip}`, a }));
+    },
+    zips: (q) => Object.keys(ZIPS).filter((z) => q && z.startsWith(q.replace(/\D/g, "").slice(0, 5)) && q.replace(/\D/g, "").length >= 3),
+    cities: (q) => {
+      const st = window.__model.region2;
+      return ["Jacksonville", "Jacksonville Beach", "Middleburg", "Orlando"].filter((c) => (!st || st === "Florida") && (!q || c.toLowerCase().includes(q.toLowerCase())));
+    },
+    states: (q) => ["Florida", "Georgia", "Texas"].filter((s) => !q || s.toLowerCase().includes(q.toLowerCase())),
+    counties: (q) => {
+      const zip = ZIPS[window.__model.postalCode || ""];
+      const base = zip ? [zip.county] : ({ Florida: ["Clay", "Duval", "Nassau", "Orange"] }[window.__model.region2] || []);
+      return base.filter((c) => !q || c.toLowerCase().includes(q.toLowerCase()));
+    },
+    genders: () => ["Female", "Male", "Non-Binary", "I do not wish to disclose"],
+    veterans: () => ["I am a protected veteran", "I am not a protected veteran", "I do not wish to self-identify"],
+    days: () => Array.from({ length: 31 }, (_, i) => String(i + 1)),
+    months: () => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    years: () => Array.from({ length: 10 }, (_, i) => String(2026 - i)),
+    sexes: () => ["Female", "Male"],
+    yesNo: () => ["Yes", "No"],
+    raceList: () => ["American Indian or Alaska Native", "Asian", "Black or African American", "Native Hawaiian or other Pacific Islander", "White", "Two or More Races"],
+    regionalRaces: () => ["Asian", "Black", "Hispanic", "Middle Eastern", "White", "Other"],
+  };
+  const boxes = {};
+
+  /* -------- Candidate Experience's list box -------- */
+  function cxSelect(host) {
+    const id = host.dataset.cx, name = host.dataset.name, label = host.dataset.label;
+    const search = host.hasAttribute("data-search"), required = host.hasAttribute("data-required");
+    const row = document.createElement("div");
+    row.className = "input-row input-row--has-picker";
+    row.dataset.row = name;
+    row.innerHTML = `${host.hasAttribute("data-bare") ? "" : `<form-element-label><label class="input-row__label" for="${id}"><span class="input-row__label-text">${label}</span>${required ? '<span class="cx-select__label--required" aria-hidden="true">*</span>' : ""}</label></form-element-label>`}
+      <div class="input-row__control-container"><div class="cx-select-container">
+        ${host.dataset.floating ? `<span class="input-field__label">${host.dataset.floating}</span>` : ""}
+        <input class="cx-select-input${search ? " cx-select-input--auto-suggest" : ""}" id="${id}" name="${name}" type="text" role="combobox"
+               aria-autocomplete="list" aria-expanded="false" autocomplete="off"${required ? ' aria-required="true"' : ""}${host.dataset.bare ? ` aria-label="${label}"` : ""}>
+        <button type="button" class="cx-select__remove" aria-label="Remove value for the ${label} field." hidden>&times;</button>
+        ${host.hasAttribute("data-notoggle") ? "" : `<button type="button" class="cx-select__toggle" id="${id}-toggle-button" aria-label="Open the drop-down list" aria-expanded="false" tabindex="-1">&#9662;</button>`}
+      </div></div>
+      ${host.dataset.helper ? `<div class="input-row__helper">${host.dataset.helper}</div>` : ""}
+      <p class="input-row__validation" hidden></p>`;
+    host.replaceWith(row);
+    const input = row.querySelector("input"), toggle = $(`${id}-toggle-button`), remove = row.querySelector(".cx-select__remove");
+    let committed = host.dataset.value || "";
+    input.value = committed;
+    remove.hidden = !committed;
+    let list = null, items = [], active = -1, timer = null, seq = 0;
+
+    const setInvalid = (on) => {
+      row.classList.toggle("input-row--invalid", on);
+      input.classList.toggle("cx-select-input--invalid", on);
+      input.setAttribute("aria-invalid", on ? "true" : "false");
+      const v = row.querySelector(".input-row__validation");
+      v.hidden = !on;
+      v.textContent = on ? `The ${label} field is required.` : "";
+    };
+    const expanded = (on) => {
+      input.setAttribute("aria-expanded", String(on));
+      toggle?.setAttribute("aria-expanded", String(on));
+      if (on) { input.setAttribute("aria-controls", `${id}-listbox`); toggle?.setAttribute("aria-controls", `${id}-listbox`); }
+      else { input.removeAttribute("aria-controls"); input.removeAttribute("aria-activedescendant"); }
+    };
+    const close = () => { if (list) { list.remove(); list = null; } items = []; active = -1; expanded(false); };
+    const draw = (busy) => {
+      // A fresh list element each time, as Oracle redraws it.
+      const fresh = document.createElement("div");
+      fresh.id = `${id}-listbox`;
+      fresh.className = "cx-select__list";
+      fresh.setAttribute("role", "grid");
+      fresh.setAttribute("aria-busy", String(Boolean(busy)));
+      const r = input.getBoundingClientRect();
+      fresh.style.top = `${r.bottom + scrollY + 2}px`;
+      fresh.style.left = `${r.left + scrollX}px`;
+      fresh.style.width = `${r.width}px`;
+      if (!busy) {
+        const shown = items.length ? items : [{ text: "No results found.", none: true }];
+        shown.forEach((it, i) => {
+          const rowEl = document.createElement("div");
+          rowEl.setAttribute("role", "row");
+          rowEl.id = `${id}-listbox-row-${i}`;
+          rowEl.className = `cx-select__list-item${i === active ? " cx-select__list-item--active" : ""}`;
+          rowEl.innerHTML = `<div role="gridcell" aria-selected="false"><span class="cx-select__list-item--content"></span></div>`;
+          rowEl.querySelector("span").textContent = it.text;
+          if (!it.none) {
+            rowEl.addEventListener("mousedown", (e) => e.preventDefault());
+            rowEl.addEventListener("click", (e) => {
+              if (MODE.keysOnly && !e.isTrusted) return;   // a list that only a person's click — or the keyboard — moves
+              choose(it);
+            });
+          }
+          fresh.appendChild(rowEl);
+        });
+      }
+      if (list) list.replaceWith(fresh); else document.body.appendChild(fresh);
+      list = fresh;
+      expanded(true);
+    };
+    const fetchList = async (q) => {
+      const mine = ++seq;
+      items = [];
+      draw(true);
+      await wait(MODE.latency);
+      if (mine !== seq || !list) return;
+      const raw = LISTS[host.dataset.list](q);
+      items = raw.map((x) => typeof x === "string" ? { text: x } : x);
+      active = -1;
+      draw(false);
+    };
+    function choose(it) {
+      const value = it.a ? it.a.street : it.text;
+      committed = value;
+      input.value = value;
+      window.__model[name] = value;
+      remove.hidden = false;
+      setInvalid(false);
+      note(`picked ${name}: ${value}`);
+      close();
+      if (it.a && MODE.addressFills) {
+        // The rest of the address arrives from the server a moment later.
+        setTimeout(() => {
+          for (const [field, v] of [["postalCode", it.a.zip], ["city", it.a.city], ["region2", it.a.state], ["region1", it.a.county]]) boxes[field].set(v);
+        }, 250);
+      }
+      if (name === "postalCode" && ZIPS[value]) {
+        setTimeout(() => {
+          const z = ZIPS[value];
+          for (const [field, v] of [["city", z.city], ["region2", z.state], ["region1", z.county]]) if (!window.__model[field]) boxes[field].set(v);
+        }, 300);
+      }
+    }
+    const openList = () => { if (!list) fetchList(search ? input.value.trim() : ""); };
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (!list) { openList(); return; }
+        if (items.length) { active = Math.min(items.length - 1, active + 1); draw(false); input.setAttribute("aria-activedescendant", `${id}-listbox-row-${active}`); }
+      } else if (e.key === "ArrowUp" && list && items.length) {
+        e.preventDefault();
+        active = Math.max(0, active - 1); draw(false); input.setAttribute("aria-activedescendant", `${id}-listbox-row-${active}`);
+      } else if (e.key === "Enter" && list && active >= 0 && items[active]) {
+        e.preventDefault();
+        choose(items[active]);
+      } else if (e.key === "Escape") {
+        close();
+      }
+    });
+    toggle?.addEventListener("mousedown", (e) => e.preventDefault());
+    toggle?.addEventListener("click", () => { if (list) close(); else { input.focus(); openList(); } });
+    remove.addEventListener("click", () => { committed = ""; input.value = ""; delete window.__model[name]; remove.hidden = true; });
+    input.addEventListener("input", () => {
+      note(`typed ${name}: ${input.value}`);
+      clearTimeout(timer);
+      if (!search) { fetchList(""); return; }
+      const q = input.value.trim();
+      if (q.length < 3) { close(); return; }
+      timer = setTimeout(() => fetchList(q), 300);
+    });
+    input.addEventListener("blur", () => {
+      setTimeout(() => {
+        if (document.activeElement === input) return;
+        close();
+        if (input.value !== committed) {
+          if (MODE.freeText && name === "addressLine1" && input.value.trim()) {
+            committed = input.value.trim();
+            window.__model[name] = committed;
+            note(`kept ${name}: ${committed}`);
+            setInvalid(false);
+            return;
+          }
+          if (input.value) note(`cleared ${name}: ${input.value}`);
+          input.value = committed;
+        }
+        if (required && !committed) setInvalid(true);
+      }, 150);
+    });
+    document.addEventListener("mousedown", (e) => {
+      if (list && e.target !== input && !list.contains(e.target) && e.target !== toggle) close();
+    }, true);
+    boxes[name] = {
+      input,
+      set(v) { committed = v; input.value = v; window.__model[name] = v; remove.hidden = false; setInvalid(false); },
+    };
+  }
+  document.querySelectorAll("[data-cx]").forEach(cxSelect);
+
+  /* -------- Yes / No questions: inputs drawn at 0 x 0 behind their labels -------- */
+  document.querySelectorAll("[data-radio]").forEach((host) => {
+    const qid = host.dataset.radio, name = host.dataset.name;
+    const row = document.createElement("div");
+    row.className = "input-row input-row--radiogroup";
+    row.setAttribute("role", "radiogroup");
+    row.setAttribute("aria-labelledby", `${qid}-label`);
+    row.innerHTML = `<label class="input-row__label input-row__label--required" id="${qid}-label"><span>${host.dataset.question}</span><span class="input-row__label--required-star" aria-hidden="true"></span></label>
+      <div class="input-row__control-container">${host.dataset.options.split("|").map((o, i) => `
+        <input type="radio" class="input-row__hidden-control" value="${729 + i}" id="${qid}-${i}" name="${name}" required="true">
+        <label class="apply-flow-input-radio" for="${qid}-${i}"><span aria-hidden="true">${o}</span></label>`).join("")}</div>
+      <p class="input-row__validation" hidden>This field is required.</p>`;
+    host.replaceWith(row);
+    row.querySelectorAll("input").forEach((input) => input.addEventListener("change", () => {
+      window.__model[name] = row.querySelector(`label[for="${input.id}"]`).textContent.trim();
+      note(`answered ${qid}: ${window.__model[name]}`);
+    }));
+  });
+
+  /* -------- Check boxes: the same, with Oracle's drawn box inside the label -------- */
+  document.querySelectorAll("[data-checks]").forEach((host) => {
+    const gid = host.dataset.checks;
+    const row = document.createElement("div");
+    row.className = "input-row input-row--checkboxes";
+    row.innerHTML = `${host.dataset.question ? `<form-element-label><label class="input-row__label" id="${gid}-label"><span class="input-row__label-text">${host.dataset.question}</span></label></form-element-label>` : ""}
+      <div class="input-row__control-container">${host.dataset.options.split("|").map((o, i) => `
+        <div class="apply-flow-input-checkbox-row">
+          <input type="checkbox" class="input-row__hidden-control" id="${gid}-${i}" name="${gid}-${i}" value="${o}">
+          <label class="apply-flow-input-checkbox" for="${gid}-${i}"><span class="apply-flow-input-checkbox__button"></span><span class="apply-flow-input-checkbox__label">${o}</span></label>
+        </div>`).join("")}</div>`;
+    host.replaceWith(row);
+    row.querySelectorAll("input").forEach((input) => input.addEventListener("change", () => {
+      row.querySelector(`label[for="${input.id}"] .apply-flow-input-checkbox__button`).classList.toggle("apply-flow-input-checkbox__button--checked", input.checked);
+      window.__model[input.value] = input.checked;
+      note(`${input.checked ? "ticked" : "unticked"} ${input.value}`);
+    }));
+  });
+
+  /* -------- Title pills -------- */
+  document.querySelectorAll(".cx-select-pills-container").forEach((group) => {
+    const buttons = Array.from(group.querySelectorAll("button"));
+    buttons.forEach((b) => b.addEventListener("click", () => {
+      buttons.forEach((o) => { o.classList.toggle("cx-select-pill-section--selected", o === b); o.setAttribute("aria-checked", String(o === b)); });
+      window.__model[group.dataset.name] = b.textContent.trim();
+      note(`picked title: ${b.textContent.trim()}`);
+    }));
+  });
+
+  /* -------- The number box keeps its value when it is left -------- */
+  const phone = $("phoneNumber-4");
+  const keepPhone = () => { const v = phone.value.trim(); if (v) window.__model.phoneNumber = v; else delete window.__model.phoneNumber; };
+  phone.addEventListener("blur", keepPhone);
+  phone.addEventListener("change", keepPhone);
+  for (const plain of ["firstName-1", "middleNames-1", "lastName-2", "addressLine2-5", "q-salary"]) {
+    const box = $(plain);
+    const keep = () => { if (box.value.trim()) window.__model[box.name] = box.value.trim(); };
+    box.addEventListener("blur", keep);
+    box.addEventListener("change", keep);
+  }
+
+  $("next").addEventListener("click", () => {
+    const errors = [];
+    const m = window.__model;
+    if (MODE.section === 1) {
+      for (const k of ["firstName", "lastName", "addressLine1", "postalCode", "city", "region2", "region1"]) if (!m[k]) errors.push(`${k}: required`);
+      const digits = String(m.phoneNumber || "").replace(/\D+/g, "");
+      if (!m.phoneNumber) errors.push("phoneNumber: required");
+      else if (/\+/.test(m.phoneNumber) || digits.length !== 10) errors.push(`phoneNumber: invalid ${m.phoneNumber}`);
+    } else {
+      for (const k of ["300000469539525-22", "300000469539525-23", "300000469539525-24", "300000469539525-25"]) if (!m[k]) errors.push(`${k}: required`);
+    }
+    window.__errors = errors;
+  });
+})();
+</script>
+</body></html>

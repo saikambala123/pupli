@@ -1,0 +1,20 @@
+
+Generic careers page — detected "generic", 10 filled, 1 left
+
+  ok   falls through to the generic adapter
+  ok   application first name
+  ok   application last name
+  ok   application email
+  ok   application phone
+  ok   application city
+  ok   application country
+  ok   application LinkedIn
+  ok   notice period from saved answers
+  ok   salary expectation
+  ok   right to work
+  ok   the site search box was left alone
+  ok   the newsletter email was left alone
+  ok   the newsletter name was left alone
+
+14/14 checks passed — Generic careers page
+

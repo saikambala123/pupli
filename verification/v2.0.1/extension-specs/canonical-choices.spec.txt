@@ -1,0 +1,41 @@
+
+states, however they are written
+  ok   NC, nc, N.C. and North Carolina are one state
+  ok   a city in front is read from the applicant's own value
+  ok   the country is not a state
+  ok   the outlying islands are their own entry
+  ok   Virgin Islands and D.C. in their portal spellings
+  ok   Virginia is not West Virginia, Kansas is not Arkansas
+  ok   Indian states by name, with a trailing country code
+  ok   Canadian provinces by code and accented name
+  ok   an id reads back as the name a menu uses
+
+yes and no
+  ok   plain and sentence-form answers
+  ok   None is a no; N/A, unsure and decline are their own answers
+  ok   words that merely begin with 'no' are not answers
+  ok   a Yes/No menu is recognised, with a placeholder or a decline option
+  ok   other menus are not Yes/No menus
+
+native selects
+  ok   MA → Massachusetts, GA → Georgia, VA → Virginia, IA → Iowa
+  ok   West Virginia is not taken for Virginia
+  ok   a full state name selects a menu of postal codes
+  ok   a state is never written into a Yes/No menu
+  ok   a clearance of None answers No
+  ok   a non-answer like Hybrid is never written into a Yes/No menu
+  ok   Yes still selects Yes
+  ok   No selects the sentence-form No option
+  ok   No is not read inside 'None of the above'
+
+radio groups
+  ok   a state is never clicked into a Yes/No radio group
+  ok   No clicks No
+  ok   No clicks the sentence-form No
+
+already-correct detection
+  ok   West Virginia on screen is not mistaken for Virginia
+  ok   North Carolina on screen counts as the profile's NC
+
+28/28 checks passed
+

@@ -1,0 +1,23 @@
+PASS Greenhouse picks the saved city and state rather than the first same-named city
+PASS Greenhouse city field keeps the city only
+PASS Greenhouse city is never replaced by a state or country
+PASS Greenhouse native city list uses the saved state
+PASS Greenhouse custom city list uses the saved state
+PASS Oracle calling-code picker uses the international number over a stale default
+PASS Oracle national number survives country-picker initialization
+PASS Oracle visually preselected calling code is actually committed
+PASS Oracle calling-code widget submits the national phone number
+PASS a second fill preserves the committed Oracle phone
+PASS ADP legacy screenshot field: state
+PASS ADP legacy screenshot field: county
+PASS ADP legacy screenshot field: source
+PASS ADP legacy screenshot field: detail
+PASS ADP legacy screenshot field: hispanic
+PASS ADP legacy screenshot field: race
+PASS ADP legacy screenshot field: gender
+PASS ADP can use the sole county offered for the selected address
+PASS ADP does not invent a county when multiple choices remain
+PASS ADP can use an exact saved county when the profile has none
+PASS an unknown city remains available for manual review
+PASS AI receives the application question but is never asked to invent a city
+22/22 portal contact checks passed

@@ -1,0 +1,58 @@
+
+Workday My Information, with the page focused
+  ok   firstName: "Pradeep" in the box and kept by the page
+  ok   lastName: "Reddy" in the box and kept by the page
+  ok   addressLine1: "4685 Old Oaks Dr" in the box and kept by the page
+  ok   city: "Jacksonville" in the box and kept by the page
+  ok   postalCode: "32256" in the box and kept by the page
+  ok   Save and Continue reports nothing missing
+
+Workday Voluntary Self-Identification of Disability, with the page focused
+  ok   Name is the applicant's name, kept by the page
+  ok   Employee ID is left blank
+  ok   Date is today, 10/27/2026
+  ok   Save and Continue reports nothing missing
+
+the same Self-Identification step, its Date with Workday's calendar, with the page focused
+  ok   Date is today, 10/27/2026, picked from the calendar
+  ok     and the calendar is closed again
+  ok   Save and Continue reports nothing missing
+
+Ashby (Chainalysis), with the page focused
+  ok   Name in the box and kept by the form
+  ok   Email kept by the form
+  ok   the Yes / No answers are the profile's
+  ok     and pressed on screen
+  ok   Submit reports no validation error
+
+Workday My Information, with the popup open (the page has no focus)
+  ok   firstName: "Pradeep" in the box and kept by the page
+  ok   lastName: "Reddy" in the box and kept by the page
+  ok   addressLine1: "4685 Old Oaks Dr" in the box and kept by the page
+  ok   city: "Jacksonville" in the box and kept by the page
+  ok   postalCode: "32256" in the box and kept by the page
+  ok   Save and Continue reports nothing missing
+
+Workday Voluntary Self-Identification of Disability, with the popup open (the page has no focus)
+  ok   Name is the applicant's name, kept by the page
+  ok   Employee ID is left blank
+  ok   Date is today, 10/27/2026
+  ok   Save and Continue reports nothing missing
+
+the same Self-Identification step, its Date with Workday's calendar, with the popup open (the page has no focus)
+  ok   Date is today, 10/27/2026, picked from the calendar
+  ok     and the calendar is closed again
+  ok   Save and Continue reports nothing missing
+
+Ashby (Chainalysis), with the popup open (the page has no focus)
+  ok   Name in the box and kept by the form
+  ok   Email kept by the form
+  ok   the Yes / No answers are the profile's
+  ok     and pressed on screen
+  ok   Submit reports no validation error
+
+the page is told nothing extra when it has the focus
+  ok   each box is left exactly once (no second blur on top of the browser's)
+
+37/37 checks passed
+

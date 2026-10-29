@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Cloud Architect at Globex</title></head>
+<body>
+<h1 class="job-title">Cloud Architect</h1>
+<form class="application">
+  <!-- SmartRecruiters uses floating labels: the <label> follows the input. -->
+  <div class="field"><input type="text" id="sr-first" name="firstName" placeholder=" "><label for="sr-first">First name</label></div>
+  <div class="field"><input type="text" id="sr-last" name="lastName" placeholder=" "><label for="sr-last">Last name</label></div>
+  <div class="field"><input type="email" id="sr-email" name="email" placeholder=" "><label for="sr-email">Email</label></div>
+  <div class="field"><input type="tel" id="sr-phone" name="phoneNumber" placeholder=" "><label for="sr-phone">Phone number</label></div>
+  <div class="field"><input type="text" id="sr-loc" name="location" placeholder=" "><label for="sr-loc">Location</label></div>
+  <div class="field"><input type="text" id="sr-country" name="country" placeholder=" "><label for="sr-country">Country</label></div>
+
+  <h3>Experience</h3>
+  <div class="field"><input type="text" id="sr-comp" name="company" placeholder=" "><label for="sr-comp">Current company</label></div>
+  <div class="field"><input type="text" id="sr-job" name="jobTitle" placeholder=" "><label for="sr-job">Current job title</label></div>
+
+  <h3>Questions</h3>
+  <div class="field">
+    <label for="sr-auth">Are you legally authorized to work in the United States?</label>
+    <select id="sr-auth" name="q1"><option value="">Please select</option><option>Yes</option><option>No</option></select>
+  </div>
+  <div class="field">
+    <label for="sr-spon">Will you require sponsorship?</label>
+    <select id="sr-spon" name="q2"><option value="">Please select</option><option>Yes</option><option>No</option></select>
+  </div>
+  <div class="field">
+    <label for="sr-why">Why are you interested in this role?</label>
+    <textarea id="sr-why" name="q3" rows="4"></textarea>
+  </div>
+  <button type="submit" data-test="submit-application">Apply</button>
+</form>
+</body></html>

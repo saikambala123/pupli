@@ -1,0 +1,10 @@
+  ok   the form keeps the one Education block it came with
+  ok   no row is added for a section that can't be answered
+  ok   the fields it can answer are still answered
+  ok   email is filled
+  ok   the run reports what it filled
+  ok   a form of unanswerable pickers doesn't take a minute
+  ok   a picker that couldn't be read is not re-opened by the settle passes
+
+7/7 checks passed
+

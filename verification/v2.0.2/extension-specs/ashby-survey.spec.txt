@@ -1,0 +1,50 @@
+
+reading the survey's answers
+  ok   "No, I don’t have a disability or have a history/record…" is a No
+  ok   "Yes, I have a disability or have a history/ record…" is a Yes
+  ok   "I don’t wish to answer" (typographic apostrophe) is a decline
+  ok   the profile's own wordings keep their meaning
+  ok   Do you live with a disability? is the disability question, under an introduction about accommodations
+  ok   Sexual Orientation is its own question
+  ok   Do you identify as transgender? is its own question
+  ok   Gender Identity is still the gender question
+  ok   Veteran Status is still the veteran question
+  ok   the feedback question about the survey is not an EEO question
+  ok   an introduction about accommodations does not take the disability question away
+  ok     an accommodation request is still not the disability question
+
+a profile with every answer
+  ok   Do you live with a disability? = No
+  ok   Sexual Orientation = Heterosexual, picked from Ashby's list
+  ok   Do you identify as transgender? = No
+  ok   Gender Identity = Man
+  ok   Veteran Status = I am not a protected Veteran
+  ok   the feedback question is left alone
+  ok   no survey question is outlined
+  ok   nothing Appli-Fill answered is offered as the applicant's
+
+Yes to the disability question
+  ok   Do you live with a disability? = Yes
+
+declining to self-identify
+  ok   disability declined
+  ok   sexual orientation declined
+  ok   transgender declined
+  ok   veteran status declined
+  ok   gender declined
+  ok   the feedback question is still left alone
+
+"Prefer not to say" for the two new questions only
+  ok   sexual orientation: I don’t wish to answer
+  ok   transgender: I don’t wish to answer
+
+another survey's wording of the orientations
+  ok   Gay → Gay or Lesbian
+  ok   Heterosexual → Straight/Heterosexual
+  ok   Pansexual → Bisexual and/or pansexual
+
+nothing saved for the survey
+  ok   nothing is guessed
+
+33/33 checks passed
+

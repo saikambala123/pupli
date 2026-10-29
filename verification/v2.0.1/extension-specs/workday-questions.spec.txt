@@ -1,0 +1,59 @@
+
+State comes from the profile, as the state itself
+  ok   Workday's State menu (address--countryRegion) gets the profile state, not the country
+  ok   Country is left as Workday prefilled it
+  ok   City and postal code from the profile
+  ok   profile state "MA" selects Massachusetts
+  ok   profile state "GA" selects Georgia
+  ok   profile state "VA" selects Virginia
+  ok   profile state "IA" selects Iowa
+  ok   profile state "Virginia" selects Virginia
+  ok   profile state "West Virginia" selects West Virginia
+  ok   profile state "N.C." selects North Carolina
+  ok   profile state "Stanley, NC" selects North Carolina
+  ok   profile state "Washington DC" selects District of Columbia
+  ok   a state that is not on the menu is left blank rather than guessed
+  ok   a saved State answer of "TX" selects Texas
+
+Application questions are answered only when the answer is known
+  ok   over 18 → Yes (profile)
+  ok   non-compete agreements → No (the applicant's saved answer)
+  ok   no agreement-type follow-up appears
+  ok   legally authorized → Yes
+  ok   sponsorship → No
+  ok   active clearance, profile says None → No
+  ok   able to obtain a clearance is not answered No for someone without one
+  ok   employed by the Federal Government is not answered as 'worked here before'
+  ok   previously employed by GDIT → No (profile)
+  ok   willing to relocate → Yes
+  ok   'Have you ever FAILED a drug test?' is never answered Yes
+  ok   'travel out of state' does not receive the applicant's state
+  ok   'Please state your desired salary' gets the salary, not the state
+  ok   a saved answer filed under a section heading is never replayed
+  ok   unanswerable questions are highlighted for the applicant
+  ok   an exact saved answer is used for the Federal Government question
+  ok   an exact saved answer fills a profile-only question the profile left empty
+  ok   an exact saved answer fills the clearance-eligibility question
+  ok   an exact saved answer to the travel question is used
+  ok   a near match with the opposite polarity is not replayed
+  ok   a Secret clearance answers the active-clearance question Yes
+  ok   and the able-to-obtain question Yes
+  ok   question 1 is left blank when the profile is silent
+  ok   question 3 is left blank when the profile is silent
+  ok   question 4 is left blank when the profile is silent
+  ok   question 8 is left blank when the profile is silent
+  ok   and highlighted for the applicant
+
+The résumé upload is left alone
+  ok   the Select files button is not collected as a field
+  ok   the file input is not collected either
+  ok   the file chooser is never opened
+  ok   nothing is attached
+  ok   the upload is not outlined as needing an answer
+
+Speed
+  ok   a full page fills in well under three seconds (774ms)
+  ok   and nothing was skipped to get there
+
+48/48 checks passed
+

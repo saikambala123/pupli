@@ -1,0 +1,18 @@
+
+SmartRecruiters — detected "smartrecruiters", 10 filled, 1 left
+
+  ok   detected as SmartRecruiters
+  ok   first name
+  ok   last name
+  ok   email
+  ok   phone
+  ok   location
+  ok   country
+  ok   current company
+  ok   current job title
+  ok   work authorization
+  ok   sponsorship
+  ok   a rephrased open question is left blank, not guessed
+
+12/12 checks passed — SmartRecruiters
+

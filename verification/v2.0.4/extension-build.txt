@@ -1,0 +1,14 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.4 ext:build
+> node scripts/build-extension.mjs
+
+Building extension packages:
+  ! API base not set — the build keeps background.js's default.
+    Set APPLI_FILL_API_BASE=https://your-app.vercel.app before packaging a release.
+  dist/chrome/  ->  dist/appli-fill-chrome.zip
+  dist/firefox/  ->  dist/appli-fill-firefox.zip
+
+  Chrome/Edge : load dist/chrome as an unpacked extension, or upload the zip.
+  Firefox     : about:debugging -> Load Temporary Add-on -> dist/firefox/manifest.json
+

@@ -1,0 +1,77 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.5 build
+> next build
+
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/24) ...
+   Generating static pages (6/24) 
+   Generating static pages (12/24) 
+   Generating static pages (18/24) 
+ ✓ Generating static pages (24/24)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    4.25 kB         106 kB
+├ ○ /_not-found                          873 B          88.1 kB
+├ ƒ /api/ai/answer                       0 B                0 B
+├ ƒ /api/ai/parse-resume                 0 B                0 B
+├ ƒ /api/ai/score                        0 B                0 B
+├ ƒ /api/applications                    0 B                0 B
+├ ƒ /api/applications/[id]               0 B                0 B
+├ ƒ /api/applications/stats              0 B                0 B
+├ ƒ /api/auth/forgot-password            0 B                0 B
+├ ƒ /api/auth/google                     0 B                0 B
+├ ƒ /api/auth/google/callback            0 B                0 B
+├ ƒ /api/auth/login                      0 B                0 B
+├ ƒ /api/auth/logout                     0 B                0 B
+├ ƒ /api/auth/me                         0 B                0 B
+├ ƒ /api/auth/register                   0 B                0 B
+├ ƒ /api/auth/reset-password             0 B                0 B
+├ ƒ /api/auth/verify-email               0 B                0 B
+├ ƒ /api/billing/checkout                0 B                0 B
+├ ƒ /api/billing/portal                  0 B                0 B
+├ ƒ /api/billing/trial                   0 B                0 B
+├ ƒ /api/billing/webhook                 0 B                0 B
+├ ƒ /api/extension/bootstrap             0 B                0 B
+├ ƒ /api/extension/check                 0 B                0 B
+├ ƒ /api/extension/pair                  0 B                0 B
+├ ƒ /api/extension/sync                  0 B                0 B
+├ ƒ /api/profiles                        0 B                0 B
+├ ƒ /api/profiles/[id]                   0 B                0 B
+├ ƒ /api/profiles/import                 0 B                0 B
+├ ƒ /api/responses                       0 B                0 B
+├ ƒ /api/responses/[id]                  0 B                0 B
+├ ƒ /api/resume/upload                   0 B                0 B
+├ ƒ /api/settings                        0 B                0 B
+├ ○ /apple-icon.png                      0 B                0 B
+├ ○ /auth                                3.88 kB         106 kB
+├ ○ /contact                             2.04 kB         104 kB
+├ ƒ /dashboard                           4.14 kB         101 kB
+├ ƒ /dashboard/applications              5.52 kB        92.8 kB
+├ ƒ /dashboard/premium                   3.51 kB        90.8 kB
+├ ƒ /dashboard/profile                   14.9 kB         102 kB
+├ ƒ /dashboard/responses                 4.84 kB        92.1 kB
+├ ƒ /dashboard/settings                  4.29 kB        91.6 kB
+├ ○ /docs                                1.37 kB         103 kB
+├ ○ /icon.png                            0 B                0 B
+├ ○ /jobs                                1.37 kB         103 kB
+├ ○ /manifest.webmanifest                0 B                0 B
+├ ○ /privacy                             1.37 kB         103 kB
+├ ○ /reset-password                      1.91 kB         104 kB
+└ ○ /terms                               1.37 kB         103 kB
++ First Load JS shared by all            87.3 kB
+  ├ chunks/117-e1bf91d2b9d3578f.js       31.7 kB
+  ├ chunks/fd9d1056-e0bba0507e6d478e.js  53.6 kB
+  └ other shared chunks (total)          1.9 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

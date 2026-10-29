@@ -1,0 +1,23 @@
+PASS focused auth committed
+PASS focused sponsor committed
+PASS focused prior committed
+PASS focused relocate committed
+PASS focused sms committed
+PASS focused name committed
+PASS focused email committed
+PASS focused no fake button value events
+PASS focused no automatic submit
+PASS focused submit validation
+PASS focused manual choice preserved
+PASS popup focus auth committed
+PASS popup focus sponsor committed
+PASS popup focus prior committed
+PASS popup focus relocate committed
+PASS popup focus sms committed
+PASS popup focus name committed
+PASS popup focus email committed
+PASS popup focus no fake button value events
+PASS popup focus no automatic submit
+PASS popup focus submit validation
+PASS popup focus manual choice preserved
+22/22 Ashby submission-state checks passed

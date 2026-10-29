@@ -1,0 +1,82 @@
+
+Workday MM / YYYY (the 'Invalid Date: /2019' field)
+  ok   write reports success
+  ok   month segment filled
+  ok   year segment filled
+  ok   works when handed the year segment
+  ok     and the year is right
+  ok   ISO input: month
+  ok   ISO input: year
+
+Workday spinbuttons with no maxlength (the shipped markup)
+  ok   write reports success
+  ok   month segment filled
+  ok   year segment filled
+  ok   works from the year segment too
+  ok     year correct
+
+Workday MM / DD / YYYY
+  ok   month
+  ok   day
+  ok   year
+
+keyboard activity is emitted (Workday marks the field touched)
+  ok   keydown fired on a segment
+  ok   change fired on a segment
+
+a plain text box is untouched by the segment path
+  ok   ordinary input still writes normally
+  ok     value is the whole string
+
+work-experience Location is profile-only
+  ok   experienceLocation is marked profileOnly
+  ok   educationLocation is marked profileOnly
+  ok   no profile location yields the "." placeholder
+  ok   a profile location is still used
+
+required Location with nothing in the profile
+  ok   a required box gets the placeholder
+  ok   an optional box gets the placeholder too
+  ok   a real location always wins
+  ok   a row the profile has no job for is left alone
+  ok   no jobs at all, nothing written
+
+phone extension
+  ok   phone extension is profile-only
+  ok   no extension in the profile means no value
+
+nothing may open the file chooser
+  ok   a file input is refused
+  ok   a label bound to one is refused
+  ok   an ordinary text input is fine
+
+text is typed through the editing pipeline
+  ok   a text box is written
+  ok     via the editing pipeline, not assignment
+  ok     and holds the value
+
+never types into a box that does not hold the caret
+  ok   the location box is written
+  ok     without the editing command
+  ok     and holds the value
+  ok     and the phone box is untouched
+  ok   a <div> is never typed into
+  ok     and nothing reached the focused box
+
+assignment still works when the pipeline refuses
+  ok   falls back cleanly
+  ok     and holds the value
+
+County is not State
+  ok   County matches its own rule
+  ok   County is not given the state
+  ok   State still fills
+
+address lines are cleaned
+  ok   Line 1 is the street alone
+  ok   Line 2 drops the repeated postal tail
+  ok   City still fills
+  ok   Postal Code still fills
+
+all passing
+

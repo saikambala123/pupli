@@ -1,0 +1,15 @@
+  ok   the sidebar heading stays out of the derived label
+  ok   a box labelled "Name" matches the full-name rule
+  ok   Name gets the applicant's name, not the employment type
+  ok   Email gets the applicant's email, not the employment type
+  ok   each segmented group is collected exactly once
+  ok   the group's options can be read
+  ok   work authorisation answers Yes
+  ok   visa sponsorship answers No
+  ok   relocation answers Yes
+  ok   an answered group is not flagged as needing the user
+  ok   the free-text question is the one left for the applicant
+  ok   no submit button is treated as a question
+
+12/12 checks passed
+

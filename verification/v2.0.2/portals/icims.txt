@@ -1,0 +1,30 @@
+
+iCIMS — detected "icims", 25 filled, 0 left
+
+  ok   detected as iCIMS
+  ok   first name
+  ok   last name
+  ok   email
+  ok   mobile phone
+  ok   street address is line 1 only
+  ok   address line 2 is the apartment
+  ok   city
+  ok   state
+  ok   postal code
+  ok   experience row 1 employer
+  ok   experience row 1 title
+  ok   experience row 2 employer is the second job
+  ok   experience row 2 title is the second job
+  ok   experience row 1 start date
+  ok   experience row 2 end date
+  ok   school
+  ok   degree
+  ok   major
+  ok   work authorization
+  ok   sponsorship
+  ok   relocate
+  ok   desired salary
+  ok   source
+
+24/24 checks passed — iCIMS
+

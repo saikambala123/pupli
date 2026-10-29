@@ -1,0 +1,18 @@
+  ok   no document is attached by default
+  ok   and none is attached even with the old setting on
+  ok   empty EEO profile leaves gender blank by default
+  ok   empty EEO profile leaves ethnicity blank by default
+  ok   empty EEO profile leaves disability blank by default
+  ok   gender declines when the setting is on
+  ok   ethnicity declines when the setting is on
+  ok   disability declines when the setting is on
+  ok   an answer already in the form is left alone
+  ok   a stale email already in the form is left alone
+  ok   existing answers are corrected when the setting is on
+  ok   saved answers are used by default
+  ok   saved answers are skipped when the setting is off
+  ok   the current profile city beats a stale generic saved City answer
+  ok   exact saved application answers still outrank profile defaults
+
+15/15 checks passed
+

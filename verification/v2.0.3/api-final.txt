@@ -1,0 +1,19 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> appli-fill@2.0.3 test:api
+> node test/api-regressions.spec.mjs
+
+  ok   a filter with url: undefined reaches Mongo as userId alone (the original bug)
+  ok   with a url present the filter keeps both constraints
+  ok   the fixed route only upserts when a real url is supplied
+  ok   the applications index is partial, not sparse
+  ok   a PATCH body cannot reassign userId
+  ok   a catastrophic pattern is escaped to a literal
+  ok   ordinary search terms still match
+  ok   unknown settings keys are rejected rather than written
+  ok   the settings schema declares every key the extension reads
+  ok   the popup's settings changes are accepted from its bearer token
+  ok   drafted answers default to on for everyone who has not chosen
+  ok   an omitted scope argument falls back to the payload's scope
+
+12 checks passed

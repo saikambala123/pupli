@@ -1,0 +1,24 @@
+
+fill, then let the page have its way with the answers
+  ok   the fill landed
+  ok   the page's phone mask ran
+  ok   the page's salary format ran
+  ok   the page's date format ran
+  ok   the page's wipe was restored by the settle pass
+  ok   nothing Appli-Fill filled is pending
+
+looking is not editing
+  ok   clicking into filled boxes and away holds nothing
+
+what the applicant changes is pending
+  ok   a retyped salary is held
+  ok   a different dropdown choice is held
+  ok   a different select choice is held
+  ok   a corrected saved answer is held
+  ok   only the four changed answers are held
+
+changing it back to Appli-Fill's answer
+  ok   withdraws what was held for the detour
+
+13/13 checks passed
+

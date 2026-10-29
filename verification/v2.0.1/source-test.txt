@@ -1,0 +1,35 @@
+
+LinkedIn in the profile, found by searching
+  ok   LinkedIn is picked, as a pill
+  ok     searched by the profile's own answer
+  ok     Save and Continue accepts it
+  ok     no search text is left in the box
+  ok     the list is closed
+  ok     reported as filled, not outlined
+  ok     not offered back as the applicant's answer
+  ok   the rest of the step still fills (previously employed = No)
+  ok   done in 738ms
+
+Indeed in the profile
+  ok   Indeed is picked
+
+a list that is browsed, not searched
+  ok   LinkedIn is found inside its category and picked
+  ok     Social Media was opened first (LinkedIn is a social network before a job board)
+
+the company's own careers site
+  ok   "SEI Careers Website" is picked for Company Website
+
+a list of categories only
+  ok   the category LinkedIn belongs to is picked (Social Media)
+
+an answer already there
+  ok   a pill already given is left as it is
+
+nothing in the profile
+  ok   nothing is picked
+  ok     the question is outlined for the applicant
+  ok     and no text is typed into it
+
+18/18 checks passed
+

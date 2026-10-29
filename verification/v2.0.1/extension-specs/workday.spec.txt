@@ -1,0 +1,18 @@
+  ok   email is filled
+  ok   phone is filled
+  ok   the phone extension never receives the email address
+  ok   the phone extension is left alone when the profile has none
+  ok   education rows do not run away
+  ok   Add is clicked at most three times
+  ok   how-did-you-hear is answered
+  ok   LinkedIn is selected when LinkedIn is an offered option
+  ok   a text date field gets today in MM/DD/YYYY
+  ok   a native date input gets today in ISO
+  ok   a dropdown carrying only aria-expanded is seen by the fill
+  ok   an "Add" control is still not treated as a dropdown
+  ok   the fill's own dropdown answer is not offered as the applicant's
+  ok   identity fields are still not queued
+  ok   identity fields are not queued as saved answers
+
+15/15 checks passed
+

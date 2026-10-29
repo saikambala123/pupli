@@ -1,0 +1,21 @@
+PASS boards.greenhouse.io: profile and saved Yes/No answers
+PASS qualifications, negation and added clauses cannot collide
+PASS indexed lookups: 1501 answers, 200 queries (34ms)
+PASS adjacent sponsorship wording cannot change authorization
+PASS never is read as a negative answer
+PASS acme.wd1.myworkdayjobs.com: profile and saved Yes/No answers
+PASS qualifications, negation and added clauses cannot collide
+PASS indexed lookups: 1501 answers, 200 queries (72ms)
+PASS adjacent sponsorship wording cannot change authorization
+PASS never is read as a negative answer
+PASS careers.example.test: profile and saved Yes/No answers
+PASS qualifications, negation and added clauses cannot collide
+PASS indexed lookups: 1501 answers, 200 queries (84ms)
+PASS adjacent sponsorship wording cannot change authorization
+PASS never is read as a negative answer
+PASS known dropdown finishes before the source picker
+PASS unknown AI dropdown collection follows known answers
+PASS source picker commits a validated LinkedIn pill
+PASS the selected source triggers one blur validation
+PASS Oracle long authorization prompt preserves without-sponsorship polarity
+20/20 accuracy and latency checks passed

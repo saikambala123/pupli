@@ -1,0 +1,62 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Application - SAP SuccessFactors</title></head>
+<body>
+<h1 class="jobTitle">Infrastructure Engineer</h1>
+<form id="sfForm">
+  <!-- SuccessFactors puts the question in a description node linked by
+       aria-describedby, and gives the control a generic aria-label. -->
+  <div class="sfRow">
+    <span id="d-fn">First Name</span>
+    <input type="text" id="sf-fn" aria-label="Text field" aria-describedby="d-fn">
+  </div>
+  <div class="sfRow">
+    <span id="d-ln">Last Name</span>
+    <input type="text" id="sf-ln" aria-label="Text field" aria-describedby="d-ln">
+  </div>
+  <div class="sfRow">
+    <span id="d-em">E-Mail</span>
+    <input type="text" id="sf-em" aria-label="Text field" aria-describedby="d-em">
+  </div>
+  <div class="sfRow">
+    <span id="d-ph">Day Time Number</span>
+    <input type="text" id="sf-ph" aria-label="Text field" aria-describedby="d-ph">
+  </div>
+  <div class="sfRow">
+    <span id="d-addr">Street Address</span>
+    <input type="text" id="sf-addr" aria-label="Text field" aria-describedby="d-addr">
+  </div>
+  <div class="sfRow">
+    <span id="d-city">City</span>
+    <input type="text" id="sf-city" aria-label="Text field" aria-describedby="d-city">
+  </div>
+  <div class="sfRow">
+    <span id="d-zip">Postal Code</span>
+    <input type="text" id="sf-zip" aria-label="Text field" aria-describedby="d-zip">
+  </div>
+  <div class="sfRow">
+    <span id="d-cty">Country/Region</span>
+    <select id="sf-cty" aria-label="Dropdown" aria-describedby="d-cty">
+      <option value="">Select</option><option>India</option><option>United States</option>
+    </select>
+  </div>
+  <div class="sfRow">
+    <span id="d-auth">Are you legally authorized to work in the country of employment?</span>
+    <select id="sf-auth" aria-label="Dropdown" aria-describedby="d-auth">
+      <option value="">Select</option><option>Yes</option><option>No</option>
+    </select>
+  </div>
+  <div class="sfRow">
+    <span id="d-spon">Do you require sponsorship now or in the future?</span>
+    <select id="sf-spon" aria-label="Dropdown" aria-describedby="d-spon">
+      <option value="">Select</option><option>Yes</option><option>No</option>
+    </select>
+  </div>
+  <div class="sfRow">
+    <span id="d-src">Source</span>
+    <select id="sf-src" aria-label="Dropdown" aria-describedby="d-src">
+      <option value="">Select</option><option>LinkedIn</option><option>Job Fair</option><option>Referral</option>
+    </select>
+  </div>
+  <button type="submit">Next</button>
+</form>
+</body></html>

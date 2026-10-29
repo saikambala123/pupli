@@ -1,0 +1,12 @@
+node_modules
+.next
+dist
+.env
+.env.local
+.vercel
+*.log
+appli-fill-extension.zip
+
+*.tsbuildinfo
+.env.*
+!.env.example

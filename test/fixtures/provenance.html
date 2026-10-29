@@ -1,0 +1,100 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Apply — Provenance</title>
+<style>
+body{font-family:system-ui;padding:20px;max-width:760px}
+.field{margin-bottom:14px}
+label,.q{display:block;font-weight:600;font-size:13px;margin-bottom:4px}
+input,select,textarea,button.dd{padding:7px;border:1px solid #ccd;border-radius:4px;font:inherit}
+button.dd{min-width:260px;text-align:left;background:#fff}
+ul[role=listbox]{list-style:none;margin:0;padding:4px 0;border:1px solid #ccd;background:#fff;position:absolute;z-index:9}
+ul[role=listbox] li{padding:6px 10px;cursor:pointer}
+.blank{height:40px}
+</style></head><body>
+<h1>Senior DevOps Engineer</h1>
+<!-- A form whose page does things to Appli-Fill's answers after the fill, with
+     nobody touching it: a phone mask, a salary formatter, a date reformatter,
+     a select re-rendered with the same answer, a dropdown whose button is
+     replaced, and a box the page wipes while it hydrates (the settle pass
+     restores it). None of that is the applicant's. -->
+<form id="application_form">
+  <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel"></div>
+  <div class="field"><label for="salary">What are your salary expectations?</label><input id="salary" name="salary"></div>
+  <div class="field"><label for="start">When can you start?</label><input id="start" name="start" placeholder="MM/DD/YYYY"></div>
+  <div class="field" id="source-wrap"><label for="source">How did you hear about us?</label>
+    <select id="source" name="source"><option value="">Select…</option><option>LinkedIn</option><option>Indeed</option><option>Referral</option></select></div>
+  <div class="field" id="relocate-wrap"><span class="q" id="relocate-label">Are you willing to relocate?</span>
+    <button type="button" class="dd" id="relocate" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="relocate-label relocate">Select One</button></div>
+  <div class="field"><label for="notice">What is your notice period?</label><input id="notice" name="notice"></div>
+  <div class="field"><label for="why">Why do you want to work here?</label><textarea id="why" name="why" rows="3" cols="60"></textarea></div>
+  <div class="blank" id="blank"></div>
+  <button type="submit">Submit application</button>
+</form>
+<script>
+const RELOCATE = ["Yes, I am willing to relocate", "No, I am not willing to relocate"];
+let open = null;
+function closeMenu() { if (open) { open.remove(); open = null; document.getElementById("relocate").setAttribute("aria-expanded", "false"); } }
+function wireRelocate(btn) {
+  btn.addEventListener("click", () => {
+    if (open) { closeMenu(); return; }
+    const ul = document.createElement("ul");
+    ul.setAttribute("role", "listbox");
+    ul.id = "relocate-menu";
+    RELOCATE.forEach((text) => {
+      const li = document.createElement("li");
+      li.setAttribute("role", "option");
+      li.textContent = text;
+      li.addEventListener("click", () => { btn.textContent = text; closeMenu(); btn.dispatchEvent(new Event("change", { bubbles: true })); });
+      ul.appendChild(li);
+    });
+    const r = btn.getBoundingClientRect();
+    ul.style.top = (r.bottom + scrollY) + "px"; ul.style.left = (r.left + scrollX) + "px";
+    document.body.appendChild(ul);
+    btn.setAttribute("aria-controls", "relocate-menu");
+    btn.setAttribute("aria-expanded", "true");
+    open = ul;
+  });
+}
+wireRelocate(document.getElementById("relocate"));
+
+const setter = (el) => Object.getOwnPropertyDescriptor(Object.getPrototypeOf(el), "value").set;
+const put = (el, v) => { setter(el).call(el, v); el.dispatchEvent(new Event("input", { bubbles: true })); el.dispatchEvent(new Event("change", { bubbles: true })); };
+
+/* The page's own behaviour, once anything has been written. */
+window.__pageEffects = () => {
+  const phone = document.getElementById("phone");
+  const salary = document.getElementById("salary");
+  const start = document.getElementById("start");
+  const notice = document.getElementById("notice");
+  // A phone mask, a moment after the value lands.
+  setTimeout(() => {
+    const d = phone.value.replace(/\D/g, "");
+    if (d.length === 10) put(phone, `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`);
+  }, 300);
+  // The page wipes a box while it hydrates; the settle pass puts it back.
+  setTimeout(() => { if (notice.value) put(notice, ""); }, 450);
+  // Thousands separators and a currency sign, well after the fill.
+  setTimeout(() => {
+    const n = salary.value.replace(/[^\d]/g, "");
+    if (n) put(salary, `$${Number(n).toLocaleString("en-US")}`);
+  }, 1700);
+  // The date, rewritten in the page's preferred format.
+  setTimeout(() => {
+    const m = start.value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (m) put(start, `${m[3]}-${m[1]}-${m[2]}`);
+  }, 1800);
+  // The select re-rendered with the same answer (a fresh element).
+  setTimeout(() => {
+    const old = document.getElementById("source");
+    const fresh = old.cloneNode(true);
+    fresh.value = old.value;
+    old.replaceWith(fresh);
+  }, 1200);
+  // The dropdown button replaced by the framework, showing the same choice.
+  setTimeout(() => {
+    const old = document.getElementById("relocate");
+    const fresh = old.cloneNode(true);
+    old.replaceWith(fresh);
+    wireRelocate(fresh);
+  }, 1300);
+};
+</script>
+</body></html>
